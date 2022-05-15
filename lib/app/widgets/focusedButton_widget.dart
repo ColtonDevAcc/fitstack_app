@@ -2,12 +2,17 @@ import 'package:flutter/material.dart';
 
 class FocusedButton_Widget extends StatelessWidget {
   final String text;
-  const FocusedButton_Widget({Key? key, required this.text}) : super(key: key);
+  final void Function()? onPressed;
+  const FocusedButton_Widget({
+    Key? key,
+    required this.text,
+    required this.onPressed,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      onPressed: () {},
+      onPressed: onPressed,
       child: Container(
         decoration: BoxDecoration(
           boxShadow: [

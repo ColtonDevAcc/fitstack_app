@@ -1,26 +1,29 @@
 import 'package:fitstackapp/app/views/login/login_view.dart';
+import 'package:fitstackapp/core/routing/appRouter.gr.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:device_preview/device_preview.dart';
 
-void main() {
-  DevicePreview(
-    enabled: !kReleaseMode,
-    builder: (context) => MyApp(), // Wrap your app
-  );
-}
+void main() => runApp(
+      DevicePreview(
+        enabled: !kReleaseMode,
+        builder: (context) => MyApp(), // Wrap your app
+      ),
+    );
 
 class MyApp extends StatelessWidget {
   MyApp({Key? key}) : super(key: key);
 
   final List views = const [
-    LoginView(),
+    Login_View(),
   ];
 
   @override
   Widget build(BuildContext context) {
+    final _appRouter = AppRouter();
+
     return kDebugMode != true
-        ? MaterialApp(
+        ? MaterialApp.router(
             theme: ThemeData(
               backgroundColor: Color.fromRGBO(249, 249, 249, 1),
               primaryColor: Colors.redAccent,
@@ -38,13 +41,15 @@ class MyApp extends StatelessWidget {
                 secondary: Color.fromRGBO(87, 54, 232, 1),
               ),
             ),
-            home: views[0],
+            routerDelegate: _appRouter.delegate(),
+            routeInformationParser: _appRouter.defaultRouteParser(),
           )
-        : MaterialApp(
+        : MaterialApp.router(
             useInheritedMediaQuery: true,
             locale: DevicePreview.locale(context),
             builder: DevicePreview.appBuilder,
             theme: ThemeData(
+              iconTheme: IconThemeData(color: Color.fromRGBO(112, 112, 112, 1)),
               backgroundColor: Color.fromRGBO(249, 249, 249, 1),
               primaryColor: Colors.redAccent,
               colorScheme: ColorScheme(
@@ -61,7 +66,8 @@ class MyApp extends StatelessWidget {
                 secondary: Color.fromRGBO(87, 54, 232, 1),
               ),
             ),
-            home: views[0],
+            routerDelegate: _appRouter.delegate(),
+            routeInformationParser: _appRouter.defaultRouteParser(),
           );
   }
 }

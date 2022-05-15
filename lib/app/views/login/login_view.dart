@@ -1,12 +1,13 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:fitstackapp/app/views/login/widgets/socialAuthButton_widget.dart';
-import 'package:fitstackapp/widgets/focusedButton_widget.dart';
-import 'package:fitstackapp/widgets/textfield_widget.dart';
+import 'package:fitstackapp/app/widgets/focusedButton_widget.dart';
+import 'package:fitstackapp/app/widgets/textfield_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class LoginView extends StatelessWidget {
-  const LoginView({Key? key}) : super(key: key);
+class Login_View extends StatelessWidget {
+  const Login_View({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +32,6 @@ class LoginView extends StatelessWidget {
               SizedBox(height: 15),
               Text(
                 'LETS SIGN YOU IN,',
-                //TODO: change to something that applies with accessibility
                 textScaleFactor: 1.6,
                 style: TextStyle(
                   color: Theme.of(context).primaryColor,
@@ -59,7 +59,13 @@ class LoginView extends StatelessWidget {
               ),
               Spacer(flex: 4),
               Center(
-                child: FocusedButton_Widget(text: "SIGN IN"),
+                child: FocusedButton_Widget(
+                  text: "SIGN IN",
+                  onPressed: () {
+                    //TODO: push and pop to main view
+                    AutoRouter.of(context).pushNamed('/mainView');
+                  },
+                ),
               ),
               SizedBox(height: 15),
               Row(
