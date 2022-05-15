@@ -1,6 +1,8 @@
 import 'package:auto_route/annotations.dart';
-import 'package:fitstackapp/app/mainView.dart';
-import 'package:fitstackapp/app/views/login/login_view.dart';
+import 'package:fitstackapp/features/dashboard/presentation/dashboard_view.dart';
+import 'package:fitstackapp/features/login/presentation/login_view.dart';
+
+import '../../mainView.dart';
 
 @MaterialAutoRouter(
   routes: <AutoRoute>[
@@ -9,7 +11,17 @@ import 'package:fitstackapp/app/views/login/login_view.dart';
       page: Login_View,
       children: [],
     ),
-    AutoRoute(page: Main_View, path: '/mainView'),
+    AutoRoute(
+      page: Main_View,
+      path: '/mainView',
+      name: 'MainViewRouter',
+      children: [
+        AutoRoute(
+          path: '',
+          page: DashBoard_View,
+        ),
+      ],
+    ),
   ],
 )
 class $AppRouter {}

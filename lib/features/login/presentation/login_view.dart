@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:fitstackapp/app/views/login/widgets/socialAuthButton_widget.dart';
-import 'package:fitstackapp/app/widgets/focusedButton_widget.dart';
-import 'package:fitstackapp/app/widgets/textfield_widget.dart';
+import 'package:fitstackapp/widgets/atoms/focusedButton_widget.dart';
+import 'package:fitstackapp/widgets/atoms/socialAuthButton_widget.dart';
+import 'package:fitstackapp/widgets/atoms/textfield_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -23,21 +23,14 @@ class Login_View extends StatelessWidget {
               Container(
                 padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
                 child: SvgPicture.asset(
-                  'assets/app/icons/Asset 1.svg',
+                  'assets/app/icons/AppLogo.svg',
                   height: MediaQuery.of(context).size.height * 0.05,
                   width: MediaQuery.of(context).size.width * 0.5,
                   color: Theme.of(context).primaryColor,
                 ),
               ),
               SizedBox(height: 15),
-              Text(
-                'LETS SIGN YOU IN,',
-                textScaleFactor: 1.6,
-                style: TextStyle(
-                  color: Theme.of(context).primaryColor,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+              Text('LETS SIGN YOU IN,', textScaleFactor: 1.6, style: Theme.of(context).textTheme.headline4),
               SizedBox(height: 15),
               Text(
                 'Welcome Back you\'ve\nbeen missed!',

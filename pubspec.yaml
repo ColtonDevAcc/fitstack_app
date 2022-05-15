@@ -9,7 +9,10 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.2
+
+  # state
   bloc: ^8.0.3
+  shared_preferences: ^2.0.15
 
   # ui
   dot_navigation_bar: ^1.0.1+4
@@ -27,7 +30,7 @@ dependencies:
   # for debug
   device_preview: ^1.0.0
 
-  # interatial 
+  # interatial
   health: ^3.4.4
 
   # routing
