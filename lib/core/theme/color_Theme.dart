@@ -6,11 +6,13 @@ class FSColorTheme {
   Color primaryColor = Colors.redAccent;
   FSColorTheme();
 
-  ThemeData Light(context) {
+  static final TextTheme textTheme = TextTheme();
+
+  static ThemeData Light(BuildContext context) {
     return ThemeData(
       iconTheme: IconThemeData(color: Color.fromRGBO(112, 112, 112, 1)),
       backgroundColor: Color.fromRGBO(249, 249, 249, 1),
-      primaryColor: primaryColor,
+      primaryColor: Color.fromRGBO(254, 99, 71, 1),
       colorScheme: ColorScheme(
         surface: Colors.white,
         background: Color.fromRGBO(249, 249, 249, 1),
@@ -24,49 +26,7 @@ class FSColorTheme {
         primary: Color.fromRGBO(254, 99, 71, 1),
         secondary: Color.fromRGBO(87, 54, 232, 1),
       ),
-      textTheme: GoogleFonts.latoTextTheme().copyWith(
-        headline4: GoogleFonts.bebasNeue(
-          textStyle: TextStyle(),
-          color: Theme.of(context).colorScheme.primary,
-        ),
-        headline3: GoogleFonts.montserrat(
-          textStyle: TextStyle(),
-          fontWeight: FontWeight.bold,
-          color: Theme.of(context).colorScheme.primary,
-          fontSize: 18,
-        ),
-        button: GoogleFonts.montserrat(
-          textStyle: TextStyle(),
-          color: Theme.of(context).colorScheme.primary,
-          fontSize: 15,
-        ),
-        bodyText1: GoogleFonts.bebasNeue(
-          textStyle: TextStyle(),
-          color: Theme.of(context).colorScheme.onBackground,
-          fontSize: 10,
-        ),
-        bodyText2: GoogleFonts.montserrat(
-          textStyle: TextStyle(),
-          color: Colors.black,
-          fontSize: 20,
-        ),
-        subtitle1: GoogleFonts.montserrat(
-          textStyle: TextStyle(),
-          fontSize: 16,
-          color: Colors.black,
-        ),
-        subtitle2: GoogleFonts.montserrat(
-          textStyle: TextStyle(),
-          fontSize: 14,
-          color: Colors.black,
-        ),
-        headline6: GoogleFonts.montserrat(
-          textStyle: TextStyle(),
-          fontSize: 15,
-          color: Colors.black,
-        ),
-      ),
-      primaryTextTheme: FSTextTheme.Primary_Text_Theme(context),
+      textTheme: textTheme,
     );
   }
 
@@ -94,6 +54,7 @@ class FSColorTheme {
         headline4: GoogleFonts.bebasNeue(
           textStyle: textTheme.headline4,
           color: Theme.of(context).colorScheme.primary,
+          fontSize: 12,
         ),
         headline3: GoogleFonts.montserrat(
           textStyle: textTheme.headline1,

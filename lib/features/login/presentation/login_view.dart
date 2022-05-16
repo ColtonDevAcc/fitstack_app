@@ -30,7 +30,9 @@ class Login_View extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 15),
-              Text('LETS SIGN YOU IN,', textScaleFactor: 1.6, style: Theme.of(context).textTheme.headline4),
+              Text('LETS SIGN YOU IN,',
+                  textScaleFactor: 1.6,
+                  style: TextStyle(color: Theme.of(context).primaryColor)),
               SizedBox(height: 15),
               Text(
                 'Welcome Back you\'ve\nbeen missed!',

@@ -7,7 +7,7 @@ class FSTextTheme extends TextTheme {
 
     return GoogleFonts.latoTextTheme().copyWith(
       headline4: GoogleFonts.bebasNeue(
-        textStyle: textTheme.headline4,
+        textStyle: TextStyle(),
         color: Theme.of(context).colorScheme.primary,
       ),
       headline3: GoogleFonts.montserrat(

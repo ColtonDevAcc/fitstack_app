@@ -33,7 +33,7 @@ class AppRouter extends _i4.RootStackRouter {
     },
     DashBoard_ViewRoute.name: (routeData) {
       return _i4.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i3.DashBoard_View());
+          routeData: routeData, child: _i3.DashBoard_View());
     }
   };
 

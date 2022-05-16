@@ -2,7 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ProgressBar extends StatelessWidget {
-  const ProgressBar({Key? key, required this.barColor, required this.totalValue, required this.partialValue, required this.icon}) : super(key: key);
+  const ProgressBar(
+      {Key? key,
+      required this.barColor,
+      required this.totalValue,
+      required this.partialValue,
+      required this.icon})
+      : super(key: key);
   final Color barColor;
   final double totalValue;
   final double partialValue;
@@ -11,12 +17,12 @@ class ProgressBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+      padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 5),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           CircleAvatar(
-            radius: 25,
+            radius: 20,
             child: FaIcon(icon, color: barColor, size: 28),
             backgroundColor: Theme.of(context).colorScheme.surface,
           ),
@@ -26,7 +32,9 @@ class ProgressBar extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Text(
-                ' ' + ((partialValue / totalValue) * 100).round().toString() + '%',
+                ' ' +
+                    ((partialValue / totalValue) * 100).round().toString() +
+                    '%',
                 style: TextStyle(
                   color: barColor,
                   fontWeight: FontWeight.bold,
@@ -35,8 +43,8 @@ class ProgressBar extends StatelessWidget {
               ),
               const SizedBox(height: 5),
               SizedBox(
-                height: 8,
-                width: 200,
+                height: 6,
+                width: 280,
                 child: Stack(
                   children: [
                     Container(
