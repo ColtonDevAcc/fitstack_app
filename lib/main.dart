@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:fitstackapp/core/routing/appRouter.gr.dart';
 import 'package:fitstackapp/features/login/presentation/login_view.dart';
 import 'package:flutter/foundation.dart';
@@ -20,15 +21,18 @@ class MyApp extends StatelessWidget {
     Login_View(),
   ];
 
+  final _appRouter = AppRouter();
+
   @override
   Widget build(BuildContext context) {
-    final _appRouter = AppRouter();
-
     return kDebugMode != true
         ? MaterialApp.router(
             theme: FSColorTheme.Light(context),
-            routerDelegate: _appRouter.delegate(),
+            routerDelegate: _appRouter.delegate(
+              navigatorObservers: () => [AutoRouteObserver()],
+            ),
             routeInformationParser: _appRouter.defaultRouteParser(),
+            routeInformationProvider: _appRouter.routeInfoProvider(),
             darkTheme: FSColorTheme.Dark(context),
           )
         : MaterialApp.router(
@@ -38,6 +42,7 @@ class MyApp extends StatelessWidget {
             theme: FSColorTheme.Light(context),
             routerDelegate: _appRouter.delegate(),
             routeInformationParser: _appRouter.defaultRouteParser(),
+            routeInformationProvider: _appRouter.routeInfoProvider(),
           );
   }
 }

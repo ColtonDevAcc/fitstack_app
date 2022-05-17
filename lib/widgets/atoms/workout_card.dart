@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
 
-class WorkoutCard extends StatelessWidget {
-  const WorkoutCard({Key? key}) : super(key: key);
+class WorkoutCard extends StatefulWidget {
+  WorkoutCard({Key? key}) : super(key: key);
 
   @override
+  State<WorkoutCard> createState() => _WorkoutCardState();
+}
+
+class _WorkoutCardState extends State<WorkoutCard> {
+  @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 180,
+    return Container(
+      constraints: BoxConstraints(
+        maxHeight: 200,
+        maxWidth: 200,
+      ),
       child: Card(
         clipBehavior: Clip.antiAlias,
         color: Colors.white,
@@ -24,6 +32,7 @@ class WorkoutCard extends StatelessWidget {
               padding: const EdgeInsets.all(10.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text(
                     "Title",

@@ -5,8 +5,9 @@ import 'package:fitstackapp/features/login/presentation/login_view.dart';
 import '../../mainView.dart';
 
 @MaterialAutoRouter(
+  replaceInRouteName: 'Page|Screen,Route',
   routes: <AutoRoute>[
-    AutoRoute(
+    AutoRoute<String>(
       path: '/',
       page: Login_View,
       children: [],

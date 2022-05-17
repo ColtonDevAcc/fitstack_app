@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:fitstackapp/widgets/atoms/workout_card.dart';
 import 'package:fitstackapp/widgets/molecules/statistics_dashboard.dart';
 import 'package:flutter/material.dart';
@@ -12,8 +13,8 @@ class DashBoard_View extends StatefulWidget {
 }
 
 class _DashBoard_ViewState extends State<DashBoard_View> {
-  final ScrollController listController =
-      ScrollController(initialScrollOffset: 0);
+  int currIndex = 0;
+  final PageController _pageController = PageController(viewportFraction: 0.5);
 
   @override
   Widget build(BuildContext context) {
@@ -44,19 +45,22 @@ class _DashBoard_ViewState extends State<DashBoard_View> {
                   ),
                   SizedBox(height: 10),
                   SizedBox(
-                    height: 230,
-                    width: double.infinity,
+                    height: 250,
                     child: PageView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: 20,
-                      itemBuilder: (BuildContext context, int index) {
-                        return WorkoutCard();
-                      }
-                    ),
+                        controller: _pageController,
+                        onPageChanged: (index) {
+                          setState(() {
+                            currIndex = index;
+                          });
+                        },
+                        scrollDirection: Axis.horizontal,
+                        itemCount: 10,
+                        itemBuilder: (BuildContext context, int index) {
+                          return Transform.scale(
+                              scale: index == currIndex ? 1 : 0.9,
+                              child: WorkoutCard());
+                        }),
                   ),
-                  Text((listController.hasClients
-                      ? listController.position.toString()
-                      : "No pos")),
                   Text("Progress"),
                   Container(
                     height: 200,
