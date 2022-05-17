@@ -11,7 +11,7 @@ class FSColorTheme {
   static ThemeData Light(BuildContext context) {
     return ThemeData(
       iconTheme: IconThemeData(color: Color.fromRGBO(112, 112, 112, 1)),
-      backgroundColor: Color.fromRGBO(249, 249, 249, 1),
+      backgroundColor: Color.fromARGB(249, 249, 249, 249),
       primaryColor: Color.fromRGBO(254, 99, 71, 1),
       colorScheme: ColorScheme(
         surface: Colors.white,

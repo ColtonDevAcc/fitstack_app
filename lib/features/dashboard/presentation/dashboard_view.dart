@@ -4,10 +4,16 @@ import 'package:flutter/material.dart';
 
 import '../../../widgets/molecules/statistics_dashboard.dart';
 
-class DashBoard_View extends StatelessWidget {
+class DashBoard_View extends StatefulWidget {
   DashBoard_View({Key? key}) : super(key: key);
 
-  final ScrollController listController = ScrollController();
+  @override
+  State<DashBoard_View> createState() => _DashBoard_ViewState();
+}
+
+class _DashBoard_ViewState extends State<DashBoard_View> {
+  final ScrollController listController =
+      ScrollController(initialScrollOffset: 0);
 
   @override
   Widget build(BuildContext context) {
@@ -38,26 +44,19 @@ class DashBoard_View extends StatelessWidget {
                   ),
                   SizedBox(height: 10),
                   SizedBox(
-                    height: 200,
+                    height: 230,
                     width: double.infinity,
-                    child: ListView.separated(
-                      primary: true,
+                    child: PageView.builder(
                       scrollDirection: Axis.horizontal,
                       itemCount: 20,
                       itemBuilder: (BuildContext context, int index) {
-                        if (index == 1) {
-                          return InteractiveViewer(
-                            child: WorkoutCard(),
-                            minScale: .75,
-                          );
-                        } else {
-                          return WorkoutCard();
-                        }
-                      },
-                      separatorBuilder: (BuildContext context, int index) =>
-                          const SizedBox(width: 12),
+                        return WorkoutCard();
+                      }
                     ),
                   ),
+                  Text((listController.hasClients
+                      ? listController.position.toString()
+                      : "No pos")),
                   Text("Progress"),
                   Container(
                     height: 200,

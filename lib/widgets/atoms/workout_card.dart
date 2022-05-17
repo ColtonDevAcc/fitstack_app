@@ -6,13 +6,12 @@ class WorkoutCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 200,
-      width: 150,
+      width: 180,
       child: Card(
         clipBehavior: Clip.antiAlias,
         color: Colors.white,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(15),
         ),
         child: Column(
           children: [
@@ -22,8 +21,20 @@ class WorkoutCard extends StatelessWidget {
               fit: BoxFit.cover,
             ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: const Text("Workout Description"),
+              padding: const EdgeInsets.all(10.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    "Title",
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  const Text(
+                    "Lorem ipsum dolor sit amet, consetetur sadipscing elitr,",
+                    style: TextStyle(fontSize: 12),
+                  ),
+                ],
+              ),
             ),
           ],
         ),

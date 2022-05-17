@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:dot_navigation_bar/dot_navigation_bar.dart';
 import 'package:fitstackapp/core/routing/appRouter.gr.dart';
-import 'package:fitstackapp/features/dashboard/presentation/dashboard_view.dart';
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
 
@@ -53,7 +52,7 @@ class _Main_ViewState extends State<Main_View> {
           ],
         );
       },
-      routes: const [
+      routes: [
         DashBoard_ViewRoute(),
       ],
     );

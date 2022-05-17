@@ -32,8 +32,10 @@ class AppRouter extends _i4.RootStackRouter {
           routeData: routeData, child: const _i2.Main_View());
     },
     DashBoard_ViewRoute.name: (routeData) {
+      final args = routeData.argsAs<DashBoard_ViewRouteArgs>(
+          orElse: () => const DashBoard_ViewRouteArgs());
       return _i4.MaterialPageX<dynamic>(
-          routeData: routeData, child: _i3.DashBoard_View());
+          routeData: routeData, child: _i3.DashBoard_View(key: args.key));
     }
   };
 
@@ -67,8 +69,21 @@ class MainViewRouter extends _i4.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i3.DashBoard_View]
-class DashBoard_ViewRoute extends _i4.PageRouteInfo<void> {
-  const DashBoard_ViewRoute() : super(DashBoard_ViewRoute.name, path: '');
+class DashBoard_ViewRoute extends _i4.PageRouteInfo<DashBoard_ViewRouteArgs> {
+  DashBoard_ViewRoute({_i5.Key? key})
+      : super(DashBoard_ViewRoute.name,
+            path: '', args: DashBoard_ViewRouteArgs(key: key));
 
   static const String name = 'DashBoard_ViewRoute';
+}
+
+class DashBoard_ViewRouteArgs {
+  const DashBoard_ViewRouteArgs({this.key});
+
+  final _i5.Key? key;
+
+  @override
+  String toString() {
+    return 'DashBoard_ViewRouteArgs{key: $key}';
+  }
 }
