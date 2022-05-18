@@ -15,6 +15,8 @@ class _WorkoutCardState extends State<WorkoutCard> {
         maxHeight: 200,
         maxWidth: 200,
       ),
+      height: 200,
+      width: 200,
       child: Card(
         clipBehavior: Clip.antiAlias,
         color: Colors.white,

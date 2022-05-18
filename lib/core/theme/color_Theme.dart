@@ -1,6 +1,4 @@
-import 'package:fitstackapp/core/theme/text_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class FSColorTheme {
   Color primaryColor = Colors.redAccent;
@@ -50,50 +48,8 @@ class FSColorTheme {
         primary: Color.fromRGBO(254, 99, 71, 1),
         secondary: Color.fromRGBO(87, 54, 232, 1),
       ),
-      textTheme: GoogleFonts.latoTextTheme().copyWith(
-        headline4: GoogleFonts.bebasNeue(
-          textStyle: textTheme.headline4,
-          color: Theme.of(context).colorScheme.primary,
-          fontSize: 12,
-        ),
-        headline3: GoogleFonts.montserrat(
-          textStyle: textTheme.headline1,
-          fontWeight: FontWeight.bold,
-          color: Theme.of(context).colorScheme.primary,
-          fontSize: 18,
-        ),
-        button: GoogleFonts.montserrat(
-          textStyle: textTheme.headline4,
-          color: Theme.of(context).colorScheme.primary,
-          fontSize: 15,
-        ),
-        bodyText1: GoogleFonts.bebasNeue(
-          textStyle: textTheme.headline4,
-          color: Theme.of(context).colorScheme.onBackground,
-          fontSize: 10,
-        ),
-        bodyText2: GoogleFonts.montserrat(
-          textStyle: textTheme.headline4,
-          color: Colors.black,
-          fontSize: 20,
-        ),
-        subtitle1: GoogleFonts.montserrat(
-          textStyle: textTheme.headline4,
-          fontSize: 16,
-          color: Colors.black,
-        ),
-        subtitle2: GoogleFonts.montserrat(
-          textStyle: textTheme.headline4,
-          fontSize: 14,
-          color: Colors.black,
-        ),
-        headline6: GoogleFonts.montserrat(
-          textStyle: textTheme.headline4,
-          fontSize: 15,
-          color: Colors.black,
-        ),
-      ),
-      primaryTextTheme: FSTextTheme.Primary_Text_Theme(context),
+      textTheme: textTheme,
+      primaryTextTheme: textTheme,
     );
   }
 }

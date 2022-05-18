@@ -1,4 +1,3 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:fitstackapp/widgets/atoms/workout_card.dart';
 import 'package:fitstackapp/widgets/molecules/statistics_dashboard.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +14,7 @@ class DashBoard_View extends StatefulWidget {
 class _DashBoard_ViewState extends State<DashBoard_View> {
   int currIndex = 0;
   final PageController _pageController = PageController(viewportFraction: 0.5);
+  //final PageController _pageController = PageController();
 
   @override
   Widget build(BuildContext context) {
@@ -29,14 +29,12 @@ class _DashBoard_ViewState extends State<DashBoard_View> {
                 children: [
                   Text(
                     "HOW YOUR DAY LOOKS?",
-                    style: TextStyle(
-                        fontSize: 20,
-                        color: Theme.of(context).colorScheme.primary),
+                    style: Theme.of(context).textTheme.headline3,
                   ),
                   SizedBox(height: 10),
                   Text(
                     "Stats",
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: Theme.of(context).textTheme.subtitle2,
                   ),
                   Statistics_Dashboard(),
                   Text(
@@ -45,21 +43,30 @@ class _DashBoard_ViewState extends State<DashBoard_View> {
                   ),
                   SizedBox(height: 10),
                   SizedBox(
-                    height: 250,
+                    height: 230,
+                    width: double.infinity,
                     child: PageView.builder(
-                        controller: _pageController,
-                        onPageChanged: (index) {
-                          setState(() {
-                            currIndex = index;
-                          });
-                        },
-                        scrollDirection: Axis.horizontal,
-                        itemCount: 10,
-                        itemBuilder: (BuildContext context, int index) {
-                          return Transform.scale(
-                              scale: index == currIndex ? 1 : 0.9,
-                              child: WorkoutCard());
-                        }),
+                      clipBehavior: Clip.none,
+                      pageSnapping: false,
+                      controller: _pageController,
+                      onPageChanged: (index) {
+                        setState(() {
+                          currIndex = index;
+                        });
+                      },
+                      scrollDirection: Axis.horizontal,
+                      itemCount: 10,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Transform.translate(
+                          offset: Offset(-80, 0),
+                          child: AnimatedScale(
+                            scale: index == currIndex ? 1.05 : 0.9,
+                            child: WorkoutCard(),
+                            duration: Duration(milliseconds: 200),
+                          ),
+                        );
+                      },
+                    ),
                   ),
                   Text("Progress"),
                   Container(

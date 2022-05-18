@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:fitstackapp/core/routing/appRouter.gr.dart';
+import 'package:fitstackapp/core/theme/theme.dart';
 import 'package:fitstackapp/features/login/presentation/login_view.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return kDebugMode != true
         ? MaterialApp.router(
-            theme: FSColorTheme.Light(context),
+            theme: lightTheme,
             routerDelegate: _appRouter.delegate(
               navigatorObservers: () => [AutoRouteObserver()],
             ),
@@ -39,7 +40,7 @@ class MyApp extends StatelessWidget {
             useInheritedMediaQuery: true,
             locale: DevicePreview.locale(context),
             builder: DevicePreview.appBuilder,
-            theme: FSColorTheme.Light(context),
+            theme: lightTheme,
             routerDelegate: _appRouter.delegate(),
             routeInformationParser: _appRouter.defaultRouteParser(),
             routeInformationProvider: _appRouter.routeInfoProvider(),
