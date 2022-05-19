@@ -36,13 +36,13 @@ class _WorkoutCardState extends State<WorkoutCard> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text(
+                  Text(
                     "Title",
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: Theme.of(context).textTheme.subtitle1,
                   ),
-                  const Text(
+                  Text(
                     "Lorem ipsum dolor sit amet, consetetur sadipscing elitr,",
-                    style: TextStyle(fontSize: 12),
+                    style: Theme.of(context).textTheme.subtitle2,
                   ),
                 ],
               ),

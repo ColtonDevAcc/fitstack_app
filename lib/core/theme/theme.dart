@@ -18,7 +18,11 @@ const ColorScheme lightColors = const ColorScheme(
 const TextTheme baseTextTheme = TextTheme();
 
 TextTheme lightTextTheme = GoogleFonts.latoTextTheme().copyWith(
-  headline4: GoogleFonts.bebasNeue(
+  headline1: GoogleFonts.bebasNeue(
+    textStyle: baseTextTheme.headline4,
+    color: lightColors.primary,
+  ),
+  headline2: GoogleFonts.bebasNeue(
     textStyle: baseTextTheme.headline4,
     color: lightColors.primary,
   ),
@@ -27,6 +31,14 @@ TextTheme lightTextTheme = GoogleFonts.latoTextTheme().copyWith(
     fontWeight: FontWeight.bold,
     color: lightColors.primary,
     fontSize: 18,
+  ),
+  headline4: GoogleFonts.bebasNeue(
+    textStyle: baseTextTheme.headline4,
+    color: lightColors.primary,
+  ),
+  headline5: GoogleFonts.bebasNeue(
+    textStyle: baseTextTheme.headline4,
+    color: lightColors.primary,
   ),
   button: GoogleFonts.montserrat(
     textStyle: baseTextTheme.button,
@@ -51,11 +63,6 @@ TextTheme lightTextTheme = GoogleFonts.latoTextTheme().copyWith(
   subtitle2: GoogleFonts.montserrat(
     textStyle: baseTextTheme.subtitle2,
     fontSize: 14,
-    color: Colors.black,
-  ),
-  headline6: GoogleFonts.montserrat(
-    textStyle: baseTextTheme.headline6,
-    fontSize: 15,
     color: Colors.black,
   ),
 );

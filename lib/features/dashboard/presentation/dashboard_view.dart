@@ -43,7 +43,7 @@ class _DashBoard_ViewState extends State<DashBoard_View> {
                   ),
                   SizedBox(height: 10),
                   SizedBox(
-                    height: 230,
+                    height: 250,
                     width: double.infinity,
                     child: PageView.builder(
                       clipBehavior: Clip.none,
