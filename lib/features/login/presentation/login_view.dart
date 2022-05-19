@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:fitstackapp/core/theme/test.dart';
 import 'package:fitstackapp/widgets/atoms/focusedButton_widget.dart';
 import 'package:fitstackapp/widgets/atoms/socialAuthButton_widget.dart';
 import 'package:fitstackapp/widgets/atoms/textfield_widget.dart';
@@ -32,14 +33,12 @@ class Login_View extends StatelessWidget {
               SizedBox(height: 15),
               Text('LETS SIGN YOU IN,',
                   textScaleFactor: 1.6,
-                  style: TextStyle(color: Theme.of(context).primaryColor)),
+                  //style: TextStyle(color: Theme.of(context).primaryColor),
+                  style: Theme.of(context).textTheme.headline4),
               SizedBox(height: 15),
               Text(
                 'Welcome Back you\'ve\nbeen missed!',
-                textScaleFactor: 1.6,
-                style: TextStyle(
-                  fontWeight: FontWeight.w300,
-                ),
+                style: Theme.of(context).textTheme.bodyMedium,
               ),
               Spacer(flex: 2),
               TextField_Widget(

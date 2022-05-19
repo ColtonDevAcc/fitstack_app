@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class FSTextTheme extends TextTheme {
+class FSTextTheme {
   static Primary_Text_Theme(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
+    final TextTheme textTheme = TextTheme();
 
     return GoogleFonts.latoTextTheme().copyWith(
       headline4: GoogleFonts.bebasNeue(
-        textStyle: TextStyle(),
+        textStyle: textTheme.headline4,
         color: Theme.of(context).colorScheme.primary,
       ),
       headline3: GoogleFonts.montserrat(
