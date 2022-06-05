@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "710929278430",
+    "project_id": "fitstack-4d510",
+    "storage_bucket": "fitstack-4d510.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:710929278430:android:a23cc9c448af39f56c694f",
+        "android_client_info": {
+          "package_name": "com.example.fitstackapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "710929278430-ccnfqk6lkkk18q0l82rq0ku29vl9jgbs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCf6ZLfqJGw4g1JPBi7fCu4UQhJ-5qKYMQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "710929278430-ccnfqk6lkkk18q0l82rq0ku29vl9jgbs.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "710929278430-auooq1l15qhu1hgvgkm15g0mn7a8512h.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.voodoostack.fitstack"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

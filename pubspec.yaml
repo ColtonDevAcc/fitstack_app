@@ -1,9 +1,9 @@
 name: fitstackapp
 description: A new Flutter project.
-publish_to: "none" # Remove this line if you wish to publish to pub.dev
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 environment:
-  sdk: ">=2.16.2 <3.0.0"
+  sdk: '>=2.16.2 <3.0.0'
 
 dependencies:
   flutter:
@@ -21,7 +21,7 @@ dependencies:
   carousel_slider: ^4.1.1
 
   # fonts
-  google_fonts: ^2.3.2
+  google_fonts: ^3.0.1
   font_awesome_flutter: ^10.1.0
   line_icons: ^2.0.1
 
@@ -31,11 +31,21 @@ dependencies:
   # for debug
   device_preview: ^1.0.0
 
-  # interatial
-  health: ^3.4.4
+  # health
+  health: ^4.0.0
 
   # routing
-  auto_route: ^3.2.4
+  auto_route: ^4.0.1
+
+  #firebase
+  firebase_dynamic_links: ^4.2.5
+  firebase_core: ^1.17.1
+  firebase_remote_config: ^2.0.8
+  firebase_messaging: ^11.4.1
+  firebase_storage: ^10.2.17
+  firebase_crashlytics: ^2.8.1
+  firebase_analytics: ^9.1.9
+  firebase_performance: ^0.8.0+13
 
 dev_dependencies:
   flutter_test:
