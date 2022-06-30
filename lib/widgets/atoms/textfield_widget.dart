@@ -4,9 +4,10 @@ class TextField_Widget extends StatelessWidget {
   final String title;
   final String? hintText;
   final String? bottomTitle;
+  final TextEditingController controller;
 
   const TextField_Widget(
-      {Key? key, required this.title, this.bottomTitle, this.hintText})
+      {Key? key, required this.title, this.bottomTitle, this.hintText, required this.controller})
       : super(key: key);
 
   @override
@@ -31,8 +32,7 @@ class TextField_Widget extends StatelessWidget {
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
-                borderSide:
-                    BorderSide(color: Theme.of(context).colorScheme.secondary),
+                borderSide: BorderSide(color: Theme.of(context).colorScheme.secondary),
               ),
               filled: true,
               fillColor: Theme.of(context).colorScheme.surface,

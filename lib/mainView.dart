@@ -53,7 +53,11 @@ class _Main_ViewState extends State<Main_View> {
         );
       },
       routes: [
-        DashBoard_ViewRoute(),
+        DashBoard_View(),
+        DashBoard_View(),
+        DashBoard_View(),
+        DashBoard_View(),
+        DashBoard_View(),
       ],
     );
   }

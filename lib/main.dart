@@ -15,11 +15,11 @@ import 'core/theme/color_Theme.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
-
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
 
   runApp(
     DevicePreview(
@@ -34,10 +34,6 @@ class MyApp extends StatelessWidget {
 
   static FirebaseAnalytics analytics = FirebaseAnalytics.instance;
   static FirebaseAnalyticsObserver observer = FirebaseAnalyticsObserver(analytics: analytics);
-
-  final List views = const [
-    Login_View(),
-  ];
 
   final _appRouter = AppRouter();
 

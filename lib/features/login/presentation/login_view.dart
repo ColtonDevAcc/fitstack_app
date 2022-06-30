@@ -1,8 +1,8 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:fitstackapp/core/theme/test.dart';
 import 'package:fitstackapp/widgets/atoms/focusedButton_widget.dart';
 import 'package:fitstackapp/widgets/atoms/socialAuthButton_widget.dart';
 import 'package:fitstackapp/widgets/atoms/textfield_widget.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -12,6 +12,9 @@ class Login_View extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController emailController = TextEditingController();
+    TextEditingController passwordController = TextEditingController();
+
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
       body: SafeArea(
@@ -42,16 +45,35 @@ class Login_View extends StatelessWidget {
               ),
               Spacer(flex: 2),
               TextField_Widget(
+                controller: emailController,
                 title: "Email",
                 hintText: 'Username or Email',
               ),
               SizedBox(height: 15),
               TextField_Widget(
+                controller: passwordController,
                 title: "Password",
                 bottomTitle: "Forgot Password?",
                 hintText: 'Password',
               ),
               Spacer(flex: 4),
+              Center(
+                child: RichText(
+                  text: TextSpan(
+                    text: "Don't have an account? ",
+                    children: [
+                      TextSpan(
+                        text: "Sign Up!",
+                        style: TextStyle(color: Colors.blue),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            AutoRouter.of(context).pushNamed('/signup');
+                          },
+                      ),
+                    ],
+                  ),
+                ),
+              ),
               Center(
                 child: FocusedButton_Widget(
                   text: "SIGN IN",
@@ -66,7 +88,7 @@ class Login_View extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SocailAuthButton_Widget(
+                  SocialAuthButton_Widget(
                     color: Theme.of(context).colorScheme.primary,
                     child: FaIcon(
                       FontAwesomeIcons.facebookF,
@@ -74,7 +96,7 @@ class Login_View extends StatelessWidget {
                     ),
                   ),
                   SizedBox(width: 15),
-                  SocailAuthButton_Widget(
+                  SocialAuthButton_Widget(
                     color: Theme.of(context).colorScheme.secondary,
                     child: FaIcon(
                       FontAwesomeIcons.google,

@@ -1,6 +1,7 @@
 import 'package:auto_route/annotations.dart';
 import 'package:fitstackapp/features/dashboard/presentation/dashboard_view.dart';
 import 'package:fitstackapp/features/login/presentation/login_view.dart';
+import 'package:fitstackapp/features/signup/presentation/signup_view.dart';
 
 import '../../mainView.dart';
 
@@ -12,6 +13,11 @@ import '../../mainView.dart';
       page: Login_View,
       children: [],
     ),
+    AutoRoute<String>(
+      page: SignUp_View,
+      path: '/signup',
+      name: 'signup',
+    ),
     AutoRoute(
       page: Main_View,
       path: '/mainView',
@@ -20,6 +26,7 @@ import '../../mainView.dart';
         AutoRoute(
           path: '',
           page: DashBoard_View,
+          initial: false,
         ),
       ],
     ),
@@ -30,3 +37,4 @@ class $AppRouter {}
 //flutter pub get && flutter pub run build_runner build --delete-conflicting-outputs
 
 
+    
