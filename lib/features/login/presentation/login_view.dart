@@ -34,14 +34,20 @@ class Login_View extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 15),
-              Text('LETS SIGN YOU IN,',
-                  textScaleFactor: 1.6,
-                  //style: TextStyle(color: Theme.of(context).primaryColor),
-                  style: Theme.of(context).textTheme.headline4),
-              SizedBox(height: 15),
+              Text(
+                'LETS SIGN YOU IN,',
+                textScaleFactor: 1.6,
+                //style: TextStyle(color: Theme.of(context).primaryColor),
+                style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+              ),
+              SizedBox(height: 10),
               Text(
                 'Welcome Back you\'ve\nbeen missed!',
-                style: Theme.of(context).textTheme.bodyMedium,
+                style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                      color: Theme.of(context).colorScheme.onBackground.withOpacity(.7),
+                    ),
               ),
               Spacer(flex: 2),
               TextField_Widget(
@@ -60,11 +66,16 @@ class Login_View extends StatelessWidget {
               Center(
                 child: RichText(
                   text: TextSpan(
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.onBackground.withOpacity(.7),
+                    ),
                     text: "Don't have an account? ",
                     children: [
                       TextSpan(
-                        text: "Sign Up!",
-                        style: TextStyle(color: Colors.blue),
+                        text: "      Sign Up!",
+                        style: TextStyle(
+                            color: Theme.of(context).colorScheme.onBackground,
+                            fontWeight: FontWeight.bold),
                         recognizer: TapGestureRecognizer()
                           ..onTap = () {
                             AutoRouter.of(context).pushNamed('/signup');

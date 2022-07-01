@@ -1,3 +1,4 @@
+import 'package:fitstackapp/core/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
 class FSColorTheme {
@@ -24,7 +25,7 @@ class FSColorTheme {
         primary: Color.fromRGBO(254, 99, 71, 1),
         secondary: Color.fromRGBO(87, 54, 232, 1),
       ),
-      textTheme: textTheme,
+      textTheme: FSTextTheme.Primary_Text_Theme(context),
     );
   }
 

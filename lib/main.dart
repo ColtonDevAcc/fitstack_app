@@ -3,7 +3,6 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:fitstackapp/core/routing/appRouter.gr.dart';
 import 'package:fitstackapp/core/theme/theme.dart';
-import 'package:fitstackapp/features/login/presentation/login_view.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:device_preview/device_preview.dart';
@@ -41,7 +40,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return kDebugMode != true
         ? MaterialApp.router(
-            theme: lightTheme,
+            theme: FSColorTheme.Light(context),
+            darkTheme: FSColorTheme.Dark(context),
             routerDelegate: _appRouter.delegate(
               navigatorObservers: () => [
                 AutoRouteObserver(),
@@ -51,13 +51,13 @@ class MyApp extends StatelessWidget {
             ),
             routeInformationParser: _appRouter.defaultRouteParser(),
             routeInformationProvider: _appRouter.routeInfoProvider(),
-            darkTheme: FSColorTheme.Dark(context),
           )
         : MaterialApp.router(
+            theme: FSColorTheme.Light(context),
+            darkTheme: FSColorTheme.Dark(context),
             useInheritedMediaQuery: true,
             locale: DevicePreview.locale(context),
             builder: DevicePreview.appBuilder,
-            theme: lightTheme,
             routerDelegate: _appRouter.delegate(
               navigatorObservers: () => [
                 AutoRouteObserver(),

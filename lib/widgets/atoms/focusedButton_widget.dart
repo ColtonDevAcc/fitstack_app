@@ -26,7 +26,9 @@ class FocusedButton_Widget extends StatelessWidget {
         child: Center(
           child: Text(
             text,
-            style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
+            style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                  color: Theme.of(context).colorScheme.onPrimary,
+                ),
           ),
         ),
       ),

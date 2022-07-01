@@ -20,10 +20,11 @@ class TextField_Widget extends StatelessWidget {
           Text(
             title,
             textScaleFactor: 1.4,
-            style: Theme.of(context).textTheme.subtitle2,
+            style: Theme.of(context).textTheme.titleSmall,
           ),
           SizedBox(height: 10),
           TextField(
+            style: Theme.of(context).textTheme.bodyMedium,
             decoration: InputDecoration(
               hintText: hintText,
               border: OutlineInputBorder(
@@ -42,9 +43,7 @@ class TextField_Widget extends StatelessWidget {
           if (bottomTitle != null)
             Text(
               bottomTitle!,
-              style: TextStyle(
-                fontWeight: FontWeight.w400,
-              ),
+              style: Theme.of(context).textTheme.subtitle2,
             ),
         ],
       ),
