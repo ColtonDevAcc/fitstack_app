@@ -11,14 +11,19 @@ dependencies:
   cupertino_icons: ^1.0.2
 
   # state
-  bloc: ^8.0.3
-  shared_preferences: ^2.0.15
+  flutter_bloc: ^8.0.1
+  shared_preferences:
+  equatable:
 
   # ui
   dot_navigation_bar: ^1.0.1+4
   lottie: ^1.3.0
   rive: ^0.8.4
   carousel_slider: ^4.1.1
+
+  #auth
+  google_sign_in: ^5.3.3
+  email_validator: ^2.0.1
 
   # fonts
   google_fonts: ^3.0.1
@@ -32,20 +37,19 @@ dependencies:
   device_preview: ^1.0.0
 
   # health
-  health: ^4.0.0
+  health:
 
   # routing
   auto_route: ^4.0.1
 
   #firebase
-  firebase_dynamic_links: ^4.2.5
-  firebase_core: ^1.17.1
-  firebase_remote_config: ^2.0.8
-  firebase_messaging: ^11.4.1
-  firebase_storage: ^10.2.17
-  firebase_crashlytics: ^2.8.1
-  firebase_analytics: ^9.1.9
-  firebase_performance: ^0.8.0+13
+  firebase_dynamic_links:
+  firebase_core:
+  firebase_remote_config:
+  firebase_crashlytics:
+  firebase_analytics:
+  firebase_performance:
+  firebase_auth:
 
 dev_dependencies:
   flutter_test:

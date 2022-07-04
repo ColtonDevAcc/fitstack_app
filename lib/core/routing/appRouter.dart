@@ -1,7 +1,7 @@
 import 'package:auto_route/annotations.dart';
-import 'package:fitstackapp/features/dashboard/presentation/dashboard_view.dart';
-import 'package:fitstackapp/features/login/presentation/login_view.dart';
-import 'package:fitstackapp/features/signup/presentation/signup_view.dart';
+import 'package:fitstackapp/presentation/dashboard/presentation/dashboard_view.dart';
+import 'package:fitstackapp/presentation/login/presentation/login_view.dart';
+import 'package:fitstackapp/presentation/signup/presentation/signup_view.dart';
 
 import '../../mainView.dart';
 

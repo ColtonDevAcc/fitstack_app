@@ -47,30 +47,30 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyAnk270LO4o-2q8h8-_yHSP1biu56MYQBw',
-    appId: '1:710929278430:web:285967d308e64f296c694f',
-    messagingSenderId: '710929278430',
-    projectId: 'fitstack-4d510',
-    authDomain: 'fitstack-4d510.firebaseapp.com',
-    storageBucket: 'fitstack-4d510.appspot.com',
-    measurementId: 'G-LHHNV7SHEG',
+    apiKey: 'AIzaSyCs_R6I730SvDI4eBk2hPOCq81SzPQEpoA',
+    appId: '1:606254244778:web:3deffadc4d0a1a1d5b81d3',
+    messagingSenderId: '606254244778',
+    projectId: 'fitstack-337104',
+    authDomain: 'fitstack-337104.firebaseapp.com',
+    storageBucket: 'fitstack-337104.appspot.com',
+    measurementId: 'G-9955668QK7',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCf6ZLfqJGw4g1JPBi7fCu4UQhJ-5qKYMQ',
-    appId: '1:710929278430:android:a23cc9c448af39f56c694f',
-    messagingSenderId: '710929278430',
-    projectId: 'fitstack-4d510',
-    storageBucket: 'fitstack-4d510.appspot.com',
+    apiKey: 'AIzaSyD00CGxTDoVgQEKBKLh2xIfudyaIHifS5Y',
+    appId: '1:606254244778:android:da05a52e47b791e05b81d3',
+    messagingSenderId: '606254244778',
+    projectId: 'fitstack-337104',
+    storageBucket: 'fitstack-337104.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyA3nvlPlarQO7gE9Zbeukrrq1Sbjof2TPY',
-    appId: '1:710929278430:ios:08dbea0f6d1874b46c694f',
-    messagingSenderId: '710929278430',
-    projectId: 'fitstack-4d510',
-    storageBucket: 'fitstack-4d510.appspot.com',
-    iosClientId: '710929278430-egilbhjp1pisvp4d3ppfqd4j57g7sco0.apps.googleusercontent.com',
+    apiKey: 'AIzaSyCNw9-sJ0DIJLbAF2-ufFz9GKrlwR7DQcI',
+    appId: '1:606254244778:ios:c322fed5743611275b81d3',
+    messagingSenderId: '606254244778',
+    projectId: 'fitstack-337104',
+    storageBucket: 'fitstack-337104.appspot.com',
+    iosClientId: '606254244778-s31ijufed41dh9kqvdpsl0m5r8k15m55.apps.googleusercontent.com',
     iosBundleId: 'com.example.fitstackapp',
   );
 }

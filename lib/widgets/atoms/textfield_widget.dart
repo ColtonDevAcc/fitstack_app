@@ -5,10 +5,16 @@ class TextField_Widget extends StatelessWidget {
   final String? hintText;
   final String? bottomTitle;
   final TextEditingController controller;
+  final String? Function(String?)? validator;
 
-  const TextField_Widget(
-      {Key? key, required this.title, this.bottomTitle, this.hintText, required this.controller})
-      : super(key: key);
+  TextField_Widget({
+    Key? key,
+    required this.title,
+    this.bottomTitle,
+    this.hintText,
+    required this.controller,
+    this.validator,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +29,10 @@ class TextField_Widget extends StatelessWidget {
             style: Theme.of(context).textTheme.titleSmall,
           ),
           SizedBox(height: 10),
-          TextField(
+          TextFormField(
+            onChanged: (value) => controller.text = value,
+            validator: validator,
+            autovalidateMode: validator == null ? null : AutovalidateMode.onUserInteraction,
             style: Theme.of(context).textTheme.bodyMedium,
             decoration: InputDecoration(
               hintText: hintText,

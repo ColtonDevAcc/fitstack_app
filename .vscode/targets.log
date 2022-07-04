@@ -7,7 +7,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 
 # This program built for i386-apple-darwin11.3.0
 
-# Make data base, printed on Thu Jun 30 21:46:10 2022
+# Make data base, printed on Sat Jul  2 01:01:19 2022
 
 # Variables
 
@@ -40,13 +40,11 @@ __CFBundleIdentifier = com.microsoft.VSCode
 # environment
 INFOPATH = /opt/homebrew/share/info:
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /var/folders/xx/07hx2gwj53x2_w666v2q192h0000gn/T/vscode-ipc-1c24bf48-92ad-4823-b4b4-ee7fad8ff0c3.sock
+VSCODE_IPC_HOOK_EXTHOST = /var/folders/xx/07hx2gwj53x2_w666v2q192h0000gn/T/vscode-ipc-9106d267-46d4-4b8a-a2b8-6220fa0aa205.sock
 # environment
 VSCODE_CWD = /
 # environment
 PATH = /Users/coltonbristow/Development/SDKs/google-cloud-sdk/bin:/Library/Frameworks/Python.framework/Versions/3.10/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/coltonbristow/Development/SDKs/flutter/bin:/Users/coltonbristow/.pub-cache/bin
-# environment
-LaunchInstanceID = FFBE8FCA-F0E3-4A76-A605-6F853503D3D0
 # environment
 VSCODE_LOG_STACK = false
 # environment
@@ -135,8 +133,6 @@ MAKEFILES :=
 <F = $(notdir $<)
 # environment
 LC_ALL = C
-# environment
-SECURITYSESSIONID = 186af
 # automatic
 ^F = $(notdir $^)
 # default
@@ -148,9 +144,9 @@ MAKELEVEL := 0
 # environment
 LANG = C
 # environment
-VSCODE_PID = 9825
+VSCODE_PID = 9012
 # variable set hash-table stats:
-# Load=69/1024=7%, Rehash=0, Collisions=1/93=1%
+# Load=67/1024=7%, Rehash=0, Collisions=1/91=1%
 
 # Pattern-specific Variable Values
 
@@ -221,7 +217,7 @@ makefile:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Thu Jun 30 21:46:10 2022
+# Finished Make data base on Sat Jul  2 01:01:19 2022
 
  
 make: *** No rule to make target `all'.  Stop.
