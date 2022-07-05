@@ -66,7 +66,7 @@ class _Main_ViewState extends State<Main_View> {
         DashBoard_View(),
         DashBoard_View(),
         DashBoard_View(),
-        DashBoard_View(),
+        Settings_View(),
       ],
     );
   }

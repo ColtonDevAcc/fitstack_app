@@ -1,6 +1,7 @@
 import 'package:auto_route/annotations.dart';
 import 'package:fitstackapp/presentation/dashboard/presentation/dashboard_view.dart';
 import 'package:fitstackapp/presentation/login/presentation/login_view.dart';
+import 'package:fitstackapp/presentation/settings/settings_view.dart';
 import 'package:fitstackapp/presentation/signup/presentation/signup_view.dart';
 
 import '../../mainView.dart';
@@ -23,8 +24,14 @@ import '../../mainView.dart';
       usesPathAsKey: true,
       children: [
         AutoRoute(
-          path: '',
+          path: 'DashBoard',
           page: DashBoard_View,
+          usesPathAsKey: true,
+          initial: false,
+        ),
+        AutoRoute(
+          path: 'Settings',
+          page: Settings_View,
           usesPathAsKey: true,
           initial: false,
         ),

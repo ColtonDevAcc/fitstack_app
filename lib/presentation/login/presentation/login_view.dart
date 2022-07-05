@@ -42,8 +42,9 @@ class _Login_ViewState extends State<Login_View> {
         builder: (context, snapshot) {
           // If the snapshot has user data, then they're already signed in. So Navigating to the Dashboard.
           if (snapshot.hasData) {
-            log('pushing to mainview');
-            context.router.pushNamed('/mainView');
+            User? firebaseUser = snapshot.data;
+            log('pushing to mainview with //==== ${firebaseUser} ====//');
+            AutoRouter.of(context).replace(MainViewRouter());
           }
           // Otherwise, they're not signed in. Show the sign in page.
           return Scaffold(
