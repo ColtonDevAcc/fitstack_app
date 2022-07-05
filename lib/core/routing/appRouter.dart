@@ -9,23 +9,23 @@ import '../../mainView.dart';
   replaceInRouteName: 'Page|Screen,Route',
   routes: <AutoRoute>[
     AutoRoute<String>(
-      path: '/',
-      page: Login_View,
-      children: [],
-    ),
+        path: '/', page: Login_View, children: [], usesPathAsKey: true, initial: true),
     AutoRoute<String>(
       page: SignUp_View,
       path: '/signup',
       name: 'signup',
+      usesPathAsKey: true,
     ),
     AutoRoute(
       page: Main_View,
       path: '/mainView',
       name: 'MainViewRouter',
+      usesPathAsKey: true,
       children: [
         AutoRoute(
           path: '',
           page: DashBoard_View,
+          usesPathAsKey: true,
           initial: false,
         ),
       ],

@@ -17,8 +17,17 @@ class _Main_ViewState extends State<Main_View> {
   @override
   Widget build(BuildContext context) {
     return AutoTabsScaffold(
+      backgroundColor: Theme.of(context).colorScheme.background,
       bottomNavigationBuilder: (context, tabsRouter) {
         return DotNavigationBar(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.shade600.withOpacity(.3),
+              spreadRadius: 1,
+              blurRadius: 10,
+            ),
+          ],
+          enableFloatingNavBar: true,
           currentIndex: tabsRouter.activeIndex,
           dotIndicatorColor: Colors.transparent,
           onTap: tabsRouter.setActiveIndex,

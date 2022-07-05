@@ -73,12 +73,6 @@ class _BasicInfoFormState extends State<BasicInfoForm> {
               children: [
                 Spacer(flex: 1),
                 TextField_Widget(
-                  controller: widget.usernameController,
-                  title: "Username",
-                  hintText: "Username",
-                ),
-                SizedBox(height: 10),
-                TextField_Widget(
                   validator: (value) {
                     return value != null && !EmailValidator.validate(value)
                         ? 'Enter a valid email'

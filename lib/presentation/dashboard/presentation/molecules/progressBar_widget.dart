@@ -19,22 +19,29 @@ class ProgressBar extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 5),
       child: Row(
+        mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          CircleAvatar(
-            radius: 20,
-            child: FaIcon(icon, color: barColor, size: 28),
-            backgroundColor: Theme.of(context).colorScheme.surface,
+          Center(
+            child: Material(
+              borderRadius: BorderRadius.circular(25),
+              elevation: 2,
+              child: CircleAvatar(
+                backgroundColor: Theme.of(context).colorScheme.surface,
+                radius: 25,
+                child: FaIcon(icon, color: barColor, size: 25),
+                foregroundColor: Theme.of(context).colorScheme.surface,
+              ),
+            ),
           ),
           const SizedBox(width: 5),
           Column(
+            mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Text(
-                ' ' +
-                    ((partialValue / totalValue) * 100).round().toString() +
-                    '%',
+                ' ' + ((partialValue / totalValue) * 100).round().toString() + '%',
                 style: TextStyle(
                   color: barColor,
                   fontWeight: FontWeight.bold,
@@ -44,7 +51,7 @@ class ProgressBar extends StatelessWidget {
               const SizedBox(height: 5),
               SizedBox(
                 height: 6,
-                width: 280,
+                width: MediaQuery.of(context).size.width * .8,
                 child: Stack(
                   children: [
                     Container(

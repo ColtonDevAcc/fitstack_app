@@ -48,12 +48,15 @@ class AppRouter extends _i5.RootStackRouter {
 
   @override
   List<_i5.RouteConfig> get routes => [
-        _i5.RouteConfig(Login_View.name, path: '/'),
-        _i5.RouteConfig(Signup.name, path: '/signup'),
-        _i5.RouteConfig(MainViewRouter.name, path: '/mainView', children: [
-          _i5.RouteConfig(DashBoard_View.name,
-              path: '', parent: MainViewRouter.name)
-        ])
+        _i5.RouteConfig(Login_View.name, path: '/', usesPathAsKey: true),
+        _i5.RouteConfig(Signup.name, path: '/signup', usesPathAsKey: true),
+        _i5.RouteConfig(MainViewRouter.name,
+            path: '/mainView',
+            usesPathAsKey: true,
+            children: [
+              _i5.RouteConfig(DashBoard_View.name,
+                  path: '', parent: MainViewRouter.name, usesPathAsKey: true)
+            ])
       ];
 }
 

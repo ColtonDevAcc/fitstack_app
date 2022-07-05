@@ -1,12 +1,14 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:fitstackapp/core/bloc/auth/auth_bloc.dart';
 import 'package:fitstackapp/core/repository/auth_repository.dart';
 import 'package:fitstackapp/core/routing/appRouter.gr.dart';
-import 'package:flutter/foundation.dart';
+import 'package:fitstackapp/mainView.dart';
+import 'package:fitstackapp/presentation/dashboard/presentation/dashboard_view.dart' as Dashboard;
+import 'package:fitstackapp/presentation/login/presentation/login_view.dart' as view;
 import 'package:flutter/material.dart';
-import 'package:device_preview/device_preview.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,14 +23,7 @@ void main() async {
 
   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
 
-  BlocOverrides.runZoned(
-    () => runApp(
-      DevicePreview(
-        enabled: !kReleaseMode,
-        builder: (context) => MyApp(), // Wrap your app
-      ),
-    ),
-  );
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -55,36 +50,21 @@ class MyApp extends StatelessWidget {
             ),
           ),
         ],
-        child: kDebugMode != true
-            ? MaterialApp.router(
-                theme: FSColorTheme.Light(context),
-                darkTheme: FSColorTheme.Dark(context),
-                routerDelegate: _appRouter.delegate(
-                  navigatorObservers: () => [
-                    AutoRouteObserver(),
-                    observer,
-                    FirebaseAnalyticsObserver(analytics: analytics),
-                  ],
-                ),
-                routeInformationParser: _appRouter.defaultRouteParser(),
-                routeInformationProvider: _appRouter.routeInfoProvider(),
-              )
-            : MaterialApp.router(
-                theme: FSColorTheme.Light(context),
-                darkTheme: FSColorTheme.Dark(context),
-                useInheritedMediaQuery: true,
-                locale: DevicePreview.locale(context),
-                builder: DevicePreview.appBuilder,
-                routerDelegate: _appRouter.delegate(
-                  navigatorObservers: () => [
-                    AutoRouteObserver(),
-                    observer,
-                    FirebaseAnalyticsObserver(analytics: analytics),
-                  ],
-                ),
-                routeInformationParser: _appRouter.defaultRouteParser(),
-                routeInformationProvider: _appRouter.routeInfoProvider(),
-              ),
+        child: MaterialApp.router(
+          theme: FSColorTheme.Light(context),
+          darkTheme: FSColorTheme.Dark(context),
+          useInheritedMediaQuery: true,
+          //!
+          routerDelegate: _appRouter.delegate(
+            navigatorObservers: () => [
+              AutoRouteObserver(),
+              observer,
+              FirebaseAnalyticsObserver(analytics: analytics),
+            ],
+          ),
+          routeInformationParser: _appRouter.defaultRouteParser(),
+          routeInformationProvider: _appRouter.routeInfoProvider(),
+        ),
       ),
     );
   }

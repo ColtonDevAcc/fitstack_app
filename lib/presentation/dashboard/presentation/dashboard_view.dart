@@ -1,8 +1,8 @@
-import 'package:fitstackapp/widgets/atoms/workout_card.dart';
-import 'package:fitstackapp/widgets/molecules/statistics_dashboard.dart';
+import 'package:fitstackapp/presentation/dashboard/presentation/organisms/workout_reccommendations_list.dart';
+import 'package:fitstackapp/presentation/dashboard/presentation/organisms/statistics_dashboard.dart';
 import 'package:flutter/material.dart';
 
-import '../../../widgets/molecules/statistics_dashboard.dart';
+import 'organisms/statistics_dashboard.dart';
 
 class DashBoard_View extends StatefulWidget {
   DashBoard_View({Key? key}) : super(key: key);
@@ -12,8 +12,8 @@ class DashBoard_View extends StatefulWidget {
 }
 
 class _DashBoard_ViewState extends State<DashBoard_View> {
-  int currIndex = 0;
-  final PageController _pageController = PageController(viewportFraction: 0.5);
+  int currentIndex = 0;
+  final PageController pageController = PageController(viewportFraction: 0.5);
   //final PageController _pageController = PageController();
 
   @override
@@ -31,50 +31,46 @@ class _DashBoard_ViewState extends State<DashBoard_View> {
                 ),
                 Text(
                   "HOW YOUR DAY LOOKS?",
-                  style: Theme.of(context).textTheme.headline3,
+                  style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                      color: Theme.of(context).colorScheme.primary, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 10),
                 Text(
                   "Stats",
-                  style: Theme.of(context).textTheme.bodyText2,
+                  style: Theme.of(context).textTheme.subtitle2!.copyWith(
+                        color: Theme.of(context).colorScheme.onBackground,
+                        fontWeight: FontWeight.bold,
+                      ),
                 ),
-                Statistics_Dashboard(),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+                  child: Statistics_Dashboard(),
+                ),
                 Text(
                   "Daily Workouts",
-                  style: Theme.of(context).textTheme.bodyText2,
+                  style: Theme.of(context).textTheme.subtitle2!.copyWith(
+                        color: Theme.of(context).colorScheme.onBackground,
+                        fontWeight: FontWeight.bold,
+                      ),
                 ),
-                SizedBox(height: 10),
-                SizedBox(
-                  height: 250,
-                  width: double.infinity,
-                  child: PageView.builder(
-                    clipBehavior: Clip.none,
-                    pageSnapping: false,
-                    controller: _pageController,
-                    onPageChanged: (index) {
-                      setState(() {
-                        currIndex = index;
-                      });
-                    },
-                    scrollDirection: Axis.horizontal,
-                    itemCount: 10,
-                    itemBuilder: (BuildContext context, int index) {
-                      return Transform.translate(
-                        offset: Offset(-80, 0),
-                        child: AnimatedScale(
-                          scale: index == currIndex ? 1.05 : 0.9,
-                          child: WorkoutCard(),
-                          duration: Duration(milliseconds: 200),
-                        ),
-                      );
-                    },
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+                  child: Workout_Recommendation_List(pageController: pageController),
+                ),
+                Text(
+                  "Progress",
+                  style: Theme.of(context).textTheme.subtitle2!.copyWith(
+                        color: Theme.of(context).colorScheme.onBackground,
+                        fontWeight: FontWeight.bold,
+                      ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+                  child: Container(
+                    height: 200,
+                    width: 100,
+                    color: Colors.red[300],
                   ),
-                ),
-                Text("Progress"),
-                Container(
-                  height: 200,
-                  width: 100,
-                  color: Colors.grey[300],
                 ),
               ],
             ),
