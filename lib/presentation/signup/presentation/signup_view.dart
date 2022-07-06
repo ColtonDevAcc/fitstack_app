@@ -1,4 +1,6 @@
-import 'package:fitstackapp/core/bloc/auth/auth_bloc.dart';
+import 'package:fitstackapp/data/bloc/app_bloc.dart';
+import 'package:fitstackapp/data/routing/appRouter.gr.dart';
+import 'package:fitstackapp/presentation/login/cubit/login_cubit.dart';
 import 'package:fitstackapp/presentation/signup/presentation/widgets/organisms/basic_info_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -29,7 +31,7 @@ class _SignUp_ViewState extends State<SignUp_View> {
             curve: Curves.ease,
           );
         },
-        googleOnTap: () => authenticateWithGoogle(context),
+        // googleOnTap: () => authenticateWithGoogle(context),
         confirmPassController: confirmPassController,
         emailController: emailController,
         passController: passController,
@@ -42,7 +44,7 @@ class _SignUp_ViewState extends State<SignUp_View> {
       )
     ];
 
-    return BlocBuilder<AuthBloc, AuthState>(
+    return BlocBuilder<LoginCubit, LoginState>(
       builder: (context, state) {
         return Scaffold(
           body: SafeArea(
@@ -69,15 +71,14 @@ class _SignUp_ViewState extends State<SignUp_View> {
   void authenticateWithEmailAndPassword(context) {
     if (formKey.currentState!.validate()) {
       // If email is valid adding new event [SignUpRequested].
-      BlocProvider.of<AuthBloc>(context).add(
-        SignUpRequested(emailController.value.text, passController.value.text),
-      );
+      context.read<LoginState>().signIn(emailController.value, passController.value);
     }
   }
 
-  void authenticateWithGoogle(context) {
-    BlocProvider.of<AuthBloc>(context).add(
-      GoogleSignInRequested(),
-    );
-  }
+//! TODO: implemnt google sign in
+  // void authenticateWithGoogle(context) {
+  //   BlocProvider.of<AuthBloc>(context).add(
+  //     GoogleSignInRequested(),
+  //   );
+  // }
 }

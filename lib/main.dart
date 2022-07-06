@@ -1,23 +1,19 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
-import 'package:fitstackapp/core/bloc/auth/auth_bloc.dart';
-import 'package:fitstackapp/core/repository/auth_repository.dart';
-import 'package:fitstackapp/core/routing/appRouter.gr.dart';
-import 'package:fitstackapp/mainView.dart';
-import 'package:fitstackapp/presentation/dashboard/presentation/dashboard_view.dart' as Dashboard;
-import 'package:fitstackapp/presentation/login/presentation/login_view.dart' as view;
+import 'package:fitstackapp/data/cache/cache_util.dart';
+import 'package:fitstackapp/data/routing/appRouter.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'core/theme/color_Theme.dart';
-
 void main() async {
+  // initialized storage drivers
+  await initCaches();
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
+    name: "FitStackApp",
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
