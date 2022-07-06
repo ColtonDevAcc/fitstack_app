@@ -1,7 +1,11 @@
 part of 'auth_bloc.dart';
 
 @immutable
-abstract class AuthState extends Equatable {}
+abstract class AuthState extends Equatable {
+  final User? user;
+
+  AuthState({this.user});
+}
 
 // When the user presses the signin or signup button the state is changed to loading first and then to Authenticated.
 class Loading extends AuthState {
@@ -11,6 +15,8 @@ class Loading extends AuthState {
 
 // When the user is authenticated the state is changed to Authenticated.
 class Authenticated extends AuthState {
+  Authenticated(User? user) : super(user: user);
+
   @override
   List<Object?> get props => [];
 }

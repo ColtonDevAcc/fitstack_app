@@ -4,9 +4,11 @@ import 'package:google_sign_in/google_sign_in.dart';
 class AuthRepository {
   final _firebaseAuth = FirebaseAuth.instance;
 
-  Future<void> signUp({required String email, required String password}) async {
+  Future<User?> signUp({required String email, required String password}) async {
     try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email, password: password);
+      return await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(email: email, password: password)
+          .then((value) => value.user);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         throw Exception('The password {$password} provided is too weak.');
@@ -16,11 +18,14 @@ class AuthRepository {
     } catch (e) {
       throw Exception(e.toString());
     }
+    return null;
   }
 
-  Future<void> signIn({required String email, required String password}) async {
+  Future<User?> signIn({required String email, required String password}) async {
     try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
+      return await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: email, password: password)
+          .then((value) => value.user);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         throw Exception('No user found for that email.');
@@ -28,6 +33,7 @@ class AuthRepository {
         throw Exception('Wrong password provided for that user.');
       }
     }
+    return null;
   }
 
   Future<void> signOut() async {
@@ -38,7 +44,7 @@ class AuthRepository {
     }
   }
 
-  Future<void> signInWithGoogle() async {
+  Future<User?> signInWithGoogle() async {
     try {
       final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
@@ -49,7 +55,9 @@ class AuthRepository {
         idToken: googleAuth?.idToken,
       );
 
-      await FirebaseAuth.instance.signInWithCredential(credential);
+      return await FirebaseAuth.instance
+          .signInWithCredential(credential)
+          .then((value) => value.user);
     } catch (e) {
       throw Exception(e.toString());
     }

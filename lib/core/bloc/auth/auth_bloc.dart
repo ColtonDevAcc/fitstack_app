@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fitstackapp/core/repository/auth_repository.dart';
 import 'package:meta/meta.dart';
 
@@ -13,8 +14,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<SignInRequested>((event, emit) async {
       emit(Loading());
       try {
-        await authRepository.signIn(email: event.email, password: event.password);
-        emit(Authenticated());
+        User? user = await authRepository.signIn(email: event.email, password: event.password);
+        emit(Authenticated(user));
       } catch (e) {
         emit(AuthError(e.toString()));
         emit(UnAuthenticated());
@@ -24,8 +25,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<SignUpRequested>((event, emit) async {
       emit(Loading());
       try {
-        await authRepository.signUp(email: event.email, password: event.password);
-        emit(Authenticated());
+        User? user = await authRepository.signUp(email: event.email, password: event.password);
+        emit(Authenticated(user));
       } catch (e) {
         emit(AuthError(e.toString()));
         emit(UnAuthenticated());
@@ -35,8 +36,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<GoogleSignInRequested>((event, emit) async {
       emit(Loading());
       try {
-        await authRepository.signInWithGoogle();
-        emit(Authenticated());
+        User? user = await authRepository.signInWithGoogle();
+        emit(Authenticated(user));
       } catch (e) {
         emit(AuthError(e.toString()));
         emit(UnAuthenticated());
