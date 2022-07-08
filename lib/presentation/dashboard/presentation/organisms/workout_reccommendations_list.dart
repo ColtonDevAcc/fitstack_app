@@ -1,4 +1,4 @@
-import 'package:fitstackapp/presentation/dashboard/presentation/molecules/workout_recommendation_card.dart';
+import 'package:FitStack/presentation/dashboard/presentation/molecules/workout_recommendation_card.dart';
 import 'package:flutter/material.dart';
 
 class Workout_Recommendation_List extends StatefulWidget {

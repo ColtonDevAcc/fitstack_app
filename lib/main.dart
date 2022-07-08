@@ -1,11 +1,10 @@
+import 'package:FitStack/app/bloc/app_bloc.dart';
+import 'package:FitStack/app/repository/auth_repository.dart';
+import 'package:FitStack/app/routing/appRouter.gr.dart';
+import 'package:FitStack/app/theme/color_Theme.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
-import 'package:fitstackapp/data/bloc/app_bloc.dart';
-import 'package:fitstackapp/data/cache/cache_util.dart';
-import 'package:fitstackapp/data/repository/auth_repository.dart';
-import 'package:fitstackapp/data/routing/appRouter.gr.dart';
-import 'package:fitstackapp/data/theme/color_Theme.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -16,7 +15,7 @@ Future<void> main() {
     () async {
       WidgetsFlutterBinding.ensureInitialized();
       await Firebase.initializeApp(
-        name: "FitStackApp",
+        name: "FitStack",
         options: DefaultFirebaseOptions.currentPlatform,
       );
       final authenticationRepository = AuthenticationRepository();
@@ -57,6 +56,7 @@ class MyApp extends StatelessWidget {
           ),
         ],
         child: MaterialApp.router(
+          //TODO: make this bloc dep injec
           theme: FSColorTheme.Light(context),
           darkTheme: FSColorTheme.Dark(context),
           useInheritedMediaQuery: true,

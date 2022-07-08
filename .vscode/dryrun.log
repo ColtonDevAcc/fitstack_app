@@ -1,7 +1,7 @@
 make --dry-run --always-make --keep-going --print-directory
-make: Entering directory `/Users/colton.bristow/Development/Projects/FitStackAPP'
+make: Entering directory `/Users/colton.bristow/Development/Projects/FitStack'
 echo "Building..."
 flutter pub get && flutter pub run build_runner build --delete-conflicting-outputs
 echo "Done."
-make: Leaving directory `/Users/colton.bristow/Development/Projects/FitStackAPP'
+make: Leaving directory `/Users/colton.bristow/Development/Projects/FitStack'
  

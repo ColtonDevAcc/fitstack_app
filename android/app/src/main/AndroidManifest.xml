@@ -1,12 +1,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.fitstackapp">
+    package="com.example.FitStack">
 
 	<!-- health kit start --> 
     <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION"/>
     <!-- health kit end --> 
 
    <application
-        android:label="fitstackapp"
+        android:label="FitStack"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

@@ -24,7 +24,7 @@ VSCODE_LOG_NATIVE = false
 # automatic
 @F = $(notdir $@)
 # makefile
-CURDIR := /Users/colton.bristow/Development/Projects/FitStackAPP
+CURDIR := /Users/colton.bristow/Development/Projects/FitStack
 # makefile
 SHELL = /bin/sh
 # environment
@@ -60,7 +60,7 @@ SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.nI7EfMI3yF/Listeners
 # environment
 VSCODE_PIPE_LOGGING = true
 # environment
-PWD = /Users/colton.bristow/Development/Projects/FitStackAPP
+PWD = /Users/colton.bristow/Development/Projects/FitStack
 # environment
 HOMEBREW_CELLAR = /opt/homebrew/Cellar
 # environment

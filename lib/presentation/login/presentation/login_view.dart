@@ -1,13 +1,13 @@
 import 'dart:developer';
 
+import 'package:FitStack/app/routing/appRouter.gr.dart';
+import 'package:FitStack/presentation/login/cubit/login_cubit.dart';
+import 'package:FitStack/widgets/atoms/focusedButton_widget.dart';
+import 'package:FitStack/widgets/atoms/socialAuthButton_widget.dart';
+import 'package:FitStack/widgets/atoms/textfield_widget.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fitstackapp/data/routing/appRouter.gr.dart';
-import 'package:fitstackapp/presentation/login/cubit/login_cubit.dart';
-import 'package:fitstackapp/widgets/atoms/focusedButton_widget.dart';
-import 'package:fitstackapp/widgets/atoms/socialAuthButton_widget.dart';
-import 'package:fitstackapp/widgets/atoms/textfield_widget.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -53,6 +53,7 @@ class _Login_ViewState extends State<Login_View> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    Spacer(flex: 1),
                     Container(
                       padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
                       child: SvgPicture.asset(

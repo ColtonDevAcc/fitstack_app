@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:606254244778:android:da05a52e47b791e05b81d3",
         "android_client_info": {
-          "package_name": "com.example.fitstackapp"
+          "package_name": "com.example.FitStack"
         }
       },
       "oauth_client": [
@@ -34,7 +34,7 @@
               "client_id": "606254244778-ama567j91u9k53gukskb1q74761snb1r.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "io.enigmic.fitstackapp"
+                "bundle_id": "io.enigmic.FitStack"
               }
             }
           ]
@@ -45,7 +45,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:606254244778:android:3f2165f34c5080eb5b81d3",
         "android_client_info": {
-          "package_name": "io.enigmic.fitstackapp"
+          "package_name": "io.enigmic.FitStack"
         }
       },
       "oauth_client": [
@@ -70,7 +70,7 @@
               "client_id": "606254244778-ama567j91u9k53gukskb1q74761snb1r.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "io.enigmic.fitstackapp"
+                "bundle_id": "io.enigmic.FitStack"
               }
             }
           ]

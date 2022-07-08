@@ -1,16 +1,20 @@
+import 'package:FitStack/mainView.dart';
+import 'package:FitStack/presentation/dashboard/presentation/dashboard_view.dart';
+import 'package:FitStack/presentation/login/presentation/login_view.dart';
+import 'package:FitStack/presentation/settings/settings_view.dart';
+import 'package:FitStack/presentation/signup/presentation/signup_view.dart';
 import 'package:auto_route/annotations.dart';
-import 'package:fitstackapp/presentation/dashboard/presentation/dashboard_view.dart';
-import 'package:fitstackapp/presentation/login/presentation/login_view.dart';
-import 'package:fitstackapp/presentation/settings/settings_view.dart';
-import 'package:fitstackapp/presentation/signup/presentation/signup_view.dart';
-
-import '../../mainView.dart';
 
 @MaterialAutoRouter(
   replaceInRouteName: 'Page|Screen,Route',
   routes: <AutoRoute>[
     AutoRoute<String>(
-        path: '/', page: Login_View, children: [], usesPathAsKey: true, initial: true),
+      path: '/',
+      page: Login_View,
+      children: [],
+      usesPathAsKey: true,
+      initial: true,
+    ),
     AutoRoute<String>(
       page: SignUp_View,
       path: '/signup',

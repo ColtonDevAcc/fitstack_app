@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.14)
-project(fitstackapp LANGUAGES CXX)
+project(FitStack LANGUAGES CXX)
 
-set(BINARY_NAME "fitstackapp")
+set(BINARY_NAME "FitStack")
 
 cmake_policy(SET CMP0063 NEW)
 

@@ -1,8 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:email_validator/email_validator.dart';
-import 'package:fitstackapp/widgets/atoms/focusedButton_widget.dart';
-import 'package:fitstackapp/widgets/atoms/socialAuthButton_widget.dart';
-import 'package:fitstackapp/widgets/atoms/textfield_widget.dart';
+import 'package:FitStack/widgets/atoms/focusedButton_widget.dart';
+import 'package:FitStack/widgets/atoms/socialAuthButton_widget.dart';
+import 'package:FitStack/widgets/atoms/textfield_widget.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';

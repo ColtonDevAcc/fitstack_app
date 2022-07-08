@@ -1,6 +1,6 @@
+import 'package:FitStack/app/repository/auth_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:fitstackapp/data/repository/auth_repository.dart';
 
 part 'login_state.dart';
 

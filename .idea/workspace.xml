@@ -7,7 +7,7 @@
     <list default="true" id="1af8dbbd-8b9a-4bf7-a989-82b8f217fdd2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fitstackapp.iml" beforeDir="false" afterPath="$PROJECT_DIR$/fitstackapp.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FitStack.iml" beforeDir="false" afterPath="$PROJECT_DIR$/FitStack.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/presentation/dashboard/presentation/dashboard_view.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/dashboard/presentation/dashboard_view.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/presentation/login/presentation/login_view.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/login/presentation/login_view.dart" afterDir="false" />

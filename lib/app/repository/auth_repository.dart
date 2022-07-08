@@ -1,8 +1,8 @@
 import 'dart:async';
 
+import 'package:FitStack/app/models/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:firebase_auth_platform_interface/firebase_auth_platform_interface.dart';
-import 'package:fitstackapp/data/models/user_model.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:get_storage/get_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';

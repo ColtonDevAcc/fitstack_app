@@ -1,4 +1,4 @@
-import 'package:fitstackapp/data/theme/text_theme.dart';
+import 'package:FitStack/app/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
 class FSColorTheme {

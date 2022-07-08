@@ -1,4 +1,4 @@
-import 'package:fitstackapp/widgets/atoms/profile_circular_avatar.dart';
+import 'package:FitStack/widgets/atoms/profile_circular_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 

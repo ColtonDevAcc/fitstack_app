@@ -70,6 +70,6 @@ class DefaultFirebaseOptions {
     projectId: 'fitstack-337104',
     storageBucket: 'fitstack-337104.appspot.com',
     iosClientId: '606254244778-s31ijufed41dh9kqvdpsl0m5r8k15m55.apps.googleusercontent.com',
-    iosBundleId: 'com.example.fitstackapp',
+    iosBundleId: 'com.example.FitStack',
   );
 }

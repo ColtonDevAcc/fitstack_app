@@ -1,6 +1,6 @@
+import 'package:FitStack/app/routing/appRouter.gr.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:dot_navigation_bar/dot_navigation_bar.dart';
-import 'package:fitstackapp/data/routing/appRouter.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
 

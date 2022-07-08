@@ -1,2 +1,3 @@
-# FitStackAPP
- Fitstacks app created in flutter 
+# FitStack
+
+Fitstacks app created in flutter

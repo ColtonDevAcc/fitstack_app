@@ -1,7 +1,5 @@
-import 'package:fitstackapp/data/bloc/app_bloc.dart';
-import 'package:fitstackapp/data/routing/appRouter.gr.dart';
-import 'package:fitstackapp/presentation/login/cubit/login_cubit.dart';
-import 'package:fitstackapp/presentation/signup/presentation/widgets/organisms/basic_info_form.dart';
+import 'package:FitStack/presentation/login/cubit/login_cubit.dart';
+import 'package:FitStack/presentation/signup/presentation/widgets/organisms/basic_info_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
