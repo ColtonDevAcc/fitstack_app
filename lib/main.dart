@@ -15,15 +15,15 @@ Future<void> main() {
     () async {
       WidgetsFlutterBinding.ensureInitialized();
       await Firebase.initializeApp(
-        name: "FitStack",
         options: DefaultFirebaseOptions.currentPlatform,
       );
+
       final authenticationRepository = AuthenticationRepository();
       await authenticationRepository.user.first;
-
       FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
-
-      runApp(MyApp(authenticationRepository: authenticationRepository));
+      runApp(
+        MyApp(authenticationRepository: authenticationRepository),
+      );
     },
     blocObserver: AppBlocObserver(),
   );
@@ -36,17 +36,12 @@ class MyApp extends StatelessWidget {
 
   static FirebaseAnalytics analytics = FirebaseAnalytics.instance;
   static FirebaseAnalyticsObserver observer = FirebaseAnalyticsObserver(analytics: analytics);
-
   final _appRouter = AppRouter();
 
   @override
   Widget build(BuildContext context) {
-    return MultiRepositoryProvider(
-      providers: [
-        RepositoryProvider(
-          create: (context) => AuthenticationRepository(),
-        ),
-      ],
+    return RepositoryProvider.value(
+      value: authenticationRepository,
       child: MultiBlocProvider(
         providers: [
           BlocProvider(

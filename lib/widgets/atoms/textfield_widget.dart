@@ -4,7 +4,7 @@ class TextField_Widget extends StatelessWidget {
   final String title;
   final String? hintText;
   final String? bottomTitle;
-  final TextEditingController controller;
+  final TextEditingController? controller;
   final String? Function(String?)? validator;
   final void Function(String)? onChanged;
 
@@ -13,7 +13,7 @@ class TextField_Widget extends StatelessWidget {
     required this.title,
     this.bottomTitle,
     this.hintText,
-    required this.controller,
+    this.controller,
     this.validator,
     this.onChanged,
   }) : super(key: key);
@@ -32,10 +32,11 @@ class TextField_Widget extends StatelessWidget {
           ),
           SizedBox(height: 10),
           TextFormField(
-            onChanged: (value) {
-              controller.text = value;
-              if (onChanged != null) onChanged!(value);
-            },
+            onChanged: onChanged ??
+                (value) {
+                  controller?.text = value;
+                  if (onChanged != null) onChanged!(value);
+                },
             validator: validator,
             autovalidateMode: validator == null ? null : AutovalidateMode.onUserInteraction,
             style: Theme.of(context).textTheme.bodyMedium,
