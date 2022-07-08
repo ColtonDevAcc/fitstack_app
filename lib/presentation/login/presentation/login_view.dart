@@ -46,130 +46,131 @@ class _Login_ViewState extends State<Login_View> {
           }
           //! Otherwise, they're not signed in. Show the sign in page.
           return Scaffold(
-              body: SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
-                    child: SvgPicture.asset(
-                      'assets/app/icons/AppLogo.svg',
-                      height: MediaQuery.of(context).size.height * 0.05,
-                      width: MediaQuery.of(context).size.width * 0.5,
-                      color: Theme.of(context).primaryColor,
-                    ),
-                  ),
-                  SizedBox(height: 15),
-                  Text(
-                    'LETS SIGN YOU IN,',
-                    textScaleFactor: 1.6,
-                    //style: TextStyle(color: Theme.of(context).primaryColor),
-                    style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
-                  ),
-                  SizedBox(height: 10),
-                  Text(
-                    'Welcome Back you\'ve\nbeen missed!',
-                    style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                          color: Theme.of(context).colorScheme.onBackground.withOpacity(.7),
-                        ),
-                  ),
-                  Expanded(
-                    child: Form(
-                      key: formKey,
-                      child: Column(
-                        children: [
-                          Spacer(flex: 2),
-                          TextField_Widget(
-                            validator: (value) {
-                              return value != null && !EmailValidator.validate(value)
-                                  ? 'Enter a valid email'
-                                  : null;
-                            },
-                            controller: emailController,
-                            title: "Email",
-                            hintText: 'Username or Email',
-                          ),
-                          SizedBox(height: 15),
-                          TextField_Widget(
-                            controller: passwordController,
-                            validator: (value) {
-                              return value != null && value.length < 6
-                                  ? "Enter min. 6 characters"
-                                  : null;
-                            },
-                            title: "Password",
-                            bottomTitle: "Forgot Password?",
-                            hintText: 'Password',
-                          ),
-                          Spacer(flex: 4),
-                        ],
+            body: SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
+                      child: SvgPicture.asset(
+                        'assets/app/icons/AppLogo.svg',
+                        height: MediaQuery.of(context).size.height * 0.05,
+                        width: MediaQuery.of(context).size.width * 0.5,
+                        color: Theme.of(context).primaryColor,
                       ),
                     ),
-                  ),
-                  Center(
-                    child: RichText(
-                      text: TextSpan(
-                        style: TextStyle(
-                          color: Theme.of(context).colorScheme.onBackground.withOpacity(.7),
-                        ),
-                        text: "Don't have an account? ",
-                        children: [
-                          TextSpan(
-                            text: "      Sign Up!",
-                            style: TextStyle(
-                                color: Theme.of(context).colorScheme.onBackground,
-                                fontWeight: FontWeight.bold),
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () {
-                                AutoRouter.of(context).pushNamed('/signup');
+                    SizedBox(height: 15),
+                    Text(
+                      'LETS SIGN YOU IN,',
+                      textScaleFactor: 1.6,
+                      //style: TextStyle(color: Theme.of(context).primaryColor),
+                      style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                            color: Theme.of(context).colorScheme.primary,
+                          ),
+                    ),
+                    SizedBox(height: 10),
+                    Text(
+                      'Welcome Back you\'ve\nbeen missed!',
+                      style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                            color: Theme.of(context).colorScheme.onBackground.withOpacity(.7),
+                          ),
+                    ),
+                    Expanded(
+                      child: Form(
+                        key: formKey,
+                        child: Column(
+                          children: [
+                            Spacer(flex: 2),
+                            TextField_Widget(
+                              validator: (value) {
+                                return value != null && !EmailValidator.validate(value)
+                                    ? 'Enter a valid email'
+                                    : null;
                               },
+                              controller: emailController,
+                              title: "Email",
+                              hintText: 'Username or Email',
+                            ),
+                            SizedBox(height: 15),
+                            TextField_Widget(
+                              controller: passwordController,
+                              validator: (value) {
+                                return value != null && value.length < 6
+                                    ? "Enter min. 6 characters"
+                                    : null;
+                              },
+                              title: "Password",
+                              bottomTitle: "Forgot Password?",
+                              hintText: 'Password',
+                            ),
+                            Spacer(flex: 4),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Center(
+                      child: RichText(
+                        text: TextSpan(
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.onBackground.withOpacity(.7),
                           ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Center(
-                    child: FocusedButton_Widget(
-                      text: "SIGN IN",
-                      onPressed: () {
-                        authenticateWithEmailAndPassword(context);
-                      },
-                    ),
-                  ),
-                  SizedBox(height: 15),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SocialAuthButton_Widget(
-                        color: Color.fromRGBO(45, 113, 197, 1),
-                        child: FaIcon(
-                          FontAwesomeIcons.facebookF,
-                          color: Theme.of(context).colorScheme.onPrimary,
+                          text: "Don't have an account? ",
+                          children: [
+                            TextSpan(
+                              text: "      Sign Up!",
+                              style: TextStyle(
+                                  color: Theme.of(context).colorScheme.onBackground,
+                                  fontWeight: FontWeight.bold),
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () {
+                                  AutoRouter.of(context).pushNamed('/signup');
+                                },
+                            ),
+                          ],
                         ),
                       ),
-                      SizedBox(width: 15),
-                      SocialAuthButton_Widget(
-                        onTap: () {
-                          // authenticateWithGoogle(context);
+                    ),
+                    Center(
+                      child: FocusedButton_Widget(
+                        text: "SIGN IN",
+                        onPressed: () {
+                          authenticateWithEmailAndPassword(context);
                         },
-                        color: Color.fromRGBO(254, 78, 78, 1),
-                        child: FaIcon(
-                          FontAwesomeIcons.google,
-                          color: Theme.of(context).colorScheme.onSecondary,
-                        ),
                       ),
-                    ],
-                  )
-                ],
+                    ),
+                    SizedBox(height: 15),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SocialAuthButton_Widget(
+                          color: Color.fromRGBO(45, 113, 197, 1),
+                          child: FaIcon(
+                            FontAwesomeIcons.facebookF,
+                            color: Theme.of(context).colorScheme.onPrimary,
+                          ),
+                        ),
+                        SizedBox(width: 15),
+                        SocialAuthButton_Widget(
+                          onTap: () {
+                            // authenticateWithGoogle(context);
+                          },
+                          color: Color.fromRGBO(254, 78, 78, 1),
+                          child: FaIcon(
+                            FontAwesomeIcons.google,
+                            color: Theme.of(context).colorScheme.onSecondary,
+                          ),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
               ),
             ),
-          ));
+          );
         },
       ),
     );

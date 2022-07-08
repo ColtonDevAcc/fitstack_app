@@ -1,7 +1,5 @@
-import 'package:fitstackapp/data/bloc/app_bloc.dart';
 import 'package:fitstackapp/widgets/atoms/profile_circular_avatar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class Settings_View extends StatelessWidget {
@@ -16,7 +14,7 @@ class Settings_View extends StatelessWidget {
           AppBar(
             actions: [
               GestureDetector(
-                onTap: () => context.read<AppBloc>().add(SignOut()),
+                // onTap: () => context.read<AppBloc>().add(SignOut()),
                 child: Icon(FontAwesomeIcons.doorOpen),
               ),
             ],
@@ -25,7 +23,7 @@ class Settings_View extends StatelessWidget {
           Center(
             child: Profile_Circular_Avatar(maxRadius: 60),
           ),
-          Text('${user?.displayName}')
+          // Text('${user?.displayName}')
         ],
       ),
     );
