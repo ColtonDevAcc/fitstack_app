@@ -1,5 +1,7 @@
+import 'dart:convert';
+
 import 'package:equatable/equatable.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' as fb;
 
 class User extends Equatable {
   final String email;
@@ -8,10 +10,10 @@ class User extends Equatable {
   final String displayName;
   final bool isAnonymous;
   final bool isEmailVerified;
-  final UserMetadata? metadata;
+  final fb.UserMetadata? metadata;
   final String phoneNumber;
   final String photoUrl;
-  final String providerData;
+  final List<fb.UserInfo> providerData;
   final String providerId;
   final String userId;
 
@@ -40,7 +42,7 @@ class User extends Equatable {
     metadata: null,
     phoneNumber: 'phoneNumber',
     photoUrl: 'photoUrl',
-    providerData: "",
+    providerData: [],
     providerId: "providerId",
     userId: "userId",
   );
@@ -63,4 +65,59 @@ class User extends Equatable {
         providerId,
         userId
       ];
+
+  Map<String, dynamic> toMap() {
+    return {
+      'email': email,
+      'name': name,
+      'photo': photo,
+      'displayName': displayName,
+      'isAnonymous': isAnonymous,
+      'isEmailVerified': isEmailVerified,
+      'metadata': metadata,
+      'phoneNumber': phoneNumber,
+      'photoUrl': photoUrl,
+      'providerData': providerData,
+      'providerId': providerId,
+      'userId': userId,
+    };
+  }
+
+  factory User.fromMap(Map<String, dynamic> map) {
+    return User(
+      email: map['email'] ?? '',
+      name: map['name'] ?? '',
+      photo: map['photo'] ?? '',
+      displayName: map['displayName'] ?? '',
+      isAnonymous: map['isAnonymous'] ?? false,
+      isEmailVerified: map['isEmailVerified'] ?? false,
+      metadata: map['metadata'] != null ? (map['metadata']) : null,
+      phoneNumber: map['phoneNumber'] ?? '',
+      photoUrl: map['photoUrl'] ?? '',
+      providerData: map['providerData'] ?? '',
+      providerId: map['providerId'] ?? '',
+      userId: map['userId'] ?? '',
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory User.fromJson(String source) => User.fromMap(json.decode(source));
+
+  factory User.fromFirebase(fb.User fb) {
+    return User(
+      email: fb.email ?? '',
+      name: fb.displayName ?? '',
+      photo: fb.photoURL ?? '',
+      displayName: fb.displayName ?? '',
+      isAnonymous: fb.isAnonymous,
+      isEmailVerified: fb.emailVerified,
+      metadata: fb.metadata,
+      phoneNumber: fb.phoneNumber ?? '',
+      photoUrl: fb.photoURL ?? '',
+      providerData: fb.providerData,
+      providerId: fb.uid,
+      userId: fb.uid,
+    );
+  }
 }

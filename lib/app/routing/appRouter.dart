@@ -1,6 +1,6 @@
 import 'package:FitStack/mainView.dart';
 import 'package:FitStack/presentation/dashboard/presentation/dashboard_view.dart';
-import 'package:FitStack/presentation/login/presentation/login_view.dart';
+import 'package:FitStack/presentation/login/presentation/login_page.dart';
 import 'package:FitStack/presentation/settings/settings_view.dart';
 import 'package:FitStack/presentation/signup/presentation/signup_view.dart';
 import 'package:auto_route/annotations.dart';
@@ -10,7 +10,7 @@ import 'package:auto_route/annotations.dart';
   routes: <AutoRoute>[
     AutoRoute<String>(
       path: '/',
-      page: Login_View,
+      page: Login_Page,
       children: [],
       usesPathAsKey: true,
       initial: true,
