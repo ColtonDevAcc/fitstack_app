@@ -1,41 +1,66 @@
 import 'package:equatable/equatable.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-/// {@template user}
-/// User model
-///
-/// [User.empty] represents an unauthenticated user.
-/// {@endtemplate}
-///
 class User extends Equatable {
-  /// {@macro user}
+  final String email;
+  final String name;
+  final String photo;
+  final String displayName;
+  final bool isAnonymous;
+  final bool isEmailVerified;
+  final UserMetadata? metadata;
+  final String phoneNumber;
+  final String photoUrl;
+  final String providerData;
+  final String providerId;
+  final String userId;
+
   const User({
-    required this.id,
-    this.email,
-    this.name,
-    this.photo,
+    required this.email,
+    required this.name,
+    required this.photo,
+    required this.displayName,
+    required this.isAnonymous,
+    required this.isEmailVerified,
+    required this.metadata,
+    required this.phoneNumber,
+    required this.photoUrl,
+    required this.providerData,
+    required this.providerId,
+    required this.userId,
   });
 
-  /// The current user's email address.
-  final String? email;
-
-  /// The current user's id.
-  final String id;
-
-  /// The current user's name (display name).
-  final String? name;
-
-  /// Url for the current user's photo.
-  final String? photo;
-
-  /// Empty user which represents an unauthenticated user.
-  static const empty = User(id: '');
-
-  /// Convenience getter to determine whether the current user is empty.
+  static const empty = User(
+    email: 'email',
+    name: 'name',
+    photo: 'photo',
+    displayName: 'displayName',
+    isAnonymous: false,
+    isEmailVerified: false,
+    metadata: null,
+    phoneNumber: 'phoneNumber',
+    photoUrl: 'photoUrl',
+    providerData: "",
+    providerId: "providerId",
+    userId: "userId",
+  );
   bool get isEmpty => this == User.empty;
-
-  /// Convenience getter to determine whether the current user is not empty.
   bool get isNotEmpty => this != User.empty;
 
   @override
-  List<Object?> get props => [email, id, name, photo];
+  List<Object?> get props => [
+        email,
+        userId,
+        name,
+        photo,
+        displayName,
+        isAnonymous,
+        isEmailVerified,
+        metadata,
+        phoneNumber,
+        photoUrl,
+        providerData,
+        providerId,
+        userId
+      ];
 }

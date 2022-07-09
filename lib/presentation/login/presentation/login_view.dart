@@ -3,13 +3,8 @@ import 'package:FitStack/presentation/login/cubit/login_cubit.dart';
 import 'package:FitStack/presentation/login/presentation/molecules/Login_Footer_Widget.dart';
 import 'package:FitStack/presentation/login/presentation/molecules/Login_Form_Widget.dart';
 import 'package:FitStack/presentation/login/presentation/molecules/Login_Header_Widget.dart';
-import 'package:FitStack/widgets/atoms/focusedButton_widget.dart';
-import 'package:FitStack/widgets/atoms/socialAuthButton_widget.dart';
-import 'package:auto_route/auto_route.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class Login_View extends StatelessWidget {
   Login_View({Key? key}) : super(key: key);
@@ -17,6 +12,7 @@ class Login_View extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: BlocProvider(
           create: (context) => LoginCubit(context.read<AuthenticationRepository>()),
