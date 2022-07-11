@@ -6,5 +6,11 @@ part 'signup_state.dart';
 
 class SignupCubit extends Cubit<SignupState> {
   SignupCubit({required AuthenticationRepository authenticationRepository})
-      : super(SignupInitial());
+      : super(const SignupState(index: 0));
+
+  void nextPage(int newIndex) {
+    emit(
+      state.copyWith(index: newIndex),
+    );
+  }
 }

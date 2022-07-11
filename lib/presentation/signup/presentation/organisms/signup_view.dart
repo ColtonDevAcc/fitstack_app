@@ -1,3 +1,4 @@
+import 'package:FitStack/presentation/login/cubit/login_cubit.dart';
 import 'package:FitStack/presentation/signup/cubit/signup_cubit.dart';
 import 'package:FitStack/presentation/signup/presentation/atoms/signup_focused_button.dart';
 import 'package:FitStack/presentation/signup/presentation/molecules/basic_info_form.dart';
@@ -24,34 +25,22 @@ class SignUp_View extends StatelessWidget {
 
     return BlocBuilder<SignupCubit, SignupState>(
       builder: (context, state) {
-        PageController pageController = PageController();
         return Padding(
           padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-          child: PageView.builder(
-            controller: pageController,
-            onPageChanged: (value) {
-              if (value == 1) {
-                // authenticateWithEmailAndPassword(context);
-              }
-            },
-            itemBuilder: (BuildContext context, int index) {
-              return Column(
-                children: [
-                  Expanded(
-                    child: forms[index],
-                  ),
-                  SignUp_Focused_Button_Widget(
-                    text: 'Next',
-                    onPressed: () {
-                      pageController.nextPage(
-                          duration: Duration(microseconds: 1), curve: Curves.ease);
-                    },
-                    index: index,
-                  ),
-                  Social_Auth_Buttons(index: index)
-                ],
-              );
-            },
+          child: Column(
+            children: [
+              Expanded(
+                child: forms[state.index],
+              ),
+              SignUp_Focused_Button_Widget(
+                text: 'Next',
+                onPressed: () {
+                  BlocProvider.of<SignupCubit>(context).nextPage(state.index + 1);
+                },
+                index: state.index,
+              ),
+              Social_Auth_Buttons()
+            ],
           ),
         );
       },

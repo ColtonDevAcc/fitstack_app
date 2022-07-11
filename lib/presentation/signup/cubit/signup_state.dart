@@ -1,10 +1,15 @@
 part of 'signup_cubit.dart';
 
-abstract class SignupState extends Equatable {
-  const SignupState();
+class SignupState extends Equatable {
+  final int index;
+  const SignupState({
+    required this.index,
+  });
 
   @override
-  List<Object> get props => [];
-}
+  List<Object> get props => [index];
 
-class SignupInitial extends SignupState {}
+  SignupState copyWith({required int index}) {
+    return SignupState(index: index);
+  }
+}
