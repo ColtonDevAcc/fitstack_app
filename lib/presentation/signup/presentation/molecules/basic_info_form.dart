@@ -1,4 +1,5 @@
 import 'package:FitStack/presentation/signup/presentation/atoms/create_account_text_widget.dart';
+import 'package:FitStack/presentation/signup/presentation/molecules/signup_header_widget.dart';
 import 'package:FitStack/widgets/atoms/FitStack_Logo_Widget.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:email_validator/email_validator.dart';
@@ -38,8 +39,7 @@ class _BasicInfoFormState extends State<BasicInfoForm> {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        FitStack_Logo_Widget(),
-        Create_Account_Text_Widget(),
+        SignUp_Header_Widget(),
         Expanded(
           child: Form(
             key: widget.formKey,

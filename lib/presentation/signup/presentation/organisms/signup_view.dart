@@ -35,7 +35,7 @@ class SignUp_View extends StatelessWidget {
               SignUp_Focused_Button_Widget(
                 text: 'Next',
                 onPressed: () {
-                  BlocProvider.of<SignupCubit>(context).nextPage(state.index + 1);
+                  BlocProvider.of<SignupCubit>(context).changePage(state.index + 1);
                 },
                 index: state.index,
               ),

@@ -8,7 +8,7 @@ class SignupCubit extends Cubit<SignupState> {
   SignupCubit({required AuthenticationRepository authenticationRepository})
       : super(const SignupState(index: 0));
 
-  void nextPage(int newIndex) {
+  void changePage(int newIndex) {
     emit(
       state.copyWith(index: newIndex),
     );
