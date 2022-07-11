@@ -1,5 +1,7 @@
 import 'package:FitStack/presentation/login/cubit/login_cubit.dart';
-import 'package:FitStack/presentation/signup/presentation/widgets/organisms/basic_info_form.dart';
+import 'package:FitStack/presentation/signup/cubit/signup_cubit.dart';
+import 'package:FitStack/presentation/signup/presentation/organisms/basic_info_form.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -42,7 +44,7 @@ class _SignUp_ViewState extends State<SignUp_View> {
       )
     ];
 
-    return BlocBuilder<LoginCubit, LoginState>(
+    return BlocBuilder<SignupCubit, SignupState>(
       builder: (context, state) {
         return Scaffold(
           body: SafeArea(

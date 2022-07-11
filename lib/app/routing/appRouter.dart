@@ -8,35 +8,33 @@ import 'package:auto_route/annotations.dart';
 @MaterialAutoRouter(
   replaceInRouteName: 'Page|Screen,Route',
   routes: <AutoRoute>[
-    AutoRoute<String>(
-      path: '/',
+    AutoRoute(
+      path: 'auth',
+      name: "login",
       page: Login_Page,
-      children: [],
-      usesPathAsKey: true,
       initial: true,
-    ),
-    AutoRoute<String>(
-      page: SignUp_View,
-      path: '/signup',
-      name: 'signup',
-      usesPathAsKey: true,
+      children: [
+        AutoRoute(
+          page: SignUp_View,
+          path: 'auth/signup',
+          name: 'signup',
+          usesPathAsKey: true,
+        ),
+      ],
     ),
     AutoRoute(
       page: Main_View,
       path: '/mainView',
-      name: 'MainViewRouter',
-      usesPathAsKey: true,
+      name: 'Main_View',
       children: [
         AutoRoute(
           path: 'DashBoard',
           page: DashBoard_View,
-          usesPathAsKey: true,
           initial: false,
         ),
         AutoRoute(
           path: 'Settings',
           page: Settings_View,
-          usesPathAsKey: true,
           initial: false,
         ),
       ],
@@ -46,6 +44,3 @@ import 'package:auto_route/annotations.dart';
 class $AppRouter {}
 
 //flutter pub get && flutter pub run build_runner build --delete-conflicting-outputs
-
-
-    

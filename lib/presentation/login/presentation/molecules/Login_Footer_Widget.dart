@@ -1,3 +1,4 @@
+import 'package:FitStack/presentation/login/presentation/atoms/Login_Account_SignUp_Text_Widget.dart';
 import 'package:FitStack/presentation/login/presentation/atoms/Login_SignIn_Button_Widget.dart';
 import 'package:FitStack/widgets/atoms/socialAuthButton_widget.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,7 @@ class Login_Footer_Widget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        Login_Account_SignUp_Text_Widget(),
         Login_SignIn_Button_Widget(),
         Row(
           crossAxisAlignment: CrossAxisAlignment.center,

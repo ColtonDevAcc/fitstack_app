@@ -1,3 +1,4 @@
+import 'package:FitStack/app/routing/appRouter.gr.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +22,7 @@ class Login_Account_SignUp_Text_Widget extends StatelessWidget {
                   color: Theme.of(context).colorScheme.onBackground, fontWeight: FontWeight.bold),
               recognizer: TapGestureRecognizer()
                 ..onTap = () {
-                  AutoRouter.of(context).pushNamed('/signup');
+                  AutoRouter.of(context).pushNamed("/signup");
                 },
             ),
           ],
