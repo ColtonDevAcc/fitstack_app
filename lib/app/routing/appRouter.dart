@@ -2,7 +2,7 @@ import 'package:FitStack/mainView.dart';
 import 'package:FitStack/presentation/dashboard/presentation/dashboard_view.dart';
 import 'package:FitStack/presentation/login/presentation/login_page.dart';
 import 'package:FitStack/presentation/settings/settings_view.dart';
-import 'package:FitStack/presentation/signup/presentation/signup_view.dart';
+import 'package:FitStack/presentation/signup/presentation/signup_page.dart';
 import 'package:auto_route/annotations.dart';
 
 @MaterialAutoRouter(
@@ -13,14 +13,12 @@ import 'package:auto_route/annotations.dart';
       name: "login",
       page: Login_Page,
       initial: true,
-      children: [
-        AutoRoute(
-          page: SignUp_View,
-          path: 'auth/signup',
-          name: 'signup',
-          usesPathAsKey: true,
-        ),
-      ],
+      children: [],
+    ),
+    AutoRoute(
+      page: SignUp_Page,
+      path: 'auth/signup',
+      name: 'signup',
     ),
     AutoRoute(
       page: Main_View,

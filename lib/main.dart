@@ -2,6 +2,7 @@ import 'package:FitStack/app/bloc/app_bloc.dart';
 import 'package:FitStack/app/repository/auth_repository.dart';
 import 'package:FitStack/app/routing/appRouter.gr.dart';
 import 'package:FitStack/app/theme/color_Theme.dart';
+import 'package:FitStack/presentation/signup/cubit/signup_cubit.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
@@ -44,6 +45,11 @@ class MyApp extends StatelessWidget {
       value: authenticationRepository,
       child: MultiBlocProvider(
         providers: [
+          BlocProvider(
+            create: (context) => SignupCubit(
+              authenticationRepository: authenticationRepository,
+            ),
+          ),
           BlocProvider(
             create: (context) => AppBloc(
               authenticationRepository: authenticationRepository,

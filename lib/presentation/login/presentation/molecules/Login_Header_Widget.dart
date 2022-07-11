@@ -1,4 +1,4 @@
-import 'package:FitStack/presentation/login/presentation/atoms/FitStack_Logo_Widget.dart';
+import 'package:FitStack/widgets/atoms/FitStack_Logo_Widget.dart';
 import 'package:flutter/material.dart';
 
 class Login_Header_Widget extends StatelessWidget {

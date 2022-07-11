@@ -22,7 +22,7 @@ class Login_Account_SignUp_Text_Widget extends StatelessWidget {
                   color: Theme.of(context).colorScheme.onBackground, fontWeight: FontWeight.bold),
               recognizer: TapGestureRecognizer()
                 ..onTap = () {
-                  AutoRouter.of(context).pushNamed("/signup");
+                  AutoRouter.of(context).push(Signup());
                 },
             ),
           ],
