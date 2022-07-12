@@ -1,4 +1,5 @@
 import 'package:FitStack/presentation/signup/cubit/signup_cubit.dart';
+import 'package:FitStack/presentation/signup/presentation/atoms/signup_selection_button_widget.dart';
 import 'package:FitStack/presentation/signup/presentation/atoms/signup_username_textfield_widget.dart';
 import 'package:FitStack/presentation/signup/presentation/molecules/signup_form_header_widget.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +25,18 @@ class Personalize_Account_View extends StatelessWidget {
                   subtitle: "Enter a username",
                 ),
                 SizedBox(height: MediaQuery.of(context).size.height * .2),
-                SignUp_Username_Textfield_Widget(),
+                BlocBuilder<SignupCubit, SignupState>(
+                  buildWhen: (previous, current) {
+                    return previous.username != current.username;
+                  },
+                  builder: (context, state) {
+                    return SignUp_fullscreen_Textfield_Widget(
+                      onChanged: (val) {
+                        BlocProvider.of<SignupCubit>(context).usernameChanged(val);
+                      },
+                    );
+                  },
+                ),
               ],
             );
           },

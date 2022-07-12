@@ -37,6 +37,7 @@ dependencies:
 
   # Images
   flutter_svg: ^1.0.3
+  image_picker: ^0.8.5+3
 
   # for debug
   device_preview: ^1.0.0
