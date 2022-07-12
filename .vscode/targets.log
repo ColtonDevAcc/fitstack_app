@@ -6,11 +6,8 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # PARTICULAR PURPOSE.
 
 # This program built for i386-apple-darwin11.3.0
- 
-make: *** No rule to make target `all'.  Stop.
 
-
-# Make data base, printed on Tue Jul 12 09:30:30 2022
+# Make data base, printed on Tue Jul 12 12:52:10 2022
 
 # Variables
 
@@ -43,8 +40,6 @@ VSCODE_CWD = /
 # environment
 PATH = /Library/Frameworks/Python.framework/Versions/3.10/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin:/Library/Apple/usr/bin:/Users/colton.bristow/go/bin:/Users/colton.bristow/Development/SDK's/flutter/bin:/Users/colton.bristow/.pub-cache/bin
 # environment
-LaunchInstanceID = 94F48448-8F04-4749-8088-5FD79507F294
-# environment
 ELECTRON_RUN_AS_NODE = 1
 # default
 .FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
@@ -67,7 +62,7 @@ HOME = /Users/colton.bristow
 # default
 MAKEFILEPATH := /Applications/Xcode.app/Contents/Developer/Makefiles
 # environment
-VSCODE_CODE_CACHE_PATH = /Users/colton.bristow/Library/Application Support/Code/CachedData/92d25e35d9bf1a6b16f7d0758f25d48ace11e5b9
+VSCODE_CODE_CACHE_PATH = /Users/colton.bristow/Library/Application Support/Code/CachedData/b06ae3b2d2dbfe28bca3134cc6be65935cdfea6a
 # environment
 LOGNAME = colton.bristow
 # environment
@@ -101,7 +96,7 @@ TMPDIR = /var/folders/fd/m393ky6x62s687tc5yg85x3ssphd4f/T/
 # automatic
 *F = $(notdir $*)
 # environment
-VSCODE_IPC_HOOK = /Users/colton.bristow/Library/Application Support/Code/1.69.0-main.sock
+VSCODE_IPC_HOOK = /Users/colton.bristow/Library/Application Support/Code/1.69.1-main.sock
 # environment
 MallocNanoZone = 0
 # makefile
@@ -111,7 +106,7 @@ MFLAGS = -Rrqp
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
-XPC_SERVICE_NAME = application.com.microsoft.VSCode.88591583.88591590
+XPC_SERVICE_NAME = application.com.microsoft.VSCode.90385913.90385919
 # environment
 HOMEBREW_PREFIX = /opt/homebrew
 # automatic
@@ -130,8 +125,6 @@ MAKEFILES :=
 <F = $(notdir $<)
 # environment
 LC_ALL = C
-# environment
-SECURITYSESSIONID = 186a5
 # automatic
 ^F = $(notdir $^)
 # default
@@ -143,9 +136,9 @@ MAKELEVEL := 0
 # environment
 LANG = C
 # environment
-VSCODE_PID = 1284
+VSCODE_PID = 22843
 # variable set hash-table stats:
-# Load=65/1024=6%, Rehash=0, Collisions=1/89=1%
+# Load=63/1024=6%, Rehash=0, Collisions=1/87=1%
 
 # Pattern-specific Variable Values
 
@@ -216,6 +209,8 @@ makefile:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Tue Jul 12 09:30:30 2022
+# Finished Make data base on Tue Jul 12 12:52:10 2022
 
  
+make: *** No rule to make target `all'.  Stop.
+
