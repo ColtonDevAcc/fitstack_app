@@ -6,8 +6,16 @@ class Profile_Circular_Avatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CircleAvatar(
-      maxRadius: maxRadius ?? 60,
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.transparent,
+        borderRadius: BorderRadius.circular(80),
+        border: Border.all(color: Theme.of(context).colorScheme.primary, width: 1.5),
+      ),
+      padding: EdgeInsets.all(5),
+      child: CircleAvatar(
+        maxRadius: maxRadius ?? 60,
+      ),
     );
   }
 }

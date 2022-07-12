@@ -1,15 +1,9 @@
-import 'package:FitStack/presentation/signup/presentation/atoms/create_account_text_widget.dart';
 import 'package:FitStack/presentation/signup/presentation/molecules/signup_header_widget.dart';
-import 'package:FitStack/widgets/atoms/FitStack_Logo_Widget.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:email_validator/email_validator.dart';
-import 'package:FitStack/widgets/atoms/focusedButton_widget.dart';
-import 'package:FitStack/widgets/atoms/socialAuthButton_widget.dart';
 import 'package:FitStack/widgets/atoms/textfield_widget.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class BasicInfoForm extends StatefulWidget {
   final GlobalKey<FormState> formKey;

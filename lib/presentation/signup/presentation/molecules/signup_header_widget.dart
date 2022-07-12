@@ -3,7 +3,9 @@ import 'package:FitStack/widgets/atoms/FitStack_Logo_Widget.dart';
 import 'package:flutter/material.dart';
 
 class SignUp_Header_Widget extends StatelessWidget {
-  const SignUp_Header_Widget({Key? key}) : super(key: key);
+  final Widget? title;
+  final Widget? subtitle;
+  const SignUp_Header_Widget({Key? key, this.title, this.subtitle}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -11,8 +13,8 @@ class SignUp_Header_Widget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        FitStack_Logo_Widget(),
-        Create_Account_Text_Widget(),
+        title ?? FitStack_Logo_Widget(),
+        subtitle ?? SignUp_Header_Text_Widget(),
       ],
     );
   }

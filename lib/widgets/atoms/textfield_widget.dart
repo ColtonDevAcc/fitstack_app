@@ -28,7 +28,7 @@ class TextField_Widget extends StatelessWidget {
           Text(
             title,
             textScaleFactor: 1.4,
-            style: Theme.of(context).textTheme.titleSmall,
+            style: Theme.of(context).textTheme.titleSmall!.copyWith(fontWeight: FontWeight.normal),
           ),
           SizedBox(height: 10),
           TextFormField(
