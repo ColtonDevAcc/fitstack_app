@@ -5,11 +5,21 @@ class SignupState extends Equatable {
   final XFile? profileImage;
   final String username;
   final String firstLastName;
-  SignupState(
-      {this.profileImage = null, this.firstLastName = "", this.index = 0, this.username = ""});
+
+  SignupState({
+    this.profileImage,
+    this.firstLastName = "",
+    this.index = 0,
+    this.username = "",
+  });
 
   @override
-  List<Object> get props => [index, username, firstLastName];
+  List<Object> get props => [
+        index,
+        username,
+        firstLastName,
+        profileImage ?? XFile('path'),
+      ];
 
   SignupState copyWith({int? index, String? username, String? firstLastName, XFile? profileImage}) {
     return SignupState(

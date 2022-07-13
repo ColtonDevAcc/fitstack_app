@@ -2,6 +2,7 @@ import 'package:FitStack/presentation/signup/cubit/signup_cubit.dart';
 import 'package:FitStack/presentation/signup/presentation/atoms/signup_focused_button.dart';
 import 'package:FitStack/presentation/signup/presentation/molecules/basic_info_form.dart';
 import 'package:FitStack/presentation/signup/presentation/molecules/social_auth_buttons.dart';
+import 'package:FitStack/presentation/signup/presentation/organisms/health_stats_form_view.dart';
 import 'package:FitStack/presentation/signup/presentation/organisms/personal_info_form_view.dart';
 import 'package:FitStack/presentation/signup/presentation/organisms/personalize_account_view.dart';
 import 'package:FitStack/presentation/signup/presentation/organisms/upload_picture_form_view.dart';
@@ -19,6 +20,7 @@ class SignUp_View extends StatelessWidget {
       Personalize_Account_View(),
       Personal_Info_Form_View(),
       Upload_Picture_Form_View(),
+      Health_Stats_Form_View(),
     ];
 
     return BlocBuilder<SignupCubit, SignupState>(
