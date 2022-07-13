@@ -43,7 +43,7 @@ dependencies:
   device_preview: ^1.0.0
 
   # health
-  health:
+  health: ^4.1.1
 
   # routing
   auto_route: ^4.0.1

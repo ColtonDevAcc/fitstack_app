@@ -1,6 +1,9 @@
+import 'dart:developer';
+
 import 'package:FitStack/app/repository/auth_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:health/health.dart';
 import 'package:image_picker/image_picker.dart';
 
 part 'signup_state.dart';
@@ -34,6 +37,50 @@ class SignupCubit extends Cubit<SignupState> {
     image = await ImagePicker().pickImage(source: ImageSource.gallery);
     emit(
       state.copyWith(profileImage: image),
+    );
+  }
+
+  void healthDataChanged() async {
+    HealthFactory health = HealthFactory();
+    List<HealthDataPoint> healthDataList = [];
+    final now = DateTime.now();
+    final yesterday = now.subtract(Duration(days: 5));
+
+    final types = [
+      HealthDataType.STEPS,
+      HealthDataType.BLOOD_GLUCOSE,
+    ];
+
+    final permissions = [
+      HealthDataAccess.READ,
+      HealthDataAccess.READ,
+    ];
+
+    // The location permission is requested for Workouts using the Distance information.
+    // await Permission.activityRecognition.request();
+    // await Permission.location.request();
+
+    bool requested = await health.requestAuthorization(types, permissions: permissions);
+
+    if (requested) {
+      try {
+        log("we have permissions");
+        // fetch health data
+        List<HealthDataPoint> healthData =
+            await health.getHealthDataFromTypes(yesterday, now, types);
+
+        // save all the new data points (only the first 100)
+        healthDataList.addAll((healthData.length < 100) ? healthData : healthData.sublist(0, 100));
+        healthDataList.forEach((x) => print(x));
+      } catch (error) {
+        log("Exception in getHealthDataFromTypes: $error");
+      }
+    } else {
+      log("no permissions given");
+    }
+
+    emit(
+      state.copyWith(healthData: healthDataList),
     );
   }
 }

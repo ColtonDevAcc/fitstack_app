@@ -2,7 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class SingUp_Stats_Card_widget extends StatelessWidget {
-  const SingUp_Stats_Card_widget({Key? key}) : super(key: key);
+  final Icon icon;
+  final String title;
+  final String subtitle;
+  const SingUp_Stats_Card_widget({
+    Key? key,
+    required this.icon,
+    required this.title,
+    required this.subtitle,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,10 +25,10 @@ class SingUp_Stats_Card_widget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "9000",
+              title,
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
-            Text("Calories"),
+            Text(subtitle),
           ],
         )
       ],
