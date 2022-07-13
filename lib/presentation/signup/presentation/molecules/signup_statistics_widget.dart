@@ -12,83 +12,33 @@ class signUp_Statistics_Widget extends StatelessWidget {
     return BlocBuilder<SignupCubit, SignupState>(
       buildWhen: (previous, current) => previous.healthData != current.healthData,
       builder: (context, state) {
-        return Container(
-          padding: EdgeInsets.all(20.0),
-          decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.surface,
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: GestureDetector(
-            onTap: () => BlocProvider.of<SignupCubit>(context).healthDataChanged(),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    SingUp_Stats_Card_widget(
-                      icon: Icon(
-                        FontAwesomeIcons.fire,
-                        color: Colors.red,
-                      ),
-                      title: '${state.healthData}',
-                      subtitle: 'Calories',
-                    ),
-                    SizedBox(height: 20),
-                    SingUp_Stats_Card_widget(
-                      icon: Icon(
-                        FontAwesomeIcons.fire,
-                        color: Colors.red,
-                      ),
-                      title: '900',
-                      subtitle: 'Calories',
-                    ),
-                  ],
-                ),
-                Column(
-                  children: [
-                    SingUp_Stats_Card_widget(
-                      icon: Icon(
-                        FontAwesomeIcons.fire,
-                        color: Colors.red,
-                      ),
-                      title: '900',
-                      subtitle: 'Calories',
-                    ),
-                    SizedBox(height: 20),
-                    SingUp_Stats_Card_widget(
-                      icon: Icon(
-                        FontAwesomeIcons.fire,
-                        color: Colors.red,
-                      ),
-                      title: '900',
-                      subtitle: 'Calories',
-                    ),
-                  ],
-                ),
-                Column(
-                  children: [
-                    SingUp_Stats_Card_widget(
-                      icon: Icon(
-                        FontAwesomeIcons.fire,
-                        color: Colors.red,
-                      ),
-                      title: '900',
-                      subtitle: 'Calories',
-                    ),
-                    SizedBox(height: 20),
-                    SingUp_Stats_Card_widget(
-                      icon: Icon(
-                        FontAwesomeIcons.fire,
-                        color: Colors.red,
-                      ),
-                      title: '900',
-                      subtitle: 'Calories',
-                    ),
-                  ],
-                )
-              ],
+        return Expanded(
+          child: Container(
+            padding: EdgeInsets.all(20.0),
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.surface,
+              borderRadius: BorderRadius.circular(20),
             ),
+            child: GestureDetector(
+                onTap: () => BlocProvider.of<SignupCubit>(context).healthDataChanged(),
+                child: Wrap(
+                  children: state.healthData != null
+                      ? state.healthData!
+                          .map(
+                            (e) => SingUp_Stats_Card_widget(
+                              icon: Icon(
+                                FontAwesomeIcons.personWalking,
+                                color: Colors.red,
+                              ),
+                              title:
+                                  '${state.healthData == null ? null : state.healthData?.first.value}',
+                              subtitle: 'Steps',
+                              healthData: state.healthData?.first,
+                            ),
+                          )
+                          .toList()
+                      : [],
+                )),
           ),
         );
       },

@@ -7,7 +7,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 
 # This program built for i386-apple-darwin11.3.0
 
-# Make data base, printed on Tue Jul 12 20:23:57 2022
+# Make data base, printed on Wed Jul 13 13:18:20 2022
 
 # Variables
 
@@ -22,7 +22,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # automatic
 @F = $(notdir $@)
 # makefile
-CURDIR := /Users/coltonbristow/Development/Projects/FitStackAPP
+CURDIR := /Users/colton.bristow/Development/Projects/FitStackAPP
 # makefile
 SHELL = /bin/sh
 # environment
@@ -38,17 +38,17 @@ INFOPATH = /opt/homebrew/share/info:
 # environment
 VSCODE_CWD = /
 # environment
-PATH = /Users/coltonbristow/Development/SDKs/google-cloud-sdk/bin:/Library/Frameworks/Python.framework/Versions/3.10/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/coltonbristow/Development/SDKs/flutter/bin:/Users/coltonbristow/.pub-cache/bin
+PATH = /Library/Frameworks/Python.framework/Versions/3.10/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin:/Library/Apple/usr/bin:/Users/colton.bristow/go/bin:/Users/colton.bristow/Development/SDK's/flutter/bin:/Users/colton.bristow/.pub-cache/bin
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # default
 .FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.QKbYzGrGB1/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.ptTduX7CoU/Listeners
 # automatic
 %F = $(notdir $%)
 # environment
-PWD = /Users/coltonbristow/Development/Projects/FitStackAPP
+PWD = /Users/colton.bristow/Development/Projects/FitStackAPP
 # environment
 HOMEBREW_CELLAR = /opt/homebrew/Cellar
 # environment
@@ -58,13 +58,13 @@ MANPATH = /opt/homebrew/share/man:
 # environment
 VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
-HOME = /Users/coltonbristow
+HOME = /Users/colton.bristow
 # default
 MAKEFILEPATH := /Applications/Xcode.app/Contents/Developer/Makefiles
 # environment
-VSCODE_CODE_CACHE_PATH = /Users/coltonbristow/Library/Application Support/Code/CachedData/92d25e35d9bf1a6b16f7d0758f25d48ace11e5b9
+VSCODE_CODE_CACHE_PATH = /Users/colton.bristow/Library/Application Support/Code/CachedData/b06ae3b2d2dbfe28bca3134cc6be65935cdfea6a
 # environment
-LOGNAME = coltonbristow
+LOGNAME = colton.bristow
 # environment
 APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
 # environment
@@ -82,7 +82,7 @@ SHLVL = 2
 # default
 MAKE_VERSION := 3.81
 # environment
-USER = coltonbristow
+USER = colton.bristow
 # makefile
 .DEFAULT_GOAL := build_runner
 # automatic
@@ -92,11 +92,11 @@ MAKE_COMMAND := /Applications/Xcode.app/Contents/Developer/usr/bin/make
 # default
 .VARIABLES := 
 # environment
-TMPDIR = /var/folders/xx/07hx2gwj53x2_w666v2q192h0000gn/T/
+TMPDIR = /var/folders/fd/m393ky6x62s687tc5yg85x3ssphd4f/T/
 # automatic
 *F = $(notdir $*)
 # environment
-VSCODE_IPC_HOOK = /Users/coltonbristow/Library/Application Support/Code/1.69.0-main.sock
+VSCODE_IPC_HOOK = /Users/colton.bristow/Library/Application Support/Code/1.69.1-main.sock
 # environment
 MallocNanoZone = 0
 # makefile
@@ -106,7 +106,7 @@ MFLAGS = -Rrqp
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
-XPC_SERVICE_NAME = application.com.microsoft.VSCode.33753037.33753043
+XPC_SERVICE_NAME = application.com.microsoft.VSCode.90385913.90385919
 # environment
 HOMEBREW_PREFIX = /opt/homebrew
 # automatic
@@ -116,7 +116,7 @@ HOMEBREW_PREFIX = /opt/homebrew
 # environment
 HOMEBREW_REPOSITORY = /opt/homebrew
 # environment
-__CF_USER_TEXT_ENCODING = 0x1F5:0x0:0x0
+__CF_USER_TEXT_ENCODING = 0x7368348E:0x0:0x0
 # environment
 COMMAND_MODE = unix2003
 # default
@@ -136,7 +136,7 @@ MAKELEVEL := 0
 # environment
 LANG = C
 # environment
-VSCODE_PID = 90022
+VSCODE_PID = 22843
 # variable set hash-table stats:
 # Load=63/1024=6%, Rehash=0, Collisions=1/87=1%
 
@@ -146,9 +146,9 @@ VSCODE_PID = 90022
 
 # Directories
 
-# . (device 16777230, inode 27610185): 29 files, no impossibilities.
+# . (device 16777232, inode 87055943): 28 files, no impossibilities.
 
-# 29 files, no impossibilities in 1 directories.
+# 28 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -184,7 +184,7 @@ build_runner:
 # Not a target:
 makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-05 00:03:52
+#  Last modified 2022-07-06 19:13:00
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -209,7 +209,7 @@ makefile:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Tue Jul 12 20:23:57 2022
+# Finished Make data base on Wed Jul 13 13:18:20 2022
 
  
 make: *** No rule to make target `all'.  Stop.
