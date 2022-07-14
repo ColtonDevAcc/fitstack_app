@@ -3,6 +3,8 @@ import 'dart:developer';
 import 'package:FitStack/app/repository/auth_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:health/health.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -21,6 +23,9 @@ class SignupCubit extends Cubit<SignupState> {
   }
 
   void usernameChanged(String username) {
+    if (username.length > 3) {
+      state.formKey![state.index].currentState!.validate();
+    }
     emit(
       state.copyWith(username: username),
     );
@@ -44,7 +49,7 @@ class SignupCubit extends Cubit<SignupState> {
     HealthFactory health = HealthFactory();
     List<HealthDataPoint> healthDataList = [];
     final now = DateTime.now();
-    final yesterday = now.subtract(Duration(days: 5));
+    final yesterday = now.subtract(Duration(days: 1));
 
     final types = [
       HealthDataType.STEPS,
@@ -94,19 +99,27 @@ class SignupCubit extends Cubit<SignupState> {
         // fetch health data
         List<HealthDataPoint> healthData =
             await health.getHealthDataFromTypes(yesterday, now, types);
-
         // save all the new data points (only the first 100)
         healthDataList.addAll((healthData.length < 100) ? healthData : healthData.sublist(0, 100));
-        healthDataList.forEach((x) => print(x));
+
+        healthDataList = HealthFactory.removeDuplicates(healthDataList);
+
+        emit(
+          state.copyWith(healthData: healthDataList),
+        );
       } catch (error) {
         log("Exception in getHealthDataFromTypes: $error");
       }
     } else {
       log("no permissions given");
     }
+  }
 
-    emit(
-      state.copyWith(healthData: healthDataList),
-    );
+  void setIndexRange(int range) {
+    List<GlobalKey<FormBuilderState>> formKey = [];
+    for (int i = 0; i < range; i++) {
+      formKey.add(GlobalKey<FormBuilderState>());
+    }
+    emit(state.copyWith(indexRange: range, formKey: formKey));
   }
 }

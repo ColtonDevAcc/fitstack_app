@@ -12,10 +12,17 @@ class Health_Stats_Form_View extends StatelessWidget {
       children: [
         SignUp_Form_Header_Widget(
           icon: FontAwesomeIcons.personRunning,
-          text: 'Import Statistics',
+          text: 'Statistics',
           subtitle: 'Lets import your progress',
         ),
         Spacer(flex: 1),
+        Text(
+          "Here is what we were able to retrieve",
+          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                color: Theme.of(context).colorScheme.onBackground.withOpacity(.7),
+              ),
+        ),
+        SizedBox(height: 10),
         signUp_Statistics_Widget(),
         Spacer(flex: 1),
       ],

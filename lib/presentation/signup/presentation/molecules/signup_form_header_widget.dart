@@ -1,4 +1,3 @@
-import 'package:FitStack/app/routing/appRouter.gr.dart';
 import 'package:FitStack/presentation/signup/cubit/signup_cubit.dart';
 import 'package:FitStack/presentation/signup/presentation/atoms/create_account_text_widget.dart';
 import 'package:FitStack/presentation/signup/presentation/atoms/signup_form_header_subtitle_widget.dart';
@@ -31,10 +30,16 @@ class SignUp_Form_Header_Widget extends StatelessWidget {
               },
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(0, 10, 10, 10),
-                child: FaIcon(
-                  FontAwesomeIcons.arrowLeftLong,
-                  color: Theme.of(context).colorScheme.onBackground,
-                  size: 18,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    FaIcon(
+                      FontAwesomeIcons.arrowLeftLong,
+                      color: Theme.of(context).colorScheme.onBackground,
+                      size: 18,
+                    ),
+                    Text("${state.index} / ${state.indexRange}")
+                  ],
                 ),
               ),
             ),
