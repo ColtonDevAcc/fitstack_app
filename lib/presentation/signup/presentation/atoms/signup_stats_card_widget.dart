@@ -3,19 +3,16 @@ import 'package:health/health.dart';
 
 class SingUp_Stats_Card_widget extends StatelessWidget {
   final Icon icon;
-  final String title;
-  final String subtitle;
   final HealthDataPoint? healthData;
   const SingUp_Stats_Card_widget({
     Key? key,
     required this.icon,
-    required this.title,
-    required this.subtitle,
-    required this.healthData,
+    this.healthData,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    Map healthType = {};
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -26,10 +23,10 @@ class SingUp_Stats_Card_widget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              title,
+              "${healthData?.type.name}",
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
-            Text(subtitle),
+            Text("${healthData?.value}"),
           ],
         )
       ],

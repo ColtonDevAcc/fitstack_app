@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:FitStack/presentation/signup/cubit/signup_cubit.dart';
 import 'package:FitStack/presentation/signup/presentation/atoms/signup_stats_card_widget.dart';
 import 'package:flutter/material.dart';
@@ -12,33 +14,35 @@ class signUp_Statistics_Widget extends StatelessWidget {
     return BlocBuilder<SignupCubit, SignupState>(
       buildWhen: (previous, current) => previous.healthData != current.healthData,
       builder: (context, state) {
+        state.healthData?.forEach((e) => log("${e}"));
         return Expanded(
-          child: Container(
-            padding: EdgeInsets.all(20.0),
-            decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.surface,
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: GestureDetector(
-                onTap: () => BlocProvider.of<SignupCubit>(context).healthDataChanged(),
-                child: Wrap(
-                  children: state.healthData != null
-                      ? state.healthData!
-                          .map(
-                            (e) => SingUp_Stats_Card_widget(
-                              icon: Icon(
-                                FontAwesomeIcons.personWalking,
-                                color: Colors.red,
-                              ),
-                              title:
-                                  '${state.healthData == null ? null : state.healthData?.first.value}',
-                              subtitle: 'Steps',
-                              healthData: state.healthData?.first,
+          child: GestureDetector(
+            onTap: () {
+              BlocProvider.of<SignupCubit>(context).healthDataChanged();
+            },
+            child: Container(
+              width: double.infinity,
+              padding: EdgeInsets.all(20.0),
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.surface,
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Wrap(
+                children: state.healthData != null
+                    ? state.healthData!
+                        .map(
+                          (healthPoint) => SingUp_Stats_Card_widget(
+                            icon: Icon(
+                              FontAwesomeIcons.personWalking,
+                              color: Colors.red,
                             ),
-                          )
-                          .toList()
-                      : [],
-                )),
+                            healthData: healthPoint,
+                          ),
+                        )
+                        .toList()
+                    : [],
+              ),
+            ),
           ),
         );
       },

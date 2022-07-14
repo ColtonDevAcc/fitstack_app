@@ -49,11 +49,37 @@ class SignupCubit extends Cubit<SignupState> {
     final types = [
       HealthDataType.STEPS,
       HealthDataType.BLOOD_GLUCOSE,
+      HealthDataType.ACTIVE_ENERGY_BURNED,
+      HealthDataType.BODY_FAT_PERCENTAGE,
+      HealthDataType.BODY_MASS_INDEX,
+      HealthDataType.HEART_RATE,
+      HealthDataType.HEIGHT,
+      HealthDataType.WEIGHT,
+      //!sleep
+      HealthDataType.SLEEP_IN_BED,
+      HealthDataType.SLEEP_ASLEEP,
+      HealthDataType.SLEEP_AWAKE,
+
+      HealthDataType.WATER,
+      HealthDataType.WORKOUT,
+      HealthDataType.SLEEP_IN_BED,
     ];
 
     final permissions = [
-      HealthDataAccess.READ,
-      HealthDataAccess.READ,
+      HealthDataAccess.READ_WRITE,
+      HealthDataAccess.READ_WRITE,
+      HealthDataAccess.READ_WRITE,
+      HealthDataAccess.READ_WRITE,
+      HealthDataAccess.READ_WRITE,
+      HealthDataAccess.READ_WRITE,
+      HealthDataAccess.READ_WRITE,
+      HealthDataAccess.READ_WRITE,
+      HealthDataAccess.READ_WRITE,
+      HealthDataAccess.READ_WRITE,
+      HealthDataAccess.READ_WRITE,
+      HealthDataAccess.READ_WRITE,
+      HealthDataAccess.READ_WRITE,
+      HealthDataAccess.READ_WRITE,
     ];
 
     // The location permission is requested for Workouts using the Distance information.
