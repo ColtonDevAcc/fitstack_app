@@ -1,4 +1,3 @@
-import 'package:FitStack/presentation/login/cubit/login_cubit.dart';
 import 'package:FitStack/presentation/signup/cubit/signup_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -50,8 +49,12 @@ class SignUp_Focused_Button_Widget extends StatelessWidget {
                 ),
                 if (state.index > 0)
                   AnimatedRotation(
-                    duration: Duration(milliseconds: 800),
-                    turns: state.formKey![state.index].currentState!.isValid ? -.25 : 0,
+                    duration: Duration(milliseconds: 300),
+                    turns: state.formKey?[state.index].currentState != null
+                        ? !state.formKey![state.index].currentState!.isValid
+                            ? -.25
+                            : 0
+                        : 0,
                     child: FaIcon(
                       FontAwesomeIcons.arrowRight,
                       color: Theme.of(context).colorScheme.onPrimary,

@@ -56,7 +56,7 @@ PODS:
     - Firebase/RemoteConfig (= 9.2.0)
     - firebase_core
     - Flutter
-  - FirebaseABTesting (9.2.0):
+  - FirebaseABTesting (9.3.0):
     - FirebaseCore (~> 9.0)
   - FirebaseAnalytics (9.2.0):
     - FirebaseAnalytics/AdIdSupport (= 9.2.0)
@@ -274,7 +274,7 @@ SPEC CHECKSUMS:
   firebase_dynamic_links: 02b1a799260c4509fe659ae58c4f2ecf29bf6263
   firebase_performance: 6c932fe63be1fd81140e19fd8bc045477aa65ea7
   firebase_remote_config: 03b4b7b047e586183109c66c32aed394ccb8a89f
-  FirebaseABTesting: cd1ec762a0078b46a7ce91dfe5b7b8991c2dff8f
+  FirebaseABTesting: d7383da017eff5dc4fccb40987fa76271fd1cdbf
   FirebaseAnalytics: af5a03a8dff7648c7b8486f6a78b1368e0268dd3
   FirebaseAuth: 1c574ab64a051dd86dbe7fd5a3f86b58155b3482
   FirebaseCore: 0e27f2a15d8f7b7ef11e7d93e23b1cbab55d748c

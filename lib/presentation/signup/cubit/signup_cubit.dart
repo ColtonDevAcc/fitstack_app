@@ -23,17 +23,31 @@ class SignupCubit extends Cubit<SignupState> {
   }
 
   void usernameChanged(String username) {
+    List<GlobalKey<FormBuilderState>>? formKeyList = state.formKey;
     if (username.length > 3) {
-      state.formKey![state.index].currentState!.validate();
+      formKeyList?[state.index].currentState!.validate();
+    } else {
+      formKeyList?[state.index]
+          .currentState!
+          .invalidateFirstField(errorText: 'Must be more than 3 characters');
     }
+    log("form key validation: ${formKeyList?[state.index].currentState!.isValid}");
     emit(
-      state.copyWith(username: username),
+      state.copyWith(username: username, formKey: formKeyList),
     );
   }
 
   void firstLastNameChanged(String firstLast) {
+    List<GlobalKey<FormBuilderState>>? formKeyList = state.formKey;
+    if (firstLast.length > 5 && firstLast.contains(" ")) {
+      formKeyList?[state.index].currentState!.validate();
+    } else {
+      formKeyList?[state.index]
+          .currentState!
+          .invalidateFirstField(errorText: 'Must be more than 5 characters and contain a space');
+    }
     emit(
-      state.copyWith(firstLastName: firstLast),
+      state.copyWith(firstLastName: firstLast, formKey: formKeyList),
     );
   }
 
@@ -117,7 +131,7 @@ class SignupCubit extends Cubit<SignupState> {
 
   void setIndexRange(int range) {
     List<GlobalKey<FormBuilderState>> formKey = [];
-    for (int i = 0; i < range; i++) {
+    for (int i = 0; i <= range; i++) {
       formKey.add(GlobalKey<FormBuilderState>());
     }
     emit(state.copyWith(indexRange: range, formKey: formKey));

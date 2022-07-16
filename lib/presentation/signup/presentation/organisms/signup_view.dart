@@ -27,7 +27,7 @@ class SignUp_View extends StatelessWidget {
     return BlocBuilder<SignupCubit, SignupState>(
       builder: (context, state) {
         if (state.indexRange < 2) {
-          BlocProvider.of<SignupCubit>(context).setIndexRange(forms.length);
+          BlocProvider.of<SignupCubit>(context).setIndexRange(forms.length + 1);
         }
         return Padding(
           padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),

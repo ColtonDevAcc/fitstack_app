@@ -1,7 +1,10 @@
+import 'dart:developer';
+
 import 'package:FitStack/app/models/user_model.dart';
 import 'package:FitStack/app/repository/auth_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:firebase_auth/firebase_auth.dart' as fb;
 part 'login_state.dart';
 
 class LoginCubit extends Cubit<LoginState> {
@@ -33,7 +36,8 @@ class LoginCubit extends Cubit<LoginState> {
         email: state.email,
         password: state.password,
       );
-
+      String token = await fb.FirebaseAuth.instance.currentUser!.getIdToken();
+      log("token: ${token} uid: ${user?.userId}");
       emit(state.copyWith(step: AuthStep.Authorized));
 
       return user;
