@@ -136,4 +136,8 @@ class SignupCubit extends Cubit<SignupState> {
     }
     emit(state.copyWith(indexRange: range, formKey: formKey));
   }
+
+  void dateOfBirthChanged(String dob) {
+    emit(state.copyWith(dob: dob));
+  }
 }

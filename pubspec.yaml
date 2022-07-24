@@ -27,6 +27,7 @@ dependencies:
   rive: ^0.8.4
   carousel_slider: ^4.1.1
   syncfusion_flutter_charts: ^20.2.39
+  syncfusion_flutter_datepicker: ^20.2.39
 
   #auth
   google_sign_in: ^5.3.3

@@ -9,8 +9,10 @@ class SignupState extends Equatable {
   final AppState healthStatus;
   final List<GlobalKey<FormBuilderState>>? formKey;
   final int indexRange;
+  final String dob;
 
   SignupState({
+    this.dob = '',
     this.formKey,
     this.healthStatus = AppState.NO_DATA,
     this.profileImage,
@@ -25,6 +27,7 @@ class SignupState extends Equatable {
   List<Object> get props => [
         formKey ?? [],
         index,
+        dob,
         username,
         firstLastName,
         profileImage ?? XFile('path'),
@@ -34,6 +37,7 @@ class SignupState extends Equatable {
       ];
 
   SignupState copyWith({
+    String? dob,
     int? index,
     String? username,
     String? firstLastName,
@@ -43,13 +47,15 @@ class SignupState extends Equatable {
     List<GlobalKey<FormBuilderState>>? formKey,
   }) {
     return SignupState(
-        firstLastName: firstLastName ?? this.firstLastName,
-        index: index ?? this.index,
-        username: username ?? this.username,
-        profileImage: profileImage ?? this.profileImage,
-        healthData: healthData ?? this.healthData,
-        indexRange: indexRange ?? this.indexRange,
-        formKey: formKey ?? this.formKey);
+      firstLastName: firstLastName ?? this.firstLastName,
+      index: index ?? this.index,
+      username: username ?? this.username,
+      profileImage: profileImage ?? this.profileImage,
+      healthData: healthData ?? this.healthData,
+      indexRange: indexRange ?? this.indexRange,
+      formKey: formKey ?? this.formKey,
+      dob: dob ?? this.dob,
+    );
   }
 }
 
