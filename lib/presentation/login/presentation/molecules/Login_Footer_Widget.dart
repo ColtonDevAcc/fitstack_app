@@ -12,7 +12,9 @@ class Login_Footer_Widget extends StatelessWidget {
     return Column(
       children: [
         Login_Account_SignUp_Text_Widget(),
+        SizedBox(height: 5),
         Login_SignIn_Button_Widget(),
+        SizedBox(height: 15),
         Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,

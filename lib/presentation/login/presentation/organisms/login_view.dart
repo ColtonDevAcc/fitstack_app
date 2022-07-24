@@ -43,7 +43,6 @@ class Login_View extends StatelessWidget {
               key: Key("Login_Form"),
             ),
             Spacer(flex: 10),
-            SizedBox(height: 15),
             Login_Footer_Widget(),
           ],
         ),

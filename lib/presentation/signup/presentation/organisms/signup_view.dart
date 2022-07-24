@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:FitStack/presentation/signup/cubit/signup_cubit.dart';
 import 'package:FitStack/presentation/signup/presentation/atoms/signup_focused_button.dart';
 import 'package:FitStack/presentation/signup/presentation/molecules/basic_info_form.dart';

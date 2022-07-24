@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:FitStack/presentation/signup/cubit/signup_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,8 +10,6 @@ class DateOfBirthButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final DateRangePickerController _controller = DateRangePickerController();
-
     return BlocBuilder<SignupCubit, SignupState>(
       buildWhen: (previous, current) => previous.dob != current.dob,
       builder: (context, state) {
@@ -24,28 +20,34 @@ class DateOfBirthButtonWidget extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20.0),
               ),
               context: context,
-              builder: (context) {
+              builder: (ctx) {
                 return Container(
                   height: MediaQuery.of(context).size.height * 0.4,
                   child: Padding(
                     padding: const EdgeInsets.all(20.0),
                     child: Column(
                       children: [
-                        SfDateRangePicker(
-                          controller: _controller,
-                          onSelectionChanged: (date) {
-                            String _date =
-                                DateFormat('dd, MMMM yyyy').format(date.value).toString();
-                            log("$date");
-                            BlocProvider.of<SignupCubit>(context).dateOfBirthChanged(_date);
-                          },
-                          onCancel: () => Navigator.pop(context),
-                          onSubmit: (date) => Navigator.pop(context),
-                          showActionButtons: true,
-                          confirmText: "OK",
-                          cancelText: "CANCEL",
-                          selectionMode: DateRangePickerSelectionMode.single,
-                          view: DateRangePickerView.year,
+                        Expanded(
+                          child: SfDateRangePicker(
+                            onSelectionChanged: (date) {
+                              String _date =
+                                  DateFormat('dd, MMMM yyyy').format(date.value).toString();
+
+                              BlocProvider.of<SignupCubit>(context).dateOfBirthChanged(_date);
+                            },
+                            onCancel: () => Navigator.pop(context),
+                            onSubmit: (date) {
+                              String _date =
+                                  DateFormat('dd, MMMM yyyy').format(date as DateTime).toString();
+                              BlocProvider.of<SignupCubit>(context).dateOfBirthChanged(_date);
+                              Navigator.pop(context);
+                            },
+                            showActionButtons: true,
+                            confirmText: "OK",
+                            cancelText: "CANCEL",
+                            selectionMode: DateRangePickerSelectionMode.single,
+                            view: DateRangePickerView.year,
+                          ),
                         ),
                       ],
                     ),
