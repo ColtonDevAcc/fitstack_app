@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:FitStack/app/repository/auth_repository.dart';
 import 'package:FitStack/presentation/signup/cubit/signup_cubit.dart';
 import 'package:FitStack/presentation/signup/presentation/organisms/signup_view.dart';
@@ -19,10 +21,13 @@ class _SignUp_PageState extends State<SignUp_Page> {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       body: SafeArea(
-        child: BlocProvider(
-          create: (context) =>
-              SignupCubit(authenticationRepository: context.read<AuthenticationRepository>()),
-          child: SignUp_View(),
+        child: Padding(
+          padding: Platform.isAndroid ? const EdgeInsets.fromLTRB(0, 10, 0, 10) : EdgeInsets.all(0),
+          child: BlocProvider(
+            create: (context) =>
+                SignupCubit(authenticationRepository: context.read<AuthenticationRepository>()),
+            child: SignUp_View(),
+          ),
         ),
       ),
     );

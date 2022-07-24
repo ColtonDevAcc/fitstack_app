@@ -1,14 +1,12 @@
 import 'package:FitStack/presentation/signup/cubit/signup_cubit.dart';
+import 'package:FitStack/presentation/signup/presentation/atoms/assigned_sex_button.dart';
 import 'package:FitStack/presentation/signup/presentation/atoms/dateofbirth_button_widget.dart';
+import 'package:FitStack/presentation/signup/presentation/atoms/plat_health_fill_button.dart';
 import 'package:FitStack/presentation/signup/presentation/molecules/signup_header_widget.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:email_validator/email_validator.dart';
-import 'package:FitStack/widgets/atoms/textfield_widget.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 class BasicInfoForm extends StatefulWidget {
   final void Function()? googleOnTap;
@@ -46,25 +44,11 @@ class _BasicInfoFormState extends State<BasicInfoForm> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Spacer(flex: 1),
+                    PlatHealthFillButton(),
                     SizedBox(height: 10),
                     DateOfBirthButtonWidget(),
                     SizedBox(height: 10),
-                    TextField_Widget(
-                      title: "Password",
-                      hintText: "Password",
-                      validator: (value) {
-                        return value != null && value.length < 6 ? "Enter min. 6 characters" : null;
-                      },
-                    ),
-                    SizedBox(height: 10),
-                    TextField_Widget(
-                      title: "Confirm Password",
-                      hintText: "Confirm Password",
-                      validator: (value) {
-                        return value != null && value.length < 6 ? "Password must match" : null;
-                      },
-                    ),
-                    SizedBox(height: 10),
+                    AssignedSexButton(),
                     Spacer(flex: 3),
                   ],
                 ),

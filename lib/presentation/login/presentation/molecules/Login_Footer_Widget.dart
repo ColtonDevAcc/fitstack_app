@@ -12,15 +12,15 @@ class Login_Footer_Widget extends StatelessWidget {
     return Column(
       children: [
         Login_Account_SignUp_Text_Widget(),
-        SizedBox(height: 5),
+        SizedBox(height: 10),
         Login_SignIn_Button_Widget(),
-        SizedBox(height: 15),
+        SizedBox(height: 5),
         Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SocialAuthButton_Widget(
-              color: Color.fromRGBO(45, 113, 197, 1),
+              color: Theme.of(context).colorScheme.primary,
               child: FaIcon(
                 FontAwesomeIcons.facebookF,
                 color: Theme.of(context).colorScheme.onPrimary,
@@ -28,10 +28,8 @@ class Login_Footer_Widget extends StatelessWidget {
             ),
             SizedBox(width: 15),
             SocialAuthButton_Widget(
-              onTap: () {
-                // authenticateWithGoogle(context);
-              },
-              color: Color.fromRGBO(254, 78, 78, 1),
+              onTap: () {},
+              color: Theme.of(context).colorScheme.secondary,
               child: FaIcon(
                 FontAwesomeIcons.google,
                 color: Theme.of(context).colorScheme.onSecondary,
