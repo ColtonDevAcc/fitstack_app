@@ -19,7 +19,7 @@ class _Workout_Recommendation_ListState extends State<Workout_Recommendation_Lis
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 300,
+      height: MediaQuery.of(context).size.height * .35,
       width: double.infinity,
       child: PageView.builder(
         clipBehavior: Clip.none,

@@ -1,3 +1,4 @@
+import 'package:FitStack/presentation/dashboard/presentation/molecules/user_goal_statistics_widget.dart';
 import 'package:FitStack/presentation/dashboard/presentation/organisms/workout_reccommendations_list.dart';
 import 'package:FitStack/presentation/dashboard/presentation/organisms/statistics_dashboard.dart';
 import 'package:FitStack/widgets/atoms/profile_circular_avatar.dart';
@@ -23,7 +24,7 @@ class _DashBoard_ViewState extends State<DashBoard_View> {
       child: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
           return Padding(
-            padding: const EdgeInsets.only(left: 10),
+            padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -35,16 +36,12 @@ class _DashBoard_ViewState extends State<DashBoard_View> {
                   children: [
                     Text(
                       "HOW YOUR DAY LOOKS?",
-                      style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                      //TODO: need to use auto resize package
+                      textScaleFactor: 1.3,
+                      style: Theme.of(context).textTheme.titleSmall!.copyWith(
                           color: Theme.of(context).colorScheme.primary,
                           fontWeight: FontWeight.bold),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
-                      child: Profile_Circular_Avatar(
-                        maxRadius: 20,
-                      ),
-                    )
                   ],
                 ),
                 SizedBox(height: 10),
@@ -83,6 +80,7 @@ class _DashBoard_ViewState extends State<DashBoard_View> {
                     height: 200,
                     width: 100,
                     color: Colors.red[300],
+                    child: UserGoalStatisticsWidget(),
                   ),
                 ),
               ],
