@@ -26,6 +26,14 @@ class SignUp_Focused_Button_Widget extends StatelessWidget {
                 state.heightFt != 0 &&
                 state.weight != 0.0) {
               BlocProvider.of<SignupCubit>(context).changePage(state.index + 1);
+            } else if (state.index == 1 && state.username != "") {
+              BlocProvider.of<SignupCubit>(context).changePage(state.index + 1);
+            } else if (state.index == 2 && state.firstLastName != "") {
+              BlocProvider.of<SignupCubit>(context).changePage(state.index + 1);
+            } else if (state.index == 3) {
+              BlocProvider.of<SignupCubit>(context).changePage(state.index + 1);
+            } else if (state.index == 4) {
+              BlocProvider.of<SignupCubit>(context).changePage(state.index + 1);
             }
           },
           child: AnimatedContainer(

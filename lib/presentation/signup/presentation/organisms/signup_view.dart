@@ -4,6 +4,7 @@ import 'package:FitStack/presentation/signup/presentation/molecules/basic_info_f
 import 'package:FitStack/presentation/signup/presentation/molecules/social_auth_buttons.dart';
 import 'package:FitStack/presentation/signup/presentation/organisms/health_stats_form_view.dart';
 import 'package:FitStack/presentation/signup/presentation/organisms/personal_info_form_view.dart';
+import 'package:FitStack/presentation/signup/presentation/organisms/user_account_auth_form_view.dart';
 import 'package:FitStack/presentation/signup/presentation/organisms/username_form_view.dart';
 import 'package:FitStack/presentation/signup/presentation/organisms/upload_picture_form_view.dart';
 import 'package:flutter/material.dart';
@@ -20,22 +21,20 @@ class SignUp_View extends StatelessWidget {
       Personal_Info_Form_View(),
       Upload_Picture_Form_View(),
       Health_Stats_Form_View(),
+      UserAccountAuthFormView(),
     ];
 
     return BlocBuilder<SignupCubit, SignupState>(
       builder: (context, state) {
         if (state.indexRange < 2) {
-          BlocProvider.of<SignupCubit>(context).setIndexRange(forms.length + 1);
+          BlocProvider.of<SignupCubit>(context).setIndexRange(forms.length);
         }
         return Padding(
           padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
           child: Column(
             children: [
               Expanded(child: forms[state.index]),
-              SignUp_Focused_Button_Widget(
-                text: 'Next',
-                index: state.index,
-              ),
+              SignUp_Focused_Button_Widget(text: 'Next', index: state.index),
               Social_Auth_Buttons()
             ],
           ),

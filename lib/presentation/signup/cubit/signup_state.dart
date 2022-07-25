@@ -13,9 +13,13 @@ class SignupState extends Equatable {
   final int heightFt;
   final double heightInch;
   final double weight;
+  final String email;
   final AssignedSex assignedSex;
+  final String password;
 
   SignupState({
+    this.password = "",
+    this.email = "",
     this.assignedSex = AssignedSex.Unknown,
     this.heightInch = 0,
     this.heightFt = 0,
@@ -33,6 +37,8 @@ class SignupState extends Equatable {
 
   @override
   List<Object> get props => [
+        password,
+        email,
         formKey ?? [],
         heightInch,
         assignedSex,
@@ -49,6 +55,8 @@ class SignupState extends Equatable {
       ];
 
   SignupState copyWith({
+    String? password,
+    String? email,
     double? heightInch,
     double? weight,
     int? heightFt,
@@ -63,6 +71,8 @@ class SignupState extends Equatable {
     List<GlobalKey<FormBuilderState>>? formKey,
   }) {
     return SignupState(
+      password: password ?? this.password,
+      email: email ?? this.email,
       heightInch: heightInch ?? this.heightInch,
       weight: weight ?? this.weight,
       heightFt: heightFt ?? this.heightFt,

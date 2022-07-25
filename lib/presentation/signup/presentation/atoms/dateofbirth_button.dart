@@ -45,7 +45,7 @@ class DateOfBirthButton extends StatelessWidget {
                             confirmText: "OK",
                             cancelText: "CANCEL",
                             selectionMode: DateRangePickerSelectionMode.single,
-                            view: DateRangePickerView.year,
+                            view: DateRangePickerView.decade,
                           ),
                         ),
                       ],

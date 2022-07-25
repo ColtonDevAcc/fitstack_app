@@ -160,4 +160,12 @@ class SignupCubit extends Cubit<SignupState> {
   void assignedSexChanged(AssignedSex assignedSex) {
     emit(state.copyWith(assignedSex: assignedSex));
   }
+
+  void passwordChanged(String? password) {
+    emit(state.copyWith(password: password));
+  }
+
+  void emailChanged(String? email) {
+    emit(state.copyWith(email: email));
+  }
 }

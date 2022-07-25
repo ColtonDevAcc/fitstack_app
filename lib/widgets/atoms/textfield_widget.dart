@@ -26,8 +26,7 @@ class TextField_Widget extends StatelessWidget {
       children: [
         Text(
           title,
-          textScaleFactor: 1.4,
-          style: Theme.of(context).textTheme.titleSmall!.copyWith(fontWeight: FontWeight.normal),
+          style: Theme.of(context).textTheme.subtitle2!.copyWith(fontWeight: FontWeight.bold),
         ),
         SizedBox(height: 10),
         TextFormField(
@@ -57,7 +56,7 @@ class TextField_Widget extends StatelessWidget {
         if (bottomTitle != null)
           Text(
             bottomTitle!,
-            style: Theme.of(context).textTheme.subtitle2,
+            style: Theme.of(context).textTheme.bodySmall,
           ),
       ],
     );
