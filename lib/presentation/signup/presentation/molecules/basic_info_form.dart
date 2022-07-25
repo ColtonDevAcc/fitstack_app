@@ -1,7 +1,9 @@
 import 'package:FitStack/presentation/signup/cubit/signup_cubit.dart';
 import 'package:FitStack/presentation/signup/presentation/atoms/assigned_sex_button.dart';
-import 'package:FitStack/presentation/signup/presentation/atoms/dateofbirth_button_widget.dart';
+import 'package:FitStack/presentation/signup/presentation/atoms/dateofbirth_button.dart';
+import 'package:FitStack/presentation/signup/presentation/atoms/height_textfield.dart';
 import 'package:FitStack/presentation/signup/presentation/atoms/plat_health_fill_button.dart';
+import 'package:FitStack/presentation/signup/presentation/atoms/weight_textfield.dart';
 import 'package:FitStack/presentation/signup/presentation/molecules/signup_header_widget.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/gestures.dart';
@@ -46,9 +48,13 @@ class _BasicInfoFormState extends State<BasicInfoForm> {
                     Spacer(flex: 1),
                     PlatHealthFillButton(),
                     SizedBox(height: 10),
-                    DateOfBirthButtonWidget(),
+                    DateOfBirthButton(),
                     SizedBox(height: 10),
                     AssignedSexButton(),
+                    SizedBox(height: 10),
+                    HeightTextfield(),
+                    SizedBox(height: 10),
+                    WeightTextfield(),
                     Spacer(flex: 3),
                   ],
                 ),

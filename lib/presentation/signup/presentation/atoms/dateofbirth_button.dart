@@ -5,8 +5,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import 'package:intl/intl.dart';
 
-class DateOfBirthButtonWidget extends StatelessWidget {
-  const DateOfBirthButtonWidget({Key? key}) : super(key: key);
+class DateOfBirthButton extends StatelessWidget {
+  const DateOfBirthButton({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,6 @@ class DateOfBirthButtonWidget extends StatelessWidget {
                             onSelectionChanged: (date) {
                               String _date =
                                   DateFormat('dd, MMMM yyyy').format(date.value).toString();
-
                               BlocProvider.of<SignupCubit>(context).dateOfBirthChanged(_date);
                             },
                             onCancel: () => Navigator.pop(context),
@@ -60,7 +59,7 @@ class DateOfBirthButtonWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Date of birth',
+                'Date of Birth',
                 style: Theme.of(context).textTheme.subtitle2!.copyWith(fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 10),
@@ -76,6 +75,7 @@ class DateOfBirthButtonWidget extends StatelessWidget {
                   children: [
                     Text(
                       state.dob == "" ? 'Choose a date' : "${state.dob}",
+                      style: Theme.of(context).textTheme.subtitle2,
                     ),
                     if (state.dob == "") Icon(FontAwesomeIcons.angleDown, size: 15),
                   ],

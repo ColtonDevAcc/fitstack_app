@@ -59,47 +59,36 @@ class SignupCubit extends Cubit<SignupState> {
     );
   }
 
-  void healthDataChanged() async {
+  void healthDataChanged(List<HealthDataType>? healthDataTypeList) async {
     HealthFactory health = HealthFactory();
     List<HealthDataPoint> healthDataList = [];
     final now = DateTime.now();
     final yesterday = now.subtract(Duration(days: 1));
 
-    final types = [
-      HealthDataType.STEPS,
-      HealthDataType.BLOOD_GLUCOSE,
-      HealthDataType.ACTIVE_ENERGY_BURNED,
-      HealthDataType.BODY_FAT_PERCENTAGE,
-      HealthDataType.BODY_MASS_INDEX,
-      HealthDataType.HEART_RATE,
-      HealthDataType.HEIGHT,
-      HealthDataType.WEIGHT,
-      //!sleep
-      HealthDataType.SLEEP_IN_BED,
-      HealthDataType.SLEEP_ASLEEP,
-      HealthDataType.SLEEP_AWAKE,
+    final types = healthDataTypeList ??
+        [
+          HealthDataType.STEPS,
+          HealthDataType.BLOOD_GLUCOSE,
+          HealthDataType.ACTIVE_ENERGY_BURNED,
+          HealthDataType.BODY_FAT_PERCENTAGE,
+          HealthDataType.BODY_MASS_INDEX,
+          HealthDataType.HEART_RATE,
+          HealthDataType.HEIGHT,
+          HealthDataType.WEIGHT,
+          //!sleep
+          HealthDataType.SLEEP_IN_BED,
+          HealthDataType.SLEEP_ASLEEP,
+          HealthDataType.SLEEP_AWAKE,
 
-      HealthDataType.WATER,
-      HealthDataType.WORKOUT,
-      HealthDataType.SLEEP_IN_BED,
-    ];
+          HealthDataType.WATER,
+          HealthDataType.WORKOUT,
+          HealthDataType.SLEEP_IN_BED,
+        ];
 
-    final permissions = [
-      HealthDataAccess.READ_WRITE,
-      HealthDataAccess.READ_WRITE,
-      HealthDataAccess.READ_WRITE,
-      HealthDataAccess.READ_WRITE,
-      HealthDataAccess.READ_WRITE,
-      HealthDataAccess.READ_WRITE,
-      HealthDataAccess.READ_WRITE,
-      HealthDataAccess.READ_WRITE,
-      HealthDataAccess.READ_WRITE,
-      HealthDataAccess.READ_WRITE,
-      HealthDataAccess.READ_WRITE,
-      HealthDataAccess.READ_WRITE,
-      HealthDataAccess.READ_WRITE,
-      HealthDataAccess.READ_WRITE,
-    ];
+    List<HealthDataAccess> permissions = [];
+    types.forEach((element) {
+      permissions.add(HealthDataAccess.READ_WRITE);
+    });
 
     // The location permission is requested for Workouts using the Distance information.
     // await Permission.activityRecognition.request();
@@ -115,11 +104,26 @@ class SignupCubit extends Cubit<SignupState> {
             await health.getHealthDataFromTypes(yesterday, now, types);
         // save all the new data points (only the first 100)
         healthDataList.addAll((healthData.length < 100) ? healthData : healthData.sublist(0, 100));
-
         healthDataList = HealthFactory.removeDuplicates(healthDataList);
 
+        HealthDataPoint? healthDataWeight =
+            healthDataList.firstWhere((element) => element.type == HealthDataType.WEIGHT);
+        HealthDataPoint? healthDataHeight =
+            healthDataList.firstWhere((element) => element.type == HealthDataType.HEIGHT);
+
+        var height = double.tryParse(healthDataHeight.value.toString())! * 39.37007874;
+        var heightFt = (height / 12).floor();
+        var heightInch = (height % 12).round().toDouble();
+        var weight =
+            (double.tryParse(healthDataWeight.value.toString())! * 2.20462262185).roundToDouble();
+
         emit(
-          state.copyWith(healthData: healthDataList),
+          state.copyWith(
+            healthData: healthDataList,
+            weight: weight,
+            heightFt: heightFt,
+            heightInch: heightInch,
+          ),
         );
       } catch (error) {
         log("Exception in getHealthDataFromTypes: $error");
@@ -139,5 +143,21 @@ class SignupCubit extends Cubit<SignupState> {
 
   void dateOfBirthChanged(String dob) {
     emit(state.copyWith(dob: dob));
+  }
+
+  void weightChanged(double? weight) {
+    emit(state.copyWith(weight: weight));
+  }
+
+  void heightFtChanged(int? heightFt) {
+    emit(state.copyWith(heightFt: heightFt));
+  }
+
+  void heightInchChanged(double? heightInch) {
+    emit(state.copyWith(heightInch: heightInch));
+  }
+
+  void assignedSexChanged(AssignedSex assignedSex) {
+    emit(state.copyWith(assignedSex: assignedSex));
   }
 }

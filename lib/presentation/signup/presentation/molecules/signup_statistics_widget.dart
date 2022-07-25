@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:FitStack/presentation/signup/cubit/signup_cubit.dart';
 import 'package:FitStack/presentation/signup/presentation/atoms/signup_stats_card_widget.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +12,7 @@ class signUp_Statistics_Widget extends StatelessWidget {
       buildWhen: (previous, current) => previous.healthData != current.healthData,
       builder: (context, state) {
         if (state.healthData == null) {
-          BlocProvider.of<SignupCubit>(context).healthDataChanged();
+          BlocProvider.of<SignupCubit>(context).healthDataChanged(null);
         }
         return Expanded(
           child: GestureDetector(

@@ -28,7 +28,7 @@ dependencies:
   carousel_slider: ^4.1.1
   syncfusion_flutter_charts: ^20.2.39
   syncfusion_flutter_datepicker: ^20.2.39
-  drop_down_list: ^0.0.2
+  dropdown_button2: ^1.6.3
 
   #auth
   google_sign_in: ^5.3.3

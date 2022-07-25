@@ -20,7 +20,13 @@ class SignUp_Focused_Button_Widget extends StatelessWidget {
       builder: (context, state) {
         return TextButton(
           onPressed: () {
-            BlocProvider.of<SignupCubit>(context).changePage(state.index + 1);
+            if (state.index == 0 &&
+                state.dob != "" &&
+                state.assignedSex != AssignedSex.Unknown &&
+                state.heightFt != 0 &&
+                state.weight != 0.0) {
+              BlocProvider.of<SignupCubit>(context).changePage(state.index + 1);
+            }
           },
           child: AnimatedContainer(
             decoration: BoxDecoration(

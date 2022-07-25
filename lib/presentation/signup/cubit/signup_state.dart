@@ -10,8 +10,16 @@ class SignupState extends Equatable {
   final List<GlobalKey<FormBuilderState>>? formKey;
   final int indexRange;
   final String dob;
+  final int heightFt;
+  final double heightInch;
+  final double weight;
+  final AssignedSex assignedSex;
 
   SignupState({
+    this.assignedSex = AssignedSex.Unknown,
+    this.heightInch = 0,
+    this.heightFt = 0,
+    this.weight = 0,
     this.dob = '',
     this.formKey,
     this.healthStatus = AppState.NO_DATA,
@@ -26,6 +34,10 @@ class SignupState extends Equatable {
   @override
   List<Object> get props => [
         formKey ?? [],
+        heightInch,
+        assignedSex,
+        heightFt,
+        weight,
         index,
         dob,
         username,
@@ -37,7 +49,11 @@ class SignupState extends Equatable {
       ];
 
   SignupState copyWith({
+    double? heightInch,
+    double? weight,
+    int? heightFt,
     String? dob,
+    AssignedSex? assignedSex,
     int? index,
     String? username,
     String? firstLastName,
@@ -47,6 +63,10 @@ class SignupState extends Equatable {
     List<GlobalKey<FormBuilderState>>? formKey,
   }) {
     return SignupState(
+      heightInch: heightInch ?? this.heightInch,
+      weight: weight ?? this.weight,
+      heightFt: heightFt ?? this.heightFt,
+      assignedSex: assignedSex ?? this.assignedSex,
       firstLastName: firstLastName ?? this.firstLastName,
       index: index ?? this.index,
       username: username ?? this.username,
@@ -69,3 +89,5 @@ enum AppState {
   DATA_NOT_ADDED,
   STEPS_READY,
 }
+
+enum AssignedSex { Male, Female, Unknown }
