@@ -3,6 +3,8 @@ import 'dart:developer';
 import 'package:FitStack/app/repository/auth_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:health/health.dart';
@@ -167,5 +169,16 @@ class SignupCubit extends Cubit<SignupState> {
 
   void emailChanged(String? email) {
     emit(state.copyWith(email: email));
+  }
+
+  void userSignUp() {
+    Future<UserCredential> userCred = FirebaseAuth.instance
+        .createUserWithEmailAndPassword(email: state.email, password: state.password);
+
+    userCred.then((value) {
+      User? _user = value.user;
+      _user?.updateDisplayName(state.username);
+      _user?.updatePhotoURL(state.profileImage?.path);
+    });
   }
 }
