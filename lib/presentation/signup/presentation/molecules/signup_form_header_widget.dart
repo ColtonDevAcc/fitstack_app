@@ -5,11 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class SignUp_Form_Header_Widget extends StatelessWidget {
+class SignupFormHeader extends StatelessWidget {
   final IconData icon;
   final String text;
   final String subtitle;
-  const SignUp_Form_Header_Widget({
+  const SignupFormHeader({
     Key? key,
     required this.icon,
     required this.text,
@@ -26,7 +26,7 @@ class SignUp_Form_Header_Widget extends StatelessWidget {
           children: [
             GestureDetector(
               onTap: () {
-                BlocProvider.of<SignupCubit>(context).changePage(state.index - 1);
+                BlocProvider.of<SignupCubit>(context).previousPage;
               },
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(0, 10, 10, 10),

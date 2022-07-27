@@ -12,7 +12,7 @@ class Login_Password_Field_Widget extends StatelessWidget {
       buildWhen: (previous, current) => previous.password != current.password,
       builder: (context, state) {
         return TextField_Widget(
-          onChanged: (password) => context.read<LoginCubit>().passwordChanged(password),
+          onChanged: (password) => context.read<LoginCubit>().passwordChanged(password ?? ""),
           validator: (value) {
             return value != null && value.length < 6 ? "Enter min. 6 characters" : null;
           },

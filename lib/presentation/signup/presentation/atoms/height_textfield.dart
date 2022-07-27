@@ -1,6 +1,8 @@
 import 'package:FitStack/presentation/signup/cubit/signup_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 
 class HeightTextfield extends StatelessWidget {
   const HeightTextfield({Key? key}) : super(key: key);
@@ -22,10 +24,17 @@ class HeightTextfield extends StatelessWidget {
             Row(
               children: [
                 Expanded(
-                  child: TextFormField(
+                  child: FormBuilderTextField(
+                    name: "ft",
                     onChanged: (value) => BlocProvider.of<SignupCubit>(context)
-                        .heightFtChanged(int.tryParse(value) ?? 0),
+                        .heightFtChanged(int.tryParse(value ?? "") ?? 0),
                     style: Theme.of(context).textTheme.subtitle2,
+                    validator: FormBuilderValidators.compose([
+                      FormBuilderValidators.required(errorText: "required"),
+                      FormBuilderValidators.numeric(errorText: "Must be a number"),
+                      FormBuilderValidators.maxLength(1, errorText: "Must be equal to 1 character"),
+                      FormBuilderValidators.integer(errorText: "Height must be in ft(integer)"),
+                    ]),
                     decoration: InputDecoration(
                       hintText: "${state.heightFt}",
                       suffixIconConstraints: BoxConstraints(maxHeight: 30, maxWidth: 40),
@@ -64,9 +73,19 @@ class HeightTextfield extends StatelessWidget {
                 ),
                 SizedBox(width: 15),
                 Expanded(
-                  child: TextFormField(
+                  child: FormBuilderTextField(
+                    name: 'in',
                     onChanged: (value) => BlocProvider.of<SignupCubit>(context)
-                        .heightInchChanged(double.tryParse(value) ?? 0),
+                        .heightInchChanged(int.tryParse(value ?? "") ?? 0),
+                    validator: FormBuilderValidators.compose([
+                      FormBuilderValidators.required(errorText: "required"),
+                      FormBuilderValidators.numeric(errorText: "Must be a number"),
+                      FormBuilderValidators.integer(errorText: "Must be an inch(integer)"),
+                      FormBuilderValidators.maxLength(2,
+                          errorText: "Cannot be greater than 2 characters"),
+                      // FormBuilderValidators.integer(errorText: "Height must be in ft(integer)")
+                    ]),
+                    valueTransformer: (value) => state.heightInch,
                     style: Theme.of(context).textTheme.subtitle2,
                     decoration: InputDecoration(
                       hintText: "${state.heightInch}",

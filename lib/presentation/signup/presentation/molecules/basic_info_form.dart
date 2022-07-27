@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:FitStack/presentation/signup/cubit/signup_cubit.dart';
 import 'package:FitStack/presentation/signup/presentation/atoms/assigned_sex_button.dart';
 import 'package:FitStack/presentation/signup/presentation/atoms/dateofbirth_button.dart';
@@ -9,6 +11,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 class BasicInfoForm extends StatefulWidget {
   final void Function()? googleOnTap;
@@ -34,14 +37,17 @@ class _BasicInfoFormState extends State<BasicInfoForm> {
   Widget build(BuildContext context) {
     return BlocBuilder<SignupCubit, SignupState>(
       builder: (context, state) {
+        GlobalKey<FormBuilderState> formKey = state.formKey![state.index];
         return Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SignUp_Header_Widget(),
             Expanded(
-              child: Form(
-                key: state.formKey?[state.index],
+              child: FormBuilder(
+                key: formKey,
+                onChanged: () => BlocProvider.of<SignupCubit>(context).formKeyChanged(formKey),
+                autovalidateMode: AutovalidateMode.always,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

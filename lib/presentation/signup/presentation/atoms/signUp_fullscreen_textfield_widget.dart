@@ -3,40 +3,35 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 class SignUp_Fullscreen_Textfield_Widget extends StatelessWidget {
   final void Function(String?)? onChanged;
-  final TextInputType? keyboardType;
-  final GlobalKey<FormBuilderState> formKey;
+  final String? Function(String?)? validator;
 
   const SignUp_Fullscreen_Textfield_Widget({
-    required this.formKey,
     Key? key,
     this.onChanged,
-    this.keyboardType,
+    this.validator,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return FormBuilder(
-      key: formKey,
-      child: FormBuilderTextField(
-        onChanged: onChanged,
-        keyboardType: keyboardType ?? TextInputType.number,
-        style: TextStyle(color: Colors.black),
-        textAlign: TextAlign.center,
-        decoration: InputDecoration(
-          hintText: 'Enter here',
-          enabledBorder: UnderlineInputBorder(
-            borderSide: BorderSide(
-              color: Colors.white.withOpacity(0),
-            ),
-          ),
-          focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(
-              color: Colors.white.withOpacity(0),
-            ),
+    return FormBuilderTextField(
+      validator: validator,
+      onChanged: onChanged,
+      style: TextStyle(color: Colors.black),
+      textAlign: TextAlign.center,
+      decoration: InputDecoration(
+        hintText: 'Enter here',
+        enabledBorder: UnderlineInputBorder(
+          borderSide: BorderSide(
+            color: Colors.white.withOpacity(0),
           ),
         ),
-        name: '',
+        focusedBorder: UnderlineInputBorder(
+          borderSide: BorderSide(
+            color: Colors.white.withOpacity(0),
+          ),
+        ),
       ),
+      name: 'username',
     );
   }
 }

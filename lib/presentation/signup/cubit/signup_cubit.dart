@@ -1,10 +1,11 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:FitStack/app/repository/auth_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:health/health.dart';
@@ -17,12 +18,6 @@ class SignupCubit extends Cubit<SignupState> {
       : super(
           SignupState(),
         );
-
-  void changePage(int newIndex) {
-    emit(
-      state.copyWith(index: newIndex),
-    );
-  }
 
   void usernameChanged(String username) {
     List<GlobalKey<FormBuilderState>>? formKeyList = state.formKey;
@@ -54,18 +49,31 @@ class SignupCubit extends Cubit<SignupState> {
   }
 
   void changeProfileImage() async {
-    XFile? image;
-    image = await ImagePicker().pickImage(source: ImageSource.gallery);
-    emit(
-      state.copyWith(profileImage: image),
-    );
+    try {
+      UploadTask? uploadTask;
+
+      await ImagePicker().pickImage(source: ImageSource.gallery).then((value) {
+        Reference firebaseStorageRef =
+            FirebaseStorage.instance.ref().child('uploads/${value?.path}');
+        uploadTask = firebaseStorageRef.putFile(File(value!.path));
+      });
+
+      String? url = await uploadTask?.snapshot.ref.getDownloadURL();
+      File file = File.fromUri(Uri.parse(url!));
+
+      emit(
+        state.copyWith(profileImage: file),
+      );
+    } catch (e) {
+      log("$e");
+    }
   }
 
   void healthDataChanged(List<HealthDataType>? healthDataTypeList) async {
     HealthFactory health = HealthFactory();
     List<HealthDataPoint> healthDataList = [];
     final now = DateTime.now();
-    final yesterday = now.subtract(Duration(days: 1));
+    final yesterday = now.subtract(Duration(days: 30));
 
     final types = healthDataTypeList ??
         [
@@ -115,9 +123,20 @@ class SignupCubit extends Cubit<SignupState> {
 
         var height = double.tryParse(healthDataHeight.value.toString())! * 39.37007874;
         var heightFt = (height / 12).floor();
-        var heightInch = (height % 12).round().toDouble();
+        var heightInch = (height % 12).round();
         var weight =
             (double.tryParse(healthDataWeight.value.toString())! * 2.20462262185).roundToDouble();
+
+        GlobalKey<FormBuilderState> formKey = state.formKey![state.index];
+        if (formKey.currentState!.fields.containsKey('ft')) {
+          formKey.currentState?.fields['ft']?.reset();
+          formKey.currentState?.fields['in']?.reset();
+          formKey.currentState?.fields['lb']?.reset();
+
+          formKey.currentState?.fields['ft']?.didChange("$heightFt");
+          formKey.currentState?.fields['in']?.didChange("$heightInch");
+          formKey.currentState?.fields['lb']?.didChange("$weight");
+        }
 
         emit(
           state.copyWith(
@@ -143,7 +162,7 @@ class SignupCubit extends Cubit<SignupState> {
     emit(state.copyWith(indexRange: range, formKey: formKey));
   }
 
-  void dateOfBirthChanged(String dob) {
+  void dateOfBirthChanged(DateTime? dob) {
     emit(state.copyWith(dob: dob));
   }
 
@@ -155,7 +174,7 @@ class SignupCubit extends Cubit<SignupState> {
     emit(state.copyWith(heightFt: heightFt));
   }
 
-  void heightInchChanged(double? heightInch) {
+  void heightInchChanged(int? heightInch) {
     emit(state.copyWith(heightInch: heightInch));
   }
 
@@ -180,5 +199,51 @@ class SignupCubit extends Cubit<SignupState> {
       _user?.updateDisplayName(state.username);
       _user?.updatePhotoURL(state.profileImage?.path);
     });
+  }
+
+  void formKeyChanged(GlobalKey<FormBuilderState> formKey) {
+    List<GlobalKey<FormBuilderState>> newFormKeyList = state.formKey!;
+    newFormKeyList.replaceRange(state.index, state.index, [formKey]);
+
+    emit(state.copyWith(formKey: newFormKeyList));
+  }
+
+  void nextPage(BuildContext context) {
+    bool isValid = state.formKey![state.index].currentState!.isValid;
+    if (isValid && state.index != 0) {
+      emit(state.copyWith(index: state.index + 1));
+    } else if (state.index == 0 && isValid) {
+      emit(state.copyWith(authState: AuthState.AUTHORIZING));
+      FirebaseAuth.instance
+          .createUserWithEmailAndPassword(email: state.email, password: state.password)
+          .then((value) => value.user)
+          .then((value) => value == null
+              ? null
+              : emit(state.copyWith(
+                  user: value, index: state.index + 1, authState: AuthState.AUTHORIZED)))
+          .onError(
+        (error, stackTrace) {
+          emit(state.copyWith(authState: AuthState.ERROR));
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              backgroundColor: Theme.of(context).colorScheme.error,
+              content: Text("${error.toString().split("]")[1]}"),
+            ),
+          );
+        },
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          backgroundColor: Theme.of(context).colorScheme.error,
+          content: Text(
+              "${state.formKey![0].currentState!.fields.entries.where((element) => !element.value.isValid).map((e) => "${e.key}: ${e.value.errorText}")}"),
+        ),
+      );
+    }
+  }
+
+  void previousPage() {
+    emit(state.copyWith(index: state.index - 1));
   }
 }

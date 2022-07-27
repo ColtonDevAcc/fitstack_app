@@ -2,31 +2,35 @@ part of 'signup_cubit.dart';
 
 class SignupState extends Equatable {
   final int index;
-  final XFile? profileImage;
+  final File? profileImage;
   final String username;
   final String firstLastName;
   final List<HealthDataPoint>? healthData;
-  final AppState healthStatus;
+  final HealthFetchState healthStatus;
   final List<GlobalKey<FormBuilderState>>? formKey;
   final int indexRange;
-  final String dob;
+  final DateTime? dob;
   final int heightFt;
-  final double heightInch;
+  final int heightInch;
   final double weight;
   final String email;
+  final AuthState authState;
   final AssignedSex assignedSex;
   final String password;
+  final User? user;
 
   SignupState({
+    this.authState = AuthState.UNAUTHORIZED,
+    this.user = null,
     this.password = "",
     this.email = "",
     this.assignedSex = AssignedSex.Unknown,
     this.heightInch = 0,
     this.heightFt = 0,
     this.weight = 0,
-    this.dob = '',
+    this.dob,
     this.formKey,
-    this.healthStatus = AppState.NO_DATA,
+    this.healthStatus = HealthFetchState.NO_DATA,
     this.profileImage,
     this.firstLastName = "",
     this.index = 0,
@@ -38,6 +42,8 @@ class SignupState extends Equatable {
   @override
   List<Object> get props => [
         password,
+        authState,
+        user ?? User,
         email,
         formKey ?? [],
         heightInch,
@@ -45,32 +51,35 @@ class SignupState extends Equatable {
         heightFt,
         weight,
         index,
-        dob,
+        dob ?? DateTime.now(),
         username,
         firstLastName,
-        profileImage ?? XFile('path'),
+        profileImage ?? File,
         healthData ?? [],
         healthStatus,
         indexRange,
       ];
 
   SignupState copyWith({
+    User? user,
+    AuthState? authState,
     String? password,
     String? email,
-    double? heightInch,
+    int? heightInch,
     double? weight,
     int? heightFt,
-    String? dob,
+    DateTime? dob,
     AssignedSex? assignedSex,
     int? index,
     String? username,
     String? firstLastName,
-    XFile? profileImage,
+    File? profileImage,
     List<HealthDataPoint>? healthData,
     int? indexRange,
     List<GlobalKey<FormBuilderState>>? formKey,
   }) {
     return SignupState(
+      user: user ?? this.user,
       password: password ?? this.password,
       email: email ?? this.email,
       heightInch: heightInch ?? this.heightInch,
@@ -80,6 +89,7 @@ class SignupState extends Equatable {
       firstLastName: firstLastName ?? this.firstLastName,
       index: index ?? this.index,
       username: username ?? this.username,
+      authState: authState ?? this.authState,
       profileImage: profileImage ?? this.profileImage,
       healthData: healthData ?? this.healthData,
       indexRange: indexRange ?? this.indexRange,
@@ -89,7 +99,7 @@ class SignupState extends Equatable {
   }
 }
 
-enum AppState {
+enum HealthFetchState {
   DATA_NOT_FETCHED,
   FETCHING_DATA,
   DATA_READY,
@@ -101,3 +111,10 @@ enum AppState {
 }
 
 enum AssignedSex { Male, Female, Unknown }
+
+enum AuthState {
+  AUTHORIZED,
+  UNAUTHORIZED,
+  AUTHORIZING,
+  ERROR,
+}

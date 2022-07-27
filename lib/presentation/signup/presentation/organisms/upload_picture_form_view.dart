@@ -7,14 +7,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class Upload_Picture_Form_View extends StatelessWidget {
-  const Upload_Picture_Form_View({Key? key}) : super(key: key);
+class UploadPictureFormView extends StatelessWidget {
+  const UploadPictureFormView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SignUp_Form_Header_Widget(
+        SignupFormHeader(
           icon: FontAwesomeIcons.camera,
           text: 'Upload your avatar',
           subtitle: 'Upload a supported image',

@@ -13,7 +13,7 @@ class Login_Email_Field_Widget extends StatelessWidget {
       buildWhen: (previous, current) => previous.email != current.email,
       builder: (context, state) {
         return TextField_Widget(
-          onChanged: (email) => context.read<LoginCubit>().emailChanged(email),
+          onChanged: (email) => context.read<LoginCubit>().emailChanged(email ?? ""),
           validator: (value) {
             return value != null && !EmailValidator.validate(value) ? 'Enter a valid email' : null;
           },

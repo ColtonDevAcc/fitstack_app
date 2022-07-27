@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 class TextField_Widget extends StatelessWidget {
   final String title;
   final String? hintText;
   final String? bottomTitle;
   final TextEditingController? controller;
+  final Function()? onEditingComplete;
   final String? Function(String?)? validator;
-  final void Function(String)? onChanged;
+  final void Function(String?)? onChanged;
 
   TextField_Widget({
     Key? key,
+    this.onEditingComplete,
     required this.title,
     this.bottomTitle,
     this.hintText,
@@ -29,14 +32,12 @@ class TextField_Widget extends StatelessWidget {
           style: Theme.of(context).textTheme.subtitle2!.copyWith(fontWeight: FontWeight.bold),
         ),
         SizedBox(height: 10),
-        TextFormField(
-          onChanged: onChanged ??
-              (value) {
-                controller?.text = value;
-                if (onChanged != null) onChanged!(value);
-              },
+        FormBuilderTextField(
+          onEditingComplete: onEditingComplete,
+          autovalidateMode: AutovalidateMode.always,
+          onChanged: onChanged ?? null,
+          name: title,
           validator: validator,
-          autovalidateMode: validator == null ? null : AutovalidateMode.onUserInteraction,
           style: Theme.of(context).textTheme.bodyMedium,
           decoration: InputDecoration(
             hintText: hintText,

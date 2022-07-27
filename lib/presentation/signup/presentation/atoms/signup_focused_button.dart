@@ -1,6 +1,7 @@
 import 'package:FitStack/presentation/signup/cubit/signup_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class SignUp_Focused_Button_Widget extends StatelessWidget {
@@ -17,25 +18,13 @@ class SignUp_Focused_Button_Widget extends StatelessWidget {
   Widget build(BuildContext context) {
     double buttonSize = MediaQuery.of(context).size.width * 0.8;
     return BlocBuilder<SignupCubit, SignupState>(
+      buildWhen: (previous, current) =>
+          previous.formKey?[previous.index] != current.formKey?[current.index],
       builder: (context, state) {
+        GlobalKey<FormBuilderState> formKey = state.formKey![state.index];
+
         return TextButton(
-          onPressed: () {
-            if (state.index == 0 &&
-                state.dob != "" &&
-                state.assignedSex != AssignedSex.Unknown &&
-                state.heightFt != 0 &&
-                state.weight != 0.0) {
-              BlocProvider.of<SignupCubit>(context).changePage(state.index + 1);
-            } else if (state.index == 1 && state.username != "") {
-              BlocProvider.of<SignupCubit>(context).changePage(state.index + 1);
-            } else if (state.index == 2 && state.firstLastName != "") {
-              BlocProvider.of<SignupCubit>(context).changePage(state.index + 1);
-            } else if (state.index == 3) {
-              BlocProvider.of<SignupCubit>(context).changePage(state.index + 1);
-            } else if (state.index == 4) {
-              BlocProvider.of<SignupCubit>(context).changePage(state.index + 1);
-            }
-          },
+          onPressed: () => BlocProvider.of<SignupCubit>(context).nextPage(context),
           child: AnimatedContainer(
             decoration: BoxDecoration(
               boxShadow: [
@@ -64,17 +53,22 @@ class SignUp_Focused_Button_Widget extends StatelessWidget {
                 if (state.index > 0)
                   AnimatedRotation(
                     duration: Duration(milliseconds: 300),
-                    turns: state.formKey?[state.index].currentState != null
-                        ? !state.formKey![state.index].currentState!.isValid
-                            ? -.25
-                            : 0
-                        : 0,
+                    turns: formKey.currentState!.isValid ? 0 : -.25,
                     child: FaIcon(
                       FontAwesomeIcons.arrowRight,
                       color: Theme.of(context).colorScheme.onPrimary,
                       size: 15,
                     ),
-                  )
+                  ),
+                if (state.authState == AuthState.AUTHORIZING)
+                  Container(
+                    height: 15,
+                    width: 15,
+                    child: CircularProgressIndicator(
+                      strokeWidth: 3,
+                      backgroundColor: Theme.of(context).colorScheme.surface,
+                    ),
+                  ),
               ],
             ),
           ),

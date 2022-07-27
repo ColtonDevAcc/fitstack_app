@@ -16,12 +16,12 @@ class SignUp_View extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Widget> forms = [
-      BasicInfoForm(),
-      Username_Form_View(),
-      Personal_Info_Form_View(),
-      Upload_Picture_Form_View(),
-      Health_Stats_Form_View(),
       UserAccountAuthFormView(),
+      BasicInfoForm(),
+      UsernameFormView(),
+      PersonalInfoFormView(),
+      UploadPictureFormView(),
+      HealthStatsFormView(),
     ];
 
     return BlocBuilder<SignupCubit, SignupState>(
