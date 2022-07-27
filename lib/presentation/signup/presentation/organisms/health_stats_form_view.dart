@@ -1,5 +1,5 @@
 import 'package:FitStack/presentation/signup/presentation/molecules/signup_form_header_widget.dart';
-import 'package:FitStack/presentation/signup/presentation/molecules/signup_statistics_widget.dart';
+import 'package:FitStack/presentation/signup/presentation/molecules/signup_health_statistics.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -23,7 +23,7 @@ class HealthStatsFormView extends StatelessWidget {
               ),
         ),
         SizedBox(height: 10),
-        signUp_Statistics_Widget(),
+        Signup_health_Statistics(),
         Spacer(flex: 1),
       ],
     );

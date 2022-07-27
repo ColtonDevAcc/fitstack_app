@@ -2,7 +2,7 @@ part of 'signup_cubit.dart';
 
 class SignupState extends Equatable {
   final int index;
-  final File? profileImage;
+  final String? profileImage;
   final String username;
   final String firstLastName;
   final List<HealthDataPoint>? healthData;
@@ -73,7 +73,7 @@ class SignupState extends Equatable {
     int? index,
     String? username,
     String? firstLastName,
-    File? profileImage,
+    String? profileImage,
     List<HealthDataPoint>? healthData,
     int? indexRange,
     List<GlobalKey<FormBuilderState>>? formKey,

@@ -48,7 +48,7 @@ class SignupCubit extends Cubit<SignupState> {
     );
   }
 
-  void changeProfileImage() async {
+  void changeProfileImage(BuildContext context) async {
     try {
       UploadTask? uploadTask;
 
@@ -56,16 +56,25 @@ class SignupCubit extends Cubit<SignupState> {
         Reference firebaseStorageRef =
             FirebaseStorage.instance.ref().child('uploads/${value?.path}');
         uploadTask = firebaseStorageRef.putFile(File(value!.path));
-      });
+      }).onError(
+        (error, stackTrace) {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${error}")));
+        },
+      );
 
-      String? url = await uploadTask?.snapshot.ref.getDownloadURL();
-      File file = File.fromUri(Uri.parse(url!));
+      String? url = await uploadTask?.then((p0) => p0.ref.getDownloadURL());
 
       emit(
-        state.copyWith(profileImage: file),
+        state.copyWith(profileImage: url),
       );
+
+      state.user?.updatePhotoURL(url);
     } catch (e) {
       log("$e");
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        backgroundColor: Theme.of(context).colorScheme.error,
+        content: Text("${e}"),
+      ));
     }
   }
 
@@ -197,7 +206,7 @@ class SignupCubit extends Cubit<SignupState> {
     userCred.then((value) {
       User? _user = value.user;
       _user?.updateDisplayName(state.username);
-      _user?.updatePhotoURL(state.profileImage?.path);
+      _user?.updatePhotoURL(state.profileImage);
     });
   }
 

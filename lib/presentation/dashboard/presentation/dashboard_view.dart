@@ -1,7 +1,6 @@
 import 'package:FitStack/presentation/dashboard/presentation/molecules/user_goal_statistics_widget.dart';
 import 'package:FitStack/presentation/dashboard/presentation/organisms/workout_reccommendations_list.dart';
 import 'package:FitStack/presentation/dashboard/presentation/organisms/statistics_dashboard.dart';
-import 'package:FitStack/widgets/atoms/profile_circular_avatar.dart';
 import 'package:flutter/material.dart';
 
 import 'organisms/statistics_dashboard.dart';

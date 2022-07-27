@@ -24,6 +24,10 @@ class AssignedSexButton extends StatelessWidget {
             SizedBox(height: 10),
             Container(
               child: FormBuilderDropdown(
+                autovalidateMode: AutovalidateMode.always,
+                name: 'assignedSex',
+                onChanged: (AssignedSex? newValue) => BlocProvider.of<SignupCubit>(context)
+                    .assignedSexChanged(newValue ?? AssignedSex.Unknown),
                 validator: FormBuilderValidators.compose([
                   FormBuilderValidators.required(errorText: "required"),
                 ]),
@@ -61,7 +65,6 @@ class AssignedSexButton extends StatelessWidget {
                   filled: true,
                   fillColor: Theme.of(context).colorScheme.surface,
                 ),
-                name: 'assignedSex',
                 items: [
                   DropdownMenuItem(
                     enabled: true,

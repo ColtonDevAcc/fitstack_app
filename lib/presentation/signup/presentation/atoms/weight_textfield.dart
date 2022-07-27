@@ -10,9 +10,7 @@ class WeightTextfield extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SignupCubit, SignupState>(
-      buildWhen: (previous, current) =>
-          previous.weight != current.weight ||
-          previous.formKey?[current.index] != previous.formKey?[current.index],
+      buildWhen: (previous, current) => previous.weight != current.weight,
       builder: (context, state) {
         return Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -24,6 +22,7 @@ class WeightTextfield extends StatelessWidget {
             ),
             SizedBox(height: 10),
             FormBuilderTextField(
+              autovalidateMode: AutovalidateMode.always,
               name: 'lb',
               keyboardType: TextInputType.number,
               onChanged: (value) => BlocProvider.of<SignupCubit>(context)
@@ -31,7 +30,7 @@ class WeightTextfield extends StatelessWidget {
               validator: FormBuilderValidators.compose([
                 FormBuilderValidators.required(errorText: "required"),
                 FormBuilderValidators.numeric(errorText: "Must be a number"),
-                FormBuilderValidators.max(500, errorText: "Must be less than 600lbs")
+                FormBuilderValidators.max(500, errorText: "Must be less than 500lbs")
               ]),
               style: Theme.of(context).textTheme.subtitle2,
               decoration: InputDecoration(

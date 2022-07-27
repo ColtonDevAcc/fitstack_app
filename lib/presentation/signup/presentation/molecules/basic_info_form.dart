@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:FitStack/presentation/signup/cubit/signup_cubit.dart';
 import 'package:FitStack/presentation/signup/presentation/atoms/assigned_sex_button.dart';
 import 'package:FitStack/presentation/signup/presentation/atoms/dateofbirth_button.dart';
@@ -13,29 +11,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
-class BasicInfoForm extends StatefulWidget {
-  final void Function()? googleOnTap;
-  final void Function()? NextPageButtonOnPressed;
-
+class BasicInfoForm extends StatelessWidget {
   BasicInfoForm({
     Key? key,
-    this.NextPageButtonOnPressed,
-    this.googleOnTap,
   }) : super(key: key);
-
-  @override
-  State<BasicInfoForm> createState() => _BasicInfoFormState();
-}
-
-class _BasicInfoFormState extends State<BasicInfoForm> {
-  @override
-  void dispose() {
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SignupCubit, SignupState>(
+      buildWhen: (previous, current) =>
+          previous.formKey?[current.index] != current.formKey?[current.index],
       builder: (context, state) {
         GlobalKey<FormBuilderState> formKey = state.formKey![state.index];
         return Column(

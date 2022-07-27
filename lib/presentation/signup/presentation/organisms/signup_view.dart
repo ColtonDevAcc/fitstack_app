@@ -3,7 +3,7 @@ import 'package:FitStack/presentation/signup/presentation/atoms/signup_focused_b
 import 'package:FitStack/presentation/signup/presentation/molecules/basic_info_form.dart';
 import 'package:FitStack/presentation/signup/presentation/molecules/social_auth_buttons.dart';
 import 'package:FitStack/presentation/signup/presentation/organisms/health_stats_form_view.dart';
-import 'package:FitStack/presentation/signup/presentation/organisms/personal_info_form_view.dart';
+import 'package:FitStack/presentation/signup/presentation/organisms/first_last_name_form_view.dart';
 import 'package:FitStack/presentation/signup/presentation/organisms/user_account_auth_form_view.dart';
 import 'package:FitStack/presentation/signup/presentation/organisms/username_form_view.dart';
 import 'package:FitStack/presentation/signup/presentation/organisms/upload_picture_form_view.dart';
@@ -19,7 +19,7 @@ class SignUp_View extends StatelessWidget {
       UserAccountAuthFormView(),
       BasicInfoForm(),
       UsernameFormView(),
-      PersonalInfoFormView(),
+      FirstLastNameFormView(),
       UploadPictureFormView(),
       HealthStatsFormView(),
     ];

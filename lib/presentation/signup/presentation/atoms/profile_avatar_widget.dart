@@ -3,7 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class Profile_Avatar_Widget extends StatelessWidget {
   final double? maxRadius;
-  final ImageProvider<Object>? image;
+  final String? image;
   const Profile_Avatar_Widget({Key? key, this.maxRadius, this.image}) : super(key: key);
 
   @override
@@ -18,7 +18,7 @@ class Profile_Avatar_Widget extends StatelessWidget {
       child: CircleAvatar(
         maxRadius: maxRadius ?? 30,
         child: image == null ? FaIcon(FontAwesomeIcons.camera) : null,
-        foregroundImage: image,
+        foregroundImage: image == null ? null : NetworkImage(image!),
       ),
     );
   }

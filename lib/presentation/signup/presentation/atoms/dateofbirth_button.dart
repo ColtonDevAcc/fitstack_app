@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
-import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import 'package:intl/intl.dart';
 
 class DateOfBirthButton extends StatelessWidget {
@@ -24,6 +23,8 @@ class DateOfBirthButton extends StatelessWidget {
             ),
             SizedBox(height: 10),
             FormBuilderDateTimePicker(
+              autovalidateMode: AutovalidateMode.always,
+              name: 'dateOfBirth',
               resetIcon: Padding(
                 padding: const EdgeInsets.only(right: 10),
                 child: Icon(FontAwesomeIcons.angleDown, size: 15),
@@ -38,7 +39,6 @@ class DateOfBirthButton extends StatelessWidget {
               firstDate: DateTime.utc(1960),
               lastDate: DateTime.now(),
               format: DateFormat('MM/dd/yyyy'),
-              name: 'dateOfBirth',
               decoration: InputDecoration(
                 hintText: "select a date",
                 suffixIconConstraints: BoxConstraints(maxHeight: 30, maxWidth: 40),

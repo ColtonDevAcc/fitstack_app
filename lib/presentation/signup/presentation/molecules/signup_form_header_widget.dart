@@ -26,7 +26,7 @@ class SignupFormHeader extends StatelessWidget {
           children: [
             GestureDetector(
               onTap: () {
-                BlocProvider.of<SignupCubit>(context).previousPage;
+                BlocProvider.of<SignupCubit>(context).previousPage();
               },
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(0, 10, 10, 10),

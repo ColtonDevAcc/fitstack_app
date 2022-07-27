@@ -25,9 +25,11 @@ class HeightTextfield extends StatelessWidget {
               children: [
                 Expanded(
                   child: FormBuilderTextField(
+                    autovalidateMode: AutovalidateMode.always,
+                    keyboardType: TextInputType.number,
                     name: "ft",
                     onChanged: (value) => BlocProvider.of<SignupCubit>(context)
-                        .heightFtChanged(int.tryParse(value ?? "") ?? 0),
+                        .heightFtChanged(int.parse(value ?? "")),
                     style: Theme.of(context).textTheme.subtitle2,
                     validator: FormBuilderValidators.compose([
                       FormBuilderValidators.required(errorText: "required"),
@@ -74,13 +76,16 @@ class HeightTextfield extends StatelessWidget {
                 SizedBox(width: 15),
                 Expanded(
                   child: FormBuilderTextField(
+                    autovalidateMode: AutovalidateMode.always,
+                    keyboardType: TextInputType.number,
                     name: 'in',
                     onChanged: (value) => BlocProvider.of<SignupCubit>(context)
-                        .heightInchChanged(int.tryParse(value ?? "") ?? 0),
+                        .heightInchChanged(int.parse(value ?? "")),
                     validator: FormBuilderValidators.compose([
                       FormBuilderValidators.required(errorText: "required"),
                       FormBuilderValidators.numeric(errorText: "Must be a number"),
                       FormBuilderValidators.integer(errorText: "Must be an inch(integer)"),
+                      FormBuilderValidators.max(12, errorText: "Must be less than 12"),
                       FormBuilderValidators.maxLength(2,
                           errorText: "Cannot be greater than 2 characters"),
                       // FormBuilderValidators.integer(errorText: "Height must be in ft(integer)")

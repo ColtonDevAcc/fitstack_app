@@ -3,14 +3,16 @@ import 'package:FitStack/presentation/signup/presentation/atoms/signup_stats_car
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class signUp_Statistics_Widget extends StatelessWidget {
-  const signUp_Statistics_Widget({Key? key}) : super(key: key);
+class Signup_health_Statistics extends StatelessWidget {
+  const Signup_health_Statistics({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SignupCubit, SignupState>(
       buildWhen: (previous, current) => previous.healthData != current.healthData,
       builder: (context, state) {
+        state.formKey?[state.index].currentState?.validate();
+
         if (state.healthData == null) {
           BlocProvider.of<SignupCubit>(context).healthDataChanged(null);
         }

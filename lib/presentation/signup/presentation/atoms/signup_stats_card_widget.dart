@@ -1,8 +1,6 @@
-import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:health/health.dart';
-import 'package:line_icons/line_icons.dart';
 
 class SingUp_Stats_Card_widget extends StatelessWidget {
   final HealthDataPoint? healthData;
