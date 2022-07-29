@@ -25,8 +25,8 @@ class SignUp_Focused_Button_Widget extends StatelessWidget {
       buildWhen: (previous, current) =>
           previous.index != current.index || previous.authState != current.authState,
       builder: (context, state) {
-        GlobalKey<FormBuilderState> formKey = state.formKey![state.index];
-        log("form is valid: ${formKey.currentState!.isValid}");
+        GlobalKey<FormBuilderState>? formKey = state.formKey![state.index];
+        log("form is valid: ${formKey.currentState?.isValid}");
 
         return TextButton(
           onPressed: () => BlocProvider.of<SignupCubit>(context).nextPage(context),
@@ -46,25 +46,26 @@ class SignUp_Focused_Button_Widget extends StatelessWidget {
               children: [
                 Text(
                   text,
-                  style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                  style: Theme.of(context).textTheme.titleSmall?.copyWith(
                         color: Theme.of(context).colorScheme.onPrimary,
                       ),
                 ),
                 AnimatedContainer(
                   curve: Curves.bounceOut,
                   duration: Duration(milliseconds: 900),
-                  width: state.index > 0 ? buttonSize * .684 : 20,
+                  width: formKey.currentState != null && formKey.currentState!.isValid
+                      ? buttonSize * .684
+                      : 20,
                 ),
-                if (state.index > 0)
-                  AnimatedRotation(
-                    duration: Duration(milliseconds: 300),
-                    turns: formKey.currentState!.isValid ? 0 : -.25,
-                    child: FaIcon(
-                      FontAwesomeIcons.arrowRight,
-                      color: Theme.of(context).colorScheme.onPrimary,
-                      size: 15,
-                    ),
+                AnimatedRotation(
+                  duration: Duration(milliseconds: 300),
+                  turns: formKey.currentState != null && formKey.currentState!.isValid ? 0 : -.25,
+                  child: FaIcon(
+                    FontAwesomeIcons.arrowRight,
+                    color: Theme.of(context).colorScheme.onPrimary,
+                    size: 15,
                   ),
+                ),
                 if (state.authState == AuthState.AUTHORIZING)
                   Container(
                     height: 15,

@@ -15,7 +15,7 @@ class Settings_View extends StatefulWidget {
 class _Settings_ViewState extends State<Settings_View> {
   @override
   Widget build(BuildContext context) {
-    User user = BlocProvider.of<AppBloc>(context).state.user;
+    User user = BlocProvider.of<AppBloc>(context).state.user ?? User.empty();
 
     return SafeArea(
       child: Column(

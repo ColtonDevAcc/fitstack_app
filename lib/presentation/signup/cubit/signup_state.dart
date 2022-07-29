@@ -2,7 +2,7 @@ part of 'signup_cubit.dart';
 
 class SignupState extends Equatable {
   final int index;
-  final String? profileImage;
+  final String profileImage;
   final String username;
   final String firstLastName;
   final List<HealthDataPoint>? healthData;
@@ -18,10 +18,12 @@ class SignupState extends Equatable {
   final AssignedSex assignedSex;
   final String password;
   final User? user;
+  final String phoneNumber;
 
   SignupState({
+    this.phoneNumber = '',
     this.authState = AuthState.UNAUTHORIZED,
-    this.user = null,
+    this.user,
     this.password = "",
     this.email = "",
     this.assignedSex = AssignedSex.Unknown,
@@ -31,7 +33,7 @@ class SignupState extends Equatable {
     this.dob,
     this.formKey,
     this.healthStatus = HealthFetchState.NO_DATA,
-    this.profileImage,
+    this.profileImage = "",
     this.firstLastName = "",
     this.index = 0,
     this.indexRange = 0,
@@ -40,22 +42,23 @@ class SignupState extends Equatable {
   });
 
   @override
-  List<Object> get props => [
+  List<Object?> get props => [
         password,
+        phoneNumber,
         authState,
-        user ?? User,
+        user,
         email,
-        formKey ?? [],
+        formKey,
         heightInch,
         assignedSex,
         heightFt,
         weight,
         index,
-        dob ?? DateTime.now(),
+        dob,
         username,
         firstLastName,
-        profileImage ?? File,
-        healthData ?? [],
+        profileImage,
+        healthData,
         healthStatus,
         indexRange,
       ];
@@ -76,9 +79,11 @@ class SignupState extends Equatable {
     String? profileImage,
     List<HealthDataPoint>? healthData,
     int? indexRange,
+    String? phoneNumber,
     List<GlobalKey<FormBuilderState>>? formKey,
   }) {
     return SignupState(
+      phoneNumber: phoneNumber ?? this.phoneNumber,
       user: user ?? this.user,
       password: password ?? this.password,
       email: email ?? this.email,

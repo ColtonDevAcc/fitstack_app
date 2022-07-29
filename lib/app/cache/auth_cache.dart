@@ -34,10 +34,10 @@ class AuthCache {
   User readUserFromCache() {
     try {
       User? user = jsonDecode(this._cache.read('user'));
-      return user == null ? User.empty : user;
+      return user == null ? User.empty() : user;
     } catch (e) {
       if (kDebugMode) print("Error reading user from cache: ${e}");
-      return User.empty;
+      return User.empty();
     }
   }
 }

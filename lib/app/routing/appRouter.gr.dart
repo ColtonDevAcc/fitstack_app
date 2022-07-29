@@ -20,38 +20,47 @@ import '../../presentation/settings/settings_view.dart' as _i5;
 import '../../presentation/signup/presentation/signup_page.dart' as _i2;
 
 class AppRouter extends _i6.RootStackRouter {
-  AppRouter([_i7.GlobalKey<_i7.NavigatorState>? navigatorKey]) : super(navigatorKey);
+  AppRouter([_i7.GlobalKey<_i7.NavigatorState>? navigatorKey])
+      : super(navigatorKey);
 
   @override
   final Map<String, _i6.PageFactory> pagesMap = {
     Login.name: (routeData) {
       final args = routeData.argsAs<LoginArgs>(orElse: () => const LoginArgs());
-      return _i6.MaterialPageX<dynamic>(routeData: routeData, child: _i1.Login_Page(key: args.key));
+      return _i6.MaterialPageX<dynamic>(
+          routeData: routeData, child: _i1.Login_Page(key: args.key));
     },
     Signup.name: (routeData) {
-      return _i6.MaterialPageX<dynamic>(routeData: routeData, child: const _i2.SignUp_Page());
+      return _i6.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i2.SignUp_Page());
     },
     Main_View.name: (routeData) {
-      return _i6.MaterialPageX<dynamic>(routeData: routeData, child: const _i3.Main_View());
+      return _i6.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i3.Main_View());
     },
     DashBoard_View.name: (routeData) {
-      final args = routeData.argsAs<DashBoard_ViewArgs>(orElse: () => const DashBoard_ViewArgs());
+      final args = routeData.argsAs<DashBoard_ViewArgs>(
+          orElse: () => const DashBoard_ViewArgs());
       return _i6.MaterialPageX<dynamic>(
           routeData: routeData, child: _i4.DashBoard_View(key: args.key));
     },
     Settings_View.name: (routeData) {
-      return _i6.MaterialPageX<dynamic>(routeData: routeData, child: const _i5.Settings_View());
+      return _i6.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i5.Settings_View());
     }
   };
 
   @override
   List<_i6.RouteConfig> get routes => [
-        _i6.RouteConfig('/#redirect', path: '/', redirectTo: 'auth', fullMatch: true),
+        _i6.RouteConfig('/#redirect',
+            path: '/', redirectTo: 'auth', fullMatch: true),
         _i6.RouteConfig(Login.name, path: 'auth'),
         _i6.RouteConfig(Signup.name, path: 'auth/signup'),
         _i6.RouteConfig(Main_View.name, path: '/mainView', children: [
-          _i6.RouteConfig(DashBoard_View.name, path: 'DashBoard', parent: Main_View.name),
-          _i6.RouteConfig(Settings_View.name, path: 'Settings', parent: Main_View.name)
+          _i6.RouteConfig(DashBoard_View.name,
+              path: 'DashBoard', parent: Main_View.name),
+          _i6.RouteConfig(Settings_View.name,
+              path: 'Settings', parent: Main_View.name)
         ])
       ];
 }
@@ -59,7 +68,8 @@ class AppRouter extends _i6.RootStackRouter {
 /// generated route for
 /// [_i1.Login_Page]
 class Login extends _i6.PageRouteInfo<LoginArgs> {
-  Login({_i7.Key? key}) : super(Login.name, path: 'auth', args: LoginArgs(key: key));
+  Login({_i7.Key? key})
+      : super(Login.name, path: 'auth', args: LoginArgs(key: key));
 
   static const String name = 'Login';
 }
@@ -96,7 +106,8 @@ class Main_View extends _i6.PageRouteInfo<void> {
 /// [_i4.DashBoard_View]
 class DashBoard_View extends _i6.PageRouteInfo<DashBoard_ViewArgs> {
   DashBoard_View({_i7.Key? key})
-      : super(DashBoard_View.name, path: 'DashBoard', args: DashBoard_ViewArgs(key: key));
+      : super(DashBoard_View.name,
+            path: 'DashBoard', args: DashBoard_ViewArgs(key: key));
 
   static const String name = 'DashBoard_View';
 }

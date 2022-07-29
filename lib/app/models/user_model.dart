@@ -1,123 +1,36 @@
-import 'dart:convert';
-
-import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart' as fb;
+import 'package:flutter/foundation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-class User extends Equatable {
-  final String email;
-  final String name;
-  final String photo;
-  final String displayName;
-  final bool isAnonymous;
-  final bool isEmailVerified;
-  final fb.UserMetadata? metadata;
-  final String phoneNumber;
-  final String photoUrl;
-  final List<fb.UserInfo> providerData;
-  final String providerId;
-  final String userId;
+part 'user_model.freezed.dart';
+part 'user_model.g.dart';
 
-  const User({
-    required this.email,
-    required this.name,
-    required this.photo,
-    required this.displayName,
-    required this.isAnonymous,
-    required this.isEmailVerified,
-    required this.metadata,
-    required this.phoneNumber,
-    required this.photoUrl,
-    required this.providerData,
-    required this.providerId,
-    required this.userId,
-  });
+@freezed
+class User with _$User {
+  const factory User({
+    required String user_id,
+    required String email,
+    required String display_name,
+    required String first_name,
+    required String last_name,
+    required DateTime dob,
+    required bool isAnonymous,
+    required bool isEmailVerified,
+    String? phoneNumber,
+    String? photo_url,
+    int? age,
+  }) = _User;
 
-  static const empty = User(
-    email: 'email',
-    name: 'name',
-    photo: 'photo',
-    displayName: 'displayName',
-    isAnonymous: false,
-    isEmailVerified: false,
-    metadata: null,
-    phoneNumber: 'phoneNumber',
-    photoUrl: 'photoUrl',
-    providerData: [],
-    providerId: "providerId",
-    userId: "userId",
-  );
-  bool get isEmpty => this == User.empty;
-  bool get isNotEmpty => this != User.empty;
-
-  @override
-  List<Object?> get props => [
-        email,
-        userId,
-        name,
-        photo,
-        displayName,
-        isAnonymous,
-        isEmailVerified,
-        metadata,
-        phoneNumber,
-        photoUrl,
-        providerData,
-        providerId,
-        userId
-      ];
-
-  Map<String, dynamic> toMap() {
-    return {
-      'email': email,
-      'name': name,
-      'photo': photo,
-      'displayName': displayName,
-      'isAnonymous': isAnonymous,
-      'isEmailVerified': isEmailVerified,
-      'metadata': metadata,
-      'phoneNumber': phoneNumber,
-      'photoUrl': photoUrl,
-      'providerData': providerData,
-      'providerId': providerId,
-      'userId': userId,
-    };
-  }
-
-  factory User.fromMap(Map<String, dynamic> map) {
-    return User(
-      email: map['email'] ?? '',
-      name: map['name'] ?? '',
-      photo: map['photo'] ?? '',
-      displayName: map['displayName'] ?? '',
-      isAnonymous: map['isAnonymous'] ?? false,
-      isEmailVerified: map['isEmailVerified'] ?? false,
-      metadata: map['metadata'] != null ? (map['metadata']) : null,
-      phoneNumber: map['phoneNumber'] ?? '',
-      photoUrl: map['photoUrl'] ?? '',
-      providerData: map['providerData'] ?? '',
-      providerId: map['providerId'] ?? '',
-      userId: map['userId'] ?? '',
-    );
-  }
-
-  String toJson() => json.encode(toMap());
-
-  factory User.fromJson(String source) => User.fromMap(json.decode(source));
-
-  factory User.fromFirebase(fb.User fb) {
-    return User(
-      email: fb.email ?? '',
-      name: fb.displayName ?? '',
-      photo: fb.photoURL ?? '',
-      displayName: fb.displayName ?? '',
-      isAnonymous: fb.isAnonymous,
-      isEmailVerified: fb.emailVerified,
-      metadata: fb.metadata,
-      phoneNumber: fb.phoneNumber ?? '',
-      photoUrl: fb.photoURL ?? '',
-      providerData: fb.providerData,
-      providerId: fb.uid,
-      userId: fb.uid,
-    );
-  }
+  factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
+  factory User.empty() => User.empty();
+  factory User.fromFirebase(fb.User user) => User(
+        user_id: user.uid,
+        email: user.email ?? "",
+        display_name: user.displayName ?? "",
+        first_name: "",
+        last_name: "",
+        dob: DateTime.now(),
+        isAnonymous: user.isAnonymous,
+        isEmailVerified: user.emailVerified,
+      );
 }

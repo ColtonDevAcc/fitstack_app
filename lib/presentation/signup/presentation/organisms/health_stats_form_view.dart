@@ -1,4 +1,4 @@
-import 'package:FitStack/presentation/signup/presentation/molecules/signup_form_header_widget.dart';
+import 'package:FitStack/presentation/signup/presentation/atoms/signup_form_header.dart';
 import 'package:FitStack/presentation/signup/presentation/molecules/signup_health_statistics.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';

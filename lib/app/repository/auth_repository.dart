@@ -17,15 +17,15 @@ class AuthenticationRepository {
   final AuthCache _cache;
   static const userCacheKey = 'us';
 
-  Future<User?> logInWithEmailAndPassword({email: String, password: String}) {
+  Future<User> logInWithEmailAndPassword({email: String, password: String}) {
     return _firebaseAuth.signInWithEmailAndPassword(email: email, password: password).then(
-          (value) => value.user != null ? User.fromFirebase(value.user!) : User.empty,
+          (value) => value.user != null ? User.fromFirebase(value.user!) : User.empty(),
         );
   }
 
   Stream<User> get user {
     return _firebaseAuth.authStateChanges().map((firebaseUser) {
-      final user = firebaseUser == null ? User.empty : User.fromFirebase(firebaseUser);
+      final user = firebaseUser == null ? User.empty() : User.fromFirebase(firebaseUser);
       _cache.writeToCache(key: userCacheKey, value: user.toString());
       return user;
     });

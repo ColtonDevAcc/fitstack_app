@@ -10,6 +10,13 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^1.0.2
 
+  #http
+  dio: ^4.0.6
+
+  #annotation
+  freezed_annotation: ^2.1.0
+  json_annotation: ^4.6.0
+
   # state
   flutter_bloc: ^8.0.1
   shared_preferences:
@@ -67,9 +74,11 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   mocktail: ^0.2.0
+  freezed: ^2.1.0+1
 
   auto_route_generator:
-  build_runner:
+  build_runner: ^2.2.0
+  json_serializable: ^6.3.1
 
 flutter:
   uses-material-design: true

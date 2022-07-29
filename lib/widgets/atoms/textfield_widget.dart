@@ -9,6 +9,7 @@ class TextField_Widget extends StatelessWidget {
   final Function()? onEditingComplete;
   final String? Function(String?)? validator;
   final void Function(String?)? onChanged;
+  final TextInputType? keyboardType;
 
   TextField_Widget({
     Key? key,
@@ -19,6 +20,7 @@ class TextField_Widget extends StatelessWidget {
     this.controller,
     this.validator,
     this.onChanged,
+    this.keyboardType,
   }) : super(key: key);
 
   @override
@@ -33,6 +35,7 @@ class TextField_Widget extends StatelessWidget {
         ),
         SizedBox(height: 10),
         FormBuilderTextField(
+          keyboardType: keyboardType,
           onEditingComplete: onEditingComplete,
           autovalidateMode: AutovalidateMode.always,
           onChanged: onChanged ?? null,

@@ -37,7 +37,7 @@ class LoginCubit extends Cubit<LoginState> {
         password: state.password,
       );
       String token = await fb.FirebaseAuth.instance.currentUser!.getIdToken();
-      log("token: ${token} uid: ${user?.userId}");
+      log("token: ${token} uid: ${user.user_id}");
       emit(state.copyWith(step: AuthStep.Authorized));
 
       return user;

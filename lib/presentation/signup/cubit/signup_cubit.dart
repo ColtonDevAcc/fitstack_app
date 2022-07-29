@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:FitStack/app/models/user_model.dart' as fs;
 import 'package:FitStack/app/repository/auth_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
@@ -109,10 +110,6 @@ class SignupCubit extends Cubit<SignupState> {
       permissions.add(HealthDataAccess.READ_WRITE);
     });
 
-    // The location permission is requested for Workouts using the Distance information.
-    // await Permission.activityRecognition.request();
-    // await Permission.location.request();
-
     bool requested = await health.requestAuthorization(types, permissions: permissions);
 
     if (requested) {
@@ -137,24 +134,23 @@ class SignupCubit extends Cubit<SignupState> {
             (double.tryParse(healthDataWeight.value.toString())! * 2.20462262185).roundToDouble();
 
         GlobalKey<FormBuilderState> formKey = state.formKey![state.index];
-        if (formKey.currentState!.fields.containsKey('ft')) {
-          formKey.currentState?.fields['ft']?.reset();
-          formKey.currentState?.fields['in']?.reset();
-          formKey.currentState?.fields['lb']?.reset();
-
-          formKey.currentState?.fields['ft']?.didChange("$heightFt");
-          formKey.currentState?.fields['in']?.didChange("$heightInch");
-          formKey.currentState?.fields['lb']?.didChange("$weight");
+        if (formKey.currentState!.fields.containsKey('heightFt')) {
+          formKey.currentState?.fields['heightFt']?.didChange("$heightFt");
+          formKey.currentState?.fields['heightInch']?.didChange("$heightInch");
+          formKey.currentState?.fields['weight']?.didChange("$weight");
         }
 
-        emit(
-          state.copyWith(
-            healthData: healthDataList,
-            weight: weight,
-            heightFt: heightFt,
-            heightInch: heightInch,
-          ),
-        );
+        formKeyChanged(formKey);
+        List<GlobalKey<FormBuilderState>> newFormKeyList = state.formKey!;
+        newFormKeyList.replaceRange(state.index, state.index, [formKey]);
+
+        emit(state.copyWith(
+          healthData: healthDataList,
+          weight: weight,
+          heightFt: heightFt,
+          heightInch: heightInch,
+          formKey: newFormKeyList,
+        ));
       } catch (error) {
         log("Exception in getHealthDataFromTypes: $error");
       }
@@ -205,23 +201,24 @@ class SignupCubit extends Cubit<SignupState> {
 
     userCred.then((value) {
       User? _user = value.user;
+
       _user?.updateDisplayName(state.username);
       _user?.updatePhotoURL(state.profileImage);
     });
   }
 
-  void formKeyChanged(GlobalKey<FormBuilderState> formKey) {
+  void formKeyChanged(GlobalKey<FormBuilderState>? formKey) {
     List<GlobalKey<FormBuilderState>> newFormKeyList = state.formKey!;
-    newFormKeyList.replaceRange(state.index, state.index, [formKey]);
+    newFormKeyList.replaceRange(state.index, state.index, [formKey!]);
 
     emit(state.copyWith(formKey: newFormKeyList));
   }
 
   void nextPage(BuildContext context) {
     bool isValid = state.formKey![state.index].currentState!.isValid;
-    if (isValid && state.index != 0) {
+    if (isValid) {
       emit(state.copyWith(index: state.index + 1));
-    } else if (state.index == 0 && isValid) {
+    } else if (state.indexRange == state.index && isValid) {
       emit(state.copyWith(authState: AuthState.AUTHORIZING));
       FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: state.email, password: state.password)
@@ -254,5 +251,9 @@ class SignupCubit extends Cubit<SignupState> {
 
   void previousPage() {
     emit(state.copyWith(index: state.index - 1));
+  }
+
+  void phoneNumberChanged(String? phoneNumber) {
+    emit(state.copyWith(phoneNumber: phoneNumber));
   }
 }

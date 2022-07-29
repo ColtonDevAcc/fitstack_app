@@ -1,6 +1,6 @@
 import 'package:FitStack/presentation/signup/cubit/signup_cubit.dart';
-import 'package:FitStack/presentation/signup/presentation/atoms/signup_fullscreen_textfield_widget.dart';
-import 'package:FitStack/presentation/signup/presentation/molecules/signup_form_header_widget.dart';
+import 'package:FitStack/presentation/signup/presentation/atoms/signup_form_header.dart';
+import 'package:FitStack/presentation/signup/presentation/atoms/signup_fullscreen_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';

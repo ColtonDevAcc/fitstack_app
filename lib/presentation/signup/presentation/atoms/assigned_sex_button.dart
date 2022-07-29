@@ -6,7 +6,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 
 class AssignedSexButton extends StatelessWidget {
-  const AssignedSexButton({Key? key}) : super(key: key);
+  final AutovalidateMode? autovalidateMode;
+
+  const AssignedSexButton({Key? key, this.autovalidateMode}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +26,7 @@ class AssignedSexButton extends StatelessWidget {
             SizedBox(height: 10),
             Container(
               child: FormBuilderDropdown(
-                autovalidateMode: AutovalidateMode.always,
+                autovalidateMode: autovalidateMode ?? AutovalidateMode.always,
                 name: 'assignedSex',
                 onChanged: (AssignedSex? newValue) => BlocProvider.of<SignupCubit>(context)
                     .assignedSexChanged(newValue ?? AssignedSex.Unknown),
