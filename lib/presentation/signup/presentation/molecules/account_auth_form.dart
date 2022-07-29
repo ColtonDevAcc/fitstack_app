@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:FitStack/presentation/signup/cubit/signup_cubit.dart';
-import 'package:FitStack/widgets/atoms/textfield_widget.dart';
+import 'package:FitStack/presentation/signup/presentation/atoms/signup_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -12,22 +12,20 @@ class AccountAuthFrom extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<SignupCubit, SignupState>(
-      listener: (context, state) => log("${state.formKey![state.index].currentState?.isValid}"),
+    return BlocBuilder<SignupCubit, SignupState>(
       buildWhen: (previous, current) =>
-          previous.index != current.index || previous.formKey != current.formKey,
+          previous.formKey?[previous.index].currentState?.value !=
+          current.formKey?[current.index].currentState?.value,
       builder: (context, state) {
         var formKey = state.formKey![state.index];
         return FormBuilder(
           autovalidateMode: AutovalidateMode.always,
-          onChanged: () {
-            BlocProvider.of<SignupCubit>(context).formKeyChanged(formKey);
-          },
+          onChanged: () => BlocProvider.of<SignupCubit>(context).formKeyChanged(formKey),
           key: formKey,
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
-              TextField_Widget(
+              SignupTextfield(
                 onChanged: (email) => BlocProvider.of<SignupCubit>(context).emailChanged(email),
                 validator: FormBuilderValidators.compose([
                   FormBuilderValidators.required(errorText: "required"),
@@ -37,8 +35,7 @@ class AccountAuthFrom extends StatelessWidget {
                 hintText: "email",
               ),
               SizedBox(height: 15),
-              TextField_Widget(
-                keyboardType: TextInputType.phone,
+              SignupTextfield(
                 onChanged: (phoneNumber) =>
                     BlocProvider.of<SignupCubit>(context).phoneNumberChanged(phoneNumber),
                 validator: FormBuilderValidators.compose([
@@ -61,7 +58,7 @@ class AccountAuthFrom extends StatelessWidget {
               Row(
                 children: [
                   Expanded(
-                    child: TextField_Widget(
+                    child: SignupTextfield(
                       onChanged: (pass) =>
                           BlocProvider.of<SignupCubit>(context).passwordChanged(pass),
                       validator: FormBuilderValidators.compose([
@@ -78,13 +75,12 @@ class AccountAuthFrom extends StatelessWidget {
                   ),
                   SizedBox(width: 15),
                   Expanded(
-                    child: TextField_Widget(
+                    child: SignupTextfield(
                       validator: FormBuilderValidators.compose([
                         FormBuilderValidators.required(errorText: "required"),
-                        FormBuilderValidators.match(
-                          state.password,
-                          errorText: "Password must match",
-                        )
+                        (value) => value == formKey.currentState?.fields['Password']?.value
+                            ? null
+                            : "Passwords must match",
                       ]),
                       title: 'Confirm Password',
                       hintText: "confirm password",

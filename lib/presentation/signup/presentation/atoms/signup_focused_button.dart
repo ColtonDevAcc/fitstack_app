@@ -21,12 +21,11 @@ class SignUp_Focused_Button_Widget extends StatelessWidget {
     double buttonSize = MediaQuery.of(context).size.width * 0.8;
 
     return BlocConsumer<SignupCubit, SignupState>(
-      listener: (context, state) => state.formKey?[state.index],
-      buildWhen: (previous, current) =>
-          previous.index != current.index || previous.authState != current.authState,
+      listener: (context, state) =>
+          log("form state value: ${state.formKey?[state.index].currentState?.fields}"),
+      buildWhen: (previous, current) => previous != current,
       builder: (context, state) {
         GlobalKey<FormBuilderState>? formKey = state.formKey![state.index];
-        log("form is valid: ${formKey.currentState?.isValid}");
 
         return TextButton(
           onPressed: () => BlocProvider.of<SignupCubit>(context).nextPage(context),

@@ -17,8 +17,8 @@ class Profile_Avatar_Widget extends StatelessWidget {
       ),
       child: CircleAvatar(
         maxRadius: maxRadius ?? 30,
-        child: image == null ? FaIcon(FontAwesomeIcons.camera) : null,
-        foregroundImage: image == null ? null : NetworkImage(image!),
+        child: image == null || image == "" ? FaIcon(FontAwesomeIcons.camera) : null,
+        foregroundImage: image == null || image == "" ? null : NetworkImage(image!),
       ),
     );
   }

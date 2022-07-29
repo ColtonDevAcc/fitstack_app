@@ -10,6 +10,7 @@ class TextField_Widget extends StatelessWidget {
   final String? Function(String?)? validator;
   final void Function(String?)? onChanged;
   final TextInputType? keyboardType;
+  final AutovalidateMode? autovalidateMode;
 
   TextField_Widget({
     Key? key,
@@ -21,6 +22,7 @@ class TextField_Widget extends StatelessWidget {
     this.validator,
     this.onChanged,
     this.keyboardType,
+    this.autovalidateMode,
   }) : super(key: key);
 
   @override
@@ -37,7 +39,7 @@ class TextField_Widget extends StatelessWidget {
         FormBuilderTextField(
           keyboardType: keyboardType,
           onEditingComplete: onEditingComplete,
-          autovalidateMode: AutovalidateMode.always,
+          autovalidateMode: autovalidateMode ?? AutovalidateMode.always,
           onChanged: onChanged ?? null,
           name: title,
           validator: validator,

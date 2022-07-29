@@ -1,7 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:FitStack/app/models/user_model.dart' as fs;
+// import 'package:FitStack/app/models/user_model.dart' as fs;
 import 'package:FitStack/app/repository/auth_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
@@ -208,17 +208,21 @@ class SignupCubit extends Cubit<SignupState> {
   }
 
   void formKeyChanged(GlobalKey<FormBuilderState>? formKey) {
-    List<GlobalKey<FormBuilderState>> newFormKeyList = state.formKey!;
-    newFormKeyList.replaceRange(state.index, state.index, [formKey!]);
+    List<GlobalKey<FormBuilderState>> keyList = state.formKey!;
+    keyList.replaceRange(state.index, state.index, [formKey!]);
 
-    emit(state.copyWith(formKey: newFormKeyList));
+    if (keyList[state.index].currentState?.value ==
+        state.formKey?[state.index].currentState?.value) {
+      log("the keys where the same. No change");
+    } else
+      emit(state.copyWith(formKey: keyList));
   }
 
   void nextPage(BuildContext context) {
     bool isValid = state.formKey![state.index].currentState!.isValid;
     if (isValid) {
       emit(state.copyWith(index: state.index + 1));
-    } else if (state.indexRange == state.index && isValid) {
+    } else if (state.indexRange == state.index + 1 && isValid) {
       emit(state.copyWith(authState: AuthState.AUTHORIZING));
       FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: state.email, password: state.password)
@@ -249,8 +253,12 @@ class SignupCubit extends Cubit<SignupState> {
     }
   }
 
-  void previousPage() {
-    emit(state.copyWith(index: state.index - 1));
+  void previousPage(BuildContext context) {
+    if (state.index == 0) {
+      Navigator.pop(context);
+    } else {
+      emit(state.copyWith(index: state.index - 1));
+    }
   }
 
   void phoneNumberChanged(String? phoneNumber) {

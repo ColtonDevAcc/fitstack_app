@@ -1,5 +1,6 @@
 import 'package:FitStack/presentation/signup/cubit/signup_cubit.dart';
-import 'package:FitStack/presentation/signup/presentation/atoms/create_account_text_widget.dart';
+import 'package:FitStack/presentation/signup/presentation/atoms/create_account_text.dart';
+
 import 'package:FitStack/presentation/signup/presentation/atoms/signup_form_header_subtitle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,7 +27,7 @@ class SignupFormHeader extends StatelessWidget {
           children: [
             GestureDetector(
               onTap: () {
-                BlocProvider.of<SignupCubit>(context).previousPage();
+                BlocProvider.of<SignupCubit>(context).previousPage(context);
               },
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(0, 10, 10, 10),

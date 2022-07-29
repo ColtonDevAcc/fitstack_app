@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:FitStack/presentation/signup/cubit/signup_cubit.dart';
 import 'package:FitStack/presentation/signup/presentation/atoms/signup_focused_button.dart';
 import 'package:FitStack/presentation/signup/presentation/molecules/social_auth_buttons.dart';
@@ -27,6 +29,7 @@ class SignUp_View extends StatelessWidget {
     return BlocBuilder<SignupCubit, SignupState>(
       builder: (context, state) {
         if (state.indexRange < 2) {
+          log("form length == ${forms.length}");
           BlocProvider.of<SignupCubit>(context).setIndexRange(forms.length);
         }
         return Padding(

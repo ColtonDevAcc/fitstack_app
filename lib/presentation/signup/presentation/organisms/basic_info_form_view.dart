@@ -23,7 +23,9 @@ class BasicInfoFormView extends StatelessWidget {
           icon: FontAwesomeIcons.weightScale,
         ),
         BlocBuilder<SignupCubit, SignupState>(
-          buildWhen: (previous, current) => previous.formKey != current.formKey,
+          buildWhen: (previous, current) =>
+              previous.formKey?[previous.index].currentState?.value !=
+              current.formKey?[current.index].currentState?.value,
           builder: (context, state) {
             var formKey = state.formKey?[state.index];
             return Expanded(
@@ -46,8 +48,6 @@ class BasicInfoFormView extends StatelessWidget {
                         Expanded(
                           flex: 1,
                           child: SignupTextfield(
-                            onSubmitted: (p0) =>
-                                BlocProvider.of<SignupCubit>(context).formKeyChanged(formKey),
                             key: Key('Height'),
                             suffixText: 'ft',
                             title: 'Height',
