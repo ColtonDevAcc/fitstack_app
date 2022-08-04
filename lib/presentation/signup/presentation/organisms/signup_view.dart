@@ -27,6 +27,21 @@ class SignUp_View extends StatelessWidget {
     ];
 
     return BlocBuilder<SignupCubit, SignupState>(
+      buildWhen: (previous, current) {
+        if (previous.errorMessage != current.errorMessage) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              backgroundColor: Theme.of(context).colorScheme.error,
+              content: Text(
+                "error: ${current.errorMessage}",
+                textAlign: TextAlign.center,
+              ),
+            ),
+          );
+          return true;
+        }
+        return false;
+      },
       builder: (context, state) {
         if (state.indexRange < 2) {
           log("form length == ${forms.length}");

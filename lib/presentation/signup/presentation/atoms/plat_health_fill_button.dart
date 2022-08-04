@@ -21,7 +21,7 @@ class PlatHealthFillButton extends StatelessWidget {
           },
           child: Container(
             padding: EdgeInsets.all(10),
-            height: 55,
+            height: MediaQuery.of(context).size.height * .05,
             decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.secondary,
               borderRadius: BorderRadius.circular(20),

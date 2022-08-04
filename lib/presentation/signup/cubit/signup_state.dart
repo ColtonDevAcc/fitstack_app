@@ -17,10 +17,12 @@ class SignupState extends Equatable {
   final AuthState authState;
   final AssignedSex assignedSex;
   final String password;
+  final String? errorMessage;
   final User? user;
   final String phoneNumber;
 
   SignupState({
+    this.errorMessage,
     this.phoneNumber = '',
     this.authState = AuthState.UNAUTHORIZED,
     this.user,
@@ -43,6 +45,7 @@ class SignupState extends Equatable {
 
   @override
   List<Object?> get props => [
+        errorMessage,
         password,
         phoneNumber,
         authState,
@@ -64,6 +67,7 @@ class SignupState extends Equatable {
       ];
 
   SignupState copyWith({
+    String? errorMessage,
     User? user,
     AuthState? authState,
     String? password,
@@ -83,6 +87,7 @@ class SignupState extends Equatable {
     List<GlobalKey<FormBuilderState>>? formKey,
   }) {
     return SignupState(
+      errorMessage: errorMessage ?? this.errorMessage,
       phoneNumber: phoneNumber ?? this.phoneNumber,
       user: user ?? this.user,
       password: password ?? this.password,

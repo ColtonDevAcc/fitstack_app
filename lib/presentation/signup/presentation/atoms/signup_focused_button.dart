@@ -20,9 +20,7 @@ class SignUp_Focused_Button_Widget extends StatelessWidget {
   Widget build(BuildContext context) {
     double buttonSize = MediaQuery.of(context).size.width * 0.8;
 
-    return BlocConsumer<SignupCubit, SignupState>(
-      listener: (context, state) =>
-          log("form state value: ${state.formKey?[state.index].currentState?.fields}"),
+    return BlocBuilder<SignupCubit, SignupState>(
       buildWhen: (previous, current) => previous != current,
       builder: (context, state) {
         GlobalKey<FormBuilderState>? formKey = state.formKey![state.index];
@@ -37,7 +35,7 @@ class SignUp_Focused_Button_Widget extends StatelessWidget {
               color: Theme.of(context).colorScheme.primary,
               borderRadius: BorderRadius.circular(10),
             ),
-            padding: EdgeInsets.all(30),
+            padding: EdgeInsets.all(25),
             width: buttonSize,
             duration: Duration(milliseconds: 2000),
             child: Row(
@@ -53,7 +51,7 @@ class SignUp_Focused_Button_Widget extends StatelessWidget {
                   curve: Curves.bounceOut,
                   duration: Duration(milliseconds: 900),
                   width: formKey.currentState != null && formKey.currentState!.isValid
-                      ? buttonSize * .684
+                      ? buttonSize * .67
                       : 20,
                 ),
                 AnimatedRotation(
@@ -67,10 +65,10 @@ class SignUp_Focused_Button_Widget extends StatelessWidget {
                 ),
                 if (state.authState == AuthState.AUTHORIZING)
                   Container(
-                    height: 15,
-                    width: 15,
+                    height: 14,
+                    width: 14,
                     child: CircularProgressIndicator(
-                      strokeWidth: 3,
+                      strokeWidth: 1,
                       backgroundColor: Theme.of(context).colorScheme.surface,
                     ),
                   ),

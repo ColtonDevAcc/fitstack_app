@@ -25,10 +25,10 @@ mixin _$User {
   String get display_name => throw _privateConstructorUsedError;
   String get first_name => throw _privateConstructorUsedError;
   String get last_name => throw _privateConstructorUsedError;
-  DateTime get dob => throw _privateConstructorUsedError;
+  DateTime get date_of_birth => throw _privateConstructorUsedError;
   bool get isAnonymous => throw _privateConstructorUsedError;
   bool get isEmailVerified => throw _privateConstructorUsedError;
-  String? get phoneNumber => throw _privateConstructorUsedError;
+  String? get phone_number => throw _privateConstructorUsedError;
   String? get photo_url => throw _privateConstructorUsedError;
   int? get age => throw _privateConstructorUsedError;
 
@@ -47,10 +47,10 @@ abstract class $UserCopyWith<$Res> {
       String display_name,
       String first_name,
       String last_name,
-      DateTime dob,
+      DateTime date_of_birth,
       bool isAnonymous,
       bool isEmailVerified,
-      String? phoneNumber,
+      String? phone_number,
       String? photo_url,
       int? age});
 }
@@ -70,10 +70,10 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
     Object? display_name = freezed,
     Object? first_name = freezed,
     Object? last_name = freezed,
-    Object? dob = freezed,
+    Object? date_of_birth = freezed,
     Object? isAnonymous = freezed,
     Object? isEmailVerified = freezed,
-    Object? phoneNumber = freezed,
+    Object? phone_number = freezed,
     Object? photo_url = freezed,
     Object? age = freezed,
   }) {
@@ -98,9 +98,9 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
           ? _value.last_name
           : last_name // ignore: cast_nullable_to_non_nullable
               as String,
-      dob: dob == freezed
-          ? _value.dob
-          : dob // ignore: cast_nullable_to_non_nullable
+      date_of_birth: date_of_birth == freezed
+          ? _value.date_of_birth
+          : date_of_birth // ignore: cast_nullable_to_non_nullable
               as DateTime,
       isAnonymous: isAnonymous == freezed
           ? _value.isAnonymous
@@ -110,9 +110,9 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
           ? _value.isEmailVerified
           : isEmailVerified // ignore: cast_nullable_to_non_nullable
               as bool,
-      phoneNumber: phoneNumber == freezed
-          ? _value.phoneNumber
-          : phoneNumber // ignore: cast_nullable_to_non_nullable
+      phone_number: phone_number == freezed
+          ? _value.phone_number
+          : phone_number // ignore: cast_nullable_to_non_nullable
               as String?,
       photo_url: photo_url == freezed
           ? _value.photo_url
@@ -137,10 +137,10 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       String display_name,
       String first_name,
       String last_name,
-      DateTime dob,
+      DateTime date_of_birth,
       bool isAnonymous,
       bool isEmailVerified,
-      String? phoneNumber,
+      String? phone_number,
       String? photo_url,
       int? age});
 }
@@ -161,10 +161,10 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
     Object? display_name = freezed,
     Object? first_name = freezed,
     Object? last_name = freezed,
-    Object? dob = freezed,
+    Object? date_of_birth = freezed,
     Object? isAnonymous = freezed,
     Object? isEmailVerified = freezed,
-    Object? phoneNumber = freezed,
+    Object? phone_number = freezed,
     Object? photo_url = freezed,
     Object? age = freezed,
   }) {
@@ -189,9 +189,9 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
           ? _value.last_name
           : last_name // ignore: cast_nullable_to_non_nullable
               as String,
-      dob: dob == freezed
-          ? _value.dob
-          : dob // ignore: cast_nullable_to_non_nullable
+      date_of_birth: date_of_birth == freezed
+          ? _value.date_of_birth
+          : date_of_birth // ignore: cast_nullable_to_non_nullable
               as DateTime,
       isAnonymous: isAnonymous == freezed
           ? _value.isAnonymous
@@ -201,9 +201,9 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
           ? _value.isEmailVerified
           : isEmailVerified // ignore: cast_nullable_to_non_nullable
               as bool,
-      phoneNumber: phoneNumber == freezed
-          ? _value.phoneNumber
-          : phoneNumber // ignore: cast_nullable_to_non_nullable
+      phone_number: phone_number == freezed
+          ? _value.phone_number
+          : phone_number // ignore: cast_nullable_to_non_nullable
               as String?,
       photo_url: photo_url == freezed
           ? _value.photo_url
@@ -226,10 +226,10 @@ class _$_User with DiagnosticableTreeMixin implements _User {
       required this.display_name,
       required this.first_name,
       required this.last_name,
-      required this.dob,
+      required this.date_of_birth,
       required this.isAnonymous,
       required this.isEmailVerified,
-      this.phoneNumber,
+      required this.phone_number,
       this.photo_url,
       this.age});
 
@@ -246,13 +246,13 @@ class _$_User with DiagnosticableTreeMixin implements _User {
   @override
   final String last_name;
   @override
-  final DateTime dob;
+  final DateTime date_of_birth;
   @override
   final bool isAnonymous;
   @override
   final bool isEmailVerified;
   @override
-  final String? phoneNumber;
+  final String? phone_number;
   @override
   final String? photo_url;
   @override
@@ -260,7 +260,7 @@ class _$_User with DiagnosticableTreeMixin implements _User {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'User(user_id: $user_id, email: $email, display_name: $display_name, first_name: $first_name, last_name: $last_name, dob: $dob, isAnonymous: $isAnonymous, isEmailVerified: $isEmailVerified, phoneNumber: $phoneNumber, photo_url: $photo_url, age: $age)';
+    return 'User(user_id: $user_id, email: $email, display_name: $display_name, first_name: $first_name, last_name: $last_name, date_of_birth: $date_of_birth, isAnonymous: $isAnonymous, isEmailVerified: $isEmailVerified, phone_number: $phone_number, photo_url: $photo_url, age: $age)';
   }
 
   @override
@@ -273,10 +273,10 @@ class _$_User with DiagnosticableTreeMixin implements _User {
       ..add(DiagnosticsProperty('display_name', display_name))
       ..add(DiagnosticsProperty('first_name', first_name))
       ..add(DiagnosticsProperty('last_name', last_name))
-      ..add(DiagnosticsProperty('dob', dob))
+      ..add(DiagnosticsProperty('date_of_birth', date_of_birth))
       ..add(DiagnosticsProperty('isAnonymous', isAnonymous))
       ..add(DiagnosticsProperty('isEmailVerified', isEmailVerified))
-      ..add(DiagnosticsProperty('phoneNumber', phoneNumber))
+      ..add(DiagnosticsProperty('phone_number', phone_number))
       ..add(DiagnosticsProperty('photo_url', photo_url))
       ..add(DiagnosticsProperty('age', age));
   }
@@ -293,13 +293,14 @@ class _$_User with DiagnosticableTreeMixin implements _User {
             const DeepCollectionEquality()
                 .equals(other.first_name, first_name) &&
             const DeepCollectionEquality().equals(other.last_name, last_name) &&
-            const DeepCollectionEquality().equals(other.dob, dob) &&
+            const DeepCollectionEquality()
+                .equals(other.date_of_birth, date_of_birth) &&
             const DeepCollectionEquality()
                 .equals(other.isAnonymous, isAnonymous) &&
             const DeepCollectionEquality()
                 .equals(other.isEmailVerified, isEmailVerified) &&
             const DeepCollectionEquality()
-                .equals(other.phoneNumber, phoneNumber) &&
+                .equals(other.phone_number, phone_number) &&
             const DeepCollectionEquality().equals(other.photo_url, photo_url) &&
             const DeepCollectionEquality().equals(other.age, age));
   }
@@ -313,10 +314,10 @@ class _$_User with DiagnosticableTreeMixin implements _User {
       const DeepCollectionEquality().hash(display_name),
       const DeepCollectionEquality().hash(first_name),
       const DeepCollectionEquality().hash(last_name),
-      const DeepCollectionEquality().hash(dob),
+      const DeepCollectionEquality().hash(date_of_birth),
       const DeepCollectionEquality().hash(isAnonymous),
       const DeepCollectionEquality().hash(isEmailVerified),
-      const DeepCollectionEquality().hash(phoneNumber),
+      const DeepCollectionEquality().hash(phone_number),
       const DeepCollectionEquality().hash(photo_url),
       const DeepCollectionEquality().hash(age));
 
@@ -340,10 +341,10 @@ abstract class _User implements User {
       required final String display_name,
       required final String first_name,
       required final String last_name,
-      required final DateTime dob,
+      required final DateTime date_of_birth,
       required final bool isAnonymous,
       required final bool isEmailVerified,
-      final String? phoneNumber,
+      required final String? phone_number,
       final String? photo_url,
       final int? age}) = _$_User;
 
@@ -360,13 +361,13 @@ abstract class _User implements User {
   @override
   String get last_name;
   @override
-  DateTime get dob;
+  DateTime get date_of_birth;
   @override
   bool get isAnonymous;
   @override
   bool get isEmailVerified;
   @override
-  String? get phoneNumber;
+  String? get phone_number;
   @override
   String? get photo_url;
   @override

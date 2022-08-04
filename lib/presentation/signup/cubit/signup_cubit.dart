@@ -1,12 +1,16 @@
 import 'dart:developer';
 import 'dart:io';
 
-// import 'package:FitStack/app/models/user_model.dart' as fs;
+import 'package:FitStack/app/models/user_model.dart' as fs;
 import 'package:FitStack/app/repository/auth_repository.dart';
+import 'package:FitStack/app/routing/appRouter.gr.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:bloc/bloc.dart';
+import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:health/health.dart';
@@ -15,10 +19,7 @@ import 'package:image_picker/image_picker.dart';
 part 'signup_state.dart';
 
 class SignupCubit extends Cubit<SignupState> {
-  SignupCubit({required AuthenticationRepository authenticationRepository})
-      : super(
-          SignupState(),
-        );
+  SignupCubit({required AuthenticationRepository authenticationRepository}) : super(SignupState());
 
   void usernameChanged(String username) {
     List<GlobalKey<FormBuilderState>>? formKeyList = state.formKey;
@@ -195,16 +196,34 @@ class SignupCubit extends Cubit<SignupState> {
     emit(state.copyWith(email: email));
   }
 
-  void userSignUp() {
-    Future<UserCredential> userCred = FirebaseAuth.instance
-        .createUserWithEmailAndPassword(email: state.email, password: state.password);
+  Future<fs.User?> userSignUp() async {
+    try {
+      Future<UserCredential> userCred = FirebaseAuth.instance
+          .createUserWithEmailAndPassword(email: state.email, password: state.password);
+      User? user = await userCred.then((value) => value.user);
 
-    userCred.then((value) {
-      User? _user = value.user;
+      var response = await Dio().post(
+        kDebugMode ? "https://dev.fitstack.io/user/signup" : "https://api.fitstack.io/user/signup",
+        data: fs.User(
+          display_name: state.username,
+          date_of_birth: state.dob!,
+          first_name: state.firstLastName.split(" ")[0],
+          last_name: state.firstLastName.split(" ")[1],
+          isAnonymous: false,
+          isEmailVerified: false,
+          email: state.email,
+          user_id: user!.uid,
+          phone_number: state.phoneNumber,
+        ).toJson(),
+      );
 
-      _user?.updateDisplayName(state.username);
-      _user?.updatePhotoURL(state.profileImage);
-    });
+      log("//====================== user signup response: $response with status: ${response.statusCode} ======================//");
+
+      return await fs.User.fromJson(response.data);
+    } on DioError catch (e) {
+      log("error while trying to signup user: ${e.message} - ${e.response}");
+      return null;
+    }
   }
 
   void formKeyChanged(GlobalKey<FormBuilderState>? formKey) {
@@ -218,36 +237,26 @@ class SignupCubit extends Cubit<SignupState> {
       emit(state.copyWith(formKey: keyList));
   }
 
-  void nextPage(BuildContext context) {
+  void nextPage(BuildContext context) async {
     bool isValid = state.formKey![state.index].currentState!.isValid;
-    if (isValid) {
+    if (isValid && state.index + 1 != state.indexRange) {
       emit(state.copyWith(index: state.index + 1));
     } else if (state.indexRange == state.index + 1 && isValid) {
       emit(state.copyWith(authState: AuthState.AUTHORIZING));
-      FirebaseAuth.instance
-          .createUserWithEmailAndPassword(email: state.email, password: state.password)
-          .then((value) => value.user)
-          .then((value) => value == null
-              ? null
-              : emit(state.copyWith(
-                  user: value, index: state.index + 1, authState: AuthState.AUTHORIZED)))
-          .onError(
-        (error, stackTrace) {
-          emit(state.copyWith(authState: AuthState.ERROR));
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              backgroundColor: Theme.of(context).colorScheme.error,
-              content: Text("${error.toString().split("]")[1]}"),
-            ),
-          );
-        },
-      );
+      fs.User? user = await userSignUp().onError((error, stackTrace) {
+        emit(state.copyWith(errorMessage: "$error"));
+        return null;
+      });
+      if (user != null) {
+        AutoRouter.of(context).popAndPush(Main_View());
+      } else {
+        emit(state.copyWith(errorMessage: "unable to create user"));
+      }
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          backgroundColor: Theme.of(context).colorScheme.error,
-          content: Text(
-              "${state.formKey![0].currentState!.fields.entries.where((element) => !element.value.isValid).map((e) => "${e.key}: ${e.value.errorText}")}"),
+      emit(
+        state.copyWith(
+          errorMessage:
+              "${state.formKey![0].currentState!.fields.entries.where((element) => !element.value.isValid).map((e) => "${e.key}: ${e.value.errorText}")}",
         ),
       );
     }

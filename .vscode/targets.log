@@ -10,7 +10,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 make: *** No rule to make target `all'.  Stop.
 
 
-# Make data base, printed on Fri Jul 29 09:30:01 2022
+# Make data base, printed on Tue Aug  2 16:23:08 2022
 
 # Variables
 
@@ -43,13 +43,13 @@ VSCODE_CWD = /
 # environment
 PATH = /Library/Frameworks/Python.framework/Versions/3.10/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin:/Library/Apple/usr/bin:/Users/colton.bristow/go/bin:/Users/colton.bristow/Development/SDK's/flutter/bin:/Users/colton.bristow/.pub-cache/bin
 # environment
-LaunchInstanceID = 8CF66029-1AB6-41BD-8D25-22F3F116A1DA
+LaunchInstanceID = 3C740AB9-7229-4077-BD45-B957990E1842
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # default
 .FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.Yz0cf6dygC/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.FKeGeUCFwY/Listeners
 # automatic
 %F = $(notdir $%)
 # environment
@@ -131,7 +131,7 @@ MAKEFILES :=
 # environment
 LC_ALL = C
 # environment
-SECURITYSESSIONID = 186a5
+SECURITYSESSIONID = 186ae
 # automatic
 ^F = $(notdir $^)
 # default
@@ -143,7 +143,7 @@ MAKELEVEL := 0
 # environment
 LANG = C
 # environment
-VSCODE_PID = 544
+VSCODE_PID = 3352
 # variable set hash-table stats:
 # Load=65/1024=6%, Rehash=0, Collisions=1/89=1%
 
@@ -153,7 +153,7 @@ VSCODE_PID = 544
 
 # Directories
 
-# . (device 16777231, inode 87055943): 29 files, no impossibilities.
+# . (device 16777233, inode 87055943): 29 files, no impossibilities.
 
 # 29 files, no impossibilities in 1 directories.
 
@@ -216,6 +216,7 @@ makefile:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Fri Jul 29 09:30:01 2022
+ 
+# Finished Make data base on Tue Aug  2 16:23:08 2022
 
  
