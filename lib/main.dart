@@ -1,24 +1,32 @@
+import 'dart:io';
+
 import 'package:FitStack/app/bloc/app_bloc.dart';
 import 'package:FitStack/app/repository/auth_repository.dart';
 import 'package:FitStack/app/routing/appRouter.gr.dart';
 import 'package:FitStack/app/theme/color_Theme.dart';
-import 'package:FitStack/presentation/signup/cubit/signup_cubit.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'firebase_options.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:path_provider/path_provider.dart';
 
-Future<void> main() {
-  return BlocOverrides.runZoned(
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  final storage = await HydratedStorage.build(
+    storageDirectory: kIsWeb ? HydratedStorage.webStorageDirectory : await getTemporaryDirectory(),
+  );
+
+  HydratedBlocOverrides.runZoned(
     () async {
-      WidgetsFlutterBinding.ensureInitialized();
       await Firebase.initializeApp(
         options: DefaultFirebaseOptions.currentPlatform,
       );
-
       final authenticationRepository = AuthenticationRepository();
       await authenticationRepository.user.first;
       FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
@@ -26,6 +34,7 @@ Future<void> main() {
         MyApp(authenticationRepository: authenticationRepository),
       );
     },
+    storage: storage,
     blocObserver: AppBlocObserver(),
   );
 }
@@ -45,11 +54,6 @@ class MyApp extends StatelessWidget {
       value: authenticationRepository,
       child: MultiBlocProvider(
         providers: [
-          BlocProvider(
-            create: (context) => SignupCubit(
-              authenticationRepository: authenticationRepository,
-            ),
-          ),
           BlocProvider(
             create: (context) => AppBloc(
               authenticationRepository: authenticationRepository,

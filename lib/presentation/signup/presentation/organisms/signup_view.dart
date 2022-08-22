@@ -39,8 +39,11 @@ class SignUp_View extends StatelessWidget {
             ),
           );
           return true;
+        } else if (previous.index != current.index) {
+          return true;
+        } else {
+          return false;
         }
-        return false;
       },
       builder: (context, state) {
         if (state.indexRange < 2) {
@@ -53,7 +56,7 @@ class SignUp_View extends StatelessWidget {
             children: [
               Expanded(child: forms[state.index]),
               SignUp_Focused_Button_Widget(text: 'Next', index: state.index),
-              Social_Auth_Buttons()
+              Social_Auth_Buttons(),
             ],
           ),
         );

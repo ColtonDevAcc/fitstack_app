@@ -1,9 +1,11 @@
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:FitStack/app/bloc/app_bloc.dart';
 import 'package:FitStack/app/models/user_model.dart' as fs;
 import 'package:FitStack/app/repository/auth_repository.dart';
 import 'package:FitStack/app/routing/appRouter.gr.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
@@ -12,6 +14,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:health/health.dart';
 import 'package:image_picker/image_picker.dart';
@@ -19,7 +22,9 @@ import 'package:image_picker/image_picker.dart';
 part 'signup_state.dart';
 
 class SignupCubit extends Cubit<SignupState> {
-  SignupCubit({required AuthenticationRepository authenticationRepository}) : super(SignupState());
+  final AppBloc appBloc;
+  SignupCubit({required this.appBloc, required AuthenticationRepository authenticationRepository})
+      : super(SignupState());
 
   void usernameChanged(String username) {
     List<GlobalKey<FormBuilderState>>? formKeyList = state.formKey;
@@ -209,8 +214,7 @@ class SignupCubit extends Cubit<SignupState> {
           date_of_birth: state.dob!,
           first_name: state.firstLastName.split(" ")[0],
           last_name: state.firstLastName.split(" ")[1],
-          isAnonymous: false,
-          isEmailVerified: false,
+          email_verified: false,
           email: state.email,
           user_id: user!.uid,
           phone_number: state.phoneNumber,
@@ -248,6 +252,8 @@ class SignupCubit extends Cubit<SignupState> {
         return null;
       });
       if (user != null) {
+        // appBloc.mapEventToState(AuthAuthenticated(user: user));
+
         AutoRouter.of(context).popAndPush(Main_View());
       } else {
         emit(state.copyWith(errorMessage: "unable to create user"));
