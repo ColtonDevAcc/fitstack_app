@@ -4,13 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ProgressBar extends StatelessWidget {
-  const ProgressBar(
-      {Key? key,
-      required this.barColor,
-      required this.totalValue,
-      required this.partialValue,
-      required this.icon})
-      : super(key: key);
+  const ProgressBar({Key? key, required this.barColor, required this.totalValue, required this.partialValue, required this.icon}) : super(key: key);
   final Color barColor;
   final double totalValue;
   final double partialValue;
@@ -18,7 +12,6 @@ class ProgressBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    log("${partialValue}");
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 5),
       child: Row(

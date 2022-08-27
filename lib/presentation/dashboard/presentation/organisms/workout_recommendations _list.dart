@@ -18,12 +18,12 @@ class _Workout_Recommendation_ListState extends State<Workout_Recommendation_Lis
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: MediaQuery.of(context).size.height * .35,
+    return Container(
+      height: MediaQuery.of(context).size.height * .33,
       width: double.infinity,
       child: PageView.builder(
         clipBehavior: Clip.none,
-        pageSnapping: false,
+        pageSnapping: true,
         controller: widget.pageController,
         onPageChanged: (index) {
           setState(() {

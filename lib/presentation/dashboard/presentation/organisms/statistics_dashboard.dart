@@ -10,19 +10,19 @@ class Statistics_Dashboard extends StatelessWidget {
     return Column(
       children: [
         ProgressBar(
-          barColor: Colors.orange,
+          barColor: Color.fromRGBO(253, 117, 5, 1),
           totalValue: 100,
           partialValue: 73,
           icon: FontAwesomeIcons.droplet,
         ),
         ProgressBar(
-          barColor: Colors.purple,
+          barColor: Color.fromRGBO(87, 54, 232, 1),
           totalValue: 100,
           partialValue: 88,
           icon: FontAwesomeIcons.jugDetergent,
         ),
         ProgressBar(
-          barColor: Colors.red,
+          barColor: Theme.of(context).colorScheme.tertiary,
           totalValue: 100,
           partialValue: 25,
           icon: FontAwesomeIcons.fire,

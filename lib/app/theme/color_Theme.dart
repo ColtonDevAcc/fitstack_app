@@ -24,6 +24,7 @@ class FSColorTheme {
         onSurface: Colors.black,
         primary: Color.fromRGBO(254, 99, 71, 1),
         secondary: Color.fromRGBO(87, 54, 232, 1),
+        tertiary: Color.fromRGBO(230, 64, 64, 1),
       ),
       textTheme: FSTextTheme.Primary_Text_Theme(context),
     );

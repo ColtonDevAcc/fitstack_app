@@ -39,7 +39,7 @@ class Workout_Recommendation_Card_State extends State<Workout_Recommendation_Car
                   "Lorem ipsum dolor sit ametLorem ipsum dolor sit ametLorem ipsum dolor sit amet, consetetur sadipscing elitr,Lorem ipsum dolor sit amet, consetetur sadipscing elitr,",
                   overflow: TextOverflow.fade,
                   //TODO: determine how many lines we can have by doing magic math with mediaquery
-                  maxLines: 5,
+                  maxLines: 4,
                   style: Theme.of(context).textTheme.subtitle2,
                 ),
               ],
