@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:FitStack/app/bloc/app_bloc.dart';
 import 'package:FitStack/app/repository/auth_repository.dart';
 import 'package:FitStack/app/routing/appRouter.gr.dart';

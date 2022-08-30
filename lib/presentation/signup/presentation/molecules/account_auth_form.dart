@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:FitStack/presentation/signup/cubit/signup_cubit.dart';
 import 'package:FitStack/presentation/signup/presentation/atoms/signup_textfield.dart';
 import 'package:flutter/material.dart';
@@ -13,9 +11,7 @@ class AccountAuthFrom extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SignupCubit, SignupState>(
-      buildWhen: (previous, current) =>
-          previous.formKey?[previous.index].currentState?.value !=
-          current.formKey?[current.index].currentState?.value,
+      buildWhen: (previous, current) => previous.formKey?[previous.index].currentState?.value != current.formKey?[current.index].currentState?.value,
       builder: (context, state) {
         var formKey = state.formKey![state.index];
         return FormBuilder(
@@ -36,8 +32,7 @@ class AccountAuthFrom extends StatelessWidget {
               ),
               SizedBox(height: 15),
               SignupTextfield(
-                onChanged: (phoneNumber) =>
-                    BlocProvider.of<SignupCubit>(context).phoneNumberChanged(phoneNumber),
+                onChanged: (phoneNumber) => BlocProvider.of<SignupCubit>(context).phoneNumberChanged(phoneNumber),
                 validator: FormBuilderValidators.compose([
                   FormBuilderValidators.required(errorText: "required"),
                   FormBuilderValidators.compose([
@@ -59,8 +54,7 @@ class AccountAuthFrom extends StatelessWidget {
                 children: [
                   Expanded(
                     child: SignupTextfield(
-                      onChanged: (pass) =>
-                          BlocProvider.of<SignupCubit>(context).passwordChanged(pass),
+                      onChanged: (pass) => BlocProvider.of<SignupCubit>(context).passwordChanged(pass),
                       validator: FormBuilderValidators.compose([
                         FormBuilderValidators.required(errorText: "required"),
                         FormBuilderValidators.minLength(
@@ -78,9 +72,7 @@ class AccountAuthFrom extends StatelessWidget {
                     child: SignupTextfield(
                       validator: FormBuilderValidators.compose([
                         FormBuilderValidators.required(errorText: "required"),
-                        (value) => value == formKey.currentState?.fields['Password']?.value
-                            ? null
-                            : "Passwords must match",
+                        (value) => value == formKey.currentState?.fields['Password']?.value ? null : "Passwords must match",
                       ]),
                       title: 'Confirm Password',
                       hintText: "confirm password",

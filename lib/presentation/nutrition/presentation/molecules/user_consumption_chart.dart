@@ -39,7 +39,6 @@ class UserConsumptionChart extends StatelessWidget {
           ConsumptionStatisticCard(),
           ConsumptionStatisticCard(),
           ConsumptionStatisticCard(),
-          ConsumptionStatisticCard(),
         ],
       ),
     );

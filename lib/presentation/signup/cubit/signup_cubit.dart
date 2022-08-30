@@ -6,7 +6,6 @@ import 'package:FitStack/app/models/user_model.dart' as fs;
 import 'package:FitStack/app/repository/auth_repository.dart';
 import 'package:FitStack/app/routing/appRouter.gr.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:auto_route/auto_route.dart';
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
@@ -23,17 +22,14 @@ part 'signup_state.dart';
 
 class SignupCubit extends Cubit<SignupState> {
   final AppBloc appBloc;
-  SignupCubit({required this.appBloc, required AuthenticationRepository authenticationRepository})
-      : super(SignupState());
+  SignupCubit({required this.appBloc, required AuthenticationRepository authenticationRepository}) : super(SignupState());
 
   void usernameChanged(String username) {
     List<GlobalKey<FormBuilderState>>? formKeyList = state.formKey;
     if (username.length > 3) {
       formKeyList?[state.index].currentState!.validate();
     } else {
-      formKeyList?[state.index]
-          .currentState!
-          .invalidateFirstField(errorText: 'Must be more than 3 characters');
+      formKeyList?[state.index].currentState!.invalidateFirstField(errorText: 'Must be more than 3 characters');
     }
     log("form key validation: ${formKeyList?[state.index].currentState!.isValid}");
     emit(
@@ -46,9 +42,7 @@ class SignupCubit extends Cubit<SignupState> {
     if (firstLast.length > 5 && firstLast.contains(" ")) {
       formKeyList?[state.index].currentState!.validate();
     } else {
-      formKeyList?[state.index]
-          .currentState!
-          .invalidateFirstField(errorText: 'Must be more than 5 characters and contain a space');
+      formKeyList?[state.index].currentState!.invalidateFirstField(errorText: 'Must be more than 5 characters and contain a space');
     }
     emit(
       state.copyWith(firstLastName: firstLast, formKey: formKeyList),
@@ -60,8 +54,7 @@ class SignupCubit extends Cubit<SignupState> {
       UploadTask? uploadTask;
 
       await ImagePicker().pickImage(source: ImageSource.gallery).then((value) {
-        Reference firebaseStorageRef =
-            FirebaseStorage.instance.ref().child('uploads/${value?.path}');
+        Reference firebaseStorageRef = FirebaseStorage.instance.ref().child('uploads/${value?.path}');
         uploadTask = firebaseStorageRef.putFile(File(value!.path));
       }).onError(
         (error, stackTrace) {
@@ -122,22 +115,18 @@ class SignupCubit extends Cubit<SignupState> {
       try {
         log("we have permissions");
         // fetch health data
-        List<HealthDataPoint> healthData =
-            await health.getHealthDataFromTypes(yesterday, now, types);
+        List<HealthDataPoint> healthData = await health.getHealthDataFromTypes(yesterday, now, types);
         // save all the new data points (only the first 100)
         healthDataList.addAll((healthData.length < 100) ? healthData : healthData.sublist(0, 100));
         healthDataList = HealthFactory.removeDuplicates(healthDataList);
 
-        HealthDataPoint? healthDataWeight =
-            healthDataList.firstWhere((element) => element.type == HealthDataType.WEIGHT);
-        HealthDataPoint? healthDataHeight =
-            healthDataList.firstWhere((element) => element.type == HealthDataType.HEIGHT);
+        HealthDataPoint? healthDataWeight = healthDataList.firstWhere((element) => element.type == HealthDataType.WEIGHT);
+        HealthDataPoint? healthDataHeight = healthDataList.firstWhere((element) => element.type == HealthDataType.HEIGHT);
 
         var height = double.tryParse(healthDataHeight.value.toString())! * 39.37007874;
         var heightFt = (height / 12).floor();
         var heightInch = (height % 12).round();
-        var weight =
-            (double.tryParse(healthDataWeight.value.toString())! * 2.20462262185).roundToDouble();
+        var weight = (double.tryParse(healthDataWeight.value.toString())! * 2.20462262185).roundToDouble();
 
         GlobalKey<FormBuilderState> formKey = state.formKey![state.index];
         if (formKey.currentState!.fields.containsKey('heightFt')) {
@@ -203,8 +192,7 @@ class SignupCubit extends Cubit<SignupState> {
 
   Future<fs.User?> userSignUp() async {
     try {
-      Future<UserCredential> userCred = FirebaseAuth.instance
-          .createUserWithEmailAndPassword(email: state.email, password: state.password);
+      Future<UserCredential> userCred = FirebaseAuth.instance.createUserWithEmailAndPassword(email: state.email, password: state.password);
       User? user = await userCred.then((value) => value.user);
 
       var response = await Dio().post(
@@ -234,8 +222,7 @@ class SignupCubit extends Cubit<SignupState> {
     List<GlobalKey<FormBuilderState>> keyList = state.formKey!;
     keyList.replaceRange(state.index, state.index, [formKey!]);
 
-    if (keyList[state.index].currentState?.value ==
-        state.formKey?[state.index].currentState?.value) {
+    if (keyList[state.index].currentState?.value == state.formKey?[state.index].currentState?.value) {
       log("the keys where the same. No change");
     } else
       emit(state.copyWith(formKey: keyList));

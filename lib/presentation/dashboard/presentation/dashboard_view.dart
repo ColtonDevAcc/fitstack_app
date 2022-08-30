@@ -32,7 +32,7 @@ class DashboardView extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "HOW'S YOUR DAY LOOK?",
+                    "HOW DOES YOUR DAY LOOK?",
                     //TODO: need to use auto resize package
                     textScaleFactor: 1.3,
                     style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: Theme.of(context).colorScheme.primary),

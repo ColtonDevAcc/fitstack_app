@@ -1,7 +1,5 @@
 import 'dart:developer';
-
 import 'package:FitStack/app/bloc/app_bloc.dart';
-import 'package:FitStack/app/repository/auth_repository.dart';
 import 'package:FitStack/widgets/atoms/profile_circular_avatar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
