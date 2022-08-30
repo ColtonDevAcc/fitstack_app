@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
-class GoalProgressGraph extends StatelessWidget {
-  const GoalProgressGraph({Key? key}) : super(key: key);
+class UserGoalStatisticsGraph extends StatelessWidget {
+  const UserGoalStatisticsGraph({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,15 +15,25 @@ class GoalProgressGraph extends StatelessWidget {
       _SalesData('Jun', 30),
     ];
 
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        color: Theme.of(context).colorScheme.surface,
-      ),
-      width: 150,
-      height: 175,
-      child: Padding(
-        padding: const EdgeInsets.all(10.0),
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(0, 0, 10, 3),
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          color: Theme.of(context).colorScheme.surface,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.2),
+              spreadRadius: 2,
+              blurRadius: 5,
+              offset: Offset(1, 3),
+              blurStyle: BlurStyle.outer,
+            ),
+          ],
+        ),
+        padding: EdgeInsets.all(10),
+        width: 150,
+        height: 175,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

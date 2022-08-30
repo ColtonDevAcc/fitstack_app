@@ -11,6 +11,7 @@ class Workout_Recommendation_Card_State extends State<Workout_Recommendation_Car
   @override
   Widget build(BuildContext context) {
     return Card(
+      margin: EdgeInsets.zero,
       elevation: 2,
       clipBehavior: Clip.antiAlias,
       color: Colors.white,
@@ -33,14 +34,17 @@ class Workout_Recommendation_Card_State extends State<Workout_Recommendation_Car
               children: [
                 Text(
                   "Title",
-                  style: Theme.of(context).textTheme.subtitle1,
+                  style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                  textScaleFactor: 1.5,
                 ),
                 Text(
                   "Lorem ipsum dolor sit ametLorem ipsum dolor sit ametLorem ipsum dolor sit amet, consetetur sadipscing elitr,Lorem ipsum dolor sit amet, consetetur sadipscing elitr,",
                   overflow: TextOverflow.fade,
                   //TODO: determine how many lines we can have by doing magic math with mediaquery
-                  maxLines: 4,
-                  style: Theme.of(context).textTheme.subtitle2,
+                  maxLines: 6,
+                  style: Theme.of(context).textTheme.labelLarge,
                 ),
               ],
             ),

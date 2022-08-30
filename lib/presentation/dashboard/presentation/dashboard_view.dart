@@ -1,16 +1,16 @@
-import 'package:FitStack/presentation/dashboard/presentation/molecules/goal_progress_graph.dart';
-import 'package:FitStack/presentation/dashboard/presentation/organisms/workout_recommendations%20_list.dart';
-import 'package:FitStack/presentation/dashboard/presentation/organisms/statistics_dashboard.dart';
+import 'package:FitStack/presentation/dashboard/presentation/molecules/user_goal_graphs_list.dart';
+import 'package:FitStack/presentation/dashboard/presentation/molecules/workout_recommendations%20_list.dart';
+import 'package:FitStack/presentation/dashboard/presentation/molecules/statistics_dashboard.dart';
 import 'package:flutter/material.dart';
-import 'organisms/statistics_dashboard.dart';
+import 'molecules/statistics_dashboard.dart';
 
-class DashBoard_View extends StatelessWidget {
-  DashBoard_View({Key? key}) : super(key: key);
+class DashboardView extends StatelessWidget {
+  DashboardView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     PageController pageController = PageController(viewportFraction: 0.5);
-    const double bottomPadding = 10;
+    const double bottomPadding = 17;
     const double topPadding = 25;
     const double textLabelScale = 1.2;
     TextStyle labelTextStyle = Theme.of(context).textTheme.labelLarge!.copyWith(
@@ -40,7 +40,7 @@ class DashBoard_View extends StatelessWidget {
                 ],
               ),
               Padding(
-                padding: const EdgeInsets.fromLTRB(0, topPadding - 5, 0, bottomPadding),
+                padding: const EdgeInsets.fromLTRB(0, topPadding - 5, 0, 0),
                 child: Text(
                   "Stats",
                   textScaleFactor: textLabelScale,
@@ -65,7 +65,10 @@ class DashBoard_View extends StatelessWidget {
                   style: labelTextStyle,
                 ),
               ),
-              GoalProgressGraph(),
+              Container(
+                height: MediaQuery.of(context).size.height * .2,
+                child: UserGoalGraphsList(),
+              ),
             ],
           ),
         ),

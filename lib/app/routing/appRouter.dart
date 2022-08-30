@@ -1,6 +1,7 @@
 import 'package:FitStack/mainView.dart';
 import 'package:FitStack/presentation/dashboard/presentation/dashboard_view.dart';
 import 'package:FitStack/presentation/login/presentation/login_page.dart';
+import 'package:FitStack/presentation/nutrition/presentation/nutrition_view.dart';
 import 'package:FitStack/presentation/settings/settings_view.dart';
 import 'package:FitStack/presentation/signup/presentation/signup_page.dart';
 import 'package:auto_route/annotations.dart';
@@ -27,12 +28,17 @@ import 'package:auto_route/annotations.dart';
       children: [
         AutoRoute(
           path: 'DashBoard',
-          page: DashBoard_View,
+          page: DashboardView,
+          initial: false,
+        ),
+        AutoRoute(
+          path: 'Nutrition',
+          page: NutritionView,
           initial: false,
         ),
         AutoRoute(
           path: 'Settings',
-          page: Settings_View,
+          page: SettingsView,
           initial: false,
         ),
       ],

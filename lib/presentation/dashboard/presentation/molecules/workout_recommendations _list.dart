@@ -1,4 +1,4 @@
-import 'package:FitStack/presentation/dashboard/presentation/molecules/workout_recommendation_card.dart';
+import 'package:FitStack/presentation/dashboard/presentation/atoms/workout_recommendation_card.dart';
 import 'package:flutter/material.dart';
 
 class Workout_Recommendation_List extends StatefulWidget {
@@ -19,7 +19,7 @@ class _Workout_Recommendation_ListState extends State<Workout_Recommendation_Lis
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * .33,
+      height: MediaQuery.of(context).size.height * .29,
       width: double.infinity,
       child: PageView.builder(
         clipBehavior: Clip.none,

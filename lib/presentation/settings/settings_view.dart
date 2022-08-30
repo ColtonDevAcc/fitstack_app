@@ -8,14 +8,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class Settings_View extends StatefulWidget {
-  const Settings_View({Key? key}) : super(key: key);
+class SettingsView extends StatefulWidget {
+  const SettingsView({Key? key}) : super(key: key);
 
   @override
-  State<Settings_View> createState() => _Settings_ViewState();
+  State<SettingsView> createState() => _SettingsViewState();
 }
 
-class _Settings_ViewState extends State<Settings_View> {
+class _SettingsViewState extends State<SettingsView> {
   getToken() async {
     var token = await FirebaseAuth.instance.currentUser?.getIdToken();
     log("$token");

@@ -62,11 +62,11 @@ class _Main_ViewState extends State<Main_View> {
         );
       },
       routes: [
-        DashBoard_View(),
-        DashBoard_View(),
-        DashBoard_View(),
-        DashBoard_View(),
-        Settings_View(),
+        DashboardView(),
+        NutritionView(),
+        DashboardView(),
+        DashboardView(),
+        SettingsView(),
       ],
     );
   }

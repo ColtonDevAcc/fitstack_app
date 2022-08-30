@@ -4,7 +4,6 @@ import 'package:FitStack/app/models/user_model.dart' as fs;
 import 'package:FitStack/app/repository/auth_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:very_good_analysis/very_good_analysis.dart';
 
 part 'app_event.dart';
@@ -34,8 +33,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     return super.close();
   }
 
-  Future<void> onAuthenticationStatusChanged(
-      AuthenticationStatusChanged event, Emitter<AppState> emit) async {
+  Future<void> onAuthenticationStatusChanged(AuthenticationStatusChanged event, Emitter<AppState> emit) async {
     switch (event.status) {
       case AuthenticationStatus.unauthenticated:
         return emit(const AppState.unauthenticated());
