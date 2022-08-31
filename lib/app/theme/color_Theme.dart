@@ -13,6 +13,8 @@ class FSColorTheme {
       backgroundColor: Color.fromARGB(249, 249, 249, 249),
       primaryColor: Color.fromRGBO(254, 99, 71, 1),
       colorScheme: ColorScheme(
+        onSecondaryContainer: Color.fromRGBO(255, 36, 36, 1),
+        surfaceVariant: Color.fromRGBO(242, 241, 254, 1),
         surface: Colors.white,
         background: Color.fromRGBO(249, 249, 249, 1),
         brightness: Brightness.light,

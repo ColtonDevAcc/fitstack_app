@@ -17,9 +17,13 @@ class _Main_ViewState extends State<Main_View> {
   @override
   Widget build(BuildContext context) {
     return AutoTabsScaffold(
+      extendBody: true,
+      extendBodyBehindAppBar: true,
+      primary: true,
       backgroundColor: Theme.of(context).colorScheme.background,
       bottomNavigationBuilder: (context, tabsRouter) {
         return DotNavigationBar(
+          enablePaddingAnimation: true,
           boxShadow: [
             BoxShadow(
               color: Colors.grey.shade600.withOpacity(.3),
@@ -64,7 +68,7 @@ class _Main_ViewState extends State<Main_View> {
       routes: [
         DashboardView(),
         NutritionView(),
-        DashboardView(),
+        WorkoutView(),
         DashboardView(),
         SettingsView(),
       ],

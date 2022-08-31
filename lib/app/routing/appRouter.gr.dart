@@ -10,63 +10,70 @@
 //
 // ignore_for_file: type=lint
 
-import 'package:auto_route/auto_route.dart' as _i7;
-import 'package:flutter/material.dart' as _i8;
+import 'package:auto_route/auto_route.dart' as _i8;
+import 'package:flutter/material.dart' as _i9;
 
 import '../../mainView.dart' as _i3;
 import '../../presentation/dashboard/presentation/dashboard_view.dart' as _i4;
 import '../../presentation/login/presentation/login_page.dart' as _i1;
 import '../../presentation/nutrition/presentation/nutrition_view.dart' as _i5;
-import '../../presentation/settings/settings_view.dart' as _i6;
+import '../../presentation/settings/settings_view.dart' as _i7;
 import '../../presentation/signup/presentation/signup_page.dart' as _i2;
+import '../../presentation/workout/presentation/workout_view.dart' as _i6;
 
-class AppRouter extends _i7.RootStackRouter {
-  AppRouter([_i8.GlobalKey<_i8.NavigatorState>? navigatorKey])
+class AppRouter extends _i8.RootStackRouter {
+  AppRouter([_i9.GlobalKey<_i9.NavigatorState>? navigatorKey])
       : super(navigatorKey);
 
   @override
-  final Map<String, _i7.PageFactory> pagesMap = {
+  final Map<String, _i8.PageFactory> pagesMap = {
     Login.name: (routeData) {
       final args = routeData.argsAs<LoginArgs>(orElse: () => const LoginArgs());
-      return _i7.MaterialPageX<dynamic>(
+      return _i8.MaterialPageX<dynamic>(
           routeData: routeData, child: _i1.Login_Page(key: args.key));
     },
     Signup.name: (routeData) {
-      return _i7.MaterialPageX<dynamic>(
+      return _i8.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i2.SignUp_Page());
     },
     Main_View.name: (routeData) {
-      return _i7.MaterialPageX<dynamic>(
+      return _i8.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i3.Main_View());
     },
     DashboardView.name: (routeData) {
       final args = routeData.argsAs<DashboardViewArgs>(
           orElse: () => const DashboardViewArgs());
-      return _i7.MaterialPageX<dynamic>(
+      return _i8.MaterialPageX<dynamic>(
           routeData: routeData, child: _i4.DashboardView(key: args.key));
     },
     NutritionView.name: (routeData) {
-      return _i7.MaterialPageX<dynamic>(
+      return _i8.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i5.NutritionView());
     },
+    WorkoutView.name: (routeData) {
+      return _i8.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i6.WorkoutView());
+    },
     SettingsView.name: (routeData) {
-      return _i7.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i6.SettingsView());
+      return _i8.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i7.SettingsView());
     }
   };
 
   @override
-  List<_i7.RouteConfig> get routes => [
-        _i7.RouteConfig('/#redirect',
+  List<_i8.RouteConfig> get routes => [
+        _i8.RouteConfig('/#redirect',
             path: '/', redirectTo: 'auth', fullMatch: true),
-        _i7.RouteConfig(Login.name, path: 'auth'),
-        _i7.RouteConfig(Signup.name, path: 'auth/signup'),
-        _i7.RouteConfig(Main_View.name, path: '/mainView', children: [
-          _i7.RouteConfig(DashboardView.name,
+        _i8.RouteConfig(Login.name, path: 'auth'),
+        _i8.RouteConfig(Signup.name, path: 'auth/signup'),
+        _i8.RouteConfig(Main_View.name, path: '/mainView', children: [
+          _i8.RouteConfig(DashboardView.name,
               path: 'DashBoard', parent: Main_View.name),
-          _i7.RouteConfig(NutritionView.name,
+          _i8.RouteConfig(NutritionView.name,
               path: 'Nutrition', parent: Main_View.name),
-          _i7.RouteConfig(SettingsView.name,
+          _i8.RouteConfig(WorkoutView.name,
+              path: 'Workout', parent: Main_View.name),
+          _i8.RouteConfig(SettingsView.name,
               path: 'Settings', parent: Main_View.name)
         ])
       ];
@@ -74,8 +81,8 @@ class AppRouter extends _i7.RootStackRouter {
 
 /// generated route for
 /// [_i1.Login_Page]
-class Login extends _i7.PageRouteInfo<LoginArgs> {
-  Login({_i8.Key? key})
+class Login extends _i8.PageRouteInfo<LoginArgs> {
+  Login({_i9.Key? key})
       : super(Login.name, path: 'auth', args: LoginArgs(key: key));
 
   static const String name = 'Login';
@@ -84,7 +91,7 @@ class Login extends _i7.PageRouteInfo<LoginArgs> {
 class LoginArgs {
   const LoginArgs({this.key});
 
-  final _i8.Key? key;
+  final _i9.Key? key;
 
   @override
   String toString() {
@@ -94,7 +101,7 @@ class LoginArgs {
 
 /// generated route for
 /// [_i2.SignUp_Page]
-class Signup extends _i7.PageRouteInfo<void> {
+class Signup extends _i8.PageRouteInfo<void> {
   const Signup() : super(Signup.name, path: 'auth/signup');
 
   static const String name = 'Signup';
@@ -102,8 +109,8 @@ class Signup extends _i7.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i3.Main_View]
-class Main_View extends _i7.PageRouteInfo<void> {
-  const Main_View({List<_i7.PageRouteInfo>? children})
+class Main_View extends _i8.PageRouteInfo<void> {
+  const Main_View({List<_i8.PageRouteInfo>? children})
       : super(Main_View.name, path: '/mainView', initialChildren: children);
 
   static const String name = 'Main_View';
@@ -111,8 +118,8 @@ class Main_View extends _i7.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i4.DashboardView]
-class DashboardView extends _i7.PageRouteInfo<DashboardViewArgs> {
-  DashboardView({_i8.Key? key})
+class DashboardView extends _i8.PageRouteInfo<DashboardViewArgs> {
+  DashboardView({_i9.Key? key})
       : super(DashboardView.name,
             path: 'DashBoard', args: DashboardViewArgs(key: key));
 
@@ -122,7 +129,7 @@ class DashboardView extends _i7.PageRouteInfo<DashboardViewArgs> {
 class DashboardViewArgs {
   const DashboardViewArgs({this.key});
 
-  final _i8.Key? key;
+  final _i9.Key? key;
 
   @override
   String toString() {
@@ -132,15 +139,23 @@ class DashboardViewArgs {
 
 /// generated route for
 /// [_i5.NutritionView]
-class NutritionView extends _i7.PageRouteInfo<void> {
+class NutritionView extends _i8.PageRouteInfo<void> {
   const NutritionView() : super(NutritionView.name, path: 'Nutrition');
 
   static const String name = 'NutritionView';
 }
 
 /// generated route for
-/// [_i6.SettingsView]
-class SettingsView extends _i7.PageRouteInfo<void> {
+/// [_i6.WorkoutView]
+class WorkoutView extends _i8.PageRouteInfo<void> {
+  const WorkoutView() : super(WorkoutView.name, path: 'Workout');
+
+  static const String name = 'WorkoutView';
+}
+
+/// generated route for
+/// [_i7.SettingsView]
+class SettingsView extends _i8.PageRouteInfo<void> {
   const SettingsView() : super(SettingsView.name, path: 'Settings');
 
   static const String name = 'SettingsView';

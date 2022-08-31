@@ -4,6 +4,7 @@ import 'package:FitStack/presentation/login/presentation/login_page.dart';
 import 'package:FitStack/presentation/nutrition/presentation/nutrition_view.dart';
 import 'package:FitStack/presentation/settings/settings_view.dart';
 import 'package:FitStack/presentation/signup/presentation/signup_page.dart';
+import 'package:FitStack/presentation/workout/presentation/workout_view.dart';
 import 'package:auto_route/annotations.dart';
 
 @MaterialAutoRouter(
@@ -34,6 +35,11 @@ import 'package:auto_route/annotations.dart';
         AutoRoute(
           path: 'Nutrition',
           page: NutritionView,
+          initial: false,
+        ),
+        AutoRoute(
+          path: 'Workout',
+          page: WorkoutView,
           initial: false,
         ),
         AutoRoute(
