@@ -1,10 +1,8 @@
-import 'package:FitStack/presentation/workout/presentation/organisms/custom_tab_view.dart';
-import 'package:FitStack/presentation/workout/presentation/organisms/history_tab_view.dart';
-import 'package:FitStack/presentation/workout/presentation/organisms/workout_tab_view.dart';
+import 'package:FitStack/presentation/relationship/presentation/organism/trainer_relationship_view.dart';
 import 'package:flutter/material.dart';
 
-class WorkoutView extends StatelessWidget {
-  const WorkoutView({Key? key}) : super(key: key);
+class RelationshipView extends StatelessWidget {
+  const RelationshipView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -42,19 +40,20 @@ class WorkoutView extends StatelessWidget {
                     color: Theme.of(context).colorScheme.primary,
                   ),
                   tabs: [
-                    Text('Saved'),
-                    Text('Custom'),
-                    Text('History'),
+                    Text('Groups'),
+                    Text('Friends'),
+                    Text('Trainers'),
                   ],
                 ),
               ),
             ),
+            SizedBox(height: 15),
             Expanded(
               child: TabBarView(
                 children: [
-                  WorkoutTabView(),
-                  CustomTabView(),
-                  HistoryTabView(),
+                  TrainerRelationshipView(),
+                  TrainerRelationshipView(),
+                  TrainerRelationshipView(),
                 ],
               ),
             ),

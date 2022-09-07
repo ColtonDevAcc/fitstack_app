@@ -69,7 +69,7 @@ class _Main_ViewState extends State<Main_View> {
         DashboardView(),
         NutritionView(),
         WorkoutView(),
-        DashboardView(),
+        RelationshipView(),
         SettingsView(),
       ],
     );

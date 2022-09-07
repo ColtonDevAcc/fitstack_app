@@ -206,7 +206,7 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_User with DiagnosticableTreeMixin implements _User {
+class _$_User implements _User {
   const _$_User(
       {required this.user_id,
       required this.email,
@@ -243,25 +243,8 @@ class _$_User with DiagnosticableTreeMixin implements _User {
   final int? age;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'User(user_id: $user_id, email: $email, display_name: $display_name, first_name: $first_name, last_name: $last_name, date_of_birth: $date_of_birth, email_verified: $email_verified, phone_number: $phone_number, photo_url: $photo_url, age: $age)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'User'))
-      ..add(DiagnosticsProperty('user_id', user_id))
-      ..add(DiagnosticsProperty('email', email))
-      ..add(DiagnosticsProperty('display_name', display_name))
-      ..add(DiagnosticsProperty('first_name', first_name))
-      ..add(DiagnosticsProperty('last_name', last_name))
-      ..add(DiagnosticsProperty('date_of_birth', date_of_birth))
-      ..add(DiagnosticsProperty('email_verified', email_verified))
-      ..add(DiagnosticsProperty('phone_number', phone_number))
-      ..add(DiagnosticsProperty('photo_url', photo_url))
-      ..add(DiagnosticsProperty('age', age));
   }
 
   @override
