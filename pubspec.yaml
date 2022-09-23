@@ -63,14 +63,13 @@ dependencies:
   auto_route: ^4.0.1
 
   #firebase
-  firebase_dynamic_links:
   firebase_core: ^1.19.1
-  firebase_remote_config:
   firebase_crashlytics:
   firebase_analytics:
   firebase_performance:
-  firebase_auth:
   firebase_storage: ^10.3.3
+  firebase_dynamic_links: ^4.3.8
+  firebase_auth: ^3.10.0
 
 dev_dependencies:
   flutter_test:
