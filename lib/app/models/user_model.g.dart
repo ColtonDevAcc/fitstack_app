@@ -7,9 +7,9 @@ part of 'user_model.dart';
 // **************************************************************************
 
 User _$UserFromJson(Map<String, dynamic> json) => User(
-      updated_at: json['updated_at'] as String,
-      created_at: json['created_at'] as String,
-      refresh_token: json['refresh_token'] as String,
+      updated_at: json['updated_at'] as String?,
+      created_at: json['created_at'] as String?,
+      refresh_token: json['refresh_token'] as String?,
       user_friendships: json['user_friendships'] as List<dynamic>?,
       user_id: json['user_id'] as String,
       email: json['email'] as String,

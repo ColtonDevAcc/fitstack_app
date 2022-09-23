@@ -17,14 +17,14 @@ class User extends Equatable {
   final List? user_friendships;
   final bool email_verified;
   final int? age;
-  final String updated_at;
-  final String created_at;
-  final String refresh_token;
+  final String? updated_at;
+  final String? created_at;
+  final String? refresh_token;
 
   User({
-    required this.updated_at,
-    required this.created_at,
-    required this.refresh_token,
+    this.updated_at,
+    this.created_at,
+    this.refresh_token,
     this.user_friendships,
     required this.user_id,
     required this.email,
