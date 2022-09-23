@@ -21,8 +21,7 @@ import 'package:image_picker/image_picker.dart';
 part 'signup_state.dart';
 
 class SignupCubit extends Cubit<SignupState> {
-  final AppBloc appBloc;
-  SignupCubit({required this.appBloc, required AuthenticationRepository authenticationRepository}) : super(SignupState());
+  SignupCubit({required AuthenticationRepository authenticationRepository}) : super(SignupState());
 
   void usernameChanged(String username) {
     List<GlobalKey<FormBuilderState>>? formKeyList = state.formKey;

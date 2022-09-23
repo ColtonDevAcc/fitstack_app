@@ -24,13 +24,7 @@ class _SignUp_PageState extends State<SignUp_Page> {
       body: SafeArea(
         child: Padding(
           padding: Platform.isAndroid ? const EdgeInsets.fromLTRB(0, 10, 0, 10) : EdgeInsets.all(0),
-          child: BlocProvider(
-            create: (context) => SignupCubit(
-              appBloc: BlocProvider.of<AppBloc>(context),
-              authenticationRepository: context.read<AuthenticationRepository>(),
-            ),
-            child: SignUp_View(),
-          ),
+          child: SignUp_View(),
         ),
       ),
     );

@@ -1,29 +1,20 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:FitStack/app/cache/auth_cache.dart';
+import 'package:FitStack/app/injection/dependency_injection.dart';
 import 'package:FitStack/app/models/user_model.dart';
+import 'package:FitStack/app/repository/user_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart' as fb;
 import 'package:flutter/foundation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:dio/dio.dart';
-import 'package:FitStack/app/models/user_model.dart' as fs;
-
-enum AuthenticationStatus {
-  authenticated,
-  unauthenticated,
-  unknown,
-  authenticating,
-}
 
 class AuthenticationRepository {
-  final fb.FirebaseAuth _firebaseAuth;
-  final GoogleSignIn _googleSignIn;
-  final AuthCache _cache;
-  final controller = StreamController<AuthenticationStatus>();
+  final controller = StreamController<AuthStream>.broadcast();
   final Dio dio = Dio();
   final storage = new FlutterSecureStorage();
-  static const userCacheKey = 'us';
   static String mainUrl = kDebugMode ? "https://dev.fitstack.io" : "https://api.fitstack.io";
   static String loginUrl = "/user/login";
 
@@ -31,78 +22,82 @@ class AuthenticationRepository {
     fb.FirebaseAuth? firebaseAuth,
     GoogleSignIn? googleSignIn,
     AuthCache? authCache,
-  })  : _firebaseAuth = firebaseAuth ?? fb.FirebaseAuth.instance,
-        _googleSignIn = googleSignIn ?? GoogleSignIn.standard(),
-        _cache = authCache ?? AuthCache();
+  });
 
-  Stream<AuthenticationStatus> get status async* {
-    await Future<void>.delayed(const Duration(seconds: 1));
-    yield AuthenticationStatus.unauthenticated;
+  Future<void> persistToken({token: String}) async {
+    await storage.write(key: 'token', value: token);
+  }
+
+  //! token section start
+  Stream<AuthStream> get status async* {
+    yield AuthStream(user: User.empty(), status: AuthenticationStatus.unauthenticated);
     yield* controller.stream;
   }
 
-  Future<fs.User> logInWithEmailAndPassword({email: String, password: String}) {
-    return _firebaseAuth.signInWithEmailAndPassword(email: email, password: password).then(
-          (value) => value.user != null ? fs.User.fromFirebase(value.user!) : fs.User.empty(),
-        );
-  }
-
-  Stream<fs.User> get user {
-    return _firebaseAuth.authStateChanges().map((firebaseUser) {
-      final user = firebaseUser == null ? User.empty() : User.fromFirebase(firebaseUser);
-      _cache.writeToCache(key: userCacheKey, value: user.toString());
-      return user;
-    });
-  }
-
-  User get currentUser {
-    return _cache.readUserFromCache();
-  }
-
-  Future<void> logOut() async {
+  Future<void> persistLogin() async {
     try {
-      await Future.wait([
-        _firebaseAuth.signOut(),
-        // _googleSignIn.signOut(),
-      ]);
-      () => controller.add(AuthenticationStatus.unauthenticated);
+      String? token = await getToken();
+      if (token != null && token != "") {
+        User? user = await getIt<UserRepository>().getUser(token: token);
+        if (user != null && user != User.empty()) {
+          controller.add(AuthStream(user: user, status: AuthenticationStatus.authenticated));
+        }
+      }
     } catch (e) {
-      () => controller.add(AuthenticationStatus.unknown);
-      throw e;
+      log('error: ${e}');
+      controller.add(AuthStream(user: User.empty(), status: AuthenticationStatus.unauthenticated));
     }
   }
 
-  Future<String?> hasToken() async {
+  Future<String?> getToken() async {
+    return await storage.read(key: "token");
+  }
+
+  Future<bool> hasToken() async {
     var value = await storage.read(key: 'token');
 
     if (value != null) {
-      return value;
+      return true;
     } else {
-      return null;
+      return false;
     }
-  }
-
-  Future<void> persistToken({token: String}) async {
-    var value = await storage.write(key: 'token', value: token);
   }
 
   Future<void> deleteToken() async {
     storage.delete(key: 'token');
     storage.deleteAll();
   }
+  //! token section end
 
-  Future<String> login({email: String, password: String}) async {
-    Response response = await dio.post(
-      loginUrl,
-      data: {
-        "email": email,
-        "password": password,
-      },
-    );
+  Future<void> logInWithEmailAndPassword({email: String, password: String}) async {
+    try {
+      fb.User fbUser = await fb.FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password).then((value) => value.user!);
+      String userToken = await fbUser.getIdToken();
 
-    () => controller.add(AuthenticationStatus.authenticated);
-    return response.data["token"];
+      Response response = await dio.post(
+        loginUrl,
+        data: {"token": userToken},
+      );
+
+      controller.add(AuthStream(user: response.data["user"], status: AuthenticationStatus.authenticated));
+      persistToken(token: fbUser.refreshToken);
+    } catch (e) {
+      controller.add(AuthStream(user: User.empty(), status: AuthenticationStatus.unauthenticated));
+    }
+  }
+
+  void logOut() async {
+    await deleteToken();
+    controller.add(AuthStream(user: User.empty(), status: AuthenticationStatus.unauthenticated));
   }
 
   void dispose() => controller.close();
 }
+
+class AuthStream {
+  User user;
+  AuthenticationStatus status;
+  AuthStream({required this.user, required this.status});
+}
+
+enum AuthenticationStatus { unknown, authenticated, unauthenticated }

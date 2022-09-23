@@ -1,3 +1,4 @@
+import 'package:FitStack/presentation/relationship/presentation/organism/friends_relationship_view.dart';
 import 'package:FitStack/presentation/relationship/presentation/organism/trainer_relationship_view.dart';
 import 'package:flutter/material.dart';
 
@@ -52,7 +53,7 @@ class RelationshipView extends StatelessWidget {
               child: TabBarView(
                 children: [
                   TrainerRelationshipView(),
-                  TrainerRelationshipView(),
+                  FriendsRelationshipView(),
                   TrainerRelationshipView(),
                 ],
               ),

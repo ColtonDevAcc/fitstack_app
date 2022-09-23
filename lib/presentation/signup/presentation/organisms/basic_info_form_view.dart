@@ -18,14 +18,13 @@ class BasicInfoFormView extends StatelessWidget {
     return Column(
       children: [
         SignupFormHeader(
-          subtitle: "Lets configure your account",
+          subtitle: "Enter you basic information",
           text: "Lets configure your account",
           icon: FontAwesomeIcons.weightScale,
         ),
         BlocBuilder<SignupCubit, SignupState>(
           buildWhen: (previous, current) =>
-              previous.formKey?[previous.index].currentState?.value !=
-              current.formKey?[current.index].currentState?.value,
+              previous.formKey?[previous.index].currentState?.value != current.formKey?[current.index].currentState?.value,
           builder: (context, state) {
             var formKey = state.formKey?[state.index];
             return Expanded(
@@ -56,8 +55,7 @@ class BasicInfoFormView extends StatelessWidget {
                             validator: FormBuilderValidators.compose([
                               FormBuilderValidators.required(errorText: "required"),
                             ]),
-                            onChanged: (value) => BlocProvider.of<SignupCubit>(context)
-                                .heightFtChanged(int.tryParse(value ?? "")),
+                            onChanged: (value) => BlocProvider.of<SignupCubit>(context).heightFtChanged(int.tryParse(value ?? "")),
                           ),
                         ),
                         SizedBox(width: 15),
@@ -72,8 +70,7 @@ class BasicInfoFormView extends StatelessWidget {
                             validator: FormBuilderValidators.compose([
                               FormBuilderValidators.required(errorText: "required"),
                             ]),
-                            onChanged: (value) => BlocProvider.of<SignupCubit>(context)
-                                .heightInchChanged(int.tryParse(value ?? "")),
+                            onChanged: (value) => BlocProvider.of<SignupCubit>(context).heightInchChanged(int.tryParse(value ?? "")),
                           ),
                         ),
                       ],
@@ -90,8 +87,7 @@ class BasicInfoFormView extends StatelessWidget {
                         FormBuilderValidators.max(500, errorText: "must be less than 500 lbs"),
                         FormBuilderValidators.min(90, errorText: "must be greater than 90 lbs")
                       ]),
-                      onChanged: (value) => BlocProvider.of<SignupCubit>(context)
-                          .weightChanged(int.tryParse(value ?? "0")?.toDouble()),
+                      onChanged: (value) => BlocProvider.of<SignupCubit>(context).weightChanged(int.tryParse(value ?? "0")?.toDouble()),
                     ),
                     Spacer(flex: 2),
                   ],

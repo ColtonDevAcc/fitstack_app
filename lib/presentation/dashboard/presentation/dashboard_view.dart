@@ -34,8 +34,10 @@ class DashboardView extends StatelessWidget {
                   Text(
                     "HOW DOES YOUR DAY LOOK?",
                     //TODO: need to use auto resize package
-                    textScaleFactor: 1.3,
-                    style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: Theme.of(context).colorScheme.primary),
+                    style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                          color: Theme.of(context).colorScheme.primary,
+                          fontWeight: FontWeight.bold,
+                        ),
                   ),
                 ],
               ),

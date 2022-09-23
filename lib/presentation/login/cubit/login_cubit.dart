@@ -1,6 +1,3 @@
-import 'dart:developer';
-
-import 'package:FitStack/app/models/user_model.dart';
 import 'package:FitStack/app/repository/auth_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
@@ -8,9 +5,9 @@ import 'package:firebase_auth/firebase_auth.dart' as fb;
 part 'login_state.dart';
 
 class LoginCubit extends Cubit<LoginState> {
-  LoginCubit(this._authenticationRepository) : super(LoginState());
+  final AuthenticationRepository authenticationRepository;
 
-  final AuthenticationRepository _authenticationRepository;
+  LoginCubit({required this.authenticationRepository}) : super(LoginState());
 
   void emailChanged(String value) {
     emit(
@@ -28,19 +25,16 @@ class LoginCubit extends Cubit<LoginState> {
     );
   }
 
-  Future<User?> logInWithCredentials() async {
+  Future<void> logInWithCredentials() async {
     try {
       emit(state.copyWith(step: AuthStep.Loading));
 
-      User? user = await _authenticationRepository.logInWithEmailAndPassword(
+      await authenticationRepository.logInWithEmailAndPassword(
         email: state.email,
         password: state.password,
       );
-      String token = await fb.FirebaseAuth.instance.currentUser!.getIdToken();
-      log("token: ${token} uid: ${user.user_id}");
-      emit(state.copyWith(step: AuthStep.Authorized));
 
-      return user;
+      emit(state.copyWith(step: AuthStep.Authorized));
     } catch (e) {
       state.errorMessage;
 
@@ -49,26 +43,4 @@ class LoginCubit extends Cubit<LoginState> {
       return null;
     }
   }
-
-// //TODO: Login with google
-//   Future<void> logInWithGoogle() async {
-//     emit(
-//       state.copyWith(),
-//     );
-//     try {
-//       await _authenticationRepository.logInWithGoogle();
-//       emit(
-//         state.copyWith(),
-//       );
-//     } on LogInWithGoogleFailure catch (e) {
-//       emit(
-//         state.copyWith(
-//           errorMessage: e.message,
-//         ),
-//       );
-//     } catch (_) {
-//       emit(state.copyWith());
-//     }
-//   }
-
 }

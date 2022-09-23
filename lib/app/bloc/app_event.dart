@@ -9,7 +9,8 @@ abstract class AppEvent extends Equatable {
 
 class AuthenticationStatusChanged extends AppEvent {
   const AuthenticationStatusChanged(this.status);
-  final AuthenticationStatus status;
+
+  final AuthStream status;
 
   @override
   List<Object> get props => [status];

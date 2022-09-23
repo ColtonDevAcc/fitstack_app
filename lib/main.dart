@@ -1,4 +1,7 @@
 import 'package:FitStack/app/bloc/app_bloc.dart';
+import 'package:FitStack/app/injection/dependency_injection.dart';
+import 'package:FitStack/app/injection/development_dependencies.dart';
+import 'package:FitStack/app/injection/state_providers.dart';
 import 'package:FitStack/app/repository/auth_repository.dart';
 import 'package:FitStack/app/routing/appRouter.gr.dart';
 import 'package:FitStack/app/theme/color_Theme.dart';
@@ -10,15 +13,13 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'firebase_options.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  final storage = await HydratedStorage.build(
-    storageDirectory: kIsWeb ? HydratedStorage.webStorageDirectory : await getTemporaryDirectory(),
-  );
+  final storage = await HydratedStorage.build(storageDirectory: kIsWeb ? HydratedStorage.webStorageDirectory : await getTemporaryDirectory());
+  await DevelopmentDependencies().init();
 
   HydratedBlocOverrides.runZoned(
     () async {
@@ -26,7 +27,7 @@ Future<void> main() async {
         options: DefaultFirebaseOptions.currentPlatform,
       );
       final authenticationRepository = AuthenticationRepository();
-      await authenticationRepository.user.first;
+      await getIt<AuthenticationRepository>().persistLogin();
       FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
       runApp(
         MyApp(authenticationRepository: authenticationRepository),
@@ -48,32 +49,21 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RepositoryProvider.value(
-      value: authenticationRepository,
-      child: MultiBlocProvider(
-        providers: [
-          BlocProvider(
-            create: (context) => AppBloc(
-              authenticationRepository: authenticationRepository,
-            ),
-          ),
-        ],
-        child: MaterialApp.router(
-          //TODO: make this bloc dep injec
-          theme: FSColorTheme.Light(context),
-          darkTheme: FSColorTheme.Dark(context),
-          useInheritedMediaQuery: true,
-          //!
-          routerDelegate: _appRouter.delegate(
-            navigatorObservers: () => [
-              AutoRouteObserver(),
-              observer,
-              FirebaseAnalyticsObserver(analytics: analytics),
-            ],
-          ),
-          routeInformationParser: _appRouter.defaultRouteParser(),
-          routeInformationProvider: _appRouter.routeInfoProvider(),
+    return StateProviders(
+      child: MaterialApp.router(
+        //TODO: make this bloc dep injec
+        theme: FSColorTheme.Light(context),
+        darkTheme: FSColorTheme.Dark(context),
+        useInheritedMediaQuery: true,
+        routerDelegate: _appRouter.delegate(
+          navigatorObservers: () => [
+            AutoRouteObserver(),
+            observer,
+            FirebaseAnalyticsObserver(analytics: analytics),
+          ],
         ),
+        routeInformationParser: _appRouter.defaultRouteParser(),
+        routeInformationProvider: _appRouter.routeInfoProvider(),
       ),
     );
   }
