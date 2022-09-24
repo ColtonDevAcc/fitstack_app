@@ -63,10 +63,10 @@ dependencies:
   auto_route: ^4.0.1
 
   #firebase
-  firebase_core: ^1.19.1
-  firebase_crashlytics:
-  firebase_analytics:
-  firebase_performance:
+  firebase_core: ^1.23.0
+  firebase_crashlytics: ^2.8.11
+  firebase_analytics: ^9.3.6
+  firebase_performance: ^0.8.3+1
   firebase_storage: ^10.3.3
   firebase_dynamic_links: ^4.3.8
   firebase_auth: ^3.10.0
