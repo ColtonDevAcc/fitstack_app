@@ -26,9 +26,6 @@ PODS:
   - Firebase/Performance (9.2.0):
     - Firebase/CoreOnly
     - FirebasePerformance (~> 9.2.0)
-  - Firebase/RemoteConfig (9.2.0):
-    - Firebase/CoreOnly
-    - FirebaseRemoteConfig (~> 9.2.0)
   - Firebase/Storage (9.2.0):
     - Firebase/CoreOnly
     - FirebaseStorage (~> 9.2.0)
@@ -36,7 +33,7 @@ PODS:
     - Firebase/Analytics (= 9.2.0)
     - firebase_core
     - Flutter
-  - firebase_auth (3.4.1):
+  - firebase_auth (3.10.0):
     - Firebase/Auth (= 9.2.0)
     - firebase_core
     - Flutter
@@ -47,16 +44,12 @@ PODS:
     - Firebase/Crashlytics (= 9.2.0)
     - firebase_core
     - Flutter
-  - firebase_dynamic_links (4.3.1):
+  - firebase_dynamic_links (4.3.8):
     - Firebase/DynamicLinks (= 9.2.0)
     - firebase_core
     - Flutter
   - firebase_performance (0.8.1-1):
     - Firebase/Performance (= 9.2.0)
-    - firebase_core
-    - Flutter
-  - firebase_remote_config (2.0.11):
-    - Firebase/RemoteConfig (= 9.2.0)
     - firebase_core
     - Flutter
   - firebase_storage (10.3.3):
@@ -127,7 +120,7 @@ PODS:
     - GoogleUtilities/ISASwizzler (~> 7.7)
     - GoogleUtilities/MethodSwizzler (~> 7.7)
     - nanopb (< 2.30910.0, >= 2.30908.0)
-  - FirebaseRemoteConfig (9.2.0):
+  - FirebaseRemoteConfig (9.6.0):
     - FirebaseABTesting (~> 9.0)
     - FirebaseCore (~> 9.0)
     - FirebaseInstallations (~> 9.0)
@@ -223,7 +216,6 @@ DEPENDENCIES:
   - firebase_crashlytics (from `.symlinks/plugins/firebase_crashlytics/ios`)
   - firebase_dynamic_links (from `.symlinks/plugins/firebase_dynamic_links/ios`)
   - firebase_performance (from `.symlinks/plugins/firebase_performance/ios`)
-  - firebase_remote_config (from `.symlinks/plugins/firebase_remote_config/ios`)
   - firebase_storage (from `.symlinks/plugins/firebase_storage/ios`)
   - Flutter (from `Flutter`)
   - flutter_secure_storage (from `.symlinks/plugins/flutter_secure_storage/ios`)
@@ -277,8 +269,6 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/firebase_dynamic_links/ios"
   firebase_performance:
     :path: ".symlinks/plugins/firebase_performance/ios"
-  firebase_remote_config:
-    :path: ".symlinks/plugins/firebase_remote_config/ios"
   firebase_storage:
     :path: ".symlinks/plugins/firebase_storage/ios"
   Flutter:
@@ -301,12 +291,11 @@ SPEC CHECKSUMS:
   device_info_plus: e5c5da33f982a436e103237c0c85f9031142abed
   Firebase: 4ba896cb8e5105d4b9e247e1c1b6222b548df55a
   firebase_analytics: 62f21c400c1fe65369985fa8ba68b5ac1d939bb8
-  firebase_auth: 1093e604044edc89df1e9119daeb82a5b0ef5fac
+  firebase_auth: 0bbb4bc0aa16092451b380bc3ad37b009a331033
   firebase_core: 9e09bbfbf5467e459822850732f5fb648f5b1927
   firebase_crashlytics: 8f38d64d3fb4d0b1976637e8a119366dbf95f3af
-  firebase_dynamic_links: 02b1a799260c4509fe659ae58c4f2ecf29bf6263
+  firebase_dynamic_links: 52a9f95dfa3fecd70c8ce79ef2e98041eadbe819
   firebase_performance: 6c932fe63be1fd81140e19fd8bc045477aa65ea7
-  firebase_remote_config: 03b4b7b047e586183109c66c32aed394ccb8a89f
   firebase_storage: 4d309c9a9f206941b43af22431cb8ef674dd31ce
   FirebaseABTesting: 61826730ce9eee8781ba99a2b3420e9bce148dc9
   FirebaseAnalytics: af5a03a8dff7648c7b8486f6a78b1368e0268dd3
@@ -321,7 +310,7 @@ SPEC CHECKSUMS:
   FirebaseDynamicLinks: f576ccfba05f2813e3679d48ccae5bcfff5714fc
   FirebaseInstallations: 0a115432c4e223c5ab20b0dbbe4cbefa793a0e8e
   FirebasePerformance: 5a8d2a9e645a398dfcc02657853f4b946675d5d4
-  FirebaseRemoteConfig: 16e29297f0dd0c7d2415c4506d614fe0b54875d1
+  FirebaseRemoteConfig: ee09d77a7d7c7e31da6a0d1cf956cd611c85609c
   FirebaseStorage: b47b4a04062ab07911063571241c103a8a2a2332
   FirebaseStorageInternal: 81d8a597324ccd06c41a43c5700bc1185a2fc328
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
