@@ -22,9 +22,7 @@ class WorkoutView extends StatelessWidget {
               child: Text(
                 "MY WORKOUTS?",
                 textScaleFactor: 1.3,
-                style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-                      color: Theme.of(context).colorScheme.onBackground,
-                    ),
+                style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: Theme.of(context).colorScheme.onBackground),
               ),
             ),
             Container(
