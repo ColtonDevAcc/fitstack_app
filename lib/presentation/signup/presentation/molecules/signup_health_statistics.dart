@@ -14,16 +14,17 @@ class Signup_health_Statistics extends StatelessWidget {
       buildWhen: (previous, current) => previous.healthData != current.healthData,
       builder: (context, state) {
         var formKey = state.formKey?[state.index];
+        formKey?.currentState?.validate();
         if (state.healthData == null) {
           BlocProvider.of<SignupCubit>(context).healthDataChanged(null);
         }
         return FormBuilder(
-          autovalidateMode: AutovalidateMode.always,
+          // autovalidateMode: AutovalidateMode.always,
           key: formKey,
           child: FormBuilderField<List<HealthDataPoint>?>(
             name: 'healthData',
             initialValue: state.healthData,
-            validator: (value) => value == null ? "Please import your health data" : null,
+            // validator: (value) => value == null ? "Please import your health data" : null,
             builder: (ffState) {
               return Expanded(
                 child: GestureDetector(

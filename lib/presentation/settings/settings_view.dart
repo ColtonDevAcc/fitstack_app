@@ -15,8 +15,7 @@ class SettingsView extends StatefulWidget {
 
 class _SettingsViewState extends State<SettingsView> {
   getToken() async {
-    var token = await FirebaseAuth.instance.currentUser?.getIdToken();
-    log("$token");
+    log("refresh token ${context.read<AppBloc>().state.user!.refresh_token}");
   }
 
   @override

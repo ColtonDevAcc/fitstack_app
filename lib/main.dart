@@ -3,6 +3,7 @@ import 'package:FitStack/app/injection/dependency_injection.dart';
 import 'package:FitStack/app/injection/development_dependencies.dart';
 import 'package:FitStack/app/injection/state_providers.dart';
 import 'package:FitStack/app/repository/auth_repository.dart';
+import 'package:FitStack/app/repository/user_repository.dart';
 import 'package:FitStack/app/routing/appRouter.gr.dart';
 import 'package:FitStack/app/theme/color_Theme.dart';
 import 'package:auto_route/auto_route.dart';
@@ -11,6 +12,7 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:get_it/get_it.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'firebase_options.dart';
 import 'package:path_provider/path_provider.dart';
@@ -26,11 +28,10 @@ Future<void> main() async {
       await Firebase.initializeApp(
         options: DefaultFirebaseOptions.currentPlatform,
       );
-      final authenticationRepository = AuthenticationRepository();
-      await getIt<AuthenticationRepository>().persistLogin();
+
       FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
       runApp(
-        MyApp(authenticationRepository: authenticationRepository),
+        MyApp(),
       );
     },
     storage: storage,
@@ -39,9 +40,7 @@ Future<void> main() async {
 }
 
 class MyApp extends StatelessWidget {
-  final AuthenticationRepository authenticationRepository;
-
-  MyApp({required this.authenticationRepository, key}) : super(key: key);
+  MyApp({key}) : super(key: key);
 
   static FirebaseAnalytics analytics = FirebaseAnalytics.instance;
   static FirebaseAnalyticsObserver observer = FirebaseAnalyticsObserver(analytics: analytics);
@@ -49,6 +48,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    getIt<AuthenticationRepository>().persistLogin();
+
     return StateProviders(
       child: MaterialApp.router(
         //TODO: make this bloc dep injec

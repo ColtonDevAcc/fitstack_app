@@ -1,7 +1,7 @@
+import 'package:FitStack/app/models/user_model.dart';
 import 'package:FitStack/app/repository/auth_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:firebase_auth/firebase_auth.dart' as fb;
 part 'login_state.dart';
 
 class LoginCubit extends Cubit<LoginState> {
@@ -29,12 +29,16 @@ class LoginCubit extends Cubit<LoginState> {
     try {
       emit(state.copyWith(step: AuthStep.Loading));
 
-      await authenticationRepository.logInWithEmailAndPassword(
+      User user = await authenticationRepository.logInWithEmailAndPassword(
         email: state.email,
         password: state.password,
       );
 
-      emit(state.copyWith(step: AuthStep.Authorized));
+      if (user == User.empty()) {
+        emit(state.copyWith(step: AuthStep.Authorized));
+      } else {
+        emit(state.copyWith(step: AuthStep.Error));
+      }
     } catch (e) {
       state.errorMessage;
 
