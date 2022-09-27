@@ -11,132 +11,143 @@
 // ignore_for_file: type=lint
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:auto_route/auto_route.dart' as _i9;
-import 'package:flutter/material.dart' as _i10;
+import 'package:auto_route/auto_route.dart' as _i10;
+import 'package:flutter/material.dart' as _i11;
 
 import '../../mainView.dart' as _i3;
-import '../../presentation/dashboard/presentation/dashboard_view.dart' as _i4;
+import '../../presentation/dashboard/presentation/dashboard_view.dart' as _i5;
 import '../../presentation/login/presentation/login_page.dart' as _i1;
-import '../../presentation/nutrition/presentation/nutrition_view.dart' as _i5;
+import '../../presentation/nutrition/presentation/nutrition_view.dart' as _i6;
+import '../../presentation/profile/presentation/profile_view.dart' as _i4;
 import '../../presentation/relationship/presentation/relationship_view.dart'
-    as _i8;
-import '../../presentation/settings/settings_view.dart' as _i7;
+    as _i9;
+import '../../presentation/settings/settings_view.dart' as _i8;
 import '../../presentation/signup/presentation/signup_page.dart' as _i2;
-import '../../presentation/workout/presentation/workout_view.dart' as _i6;
+import '../../presentation/workout/presentation/workout_view.dart' as _i7;
 
-class AppRouter extends _i9.RootStackRouter {
-  AppRouter([_i10.GlobalKey<_i10.NavigatorState>? navigatorKey])
+class AppRouter extends _i10.RootStackRouter {
+  AppRouter([_i11.GlobalKey<_i11.NavigatorState>? navigatorKey])
       : super(navigatorKey);
 
   @override
-  final Map<String, _i9.PageFactory> pagesMap = {
+  final Map<String, _i10.PageFactory> pagesMap = {
     Login.name: (routeData) {
       final args = routeData.argsAs<LoginArgs>(orElse: () => const LoginArgs());
-      return _i9.MaterialPageX<dynamic>(
+      return _i10.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i1.Login_Page(key: args.key),
       );
     },
     Signup.name: (routeData) {
-      return _i9.MaterialPageX<dynamic>(
+      return _i10.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i2.SignUp_Page(),
       );
     },
     Main_View.name: (routeData) {
-      return _i9.MaterialPageX<dynamic>(
+      return _i10.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i3.Main_View(),
+      );
+    },
+    Profile.name: (routeData) {
+      return _i10.MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: const _i4.ProfileView(),
       );
     },
     DashboardView.name: (routeData) {
       final args = routeData.argsAs<DashboardViewArgs>(
           orElse: () => const DashboardViewArgs());
-      return _i9.MaterialPageX<dynamic>(
+      return _i10.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i4.DashboardView(key: args.key),
+        child: _i5.DashboardView(key: args.key),
       );
     },
     NutritionView.name: (routeData) {
-      return _i9.MaterialPageX<dynamic>(
+      return _i10.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i5.NutritionView(),
+        child: const _i6.NutritionView(),
       );
     },
     WorkoutView.name: (routeData) {
-      return _i9.MaterialPageX<dynamic>(
+      return _i10.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i6.WorkoutView(),
+        child: const _i7.WorkoutView(),
       );
     },
     SettingsView.name: (routeData) {
-      return _i9.MaterialPageX<dynamic>(
+      return _i10.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i7.SettingsView(),
+        child: const _i8.SettingsView(),
       );
     },
     RelationshipView.name: (routeData) {
-      return _i9.MaterialPageX<dynamic>(
+      return _i10.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i8.RelationshipView(),
+        child: const _i9.RelationshipView(),
       );
     },
   };
 
   @override
-  List<_i9.RouteConfig> get routes => [
-        _i9.RouteConfig(
+  List<_i10.RouteConfig> get routes => [
+        _i10.RouteConfig(
           '/#redirect',
           path: '/',
           redirectTo: 'auth',
           fullMatch: true,
         ),
-        _i9.RouteConfig(
+        _i10.RouteConfig(
           Login.name,
           path: 'auth',
         ),
-        _i9.RouteConfig(
+        _i10.RouteConfig(
           Signup.name,
           path: 'auth/signup',
         ),
-        _i9.RouteConfig(
+        _i10.RouteConfig(
           Main_View.name,
           path: '/mainView',
           children: [
-            _i9.RouteConfig(
+            _i10.RouteConfig(
               DashboardView.name,
               path: 'DashBoard',
               parent: Main_View.name,
             ),
-            _i9.RouteConfig(
+            _i10.RouteConfig(
               NutritionView.name,
               path: 'Nutrition',
               parent: Main_View.name,
             ),
-            _i9.RouteConfig(
+            _i10.RouteConfig(
               WorkoutView.name,
               path: 'Workout',
               parent: Main_View.name,
             ),
-            _i9.RouteConfig(
+            _i10.RouteConfig(
               SettingsView.name,
               path: 'Settings',
               parent: Main_View.name,
             ),
-            _i9.RouteConfig(
+            _i10.RouteConfig(
               RelationshipView.name,
               path: 'Relationship',
               parent: Main_View.name,
             ),
           ],
         ),
+        _i10.RouteConfig(
+          Profile.name,
+          path: 'user/profile',
+        ),
       ];
 }
 
 /// generated route for
 /// [_i1.Login_Page]
-class Login extends _i9.PageRouteInfo<LoginArgs> {
-  Login({_i10.Key? key})
+class Login extends _i10.PageRouteInfo<LoginArgs> {
+  Login({_i11.Key? key})
       : super(
           Login.name,
           path: 'auth',
@@ -149,7 +160,7 @@ class Login extends _i9.PageRouteInfo<LoginArgs> {
 class LoginArgs {
   const LoginArgs({this.key});
 
-  final _i10.Key? key;
+  final _i11.Key? key;
 
   @override
   String toString() {
@@ -159,7 +170,7 @@ class LoginArgs {
 
 /// generated route for
 /// [_i2.SignUp_Page]
-class Signup extends _i9.PageRouteInfo<void> {
+class Signup extends _i10.PageRouteInfo<void> {
   const Signup()
       : super(
           Signup.name,
@@ -171,8 +182,8 @@ class Signup extends _i9.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i3.Main_View]
-class Main_View extends _i9.PageRouteInfo<void> {
-  const Main_View({List<_i9.PageRouteInfo>? children})
+class Main_View extends _i10.PageRouteInfo<void> {
+  const Main_View({List<_i10.PageRouteInfo>? children})
       : super(
           Main_View.name,
           path: '/mainView',
@@ -183,9 +194,21 @@ class Main_View extends _i9.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i4.DashboardView]
-class DashboardView extends _i9.PageRouteInfo<DashboardViewArgs> {
-  DashboardView({_i10.Key? key})
+/// [_i4.ProfileView]
+class Profile extends _i10.PageRouteInfo<void> {
+  const Profile()
+      : super(
+          Profile.name,
+          path: 'user/profile',
+        );
+
+  static const String name = 'Profile';
+}
+
+/// generated route for
+/// [_i5.DashboardView]
+class DashboardView extends _i10.PageRouteInfo<DashboardViewArgs> {
+  DashboardView({_i11.Key? key})
       : super(
           DashboardView.name,
           path: 'DashBoard',
@@ -198,7 +221,7 @@ class DashboardView extends _i9.PageRouteInfo<DashboardViewArgs> {
 class DashboardViewArgs {
   const DashboardViewArgs({this.key});
 
-  final _i10.Key? key;
+  final _i11.Key? key;
 
   @override
   String toString() {
@@ -207,8 +230,8 @@ class DashboardViewArgs {
 }
 
 /// generated route for
-/// [_i5.NutritionView]
-class NutritionView extends _i9.PageRouteInfo<void> {
+/// [_i6.NutritionView]
+class NutritionView extends _i10.PageRouteInfo<void> {
   const NutritionView()
       : super(
           NutritionView.name,
@@ -219,8 +242,8 @@ class NutritionView extends _i9.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i6.WorkoutView]
-class WorkoutView extends _i9.PageRouteInfo<void> {
+/// [_i7.WorkoutView]
+class WorkoutView extends _i10.PageRouteInfo<void> {
   const WorkoutView()
       : super(
           WorkoutView.name,
@@ -231,8 +254,8 @@ class WorkoutView extends _i9.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i7.SettingsView]
-class SettingsView extends _i9.PageRouteInfo<void> {
+/// [_i8.SettingsView]
+class SettingsView extends _i10.PageRouteInfo<void> {
   const SettingsView()
       : super(
           SettingsView.name,
@@ -243,8 +266,8 @@ class SettingsView extends _i9.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i8.RelationshipView]
-class RelationshipView extends _i9.PageRouteInfo<void> {
+/// [_i9.RelationshipView]
+class RelationshipView extends _i10.PageRouteInfo<void> {
   const RelationshipView()
       : super(
           RelationshipView.name,

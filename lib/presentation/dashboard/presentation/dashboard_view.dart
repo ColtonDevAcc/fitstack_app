@@ -1,3 +1,4 @@
+import 'package:FitStack/presentation/dashboard/presentation/atoms/profile_circular_avatar.dart';
 import 'package:FitStack/presentation/dashboard/presentation/molecules/user_goal_graphs_list.dart';
 import 'package:FitStack/presentation/dashboard/presentation/molecules/workout_recommendations%20_list.dart';
 import 'package:FitStack/presentation/dashboard/presentation/molecules/statistics_dashboard.dart';
@@ -29,6 +30,7 @@ class DashboardView extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
@@ -36,6 +38,10 @@ class DashboardView extends StatelessWidget {
                     //TODO: need to use auto resize package
                     textScaleFactor: 1.3,
                     style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: Theme.of(context).colorScheme.primary),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 15),
+                    child: ProfileCircularAvatar(),
                   ),
                 ],
               ),

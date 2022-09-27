@@ -1,0 +1,45 @@
+import 'package:FitStack/presentation/profile/presentation/atoms/profile_drawer_listtile.dart';
+import 'package:device_info_plus/device_info_plus.dart';
+import 'package:device_preview/device_preview.dart';
+import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+class ProfileDrawer extends StatelessWidget {
+  const ProfileDrawer({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      child: SafeArea(
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            ProfileDrawerListTile(
+              title: "Alerts",
+              icon: FontAwesomeIcons.bell,
+            ),
+            ProfileDrawerListTile(
+              title: "Friends",
+              icon: FontAwesomeIcons.userGroup,
+            ),
+            ProfileDrawerListTile(
+              title: "Extra",
+              icon: FontAwesomeIcons.gear,
+            ),
+            ProfileDrawerListTile(
+              title: "Sign Out",
+              icon: FontAwesomeIcons.rightFromBracket,
+            ),
+            Spacer(
+              flex: 1,
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Text("version: 1"),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}

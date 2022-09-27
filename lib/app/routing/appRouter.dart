@@ -2,6 +2,7 @@ import 'package:FitStack/mainView.dart';
 import 'package:FitStack/presentation/dashboard/presentation/dashboard_view.dart';
 import 'package:FitStack/presentation/login/presentation/login_page.dart';
 import 'package:FitStack/presentation/nutrition/presentation/nutrition_view.dart';
+import 'package:FitStack/presentation/profile/presentation/profile_view.dart';
 import 'package:FitStack/presentation/relationship/presentation/relationship_view.dart';
 import 'package:FitStack/presentation/settings/settings_view.dart';
 import 'package:FitStack/presentation/signup/presentation/signup_page.dart';
@@ -54,6 +55,11 @@ import 'package:auto_route/annotations.dart';
           initial: false,
         )
       ],
+    ),
+    AutoRoute(
+      page: ProfileView,
+      path: 'user/profile',
+      name: 'profile',
     ),
   ],
 )

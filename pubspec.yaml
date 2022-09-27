@@ -13,6 +13,9 @@ dependencies:
   #http
   retrofit: ^3.0.1+1
 
+  #util
+  device_info_plus: ^4.1.2
+
   #annotation
   json_annotation: ^4.6.0
   copy_with_extension_gen: ^4.0.3
