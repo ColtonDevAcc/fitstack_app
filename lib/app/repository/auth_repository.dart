@@ -42,17 +42,18 @@ class AuthenticationRepository {
             controller.add(AuthStream(user: user, status: AuthenticationStatus.authenticated));
           }
         }
-      } catch (e) {
-        log('error: ${e}');
+      } on Error catch (e) {
+        log('error: ${e}, stacktrace: ${e.stackTrace}');
         controller.add(AuthStream(user: User.empty(), status: AuthenticationStatus.unauthenticated));
       }
     } else {
       try {
+        log('getting user from persistent token');
         var token = await fb.FirebaseAuth.instance.currentUser?.getIdToken();
         User? user = await getIt<UserRepository>().getUser(token: token);
         controller.add(AuthStream(user: user!, status: AuthenticationStatus.authenticated));
-      } catch (e) {
-        log('error: ${e}');
+      } on Error catch (e) {
+        log('error: ${e}, stacktrace: ${e.stackTrace}');
         controller.add(AuthStream(user: User.empty(), status: AuthenticationStatus.unauthenticated));
       }
     }
@@ -89,7 +90,6 @@ class AuthenticationRepository {
         mainUrl + "/user/refresh-token",
         data: {"refresh_token": refresh_token},
       );
-      controller.add(AuthStream(user: User.fromJson(response.data["user"]), status: AuthenticationStatus.authenticated));
       return response.data;
     } on DioError catch (e) {
       log("error logging in user. message: ${e.message} response: ${e.response}");
@@ -114,16 +114,37 @@ class AuthenticationRepository {
         data: {"token": userToken},
       );
 
+      User user = User.fromJson(response.data);
       await persistRefreshToken(token: userToken);
-      controller.add(AuthStream(user: User.fromJson(response.data["user"]), status: AuthenticationStatus.authenticated));
-      return User.fromJson(response.data["user"]);
+      controller.add(AuthStream(user: user, status: AuthenticationStatus.authenticated));
+      return user;
     } on DioError catch (e) {
       log("error logging in user. message: ${e.message} response: ${e.response}");
       controller.add(AuthStream(user: User.empty(), status: AuthenticationStatus.unauthenticated));
       return User.empty();
-    } catch (e) {
-      log("error logging in user $e");
+    } on Error catch (e) {
+      log('error: ${e}, stacktrace: ${e.stackTrace}');
       controller.add(AuthStream(user: User.empty(), status: AuthenticationStatus.unauthenticated));
+      return User.empty();
+    }
+  }
+
+  Future<User> userSignUp({email: String, password: String, user: User}) async {
+    try {
+      var response = await Dio().post(
+        mainUrl + "/user/signup",
+        data: user.toJson(),
+      );
+
+      var newUser = User.fromJson(response.data);
+      controller.add(AuthStream(user: newUser, status: AuthenticationStatus.authenticated));
+      persistRefreshToken(token: newUser.refresh_token);
+      return await newUser;
+    } on DioError catch (e) {
+      log("error while trying to signup user: ${e.message} - ${e.response}");
+      return User.empty();
+    } catch (e) {
+      log("error while trying to signup user: $e");
       return User.empty();
     }
   }

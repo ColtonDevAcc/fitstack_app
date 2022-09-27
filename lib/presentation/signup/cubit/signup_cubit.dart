@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:FitStack/app/bloc/app_bloc.dart';
+import 'package:FitStack/app/injection/dependency_injection.dart';
 import 'package:FitStack/app/models/user_model.dart' as fs;
 import 'package:FitStack/app/repository/auth_repository.dart';
 import 'package:FitStack/app/routing/appRouter.gr.dart';
@@ -77,13 +78,12 @@ class SignupCubit extends Cubit<SignupState> {
     }
   }
 
-  void healthDataChanged(List<HealthDataType>? healthDataTypeList) async {
+  void healthDataChanged(List<HealthDataType>? PassedHealthDataTypeList) async {
     HealthFactory health = HealthFactory();
     List<HealthDataPoint> healthDataList = [];
     final now = DateTime.now();
-    final yesterday = now.subtract(Duration(days: 30));
-
-    final types = healthDataTypeList ??
+    final timeSeparation = now.subtract(Duration(days: 1000));
+    final types = PassedHealthDataTypeList ??
         [
           HealthDataType.STEPS,
           HealthDataType.BLOOD_GLUCOSE,
@@ -100,32 +100,26 @@ class SignupCubit extends Cubit<SignupState> {
 
           HealthDataType.WATER,
           HealthDataType.WORKOUT,
-          HealthDataType.SLEEP_IN_BED,
         ];
-
     List<HealthDataAccess> permissions = [];
-    types.forEach((element) {
-      permissions.add(HealthDataAccess.READ_WRITE);
-    });
+    types.forEach((element) => permissions.add(HealthDataAccess.READ_WRITE));
 
     bool requested = await health.requestAuthorization(types, permissions: permissions);
 
     if (requested) {
       try {
-        log("we have permissions");
         // fetch health data
-        List<HealthDataPoint> healthData = await health.getHealthDataFromTypes(yesterday, now, types);
-        // save all the new data points (only the first 100)
-        healthDataList.addAll((healthData.length < 100) ? healthData : healthData.sublist(0, 100));
-        healthDataList = HealthFactory.removeDuplicates(healthDataList);
+        List<HealthDataPoint> healthData = await health.getHealthDataFromTypes(timeSeparation, now, types);
+        healthDataList = HealthFactory.removeDuplicates(healthData);
 
-        HealthDataPoint? healthDataWeight = healthDataList.firstWhere((element) => element.type == HealthDataType.WEIGHT);
-        HealthDataPoint? healthDataHeight = healthDataList.firstWhere((element) => element.type == HealthDataType.HEIGHT);
+        log("height type: ${healthDataList.where((element) => element.type == HealthDataType.HEIGHT)}");
+        HealthDataPoint? healthDataWeight = healthDataList.where((element) => element.type == HealthDataType.WEIGHT).first;
+        HealthDataPoint? healthDataHeight = healthDataList.where((element) => element.type == HealthDataType.HEIGHT).first;
 
         var height = double.tryParse(healthDataHeight.value.toString())! * 39.37007874;
+        var weight = (double.tryParse(healthDataWeight.value.toString())! * 2.20462262185).roundToDouble();
         var heightFt = (height / 12).floor();
         var heightInch = (height % 12).round();
-        var weight = (double.tryParse(healthDataWeight.value.toString())! * 2.20462262185).roundToDouble();
 
         GlobalKey<FormBuilderState> formKey = state.formKey![state.index];
         if (formKey.currentState!.fields.containsKey('heightFt')) {
@@ -135,18 +129,9 @@ class SignupCubit extends Cubit<SignupState> {
         }
 
         formKeyChanged(formKey);
-        List<GlobalKey<FormBuilderState>> newFormKeyList = state.formKey!;
-        newFormKeyList.replaceRange(state.index, state.index, [formKey]);
-
-        emit(state.copyWith(
-          healthData: healthDataList,
-          weight: weight,
-          heightFt: heightFt,
-          heightInch: heightInch,
-          formKey: newFormKeyList,
-        ));
+        emit(state.copyWith(healthData: healthDataList, weight: weight, heightFt: heightFt, heightInch: heightInch));
       } catch (error) {
-        log("Exception in getHealthDataFromTypes: $error");
+        log("Exception in getHealthDataFromTypes: ${error.toString()}");
       }
     } else {
       log("no permissions given");
@@ -189,34 +174,6 @@ class SignupCubit extends Cubit<SignupState> {
     emit(state.copyWith(email: email));
   }
 
-  Future<fs.User?> userSignUp() async {
-    try {
-      Future<UserCredential> userCred = FirebaseAuth.instance.createUserWithEmailAndPassword(email: state.email, password: state.password);
-      User? user = await userCred.then((value) => value.user);
-
-      var response = await Dio().post(
-        kDebugMode ? "https://dev.fitstack.io/user/signup" : "https://api.fitstack.io/user/signup",
-        data: fs.User(
-          display_name: state.username,
-          date_of_birth: state.dob!,
-          first_name: state.firstLastName.split(" ")[0],
-          last_name: state.firstLastName.split(" ")[1],
-          email_verified: false,
-          email: state.email,
-          user_id: user!.uid,
-          phone_number: state.phoneNumber,
-        ).toJson(),
-      );
-
-      log("//====================== user signup response: $response with status: ${response.statusCode} ======================//");
-
-      return await fs.User.fromJson(response.data);
-    } on DioError catch (e) {
-      log("error while trying to signup user: ${e.message} - ${e.response}");
-      return null;
-    }
-  }
-
   void formKeyChanged(GlobalKey<FormBuilderState>? formKey) {
     List<GlobalKey<FormBuilderState>> keyList = state.formKey!;
     keyList.replaceRange(state.index, state.index, [formKey!]);
@@ -233,16 +190,31 @@ class SignupCubit extends Cubit<SignupState> {
       emit(state.copyWith(index: state.index + 1));
     } else if (state.indexRange == state.index + 1 && isValid) {
       emit(state.copyWith(authState: AuthState.AUTHORIZING));
-      fs.User? user = await userSignUp().onError((error, stackTrace) {
-        emit(state.copyWith(errorMessage: "$error"));
-        return null;
-      });
-      if (user != null) {
-        // appBloc.mapEventToState(AuthAuthenticated(user: user));
-
-        AutoRouter.of(context).popAndPush(Main_View());
-      } else {
-        emit(state.copyWith(errorMessage: "unable to create user"));
+      try {
+        await getIt<AuthenticationRepository>()
+            .userSignUp(
+          user: fs.User(
+            display_name: state.username,
+            date_of_birth: state.dob!,
+            first_name: state.firstLastName.split(" ")[0],
+            last_name: state.firstLastName.split(" ")[1],
+            email_verified: false,
+            email: state.email,
+            phone_number: state.phoneNumber,
+            password: state.password,
+          ),
+        )
+            .onError((error, stackTrace) {
+          emit(state.copyWith(errorMessage: "$error"));
+          return fs.User.empty();
+        });
+      } catch (e) {
+        emit(
+          state.copyWith(
+            errorMessage:
+                "${state.formKey![0].currentState!.fields.entries.where((element) => !element.value.isValid).map((e) => "${e.key}: ${e.value.errorText}")}",
+          ),
+        );
       }
     } else {
       emit(

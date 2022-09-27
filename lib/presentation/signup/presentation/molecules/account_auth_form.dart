@@ -37,11 +37,11 @@ class AccountAuthFrom extends StatelessWidget {
                   FormBuilderValidators.required(errorText: "required"),
                   FormBuilderValidators.compose([
                     (value) {
-                      RegExp pattern = RegExp(r"^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$");
+                      RegExp pattern = RegExp(r"^\+[1-9]\d{1,14}$");
                       if (pattern.hasMatch(value ?? "")) {
                         return null;
                       } else {
-                        return "must be a valid phone number: (123) 456-7890";
+                        return "must be a valid phone number: 8989829304";
                       }
                     },
                   ]),

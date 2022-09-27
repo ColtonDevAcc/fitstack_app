@@ -15,6 +15,7 @@ dependencies:
 
   #annotation
   json_annotation: ^4.6.0
+  copy_with_extension_gen: ^4.0.3
 
   # state
   flutter_bloc: ^8.0.1

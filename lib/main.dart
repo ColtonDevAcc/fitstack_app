@@ -52,7 +52,6 @@ class MyApp extends StatelessWidget {
 
     return StateProviders(
       child: MaterialApp.router(
-        //TODO: make this bloc dep injec
         theme: FSColorTheme.Light(context),
         darkTheme: FSColorTheme.Dark(context),
         useInheritedMediaQuery: true,
