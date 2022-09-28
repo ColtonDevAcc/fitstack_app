@@ -8,7 +8,6 @@ import 'package:FitStack/app/repository/user_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart' as fb;
 import 'package:flutter/foundation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:dio/dio.dart';
 
 class AuthenticationRepository {
@@ -19,7 +18,6 @@ class AuthenticationRepository {
 
   AuthenticationRepository({
     fb.FirebaseAuth? firebaseAuth,
-    GoogleSignIn? googleSignIn,
     AuthCache? authCache,
   });
 
