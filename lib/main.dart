@@ -3,7 +3,6 @@ import 'package:FitStack/app/injection/development_dependencies.dart';
 import 'package:FitStack/app/injection/state_providers.dart';
 import 'package:FitStack/app/providers/bloc/app_bloc.dart';
 import 'package:FitStack/app/repository/auth_repository.dart';
-import 'package:FitStack/app/repository/user_repository.dart';
 import 'package:FitStack/app/routing/app_router.dart';
 import 'package:FitStack/app/theme/color_Theme.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
@@ -42,6 +41,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey = GlobalKey(debugLabel: "ScaffoldMessengerKey");
+    final GlobalKey<NavigatorState> navigatorKey = GlobalKey(debugLabel: "GlobalNavigatorKey");
     return StateProviders(
       child: BlocBuilder<AppBloc, AppState>(
         buildWhen: (previous, current) => previous.status != current.status,
@@ -49,8 +50,10 @@ class MyApp extends StatelessWidget {
           if (state.status != AuthenticationStatus.authenticated) {
             getIt<AuthenticationRepository>().persistLogin();
           }
-          final router = AppRouter(authStatus: state.status);
+          final router = AppRouter(authStatus: state.status, navigatorKey: navigatorKey);
           return MaterialApp.router(
+            scaffoldMessengerKey: scaffoldMessengerKey,
+            useInheritedMediaQuery: true,
             theme: FSColorTheme.Light(context),
             darkTheme: FSColorTheme.Dark(context),
             routerDelegate: router.router.routerDelegate,

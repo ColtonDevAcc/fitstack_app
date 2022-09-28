@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:FitStack/app/repository/auth_repository.dart';
 import 'package:FitStack/app/routing/navigation_observers.dart';
 import 'package:FitStack/presentation/mainView.dart';
@@ -13,18 +11,22 @@ import 'package:FitStack/presentation/signup/presentation/signup_page.dart';
 import 'package:FitStack/presentation/workout/presentation/workout_view.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 //flutter pub get && flutter pub run build_runner build --delete-conflicting-outputs
 class AppRouter {
+  final GlobalKey<NavigatorState> navigatorKey;
   final AuthenticationStatus authStatus;
-  AppRouter({required this.authStatus});
+  AppRouter({required this.navigatorKey, required this.authStatus});
 
   static FirebaseAnalytics analytics = FirebaseAnalytics.instance;
   static FirebaseAnalyticsObserver observer = FirebaseAnalyticsObserver(analytics: analytics);
 
   late final router = GoRouter(
+    navigatorKey: navigatorKey,
     debugLogDiagnostics: kDebugMode,
+    initialLocation: '/login',
     observers: [
       GoRouterObserver(analytics: analytics),
     ],

@@ -1,6 +1,4 @@
-import 'package:FitStack/app/providers/bloc/app_bloc.dart';
 import 'package:FitStack/app/providers/cubit/cubit/main_view_cubit.dart';
-import 'package:FitStack/app/repository/auth_repository.dart';
 import 'package:FitStack/presentation/dashboard/presentation/dashboard_view.dart';
 import 'package:FitStack/presentation/nutrition/presentation/nutrition_view.dart';
 import 'package:FitStack/presentation/relationship/presentation/relationship_view.dart';
@@ -9,7 +7,6 @@ import 'package:FitStack/presentation/workout/presentation/workout_view.dart';
 import 'package:dot_navigation_bar/dot_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:line_icons/line_icons.dart';
 
 class Main_View extends StatelessWidget {

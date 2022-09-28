@@ -13,7 +13,7 @@ class ProfileCircularAvatar extends StatelessWidget {
     bool hasProfileImage = profileUrl != null && profileUrl != "";
     return GestureDetector(
       onTap: () {
-        GoRouter.of(context).go('/user/profile');
+        GoRouter.of(context).push('/user/profile');
       },
       child: CircleAvatar(
         maxRadius: 20,
