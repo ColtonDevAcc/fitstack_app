@@ -83,7 +83,7 @@ dev_dependencies:
 
 flutter_icons:
   android: true
-  iod: true
+  ios: true
   image_path: 'assets/app/icons/FitStackIosLauncherIcon.png'
 
   build_runner: ^2.2.0
