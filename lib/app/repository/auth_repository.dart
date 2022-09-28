@@ -70,7 +70,7 @@ class AuthenticationRepository {
   }
 
   Future<bool> hasToken() async {
-    var value = await storage.read(key: 'token');
+    var value = await storage.read(key: 'refreshToken');
 
     if (value != null) {
       return true;
@@ -80,7 +80,7 @@ class AuthenticationRepository {
   }
 
   Future<void> deleteToken() async {
-    storage.delete(key: 'token');
+    storage.delete(key: 'refreshToken');
     storage.deleteAll();
   }
 
@@ -151,6 +151,7 @@ class AuthenticationRepository {
 
   void logOut() async {
     await deleteToken();
+    fb.FirebaseAuth.instance.signOut();
     controller.add(AuthStream(user: User.empty(), status: AuthenticationStatus.unauthenticated));
   }
 

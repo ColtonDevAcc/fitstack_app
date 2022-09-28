@@ -3,10 +3,9 @@ import 'package:FitStack/presentation/dashboard/presentation/molecules/user_goal
 import 'package:FitStack/presentation/dashboard/presentation/molecules/workout_recommendations%20_list.dart';
 import 'package:FitStack/presentation/dashboard/presentation/molecules/statistics_dashboard.dart';
 import 'package:flutter/material.dart';
-import 'molecules/statistics_dashboard.dart';
 
 class DashboardView extends StatelessWidget {
-  DashboardView({Key? key}) : super(key: key);
+  const DashboardView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -1,5 +1,6 @@
-import 'package:FitStack/app/bloc/app_bloc.dart';
 import 'package:FitStack/app/injection/dependency_injection.dart';
+import 'package:FitStack/app/providers/bloc/app_bloc.dart';
+import 'package:FitStack/app/providers/cubit/cubit/main_view_cubit.dart';
 import 'package:FitStack/app/repository/auth_repository.dart';
 import 'package:FitStack/app/repository/user_repository.dart';
 import 'package:FitStack/presentation/login/cubit/login_cubit.dart';
@@ -17,6 +18,9 @@ class CoreDependencies implements Dependencies {
     );
     getIt.registerFactory<SignupCubit>(
       () => SignupCubit(authenticationRepository: getIt<AuthenticationRepository>()),
+    );
+    getIt.registerFactory<MainViewCubit>(
+      () => MainViewCubit(),
     );
 
     //!repositories

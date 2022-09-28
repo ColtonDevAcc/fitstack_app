@@ -1,18 +1,13 @@
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:FitStack/app/bloc/app_bloc.dart';
 import 'package:FitStack/app/injection/dependency_injection.dart';
 import 'package:FitStack/app/models/user_model.dart' as fs;
 import 'package:FitStack/app/repository/auth_repository.dart';
-import 'package:FitStack/app/routing/appRouter.gr.dart';
-import 'package:auto_route/auto_route.dart';
 import 'package:bloc/bloc.dart';
-import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';

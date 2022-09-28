@@ -9,18 +9,13 @@ class Login_Email_Field_Widget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<LoginCubit, LoginState>(
-      buildWhen: (previous, current) => previous.email != current.email,
-      builder: (context, state) {
-        return TextField_Widget(
-          onChanged: (email) => context.read<LoginCubit>().emailChanged(email ?? ""),
-          validator: (value) {
-            return value != null && !EmailValidator.validate(value) ? 'Enter a valid email' : null;
-          },
-          title: "Email",
-          hintText: 'Username or Email',
-        );
+    return TextField_Widget(
+      onChanged: (email) => context.read<LoginCubit>().emailChanged(email ?? ""),
+      validator: (value) {
+        return value != null && !EmailValidator.validate(value) ? 'Enter a valid email' : null;
       },
+      title: "Email",
+      hintText: 'Username or Email',
     );
   }
 }

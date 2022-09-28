@@ -12,15 +12,11 @@ class Login_SignIn_Button_Widget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: BlocBuilder<LoginCubit, LoginState>(
-        builder: (context, state) {
-          return FocusedButton_Widget(
-            text: "SIGN IN",
-            onPressed: () {
-              if (kDebugMode) log("trying to log you in ....");
-              context.read<LoginCubit>().logInWithCredentials();
-            },
-          );
+      child: FocusedButton_Widget(
+        text: "SIGN IN",
+        onPressed: () {
+          if (kDebugMode) log("trying to log you in ....");
+          context.read<LoginCubit>().logInWithCredentials();
         },
       ),
     );

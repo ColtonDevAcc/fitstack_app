@@ -1,5 +1,5 @@
-import 'package:FitStack/app/bloc/app_bloc.dart';
 import 'package:FitStack/app/models/user_model.dart';
+import 'package:FitStack/app/providers/bloc/app_bloc.dart';
 import 'package:FitStack/presentation/signup/presentation/atoms/profile_avatar_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart' as fb;
 import 'package:flutter/material.dart';

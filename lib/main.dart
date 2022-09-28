@@ -1,18 +1,16 @@
-import 'package:FitStack/app/bloc/app_bloc.dart';
 import 'package:FitStack/app/injection/dependency_injection.dart';
 import 'package:FitStack/app/injection/development_dependencies.dart';
 import 'package:FitStack/app/injection/state_providers.dart';
+import 'package:FitStack/app/providers/bloc/app_bloc.dart';
 import 'package:FitStack/app/repository/auth_repository.dart';
 import 'package:FitStack/app/repository/user_repository.dart';
-import 'package:FitStack/app/routing/appRouter.gr.dart';
+import 'package:FitStack/app/routing/app_router.dart';
 import 'package:FitStack/app/theme/color_Theme.dart';
-import 'package:auto_route/auto_route.dart';
-import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:get_it/get_it.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'firebase_options.dart';
 import 'package:path_provider/path_provider.dart';
@@ -42,34 +40,29 @@ Future<void> main() async {
 class MyApp extends StatelessWidget {
   MyApp({key}) : super(key: key);
 
-  static FirebaseAnalytics analytics = FirebaseAnalytics.instance;
-  static FirebaseAnalyticsObserver observer = FirebaseAnalyticsObserver(analytics: analytics);
-  final _appRouter = AppRouter();
-
   @override
   Widget build(BuildContext context) {
-    getIt<AuthenticationRepository>().persistLogin();
-
     return StateProviders(
-      child: MaterialApp.router(
-        theme: FSColorTheme.Light(context),
-        darkTheme: FSColorTheme.Dark(context),
-        useInheritedMediaQuery: true,
-        routerDelegate: _appRouter.delegate(
-          navigatorObservers: () => [
-            AutoRouteObserver(),
-            observer,
-            FirebaseAnalyticsObserver(analytics: analytics),
-          ],
-        ),
-        routeInformationParser: _appRouter.defaultRouteParser(),
-        routeInformationProvider: _appRouter.routeInfoProvider(),
+      child: BlocBuilder<AppBloc, AppState>(
+        buildWhen: (previous, current) => previous.status != current.status,
+        builder: (context, state) {
+          if (state.status != AuthenticationStatus.authenticated) {
+            getIt<AuthenticationRepository>().persistLogin();
+          }
+          final router = AppRouter(authStatus: state.status);
+          return MaterialApp.router(
+            theme: FSColorTheme.Light(context),
+            darkTheme: FSColorTheme.Dark(context),
+            routerDelegate: router.router.routerDelegate,
+            routeInformationParser: router.router.routeInformationParser,
+            routeInformationProvider: router.router.routeInformationProvider,
+          );
+        },
       ),
     );
   }
 }
 
-/// Custom [BlocObserver] that observes all bloc and cubit state changes.
 class AppBlocObserver extends BlocObserver {
   @override
   void onChange(BlocBase bloc, Change change) {

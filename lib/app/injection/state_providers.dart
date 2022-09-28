@@ -1,5 +1,6 @@
-import 'package:FitStack/app/bloc/app_bloc.dart';
 import 'package:FitStack/app/injection/dependency_injection.dart';
+import 'package:FitStack/app/providers/bloc/app_bloc.dart';
+import 'package:FitStack/app/providers/cubit/cubit/main_view_cubit.dart';
 import 'package:FitStack/presentation/login/cubit/login_cubit.dart';
 import 'package:FitStack/presentation/signup/cubit/signup_cubit.dart';
 import 'package:flutter/material.dart';
@@ -25,6 +26,9 @@ class StateProviders extends StatelessWidget {
         ),
         BlocProvider<SignupCubit>(
           create: (context) => getIt<SignupCubit>(),
+        ),
+        BlocProvider<MainViewCubit>(
+          create: (context) => getIt<MainViewCubit>(),
         ),
       ],
       child: child,

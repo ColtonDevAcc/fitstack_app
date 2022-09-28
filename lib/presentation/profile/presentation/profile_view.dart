@@ -1,9 +1,9 @@
 import 'package:FitStack/presentation/profile/presentation/molecules/user_profile_header.dart';
 import 'package:FitStack/presentation/profile/presentation/organisms/profile_drawer.dart';
 import 'package:FitStack/widgets/atoms/basic_view_header.dart';
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 
 class ProfileView extends StatelessWidget {
   const ProfileView({Key? key}) : super(key: key);
@@ -17,7 +17,7 @@ class ProfileView extends StatelessWidget {
       endDrawer: ProfileDrawer(),
       appBar: AppBar(
         leading: GestureDetector(
-          onTap: () => AutoRouter.of(context).pop(),
+          onTap: () => GoRouter.of(context).pop(),
           child: Container(
             padding: EdgeInsets.all(5),
             child: Icon(

@@ -1,10 +1,8 @@
-import 'dart:developer';
-
-import 'package:FitStack/app/bloc/app_bloc.dart';
-import 'package:auto_route/auto_route.dart';
+import 'package:FitStack/app/providers/bloc/app_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 
 class ProfileCircularAvatar extends StatelessWidget {
   const ProfileCircularAvatar({Key? key}) : super(key: key);
@@ -15,7 +13,7 @@ class ProfileCircularAvatar extends StatelessWidget {
     bool hasProfileImage = profileUrl != null && profileUrl != "";
     return GestureDetector(
       onTap: () {
-        AutoRouter.of(context).pushNamed('user/profile');
+        GoRouter.of(context).go('/user/profile');
       },
       child: CircleAvatar(
         maxRadius: 20,

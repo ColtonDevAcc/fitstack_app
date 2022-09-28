@@ -8,12 +8,7 @@ enum AuthStep {
 }
 
 class LoginState extends Equatable {
-  LoginState({
-    this.email = "",
-    this.password = "",
-    this.errorMessage,
-    this.step = AuthStep.Uninitialized,
-  });
+  const LoginState({this.email = "", this.password = "", this.errorMessage, this.step = AuthStep.Uninitialized});
 
   final String email;
   final String password;

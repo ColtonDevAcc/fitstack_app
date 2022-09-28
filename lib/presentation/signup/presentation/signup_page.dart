@@ -1,11 +1,6 @@
 import 'dart:io';
-
-import 'package:FitStack/app/bloc/app_bloc.dart';
-import 'package:FitStack/app/repository/auth_repository.dart';
-import 'package:FitStack/presentation/signup/cubit/signup_cubit.dart';
 import 'package:FitStack/presentation/signup/presentation/organisms/signup_view.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SignUp_Page extends StatefulWidget {
   const SignUp_Page({Key? key}) : super(key: key);

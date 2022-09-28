@@ -1,7 +1,6 @@
-import 'package:FitStack/app/routing/appRouter.gr.dart';
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class Login_Account_SignUp_Text_Widget extends StatelessWidget {
   const Login_Account_SignUp_Text_Widget({Key? key}) : super(key: key);
@@ -18,12 +17,8 @@ class Login_Account_SignUp_Text_Widget extends StatelessWidget {
           children: [
             TextSpan(
               text: "      Sign Up!",
-              style: TextStyle(
-                  color: Theme.of(context).colorScheme.onBackground, fontWeight: FontWeight.bold),
-              recognizer: TapGestureRecognizer()
-                ..onTap = () {
-                  AutoRouter.of(context).push(Signup());
-                },
+              style: TextStyle(color: Theme.of(context).colorScheme.onBackground, fontWeight: FontWeight.bold),
+              recognizer: TapGestureRecognizer()..onTap = () => GoRouter.of(context).push('/signup'),
             ),
           ],
         ),
