@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:FitStack/app/repository/auth_repository.dart';
 import 'package:FitStack/app/routing/navigation_observers.dart';
 import 'package:FitStack/presentation/mainView.dart';
@@ -10,7 +12,6 @@ import 'package:FitStack/presentation/settings/settings_view.dart';
 import 'package:FitStack/presentation/signup/presentation/signup_page.dart';
 import 'package:FitStack/presentation/workout/presentation/workout_view.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -25,8 +26,7 @@ class AppRouter {
 
   late final router = GoRouter(
     navigatorKey: navigatorKey,
-    debugLogDiagnostics: kDebugMode,
-    initialLocation: '/login',
+    initialLocation: '/',
     observers: [
       GoRouterObserver(analytics: analytics),
     ],
@@ -35,6 +35,7 @@ class AppRouter {
       if (state.location != "/signup" && !isAuthenticated && state.location != "/login" && !isAuthenticated) {
         return "/login";
       } else if (state.location == "/login" && isAuthenticated || state.location == "/signup" && isAuthenticated) {
+        log("${state.location} this was hit ${state.location == "/login" && isAuthenticated || state.location == "/signup" && isAuthenticated}");
         return "/";
       } else {
         return null;
@@ -44,46 +45,55 @@ class AppRouter {
       GoRoute(
         path: '/login',
         name: "login",
+        parentNavigatorKey: navigatorKey,
         builder: (context, state) => const Login_Page(),
       ),
       GoRoute(
         path: '/signup',
         name: 'signup',
+        parentNavigatorKey: navigatorKey,
         builder: (context, state) => const SignUp_Page(),
       ),
       GoRoute(
         path: '/',
         name: 'home',
+        parentNavigatorKey: navigatorKey,
         builder: (context, state) => const Main_View(),
       ),
       GoRoute(
         path: '/dashBoard',
         name: "dashboard",
+        parentNavigatorKey: navigatorKey,
         builder: (context, state) => const DashboardView(),
       ),
       GoRoute(
         path: '/nutrition',
         name: "nutrition",
+        parentNavigatorKey: navigatorKey,
         builder: (context, state) => const NutritionView(),
       ),
       GoRoute(
         path: '/workout',
         name: "workout",
+        parentNavigatorKey: navigatorKey,
         builder: (context, state) => const WorkoutView(),
       ),
       GoRoute(
         path: '/settings',
         name: "settings",
+        parentNavigatorKey: navigatorKey,
         builder: (context, state) => const SettingsView(),
       ),
       GoRoute(
         path: '/relationship',
         name: "relationship",
+        parentNavigatorKey: navigatorKey,
         builder: (context, state) => const RelationshipView(),
       ),
       GoRoute(
         path: '/user/profile',
         name: 'profile',
+        parentNavigatorKey: navigatorKey,
         builder: (context, state) => const ProfileView(),
       ),
     ],

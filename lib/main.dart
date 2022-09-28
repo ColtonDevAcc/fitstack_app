@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:FitStack/app/injection/dependency_injection.dart';
 import 'package:FitStack/app/injection/development_dependencies.dart';
 import 'package:FitStack/app/injection/state_providers.dart';
@@ -47,6 +49,7 @@ class MyApp extends StatelessWidget {
       child: BlocBuilder<AppBloc, AppState>(
         buildWhen: (previous, current) => previous.status != current.status,
         builder: (context, state) {
+          log("hot reload");
           if (state.status != AuthenticationStatus.authenticated) {
             getIt<AuthenticationRepository>().persistLogin();
           }
