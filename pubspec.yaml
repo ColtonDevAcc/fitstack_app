@@ -81,14 +81,13 @@ dev_dependencies:
   mocktail: ^0.3.0
   flutter_lorem: ^2.0.0
   flutter_launcher_icons: ^0.10.0
+  build_runner: ^2.2.0
+  json_serializable: ^6.3.1
 
 flutter_icons:
   android: true
   ios: true
   image_path: 'assets/app/icons/FitStackIosLauncherIcon.png'
-
-  build_runner: ^2.2.0
-  json_serializable: ^6.3.1
 
 flutter:
   uses-material-design: true

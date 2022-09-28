@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 class Workout_Recommendation_Card extends StatefulWidget {
@@ -26,27 +27,34 @@ class Workout_Recommendation_Card_State extends State<Workout_Recommendation_Car
             height: 140,
             fit: BoxFit.cover,
           ),
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "Title",
-                  style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                        color: Theme.of(context).colorScheme.primary,
-                      ),
-                  textScaleFactor: 1.5,
-                ),
-                Text(
-                  "Lorem ipsum dolor sit ametLorem ipsum dolor sit ametLorem ipsum dolor sit amet, consetetur sadipscing elitr,Lorem ipsum dolor sit amet, consetetur sadipscing elitr,",
-                  overflow: TextOverflow.fade,
-                  //TODO: determine how many lines we can have by doing magic math with mediaquery
-                  maxLines: 6,
-                  style: Theme.of(context).textTheme.labelLarge,
-                ),
-              ],
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Flexible(
+                    child: AutoSizeText(
+                      "Title",
+                      maxLines: 1,
+                      style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                            color: Theme.of(context).colorScheme.primary,
+                            fontWeight: FontWeight.bold,
+                          ),
+                      textScaleFactor: 1.5,
+                    ),
+                  ),
+                  Expanded(
+                    flex: 4,
+                    child: AutoSizeText(
+                      "Lorem ipsum dolor sit ametLorem ipsum dolor sit ametLorem ipsum dolor sit amet, consetetur sadipscing elitr,Lorem ipsum dolor sit amet, consetetur sadipscing elitr,",
+                      overflow: TextOverflow.fade,
+                      style: Theme.of(context).textTheme.labelLarge,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ],

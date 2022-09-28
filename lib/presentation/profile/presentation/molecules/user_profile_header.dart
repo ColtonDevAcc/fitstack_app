@@ -1,9 +1,5 @@
-import 'package:FitStack/app/models/user_model.dart';
-import 'package:FitStack/app/providers/bloc/app_bloc.dart';
 import 'package:FitStack/presentation/signup/presentation/atoms/profile_avatar_widget.dart';
-import 'package:firebase_auth/firebase_auth.dart' as fb;
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class UserProfileHeader extends StatelessWidget {
@@ -11,36 +7,61 @@ class UserProfileHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    User user = BlocProvider.of<AppBloc>(context).state.user!;
-    return Row(
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Profile_Avatar_Widget(),
-        SizedBox(width: 10),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(
-              user.display_name,
-              style: Theme.of(context).textTheme.labelLarge,
-              textScaleFactor: 1.4,
-            ),
-            Text("member since: ${fb.FirebaseAuth.instance.currentUser?.metadata.creationTime}"),
+            Profile_Avatar_Widget(),
             Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Icon(
-                  FontAwesomeIcons.locationDot,
-                  size: 15,
-                  color: Theme.of(context).colorScheme.onBackground,
+                  FontAwesomeIcons.chartSimple,
+                  color: Theme.of(context).colorScheme.secondary,
                 ),
-                SizedBox(width: 2),
-                //TODO: add user location field
-                Text("TODO: add user location"),
+                SizedBox(width: 10),
+                Text("25"),
               ],
             ),
+            Row(
+              children: [
+                Icon(
+                  FontAwesomeIcons.shekelSign,
+                  color: Theme.of(context).colorScheme.error,
+                ),
+                SizedBox(width: 10),
+                Text("200"),
+              ],
+            ),
+            SizedBox(),
           ],
+        ),
+        SizedBox(height: 50),
+        Container(
+          child: Column(
+            children: [
+              LinearProgressIndicator(
+                value: .2,
+                backgroundColor: Theme.of(context).colorScheme.onBackground.withOpacity(.08),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'xp',
+                    style: TextStyle(color: Theme.of(context).colorScheme.primary),
+                  ),
+                  Text(
+                    '20/100',
+                    style: TextStyle(color: Theme.of(context).colorScheme.onBackground),
+                  )
+                ],
+              ),
+            ],
+          ),
         ),
       ],
     );

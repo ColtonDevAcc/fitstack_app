@@ -15,10 +15,11 @@ class BasicViewHeader extends StatelessWidget {
       children: [
         AutoSizeText(
           title,
-          minFontSize: 30,
-          maxFontSize: 90,
           maxLines: 1,
-          style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: color ?? Theme.of(context).colorScheme.primary),
+          style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                color: color ?? Theme.of(context).colorScheme.primary,
+                fontWeight: FontWeight.bold,
+              ),
         ),
         trailing ?? SizedBox(),
       ],

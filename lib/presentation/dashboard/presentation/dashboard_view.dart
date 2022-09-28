@@ -31,7 +31,7 @@ class DashboardView extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               BasicViewHeader(
-                title: "HOW DOES YOUR DAY LOOK",
+                title: "DASHBOARD",
                 trailing: Padding(
                   padding: const EdgeInsets.only(right: 15),
                   child: ProfileCircularAvatar(),
