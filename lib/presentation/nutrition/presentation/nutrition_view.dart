@@ -1,5 +1,6 @@
 import 'package:FitStack/presentation/nutrition/presentation/molecules/recent_meals_list.dart';
 import 'package:FitStack/presentation/nutrition/presentation/molecules/user_consumption_chart.dart';
+import 'package:FitStack/widgets/atoms/basic_view_header.dart';
 import 'package:flutter/material.dart';
 
 class NutritionView extends StatelessWidget {
@@ -23,20 +24,11 @@ class NutritionView extends StatelessWidget {
           scrollDirection: Axis.vertical,
           slivers: [
             SliverFillRemaining(
-              hasScrollBody: false,
+              hasScrollBody: true,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Nutrition",
-                        textScaleFactor: 1.3,
-                        style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: Theme.of(context).colorScheme.primary),
-                      ),
-                    ],
-                  ),
+                  BasicViewHeader(title: 'NUTRITION'),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(0, topPadding - 5, 0, bottomPadding),
                     child: Text(

@@ -1,6 +1,7 @@
 import 'package:FitStack/presentation/workout/presentation/organisms/custom_tab_view.dart';
 import 'package:FitStack/presentation/workout/presentation/organisms/history_tab_view.dart';
 import 'package:FitStack/presentation/workout/presentation/organisms/workout_tab_view.dart';
+import 'package:FitStack/widgets/atoms/basic_view_header.dart';
 import 'package:flutter/material.dart';
 
 class WorkoutView extends StatelessWidget {
@@ -19,11 +20,7 @@ class WorkoutView extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.only(bottom: 15),
-              child: Text(
-                "MY WORKOUTS?",
-                textScaleFactor: 1.3,
-                style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: Theme.of(context).colorScheme.onBackground),
-              ),
+              child: BasicViewHeader(title: "MY WORKOUTS", color: Theme.of(context).colorScheme.onBackground),
             ),
             Container(
               height: 40,

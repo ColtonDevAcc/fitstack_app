@@ -1,5 +1,6 @@
 import 'package:FitStack/presentation/relationship/presentation/organism/friends_relationship_view.dart';
 import 'package:FitStack/presentation/relationship/presentation/organism/trainer_relationship_view.dart';
+import 'package:FitStack/widgets/atoms/basic_view_header.dart';
 import 'package:flutter/material.dart';
 
 class RelationshipView extends StatelessWidget {
@@ -17,15 +18,8 @@ class RelationshipView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.only(bottom: 15),
-              child: Text(
-                "MY WORKOUTS?",
-                textScaleFactor: 1.3,
-                style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-                      color: Theme.of(context).colorScheme.onBackground,
-                    ),
-              ),
-            ),
+                padding: const EdgeInsets.only(bottom: 15),
+                child: BasicViewHeader(title: "Relationships", color: Theme.of(context).colorScheme.onBackground)),
             Container(
               height: 40,
               decoration: BoxDecoration(

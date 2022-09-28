@@ -2,6 +2,8 @@ import 'package:FitStack/presentation/dashboard/presentation/atoms/profile_circu
 import 'package:FitStack/presentation/dashboard/presentation/molecules/user_goal_graphs_list.dart';
 import 'package:FitStack/presentation/dashboard/presentation/molecules/workout_recommendations%20_list.dart';
 import 'package:FitStack/presentation/dashboard/presentation/molecules/statistics_dashboard.dart';
+import 'package:FitStack/widgets/atoms/basic_view_header.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 class DashboardView extends StatelessWidget {
@@ -28,21 +30,12 @@ class DashboardView extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "HOW DOES YOUR DAY LOOK?",
-                    //TODO: need to use auto resize package
-                    textScaleFactor: 1.3,
-                    style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: Theme.of(context).colorScheme.primary),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 15),
-                    child: ProfileCircularAvatar(),
-                  ),
-                ],
+              BasicViewHeader(
+                title: "HOW DOES YOUR DAY LOOK",
+                trailing: Padding(
+                  padding: const EdgeInsets.only(right: 15),
+                  child: ProfileCircularAvatar(),
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, topPadding - 5, 0, 0),

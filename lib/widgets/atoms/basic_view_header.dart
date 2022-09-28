@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 class BasicViewHeader extends StatelessWidget {
@@ -12,10 +13,11 @@ class BasicViewHeader extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
+        AutoSizeText(
           title,
-          //TODO: need to use auto resize package
-          textScaleFactor: 1.3,
+          minFontSize: 30,
+          maxFontSize: 90,
+          maxLines: 1,
           style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: color ?? Theme.of(context).colorScheme.primary),
         ),
         trailing ?? SizedBox(),

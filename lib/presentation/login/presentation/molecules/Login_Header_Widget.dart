@@ -1,4 +1,5 @@
 import 'package:FitStack/widgets/atoms/FitStack_Logo_Widget.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 class Login_Header_Widget extends StatelessWidget {
@@ -13,9 +14,11 @@ class Login_Header_Widget extends StatelessWidget {
       children: [
         FitStack_Logo_Widget(),
         SizedBox(height: 15),
-        Text(
+        AutoSizeText(
           'LETS SIGN YOU IN,',
-          textScaleFactor: 1.6,
+          maxFontSize: 90,
+          minFontSize: 40,
+          maxLines: 1,
           //style: TextStyle(color: Theme.of(context).primaryColor),
           style: Theme.of(context).textTheme.titleLarge!.copyWith(
                 color: Theme.of(context).colorScheme.primary,

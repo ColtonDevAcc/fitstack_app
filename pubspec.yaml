@@ -43,6 +43,7 @@ dependencies:
   syncfusion_flutter_charts: ^20.2.39
   syncfusion_flutter_datepicker: ^20.2.39
   dropdown_button2: ^1.6.3
+  auto_size_text: ^3.0.0
 
   #auth
   email_validator: ^2.0.1
