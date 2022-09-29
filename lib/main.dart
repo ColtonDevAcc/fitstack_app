@@ -56,7 +56,6 @@ class MyApp extends StatelessWidget {
           final router = AppRouter(authStatus: state.status, navigatorKey: navigatorKey);
           return MaterialApp.router(
             scaffoldMessengerKey: scaffoldMessengerKey,
-            useInheritedMediaQuery: true,
             theme: FSColorTheme.Light(context),
             darkTheme: FSColorTheme.Dark(context),
             routerDelegate: router.router.routerDelegate,

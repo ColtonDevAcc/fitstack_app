@@ -33,8 +33,6 @@ class FSColorTheme {
   }
 
   static ThemeData Dark(context) {
-    final textTheme = Theme.of(context).textTheme;
-
     return ThemeData(
       iconTheme: IconThemeData(color: Color.fromRGBO(112, 112, 112, 1)),
       backgroundColor: Color.fromRGBO(249, 249, 249, 1),
@@ -52,8 +50,8 @@ class FSColorTheme {
         primary: Color.fromRGBO(254, 99, 71, 1),
         secondary: Color.fromRGBO(87, 54, 232, 1),
       ),
-      textTheme: textTheme,
-      primaryTextTheme: textTheme,
+      textTheme: FSTextTheme.Primary_Text_Theme(context),
+      primaryTextTheme: FSTextTheme.Primary_Text_Theme(context),
     );
   }
 }

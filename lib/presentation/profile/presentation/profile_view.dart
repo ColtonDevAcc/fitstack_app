@@ -26,7 +26,7 @@ class ProfileView extends StatelessWidget {
         centerTitle: false,
         title: AutoSizeText(
           "${user.display_name}",
-          style: Theme.of(context).textTheme.headlineSmall?.copyWith(color: Theme.of(context).colorScheme.onBackground),
+          style: Theme.of(context).textTheme.headlineSmall?.apply(color: Theme.of(context).colorScheme.onBackground),
           textAlign: TextAlign.center,
         ),
         leading: GestureDetector(
