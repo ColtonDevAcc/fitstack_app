@@ -45,6 +45,9 @@ dependencies:
   dropdown_button2: ^1.6.3
   auto_size_text: ^3.0.0
 
+  #gameify
+  achievement_view: ^1.0.0
+
   #auth
   email_validator: ^2.0.1
 

@@ -60,10 +60,7 @@ class ProfileView extends StatelessWidget {
       backgroundColor: Theme.of(context).colorScheme.background,
       body: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(40 - 15, 40, 40, 40),
-            child: UserProfileHeader(),
-          ),
+          Padding(padding: const EdgeInsets.fromLTRB(40 - 15, 20, 40, 40), child: UserProfileHeader()),
           Divider(height: 1, color: Theme.of(context).colorScheme.onBackground),
           SizedBox(
             height: MediaQuery.of(context).size.height * .08,

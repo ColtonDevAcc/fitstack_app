@@ -1,3 +1,5 @@
+import 'package:FitStack/presentation/profile/presentation/atoms/profile_featured_statistics_graph.dart';
+import 'package:FitStack/presentation/profile/presentation/atoms/profile_social_currency_icon.dart';
 import 'package:FitStack/presentation/signup/presentation/atoms/profile_avatar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -16,37 +18,43 @@ class UserProfileHeader extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Profile_Avatar_Widget(),
-            Row(
-              children: [
-                Icon(
-                  FontAwesomeIcons.chartSimple,
-                  color: Theme.of(context).colorScheme.secondary,
-                ),
-                SizedBox(width: 10),
-                Text("25"),
-              ],
-            ),
-            Row(
-              children: [
-                Icon(
-                  FontAwesomeIcons.shekelSign,
-                  color: Theme.of(context).colorScheme.error,
-                ),
-                SizedBox(width: 10),
-                Text("200"),
-              ],
-            ),
+            ProfileSocialCurrencyIcon(icon: FontAwesomeIcons.chartSimple, value: "15", color: Colors.blue),
+            ProfileSocialCurrencyIcon(icon: FontAwesomeIcons.shekelSign, value: "39", color: Theme.of(context).colorScheme.secondary),
+            ProfileSocialCurrencyIcon(icon: FontAwesomeIcons.fireFlameCurved, value: "4", color: Theme.of(context).colorScheme.error),
             SizedBox(),
           ],
         ),
-        SizedBox(height: 50),
+        SizedBox(height: 30),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            ProfileFeaturedStatisticsGraph(
+              graphColor: Theme.of(context).colorScheme.error,
+              measurementAbrv: 'lbs',
+              subtitle: 'Weight Gain',
+              value: '-40',
+            ),
+            SizedBox(width: 10),
+            ProfileFeaturedStatisticsGraph(
+              graphColor: Theme.of(context).colorScheme.secondary,
+              measurementAbrv: 'BMI',
+              subtitle: 'body mass index',
+              value: '-1.0',
+            ),
+            SizedBox(width: 10),
+            ProfileFeaturedStatisticsGraph(
+              graphColor: Theme.of(context).colorScheme.primary,
+              measurementAbrv: 'LBM',
+              subtitle: 'lean body mass',
+              value: '+5',
+            ),
+          ],
+        ),
+        SizedBox(height: 30),
         Container(
           child: Column(
             children: [
-              LinearProgressIndicator(
-                value: .2,
-                backgroundColor: Theme.of(context).colorScheme.onBackground.withOpacity(.08),
-              ),
+              LinearProgressIndicator(value: .2, backgroundColor: Theme.of(context).colorScheme.onBackground.withOpacity(.08)),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

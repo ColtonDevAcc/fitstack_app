@@ -3,7 +3,6 @@ import 'package:FitStack/presentation/dashboard/presentation/molecules/user_goal
 import 'package:FitStack/presentation/dashboard/presentation/molecules/workout_recommendations%20_list.dart';
 import 'package:FitStack/presentation/dashboard/presentation/molecules/statistics_dashboard.dart';
 import 'package:FitStack/widgets/atoms/basic_view_header.dart';
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 class DashboardView extends StatelessWidget {
