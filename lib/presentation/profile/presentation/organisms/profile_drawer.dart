@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:FitStack/app/injection/dependency_injection.dart';
 import 'package:FitStack/app/providers/bloc/app/app_bloc.dart';
 import 'package:FitStack/presentation/profile/presentation/atoms/profile_drawer_listtile.dart';
+import 'package:clipboard/clipboard.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -49,9 +50,11 @@ class ProfileDrawer extends StatelessWidget {
                           child: Text("${user.toJson()}"),
                         ),
                     backgroundColor: Theme.of(context).colorScheme.surface);
+                var userId = await FirebaseAuth.instance.currentUser?.getIdToken();
+                FlutterClipboard.copy(userId ?? "");
                 log("========================\nuser refresh token ${user.refresh_token}\n========================");
                 log("========================\nuser refresh token ${user.user_id}\n========================");
-                log("========================\nuser token ${await FirebaseAuth.instance.currentUser?.getIdToken()}\n========================");
+                log("========================\nuser token ${userId}\n========================");
               },
               title: "Developer",
               icon: FontAwesomeIcons.terminal,
