@@ -7,6 +7,7 @@ import 'package:FitStack/presentation/dashboard/presentation/dashboard_view.dart
 import 'package:FitStack/presentation/login/presentation/login_page.dart';
 import 'package:FitStack/presentation/nutrition/presentation/nutrition_view.dart';
 import 'package:FitStack/presentation/profile/presentation/profile_view.dart';
+import 'package:FitStack/presentation/relationship/presentation/organism/friendship_full_view.dart';
 import 'package:FitStack/presentation/relationship/presentation/relationship_view.dart';
 import 'package:FitStack/presentation/settings/settings_view.dart';
 import 'package:FitStack/presentation/signup/presentation/signup_page.dart';
@@ -27,7 +28,7 @@ class AppRouter {
 
   late final router = GoRouter(
     navigatorKey: navigatorKey,
-    initialLocation: kDebugMode ? '/' : '/',
+    initialLocation: kDebugMode ? '/friendship' : '/',
     observers: [
       GoRouterObserver(analytics: analytics),
     ],
@@ -90,6 +91,12 @@ class AppRouter {
         name: "relationship",
         parentNavigatorKey: navigatorKey,
         builder: (context, state) => const RelationshipView(),
+      ),
+      GoRoute(
+        path: '/friendship',
+        name: "friendship",
+        parentNavigatorKey: navigatorKey,
+        builder: (context, state) => const FriendshipFullView(),
       ),
       GoRoute(
         path: '/user/profile',

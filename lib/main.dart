@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:FitStack/app/injection/dependency_injection.dart';
 import 'package:FitStack/app/injection/development_dependencies.dart';
 import 'package:FitStack/app/injection/state_providers.dart';
-import 'package:FitStack/app/providers/bloc/app_bloc.dart';
+import 'package:FitStack/app/providers/bloc/app/app_bloc.dart';
 import 'package:FitStack/app/repository/auth_repository.dart';
 import 'package:FitStack/app/routing/app_router.dart';
 import 'package:FitStack/app/theme/color_Theme.dart';

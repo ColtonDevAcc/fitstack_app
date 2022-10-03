@@ -1,5 +1,5 @@
+import 'package:FitStack/widgets/atoms/list_header.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class UserProfileChallengeBadgesList extends StatelessWidget {
   const UserProfileChallengeBadgesList({
@@ -14,31 +14,7 @@ class UserProfileChallengeBadgesList extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-          child: Row(
-            children: [
-              Text('Challenges', style: TextStyle(fontWeight: FontWeight.bold)),
-              SizedBox(width: 10),
-              Text('(10 wins)'),
-              Spacer(flex: 1),
-              Container(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      "more",
-                      style: TextStyle(color: Colors.blue),
-                    ),
-                    Icon(
-                      FontAwesomeIcons.chevronRight,
-                      color: Colors.blue,
-                      size: 12,
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
+          child: ListHeader(title: "Challenges", subtitle: '(10 wins)'),
         ),
         Padding(
           padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),

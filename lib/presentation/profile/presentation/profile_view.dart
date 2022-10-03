@@ -1,11 +1,14 @@
 import 'package:FitStack/app/models/user_model.dart';
-import 'package:FitStack/app/providers/bloc/app_bloc.dart';
+import 'package:FitStack/app/providers/bloc/app/app_bloc.dart';
 import 'package:FitStack/presentation/profile/presentation/atoms/profile_featured_user_statistics.dart';
+import 'package:FitStack/presentation/profile/presentation/molecules/friendship_profile_card.dart';
 import 'package:FitStack/presentation/profile/presentation/molecules/user_profile_achievements_list.dart';
 import 'package:FitStack/presentation/profile/presentation/molecules/user_profile_challenge_badges_list.dart';
 import 'package:FitStack/presentation/profile/presentation/molecules/user_profile_header.dart';
 import 'package:FitStack/presentation/profile/presentation/organisms/profile_drawer.dart';
+import 'package:FitStack/widgets/atoms/list_header.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -20,6 +23,7 @@ class ProfileView extends StatelessWidget {
     User user = BlocProvider.of<AppBloc>(context).state.user!;
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       key: globalKey,
       endDrawer: ProfileDrawer(),
       appBar: AppBar(
@@ -46,9 +50,12 @@ class ProfileView extends StatelessWidget {
               padding: const EdgeInsets.only(right: 10),
               child: Container(
                 padding: EdgeInsets.all(5),
-                child: Icon(
-                  FontAwesomeIcons.bars,
-                  color: Theme.of(context).colorScheme.onBackground,
+                child: Badge(
+                  badgeContent: Text("3", style: Theme.of(context).textTheme.labelLarge?.apply(color: Theme.of(context).colorScheme.background)),
+                  child: Icon(
+                    FontAwesomeIcons.bars,
+                    color: Theme.of(context).colorScheme.onBackground,
+                  ),
                 ),
               ),
             ),
@@ -58,28 +65,45 @@ class ProfileView extends StatelessWidget {
         elevation: 0,
       ),
       backgroundColor: Theme.of(context).colorScheme.background,
-      body: Column(
-        children: [
-          Padding(padding: const EdgeInsets.fromLTRB(40 - 15, 20, 40, 40), child: UserProfileHeader()),
-          Divider(height: 1, color: Theme.of(context).colorScheme.onBackground),
-          SizedBox(
-            height: MediaQuery.of(context).size.height * .08,
-            child: Row(
-              children: [
-                ProfileFeaturedUserStatistics(statisticValue: "4.4", statisticMeasurement: "km", subtitle: "Distance Avg"),
-                FeaturedStatisticDivider(),
-                ProfileFeaturedUserStatistics(statisticValue: "3,000", statisticMeasurement: null, subtitle: "Distance Avg"),
-                FeaturedStatisticDivider(),
-                ProfileFeaturedUserStatistics(statisticValue: "800", statisticMeasurement: "cal", subtitle: "Calories Avg"),
-              ],
+      body: SingleChildScrollView(
+        clipBehavior: Clip.none,
+        scrollDirection: Axis.vertical,
+        padding: EdgeInsets.zero,
+        child: Column(
+          children: [
+            Padding(padding: const EdgeInsets.fromLTRB(40 - 15, 20, 40, 40), child: UserProfileHeader()),
+            Divider(height: 1, color: Theme.of(context).colorScheme.onBackground),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * .08,
+              child: Row(
+                children: [
+                  ProfileFeaturedUserStatistics(statisticValue: "4.4", statisticMeasurement: "km", subtitle: "Distance Avg"),
+                  FeaturedStatisticDivider(),
+                  ProfileFeaturedUserStatistics(statisticValue: "3,000", statisticMeasurement: null, subtitle: "Distance Avg"),
+                  FeaturedStatisticDivider(),
+                  ProfileFeaturedUserStatistics(statisticValue: "800", statisticMeasurement: "cal", subtitle: "Calories Avg"),
+                ],
+              ),
             ),
-          ),
-          Container(height: 10, color: Theme.of(context).colorScheme.onBackground.withOpacity(.02)),
-          UserProfileAchievementsList(),
-          Container(height: 10, color: Theme.of(context).colorScheme.onBackground.withOpacity(.02)),
-          UserProfileChallengeBadgesList(),
-          Container(height: 10, color: Theme.of(context).colorScheme.onBackground.withOpacity(.02)),
-        ],
+            Container(height: 10, color: Theme.of(context).colorScheme.onBackground.withOpacity(.02)),
+            UserProfileAchievementsList(),
+            Container(height: 10, color: Theme.of(context).colorScheme.onBackground.withOpacity(.02)),
+            UserProfileChallengeBadgesList(),
+            Container(height: 10, color: Theme.of(context).colorScheme.onBackground.withOpacity(.02)),
+            Container(
+              padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+              color: Theme.of(context).colorScheme.surface,
+              child: Column(
+                children: [
+                  ListHeader(title: "Friend Group", subtitle: "(2nd place)"),
+                  FriendshipProfileCard(colorTheme: Theme.of(context).colorScheme.primary, position: "1st"),
+                  FriendshipProfileCard(colorTheme: Theme.of(context).colorScheme.secondary, position: "2nd"),
+                  FriendshipProfileCard(colorTheme: Theme.of(context).colorScheme.error, position: "3rd"),
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

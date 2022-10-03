@@ -1,6 +1,9 @@
+import 'dart:developer';
+
 import 'package:FitStack/app/injection/dependency_injection.dart';
-import 'package:FitStack/app/providers/bloc/app_bloc.dart';
+import 'package:FitStack/app/providers/bloc/app/app_bloc.dart';
 import 'package:FitStack/presentation/profile/presentation/atoms/profile_drawer_listtile.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -21,6 +24,7 @@ class ProfileDrawer extends StatelessWidget {
               icon: FontAwesomeIcons.bell,
             ),
             ProfileDrawerListTile(
+              onTap: () => GoRouter.of(context).push('/friendship'),
               title: "Friends",
               icon: FontAwesomeIcons.userGroup,
             ),
@@ -37,13 +41,17 @@ class ProfileDrawer extends StatelessWidget {
               flex: 1,
             ),
             ProfileDrawerListTile(
-              onTap: () {
+              onTap: () async {
+                final user = BlocProvider.of<AppBloc>(context).state.user!;
                 Scaffold.of(context).showBottomSheet(
                     (context) => Container(
                           height: 200,
-                          child: Text("${BlocProvider.of<AppBloc>(context).state.user!.toJson()}"),
+                          child: Text("${user.toJson()}"),
                         ),
                     backgroundColor: Theme.of(context).colorScheme.surface);
+                log("========================\nuser refresh token ${user.refresh_token}\n========================");
+                log("========================\nuser refresh token ${user.user_id}\n========================");
+                log("========================\nuser token ${await FirebaseAuth.instance.currentUser?.getIdToken()}\n========================");
               },
               title: "Developer",
               icon: FontAwesomeIcons.terminal,

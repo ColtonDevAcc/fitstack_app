@@ -14,7 +14,7 @@ class AuthenticationRepository {
   final controller = StreamController<AuthStream>.broadcast();
   final Dio dio = Dio();
   final storage = new FlutterSecureStorage();
-  static String mainUrl = kDebugMode ? "https://dev.fitstack.io" : "https://dev.fitstack.io";
+  static String mainUrl = kDebugMode ? "http://localhost:8000" : "https://dev.fitstack.io";
 
   AuthenticationRepository({
     fb.FirebaseAuth? firebaseAuth,
@@ -109,7 +109,9 @@ class AuthenticationRepository {
 
       Response response = await dio.post(
         mainUrl + "/user/signin",
-        data: {"token": userToken},
+        options: Options(
+          headers: {"Authorization": "Bearer ${userToken}"},
+        ),
       );
 
       User user = User.fromJson(response.data);

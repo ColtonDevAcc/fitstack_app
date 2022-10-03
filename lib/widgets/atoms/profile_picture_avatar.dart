@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
-class Profile_Circular_Avatar extends StatelessWidget {
+class ProfilePictureAvatar extends StatelessWidget {
   final double? maxRadius;
-  const Profile_Circular_Avatar({Key? key, this.maxRadius}) : super(key: key);
+  final bool? withBorder;
+  const ProfilePictureAvatar({Key? key, this.maxRadius, this.withBorder}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -10,7 +11,7 @@ class Profile_Circular_Avatar extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.transparent,
         borderRadius: BorderRadius.circular(80),
-        border: Border.all(color: Theme.of(context).colorScheme.primary, width: 1.5),
+        border: withBorder == false ? null : Border.all(color: Theme.of(context).colorScheme.primary, width: 1.5),
       ),
       padding: EdgeInsets.all(5),
       child: CircleAvatar(

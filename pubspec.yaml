@@ -44,6 +44,8 @@ dependencies:
   syncfusion_flutter_datepicker: ^20.2.39
   dropdown_button2: ^1.6.3
   auto_size_text: ^3.0.0
+  badges: ^2.0.3
+  flutter_slidable: ^2.0.0
 
   #gameify
   achievement_view: ^1.0.0

@@ -5,14 +5,16 @@ import 'package:flutter/foundation.dart';
 import 'package:dio/dio.dart';
 
 class UserRepository {
-  static String mainUrl = kDebugMode ? "https://dev.fitstack.io" : "https://dev.fitstack.io";
+  static String mainUrl = kDebugMode ? "http://localhost:8000" : "https://dev.fitstack.io";
   final Dio dio = Dio();
 
   Future<User?> getUser({required token}) async {
     try {
       Response response = await dio.post(
         mainUrl + '/user/signin',
-        data: {"token": token},
+        options: Options(
+          headers: {"Authorization": "Bearer ${token}"},
+        ),
       );
 
       if (response.statusCode == 200) {

@@ -1,5 +1,6 @@
 import 'package:FitStack/app/injection/dependency_injection.dart';
-import 'package:FitStack/app/providers/bloc/app_bloc.dart';
+import 'package:FitStack/app/providers/bloc/app/app_bloc.dart';
+import 'package:FitStack/app/providers/bloc/relationship/relationship_bloc.dart';
 import 'package:FitStack/app/providers/cubit/cubit/main_view_cubit.dart';
 import 'package:FitStack/presentation/login/cubit/login_cubit.dart';
 import 'package:FitStack/presentation/signup/cubit/signup_cubit.dart';
@@ -29,6 +30,9 @@ class StateProviders extends StatelessWidget {
         ),
         BlocProvider<MainViewCubit>(
           create: (context) => getIt<MainViewCubit>(),
+        ),
+        BlocProvider<RelationshipBloc>(
+          create: (context) => getIt<RelationshipBloc>(),
         ),
       ],
       child: child,
