@@ -77,7 +77,7 @@ dependencies:
   firebase_analytics: ^9.3.6
   firebase_performance: ^0.8.3+1
   firebase_storage: ^10.3.9
-  firebase_dynamic_links: ^4.3.8
+  firebase_dynamic_links: ^4.3.9
   firebase_auth: ^3.10.0
 
 dev_dependencies:
