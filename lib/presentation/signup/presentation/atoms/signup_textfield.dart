@@ -10,6 +10,7 @@ class SignupTextfield extends StatelessWidget {
   final String? fieldName;
   final AutovalidateMode? autovalidateMode;
   final void Function(String?)? onSubmitted;
+  final TextInputType? keyboardType;
 
   const SignupTextfield({
     Key? key,
@@ -21,6 +22,7 @@ class SignupTextfield extends StatelessWidget {
     this.fieldName,
     this.autovalidateMode,
     this.onSubmitted,
+    this.keyboardType,
   }) : super(key: key);
 
   @override
@@ -35,7 +37,7 @@ class SignupTextfield extends StatelessWidget {
         SizedBox(height: 10),
         FormBuilderTextField(
           autovalidateMode: autovalidateMode ?? AutovalidateMode.always,
-          keyboardType: TextInputType.number,
+          keyboardType: keyboardType ?? TextInputType.number,
           name: fieldName ?? title,
           onChanged: onChanged,
           style: Theme.of(context).textTheme.subtitle2,

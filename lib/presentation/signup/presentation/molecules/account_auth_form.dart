@@ -23,6 +23,7 @@ class AccountAuthFrom extends StatelessWidget {
             children: [
               SignupTextfield(
                 onChanged: (email) => BlocProvider.of<SignupCubit>(context).emailChanged(email),
+                keyboardType: TextInputType.emailAddress,
                 validator: FormBuilderValidators.compose([
                   FormBuilderValidators.required(errorText: "required"),
                   FormBuilderValidators.email(errorText: "Must be a valid email"),
@@ -32,6 +33,7 @@ class AccountAuthFrom extends StatelessWidget {
               ),
               SizedBox(height: 15),
               SignupTextfield(
+                keyboardType: TextInputType.phone,
                 onChanged: (phoneNumber) => BlocProvider.of<SignupCubit>(context).phoneNumberChanged(phoneNumber),
                 validator: FormBuilderValidators.compose([
                   FormBuilderValidators.required(errorText: "required"),
@@ -54,6 +56,7 @@ class AccountAuthFrom extends StatelessWidget {
                 children: [
                   Expanded(
                     child: SignupTextfield(
+                      keyboardType: TextInputType.text,
                       onChanged: (pass) => BlocProvider.of<SignupCubit>(context).passwordChanged(pass),
                       validator: FormBuilderValidators.compose([
                         FormBuilderValidators.required(errorText: "required"),
@@ -70,6 +73,7 @@ class AccountAuthFrom extends StatelessWidget {
                   SizedBox(width: 15),
                   Expanded(
                     child: SignupTextfield(
+                      keyboardType: TextInputType.text,
                       validator: FormBuilderValidators.compose([
                         FormBuilderValidators.required(errorText: "required"),
                         (value) => value == formKey.currentState?.fields['Password']?.value ? null : "Passwords must match",
