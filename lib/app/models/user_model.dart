@@ -17,11 +17,9 @@ class User extends Equatable {
   final String? phone_number;
   final DateTime date_of_birth;
   final String? photo_url;
-  final List? user_friendships;
   final bool email_verified;
-  final int? age;
-  final String? updated_at;
-  final int? created_at;
+  final DateTime? updated_at;
+  final DateTime? created_at;
   final String? refresh_token;
 
   User({
@@ -29,7 +27,6 @@ class User extends Equatable {
     this.updated_at,
     this.created_at,
     this.refresh_token,
-    this.user_friendships,
     this.user_id,
     required this.email,
     required this.display_name,
@@ -39,7 +36,6 @@ class User extends Equatable {
     required this.email_verified,
     this.phone_number,
     this.photo_url,
-    this.age,
   });
 
   @override
@@ -54,7 +50,6 @@ class User extends Equatable {
         email_verified,
         phone_number,
         photo_url,
-        age,
       ];
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
@@ -69,11 +64,10 @@ class User extends Equatable {
         email_verified: false,
         phone_number: null,
         photo_url: null,
-        age: 0,
         password: '',
-        created_at: DateTime.now().day,
+        created_at: DateTime.now(),
         refresh_token: '',
-        updated_at: '',
+        updated_at: DateTime.now(),
       );
   factory User.fromFirebase(fb.User user) => User(
         user_id: user.uid,
@@ -85,8 +79,8 @@ class User extends Equatable {
         date_of_birth: DateTime.now(),
         email_verified: user.emailVerified,
         phone_number: user.phoneNumber,
-        created_at: user.metadata.creationTime?.day.toInt(),
+        created_at: user.metadata.creationTime,
         refresh_token: user.refreshToken ?? "",
-        updated_at: user.metadata.lastSignInTime.toString(),
+        updated_at: user.metadata.lastSignInTime,
       );
 }

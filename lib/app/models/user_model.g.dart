@@ -7,9 +7,7 @@ part of 'user_model.dart';
 // **************************************************************************
 
 abstract class _$UserCWProxy {
-  User age(int? age);
-
-  User created_at(int? created_at);
+  User created_at(DateTime? created_at);
 
   User date_of_birth(DateTime date_of_birth);
 
@@ -31,9 +29,7 @@ abstract class _$UserCWProxy {
 
   User refresh_token(String? refresh_token);
 
-  User updated_at(String? updated_at);
-
-  User user_friendships(List<dynamic>? user_friendships);
+  User updated_at(DateTime? updated_at);
 
   User user_id(String? user_id);
 
@@ -44,8 +40,7 @@ abstract class _$UserCWProxy {
   /// User(...).copyWith(id: 12, name: "My name")
   /// ````
   User call({
-    int? age,
-    int? created_at,
+    DateTime? created_at,
     DateTime? date_of_birth,
     String? display_name,
     String? email,
@@ -56,8 +51,7 @@ abstract class _$UserCWProxy {
     String? phone_number,
     String? photo_url,
     String? refresh_token,
-    String? updated_at,
-    List<dynamic>? user_friendships,
+    DateTime? updated_at,
     String? user_id,
   });
 }
@@ -69,10 +63,7 @@ class _$UserCWProxyImpl implements _$UserCWProxy {
   const _$UserCWProxyImpl(this._value);
 
   @override
-  User age(int? age) => this(age: age);
-
-  @override
-  User created_at(int? created_at) => this(created_at: created_at);
+  User created_at(DateTime? created_at) => this(created_at: created_at);
 
   @override
   User date_of_birth(DateTime date_of_birth) =>
@@ -108,11 +99,7 @@ class _$UserCWProxyImpl implements _$UserCWProxy {
       this(refresh_token: refresh_token);
 
   @override
-  User updated_at(String? updated_at) => this(updated_at: updated_at);
-
-  @override
-  User user_friendships(List<dynamic>? user_friendships) =>
-      this(user_friendships: user_friendships);
+  User updated_at(DateTime? updated_at) => this(updated_at: updated_at);
 
   @override
   User user_id(String? user_id) => this(user_id: user_id);
@@ -126,7 +113,6 @@ class _$UserCWProxyImpl implements _$UserCWProxy {
   /// User(...).copyWith(id: 12, name: "My name")
   /// ````
   User call({
-    Object? age = const $CopyWithPlaceholder(),
     Object? created_at = const $CopyWithPlaceholder(),
     Object? date_of_birth = const $CopyWithPlaceholder(),
     Object? display_name = const $CopyWithPlaceholder(),
@@ -139,18 +125,13 @@ class _$UserCWProxyImpl implements _$UserCWProxy {
     Object? photo_url = const $CopyWithPlaceholder(),
     Object? refresh_token = const $CopyWithPlaceholder(),
     Object? updated_at = const $CopyWithPlaceholder(),
-    Object? user_friendships = const $CopyWithPlaceholder(),
     Object? user_id = const $CopyWithPlaceholder(),
   }) {
     return User(
-      age: age == const $CopyWithPlaceholder()
-          ? _value.age
-          // ignore: cast_nullable_to_non_nullable
-          : age as int?,
       created_at: created_at == const $CopyWithPlaceholder()
           ? _value.created_at
           // ignore: cast_nullable_to_non_nullable
-          : created_at as int?,
+          : created_at as DateTime?,
       date_of_birth:
           date_of_birth == const $CopyWithPlaceholder() || date_of_birth == null
               ? _value.date_of_birth
@@ -198,11 +179,7 @@ class _$UserCWProxyImpl implements _$UserCWProxy {
       updated_at: updated_at == const $CopyWithPlaceholder()
           ? _value.updated_at
           // ignore: cast_nullable_to_non_nullable
-          : updated_at as String?,
-      user_friendships: user_friendships == const $CopyWithPlaceholder()
-          ? _value.user_friendships
-          // ignore: cast_nullable_to_non_nullable
-          : user_friendships as List<dynamic>?,
+          : updated_at as DateTime?,
       user_id: user_id == const $CopyWithPlaceholder()
           ? _value.user_id
           // ignore: cast_nullable_to_non_nullable
@@ -223,10 +200,13 @@ extension $UserCopyWith on User {
 
 User _$UserFromJson(Map<String, dynamic> json) => User(
       password: json['password'] as String?,
-      updated_at: json['updated_at'] as String?,
-      created_at: json['created_at'] as int?,
+      updated_at: json['updated_at'] == null
+          ? null
+          : DateTime.parse(json['updated_at'] as String),
+      created_at: json['created_at'] == null
+          ? null
+          : DateTime.parse(json['created_at'] as String),
       refresh_token: json['refresh_token'] as String?,
-      user_friendships: json['user_friendships'] as List<dynamic>?,
       user_id: json['user_id'] as String?,
       email: json['email'] as String,
       display_name: json['display_name'] as String,
@@ -236,7 +216,6 @@ User _$UserFromJson(Map<String, dynamic> json) => User(
       email_verified: json['email_verified'] as bool,
       phone_number: json['phone_number'] as String?,
       photo_url: json['photo_url'] as String?,
-      age: json['age'] as int?,
     );
 
 const _$UserFieldMap = <String, String>{
@@ -249,9 +228,7 @@ const _$UserFieldMap = <String, String>{
   'phone_number': 'phone_number',
   'date_of_birth': 'date_of_birth',
   'photo_url': 'photo_url',
-  'user_friendships': 'user_friendships',
   'email_verified': 'email_verified',
-  'age': 'age',
   'updated_at': 'updated_at',
   'created_at': 'created_at',
   'refresh_token': 'refresh_token',
@@ -267,10 +244,8 @@ Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
       'phone_number': instance.phone_number,
       'date_of_birth': instance.date_of_birth.toIso8601String(),
       'photo_url': instance.photo_url,
-      'user_friendships': instance.user_friendships,
       'email_verified': instance.email_verified,
-      'age': instance.age,
-      'updated_at': instance.updated_at,
-      'created_at': instance.created_at,
+      'updated_at': instance.updated_at?.toIso8601String(),
+      'created_at': instance.created_at?.toIso8601String(),
       'refresh_token': instance.refresh_token,
     };

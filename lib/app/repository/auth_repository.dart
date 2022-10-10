@@ -114,6 +114,7 @@ class AuthenticationRepository {
         ),
       );
 
+      log("${response.data}");
       User user = User.fromJson(response.data);
       await persistRefreshToken(token: userToken);
       controller.add(AuthStream(user: user, status: AuthenticationStatus.authenticated));
