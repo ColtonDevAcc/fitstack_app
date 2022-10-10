@@ -18,3 +18,4 @@ steps:
       - 'REGION'
 images:
   - 'gcr.io/$PROJECT_ID/SERVICE-NAME:$COMMIT_SHA'
+//
