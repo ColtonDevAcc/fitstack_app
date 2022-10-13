@@ -1,4 +1,4 @@
-import 'package:FitStack/app/providers/cubit/cubit/main_view_cubit.dart';
+import 'package:FitStack/app/providers/cubit/main_view/main_view_cubit.dart';
 import 'package:FitStack/presentation/dashboard/presentation/dashboard_view.dart';
 import 'package:FitStack/presentation/nutrition/presentation/nutrition_view.dart';
 import 'package:FitStack/presentation/relationship/presentation/relationship_view.dart';

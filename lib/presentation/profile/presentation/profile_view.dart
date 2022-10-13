@@ -1,5 +1,9 @@
+import 'package:FitStack/app/injection/dependency_injection.dart';
 import 'package:FitStack/app/models/user_model.dart';
 import 'package:FitStack/app/providers/bloc/app/app_bloc.dart';
+import 'package:FitStack/app/providers/bloc/relationship/relationship_bloc.dart';
+import 'package:FitStack/app/providers/cubit/friendship/friendship_cubit.dart';
+import 'package:FitStack/app/repository/relationship_repository.dart';
 import 'package:FitStack/presentation/profile/presentation/atoms/profile_featured_user_statistics.dart';
 import 'package:FitStack/presentation/profile/presentation/molecules/friendship_profile_card.dart';
 import 'package:FitStack/presentation/profile/presentation/molecules/user_profile_achievements_list.dart';
@@ -96,9 +100,24 @@ class ProfileView extends StatelessWidget {
               child: Column(
                 children: [
                   ListHeader(title: "Friend Group", subtitle: "(2nd place)"),
-                  FriendshipProfileCard(colorTheme: Theme.of(context).colorScheme.primary, position: "1st"),
-                  FriendshipProfileCard(colorTheme: Theme.of(context).colorScheme.secondary, position: "2nd"),
-                  FriendshipProfileCard(colorTheme: Theme.of(context).colorScheme.error, position: "3rd"),
+                  BlocProvider(
+                    create: (context) => FriendshipCubit(
+                      relationshipRepository: getIt<RelationshipRepository>(),
+                    )..getFriends(),
+                    child: BlocBuilder<FriendshipCubit, FriendshipState>(
+                      buildWhen: (previous, current) => previous.friends != current.friends,
+                      builder: (context, state) {
+                        print('${state.friends}');
+                        return Column(
+                          children: state.friends == null
+                              ? []
+                              : state.friends!
+                                  .map((e) => FriendshipProfileCard(colorTheme: Theme.of(context).colorScheme.primary, position: "1st"))
+                                  .toList(),
+                        );
+                      },
+                    ),
+                  ),
                 ],
               ),
             )

@@ -7,13 +7,19 @@ part 'friendship_model.g.dart';
 @JsonSerializable()
 @CopyWith()
 class Friendship extends Equatable {
-  final String to_user;
+  final String id;
   final String from_user;
+  final String to_user;
+  final bool accepted;
   final String sent_time;
   final String? response_time;
-  final bool accepted;
+  final DateTime? updated_at;
+  final DateTime? deleted_at;
 
   Friendship({
+    required this.id,
+    this.updated_at,
+    this.deleted_at,
     required this.sent_time,
     this.response_time,
     required this.accepted,
@@ -22,9 +28,10 @@ class Friendship extends Equatable {
   });
 
   @override
-  List<Object?> get props => [this.to_user, this.from_user, this.sent_time, this.response_time, this.accepted];
+  List<Object?> get props =>
+      [this.to_user, this.from_user, this.sent_time, this.response_time, this.accepted, this.id, this.updated_at, this.deleted_at];
 
   factory Friendship.fromJson(Map<String, dynamic> json) => _$FriendshipFromJson(json);
   Map<String, dynamic> toJson() => _$FriendshipToJson(this);
-  factory Friendship.empty() => Friendship(accepted: false, from_user: '', sent_time: '', to_user: '');
+  factory Friendship.empty() => Friendship(accepted: false, from_user: '', sent_time: '', to_user: '', id: '');
 }

@@ -1,3 +1,5 @@
+import 'dart:async';
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:FitStack/app/models/friendship_model.dart';
@@ -9,23 +11,52 @@ class RelationshipRepository {
   final Dio dio = Dio();
   final storage = new FlutterSecureStorage();
   static String mainUrl = kDebugMode ? "http://localhost:8000" : "https://dev.fitstack.io";
+  final controller = StreamController<FriendStream>.broadcast();
 
-  Future<List<Friendship?>?> getFriends({required token}) async {
+  RelationshipRepository();
+
+  //! token section start
+  Stream<FriendStream> get friendStatus async* {
+    yield FriendStream(friendship: [], status: FriendshipFetchStatus.initial);
+    yield* controller.stream;
+  }
+
+  Future<List<Friendship?>?> getFriends({required String token}) async {
     try {
-      Response response = await dio.post(
-        mainUrl + '/get-friends',
+      controller.add(FriendStream(friendship: [], status: FriendshipFetchStatus.loading));
+      Response response = await dio.get(
+        mainUrl + '/friendship/get-friends',
         options: Options(
           headers: {"Authorization": "Bearer ${token}"},
         ),
       );
 
       if (response.statusCode == 200) {
-        print(response.data);
-        response.data;
+        List responseJson = response.data as List;
+
+        print("\n ========== parsed ========= \n ${responseJson} \n ========== parsed =========");
+
+        log("${responseJson}");
+        // controller.add(FriendStream(friendship: friends, status: FriendshipFetchStatus.loading));
+        // return friends;
+      } else {
+        log("error");
       }
     } on Error catch (e) {
+      controller.add(FriendStream(friendship: [], status: FriendshipFetchStatus.error));
       log('error: ${e}, stacktrace: ${e.stackTrace}');
       return null;
     }
+    return null;
   }
+
+  void dispose() => controller.close();
 }
+
+class FriendStream {
+  List<Friendship> friendship;
+  FriendshipFetchStatus status;
+  FriendStream({required this.friendship, required this.status});
+}
+
+enum FriendshipFetchStatus { initial, loading, error, loaded }

@@ -13,10 +13,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
   final UserRepository userRepository;
   late StreamSubscription<AuthStream> authenticationStatusSubscription;
 
-  AppBloc({required AuthenticationRepository authenticationRepository, required UserRepository userRepository})
-      : authenticationRepository = authenticationRepository,
-        userRepository = userRepository,
-        super(const AppState.unknown()) {
+  AppBloc({required this.authenticationRepository, required this.userRepository}) : super(const AppState.unknown()) {
     on<AuthenticationStatusChanged>(onAuthenticationStatusChanged);
     on<AuthenticationLogoutRequested>(onAuthenticationLogoutRequested);
     authenticationStatusSubscription = authenticationRepository.status.listen((status) => add(AuthenticationStatusChanged(status)));

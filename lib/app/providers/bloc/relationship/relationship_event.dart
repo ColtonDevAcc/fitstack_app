@@ -7,10 +7,24 @@ abstract class RelationshipEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class AddFriend extends RelationshipEvent {}
+class InitialRelationships extends RelationshipEvent {}
 
-class RemoveFriend extends RelationshipEvent {}
+class FriendshipError extends RelationshipEvent {}
 
-class AddGroup extends RelationshipEvent {}
+class FriendshipInitial extends RelationshipEvent {}
 
-class RemoveGroup extends RelationshipEvent {}
+class FriendshipLoaded extends RelationshipEvent {
+  final List<Friendship?>? friends;
+  const FriendshipLoaded({this.friends});
+
+  @override
+  List<Object> get props => [friends ?? []];
+}
+
+class FriendshipStatusChanged extends RelationshipEvent {
+  final FriendStream status;
+  const FriendshipStatusChanged(this.status);
+
+  @override
+  List<Object> get props => [status];
+}

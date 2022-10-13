@@ -28,7 +28,7 @@ class AppRouter {
 
   late final router = GoRouter(
     navigatorKey: navigatorKey,
-    initialLocation: kDebugMode ? '/friendship' : '/',
+    initialLocation: kDebugMode ? '/user/profile' : '/',
     observers: [
       GoRouterObserver(analytics: analytics),
     ],
