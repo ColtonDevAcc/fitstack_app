@@ -1,7 +1,6 @@
 import 'package:FitStack/app/injection/dependency_injection.dart';
 import 'package:FitStack/app/models/user_model.dart';
 import 'package:FitStack/app/providers/bloc/app/app_bloc.dart';
-import 'package:FitStack/app/providers/bloc/relationship/relationship_bloc.dart';
 import 'package:FitStack/app/providers/cubit/friendship/friendship_cubit.dart';
 import 'package:FitStack/app/repository/relationship_repository.dart';
 import 'package:FitStack/presentation/profile/presentation/atoms/profile_featured_user_statistics.dart';
@@ -75,11 +74,15 @@ class ProfileView extends StatelessWidget {
         padding: EdgeInsets.zero,
         child: Column(
           children: [
-            Padding(padding: const EdgeInsets.fromLTRB(40 - 15, 20, 40, 40), child: UserProfileHeader()),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 20, 20, 40),
+              child: UserProfileHeader(),
+            ),
             Divider(height: 1, color: Theme.of(context).colorScheme.onBackground),
             SizedBox(
               height: MediaQuery.of(context).size.height * .08,
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   ProfileFeaturedUserStatistics(statisticValue: "4.4", statisticMeasurement: "km", subtitle: "Distance Avg"),
                   FeaturedStatisticDivider(),

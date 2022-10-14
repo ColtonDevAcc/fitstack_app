@@ -47,7 +47,7 @@ class RelationshipView extends StatelessWidget {
               child: TabBarView(
                 children: [
                   TrainerRelationshipView(),
-                  FriendsRelationshipView(),
+                  FriendsRelationshipView(appBar: false),
                   TrainerRelationshipView(),
                 ],
               ),

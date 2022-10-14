@@ -19,16 +19,7 @@ class FriendListTile extends StatelessWidget {
         ),
         subtitle: AutoSizeText(username, minFontSize: 6),
         leading: CircleAvatar(),
-        trailing: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            border: Border.all(width: 1, color: Theme.of(context).colorScheme.onBackground),
-          ),
-          child: CircleAvatar(
-            maxRadius: 12,
-            backgroundColor: Theme.of(context).colorScheme.background,
-          ),
-        ),
+        trailing: SizedBox(), //TODO: find something to put on the trailing widget
       ),
       endActionPane: ActionPane(
         motion: ScrollMotion(),

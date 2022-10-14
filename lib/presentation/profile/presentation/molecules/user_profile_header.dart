@@ -26,7 +26,7 @@ class UserProfileHeader extends StatelessWidget {
         ),
         SizedBox(height: 30),
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             ProfileFeaturedStatisticsGraph(
               graphColor: Theme.of(context).colorScheme.error,

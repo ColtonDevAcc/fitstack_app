@@ -14,27 +14,24 @@ class ProfileFeaturedUserStatistics extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(20),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          AutoSizeText.rich(
-            TextSpan(
-              text: '$statisticValue',
-              style: TextStyle(color: Theme.of(context).colorScheme.onBackground, fontWeight: FontWeight.bold),
-              children: [
-                TextSpan(
-                  text: statisticMeasurement == null ? null : " $statisticMeasurement",
-                  style: TextStyle(color: Theme.of(context).colorScheme.onBackground),
-                ),
-              ],
-            ),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        AutoSizeText.rich(
+          TextSpan(
+            text: '$statisticValue',
+            style: TextStyle(color: Theme.of(context).colorScheme.onBackground, fontWeight: FontWeight.bold),
+            children: [
+              TextSpan(
+                text: statisticMeasurement == null ? null : " $statisticMeasurement",
+                style: TextStyle(color: Theme.of(context).colorScheme.onBackground),
+              ),
+            ],
           ),
-          Text(subtitle),
-        ],
-      ),
+        ),
+        Text(subtitle),
+      ],
     );
   }
 }
