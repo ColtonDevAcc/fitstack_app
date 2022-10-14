@@ -5,11 +5,13 @@ import 'package:flutter/material.dart';
 class FriendshipProfileCard extends StatelessWidget {
   final Color colorTheme;
   final String position;
+  final String username;
 
   const FriendshipProfileCard({
     Key? key,
     required this.colorTheme,
     required this.position,
+    required this.username,
   }) : super(key: key);
 
   @override
@@ -37,7 +39,7 @@ class FriendshipProfileCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   AutoSizeText(
-                    'user friend name',
+                    username,
                     minFontSize: 16,
                     style: Theme.of(context).textTheme.labelLarge?.copyWith(fontWeight: FontWeight.bold),
                   ),

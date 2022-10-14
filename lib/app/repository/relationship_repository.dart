@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:FitStack/app/models/friendship_model.dart';
+import 'package:FitStack/app/models/user_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:dio/dio.dart';
@@ -21,7 +22,7 @@ class RelationshipRepository {
     yield* controller.stream;
   }
 
-  Future<List<Friendship?>?> getFriends({required String token}) async {
+  Future<List<User?>?> getFriends({required String token}) async {
     try {
       controller.add(FriendStream(friendship: [], status: FriendshipFetchStatus.loading));
       Response response = await dio.get(
@@ -34,11 +35,8 @@ class RelationshipRepository {
       if (response.statusCode == 200) {
         List responseJson = response.data as List;
 
-        print("\n ========== parsed ========= \n ${responseJson} \n ========== parsed =========");
-
-        log("${responseJson}");
-        // controller.add(FriendStream(friendship: friends, status: FriendshipFetchStatus.loading));
-        // return friends;
+        var friends = responseJson.map((e) => User.fromJson(e)).toList();
+        return friends;
       } else {
         log("error");
       }

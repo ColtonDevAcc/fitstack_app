@@ -1,12 +1,12 @@
 part of 'friendship_cubit.dart';
 
 class FriendshipState extends Equatable {
-  final List<Friendship?>? friends;
+  final List<User?>? friends;
   FriendshipState({
     this.friends,
   });
 
-  FriendshipState copyWith({List<Friendship?>? friends}) {
+  FriendshipState copyWith({List<User?>? friends}) {
     return FriendshipState(friends: friends ?? this.friends);
   }
 

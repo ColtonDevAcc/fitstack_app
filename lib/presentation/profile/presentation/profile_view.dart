@@ -112,7 +112,13 @@ class ProfileView extends StatelessWidget {
                           children: state.friends == null
                               ? []
                               : state.friends!
-                                  .map((e) => FriendshipProfileCard(colorTheme: Theme.of(context).colorScheme.primary, position: "1st"))
+                                  .map(
+                                    (e) => FriendshipProfileCard(
+                                      colorTheme: Theme.of(context).colorScheme.primary,
+                                      position: "1st",
+                                      username: e!.display_name,
+                                    ),
+                                  )
                                   .toList(),
                         );
                       },
