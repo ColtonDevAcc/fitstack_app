@@ -7,6 +7,7 @@ import 'package:FitStack/app/repository/auth_repository.dart';
 import 'package:FitStack/app/repository/relationship_repository.dart';
 import 'package:FitStack/app/repository/user_repository.dart';
 import 'package:FitStack/presentation/login/cubit/login_cubit.dart';
+import 'package:FitStack/presentation/profile/cubit/profile_cubit.dart';
 import 'package:FitStack/presentation/signup/cubit/signup_cubit.dart';
 
 class CoreDependencies implements Dependencies {
@@ -20,6 +21,7 @@ class CoreDependencies implements Dependencies {
     getIt.registerFactory<SignupCubit>(() => SignupCubit(authenticationRepository: getIt<AuthenticationRepository>()));
     getIt.registerFactory<MainViewCubit>(() => MainViewCubit());
     getIt.registerFactory<FriendshipCubit>(() => FriendshipCubit(relationshipRepository: getIt<RelationshipRepository>()));
+    getIt.registerFactory<ProfileCubit>(() => ProfileCubit(userRepository: getIt<UserRepository>()));
     getIt.registerFactory<RelationshipBloc>(() => RelationshipBloc(relationshipRepository: getIt<RelationshipRepository>()));
 
     //!repositories

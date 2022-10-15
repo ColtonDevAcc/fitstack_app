@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:FitStack/app/providers/bloc/app/app_bloc.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -11,15 +14,26 @@ class ProfileCircularAvatar extends StatelessWidget {
   Widget build(BuildContext context) {
     String? profileUrl = BlocProvider.of<AppBloc>(context).state.user?.photo_url;
     bool hasProfileImage = profileUrl != null && profileUrl != "";
+
     return GestureDetector(
       onTap: () {
         GoRouter.of(context).push('/user/profile');
       },
-      child: CircleAvatar(
-        maxRadius: 20,
-        backgroundImage: hasProfileImage ? NetworkImage(profileUrl) : null,
-        backgroundColor: Theme.of(context).colorScheme.tertiary,
-        child: !hasProfileImage ? Center(child: Icon(FontAwesomeIcons.user, size: 17, color: Theme.of(context).colorScheme.background)) : null,
+      child: FutureBuilder(
+        future: FirebaseStorage.instance.ref(profileUrl?.split("/")[2]).getDownloadURL(),
+        builder: (context, snapshot) {
+          String? url = snapshot.hasData ? snapshot.data as String : null;
+          log("url: ${url} purl: ${profileUrl}");
+          return snapshot.hasData
+              ? CircleAvatar(
+                  maxRadius: 20,
+                  backgroundImage: hasProfileImage ? NetworkImage(url!) : null,
+                  backgroundColor: Theme.of(context).colorScheme.tertiary,
+                  child:
+                      !hasProfileImage ? Center(child: Icon(FontAwesomeIcons.user, size: 17, color: Theme.of(context).colorScheme.background)) : null,
+                )
+              : CircularProgressIndicator();
+        },
       ),
     );
   }

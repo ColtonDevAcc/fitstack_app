@@ -24,14 +24,10 @@ Future<void> main() async {
 
   HydratedBlocOverrides.runZoned(
     () async {
-      await Firebase.initializeApp(
-        options: DefaultFirebaseOptions.currentPlatform,
-      );
+      await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
       FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
-      runApp(
-        MyApp(),
-      );
+      runApp(MyApp());
     },
     storage: storage,
     blocObserver: AppBlocObserver(),

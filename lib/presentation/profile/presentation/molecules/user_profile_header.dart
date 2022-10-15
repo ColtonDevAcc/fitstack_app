@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class UserProfileHeader extends StatelessWidget {
-  const UserProfileHeader({Key? key}) : super(key: key);
+  final void Function()? avatarOnTap;
+  const UserProfileHeader({Key? key, this.avatarOnTap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,10 @@ class UserProfileHeader extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Profile_Avatar_Widget(),
+            GestureDetector(
+              onTap: avatarOnTap,
+              child: Profile_Avatar_Widget(),
+            ),
             ProfileSocialCurrencyIcon(icon: FontAwesomeIcons.chartSimple, value: "15", color: Colors.blue),
             ProfileSocialCurrencyIcon(icon: FontAwesomeIcons.shekelSign, value: "39", color: Theme.of(context).colorScheme.secondary),
             ProfileSocialCurrencyIcon(icon: FontAwesomeIcons.fireFlameCurved, value: "4", color: Theme.of(context).colorScheme.error),
