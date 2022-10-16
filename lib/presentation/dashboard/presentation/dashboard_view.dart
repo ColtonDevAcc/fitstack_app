@@ -6,6 +6,7 @@ import 'package:FitStack/presentation/signup/presentation/atoms/profile_avatar_w
 import 'package:FitStack/widgets/atoms/basic_view_header.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class DashboardView extends StatelessWidget {
   const DashboardView({Key? key}) : super(key: key);
@@ -36,6 +37,7 @@ class DashboardView extends StatelessWidget {
                 trailing: Padding(
                   padding: const EdgeInsets.only(right: 15),
                   child: ProfileAvatar(
+                    onTap: () => GoRouter.of(context).push("/user/profile"),
                     profileUrl: context.read<AppBloc>().state.user?.photo_url,
                     withBorder: false,
                     maxRadius: 20,
