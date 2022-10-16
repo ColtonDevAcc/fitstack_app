@@ -38,6 +38,7 @@ class DashboardView extends StatelessWidget {
                   child: ProfileAvatar(
                     profileUrl: context.read<AppBloc>().state.user?.photo_url,
                     withBorder: false,
+                    maxRadius: 20,
                   ),
                 ),
               ),
