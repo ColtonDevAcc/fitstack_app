@@ -86,7 +86,7 @@ class ProfileView extends StatelessWidget {
                     avatarOnTap: () {
                       context.read<ProfileCubit>().ChangeProfileUrl();
                     },
-                    user: context.read<AppBloc>().state.user!,
+                    user: context.read<AppBloc>().state.user ?? User.empty(),
                   ),
                 ),
                 Divider(height: 1, color: Theme.of(context).colorScheme.onBackground),
