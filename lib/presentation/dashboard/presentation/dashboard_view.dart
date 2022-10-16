@@ -40,7 +40,7 @@ class DashboardView extends StatelessWidget {
                     onTap: () => GoRouter.of(context).push("/user/profile"),
                     profileUrl: context.read<AppBloc>().state.user?.photo_url,
                     withBorder: false,
-                    maxRadius: 20,
+                    maxRadius: 17,
                   ),
                 ),
               ),
