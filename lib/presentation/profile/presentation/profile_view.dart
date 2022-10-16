@@ -72,6 +72,7 @@ class ProfileView extends StatelessWidget {
       ),
       backgroundColor: Theme.of(context).colorScheme.background,
       body: BlocBuilder<ProfileCubit, ProfileState>(
+        buildWhen: (previous, current) => previous.profileUrl != current.profileUrl,
         builder: (context, state) {
           return SingleChildScrollView(
             clipBehavior: Clip.none,
