@@ -16,7 +16,8 @@ class ProfileCubit extends Cubit<ProfileState> {
   void ChangeProfileUrl() async {
     await ImagePicker().pickImage(source: ImageSource.gallery).then((value) async {
       var token = await FirebaseAuth.instance.currentUser?.getIdToken();
-      await userRepository.updateProfileAvatar(token: token!, file: File(value!.path));
+      var profileUrl = await userRepository.updateProfileAvatar(token: token!, file: File(value!.path));
+      emit(state.copyWith(profileUrl: profileUrl));
     }).onError(
       (error, stackTrace) {
         log("${error}");

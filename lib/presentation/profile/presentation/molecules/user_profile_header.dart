@@ -1,3 +1,4 @@
+import 'package:FitStack/app/models/user_model.dart';
 import 'package:FitStack/presentation/profile/presentation/atoms/profile_featured_statistics_graph.dart';
 import 'package:FitStack/presentation/profile/presentation/atoms/profile_social_currency_icon.dart';
 import 'package:FitStack/presentation/signup/presentation/atoms/profile_avatar_widget.dart';
@@ -6,7 +7,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class UserProfileHeader extends StatelessWidget {
   final void Function()? avatarOnTap;
-  const UserProfileHeader({Key? key, this.avatarOnTap}) : super(key: key);
+  final User user;
+  const UserProfileHeader({Key? key, this.avatarOnTap, required this.user}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,11 @@ class UserProfileHeader extends StatelessWidget {
           children: [
             GestureDetector(
               onTap: avatarOnTap,
-              child: Profile_Avatar_Widget(),
+              child: ProfileAvatar(
+                maxRadius: 31,
+                profileUrl: user.photo_url,
+                withBorder: true,
+              ),
             ),
             ProfileSocialCurrencyIcon(icon: FontAwesomeIcons.chartSimple, value: "15", color: Colors.blue),
             ProfileSocialCurrencyIcon(icon: FontAwesomeIcons.shekelSign, value: "39", color: Theme.of(context).colorScheme.secondary),

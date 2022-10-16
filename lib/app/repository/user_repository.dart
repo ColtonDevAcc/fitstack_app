@@ -30,12 +30,12 @@ class UserRepository {
     }
   }
 
-  Future<void> updateProfileAvatar({required String token, required File file}) async {
+  Future<String?> updateProfileAvatar({required String token, required File file}) async {
     try {
-      FormData formData = FormData.fromMap({
+      FormData data = FormData.fromMap({
         "file": await MultipartFile.fromFile(
           file.path,
-          filename: file.path.split("/").last,
+          filename: file.path.split('/').last,
         ),
       });
 
@@ -46,16 +46,16 @@ class UserRepository {
             "Authorization": "Bearer ${token}",
           },
         ),
-        data: formData,
+        data: data,
       );
-      log("${response.statusCode}: ${response.statusMessage}");
 
       if (response.statusCode == 200) {
       } else {
-        log("${response.statusCode}: ${response.statusMessage}");
+        return response.data;
       }
     } on Error catch (e) {
       log('error: ${e}, stacktrace: ${e.stackTrace}');
     }
+    return null;
   }
 }

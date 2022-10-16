@@ -85,6 +85,7 @@ class ProfileView extends StatelessWidget {
                     avatarOnTap: () {
                       context.read<ProfileCubit>().ChangeProfileUrl();
                     },
+                    user: context.read<AppBloc>().state.user!,
                   ),
                 ),
                 Divider(height: 1, color: Theme.of(context).colorScheme.onBackground),
@@ -127,6 +128,7 @@ class ProfileView extends StatelessWidget {
                                         colorTheme: Theme.of(context).colorScheme.primary,
                                         position: "1st",
                                         username: e!.display_name,
+                                        profileUrl: e.photo_url,
                                       ),
                                     )
                                     .toList(),

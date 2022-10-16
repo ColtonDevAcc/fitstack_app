@@ -1,4 +1,4 @@
-import 'package:FitStack/widgets/atoms/Profile_picture_avatar.dart';
+import 'package:FitStack/presentation/signup/presentation/atoms/profile_avatar_widget.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
@@ -6,12 +6,14 @@ class FriendshipProfileCard extends StatelessWidget {
   final Color colorTheme;
   final String position;
   final String username;
+  final String? profileUrl;
 
   const FriendshipProfileCard({
     Key? key,
     required this.colorTheme,
     required this.position,
     required this.username,
+    this.profileUrl,
   }) : super(key: key);
 
   @override
@@ -31,7 +33,7 @@ class FriendshipProfileCard extends StatelessWidget {
               ),
             ),
             SizedBox(width: 3),
-            ProfilePictureAvatar(withBorder: false, maxRadius: 35),
+            ProfileAvatar(withBorder: false, profileUrl: profileUrl),
             SizedBox(width: 3),
             Expanded(
               child: Column(

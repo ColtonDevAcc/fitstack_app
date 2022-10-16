@@ -1,9 +1,11 @@
-import 'package:FitStack/presentation/dashboard/presentation/atoms/profile_circular_avatar.dart';
+import 'package:FitStack/app/providers/bloc/app/app_bloc.dart';
 import 'package:FitStack/presentation/dashboard/presentation/molecules/user_goal_graphs_list.dart';
 import 'package:FitStack/presentation/dashboard/presentation/molecules/workout_recommendations%20_list.dart';
 import 'package:FitStack/presentation/dashboard/presentation/molecules/statistics_dashboard.dart';
+import 'package:FitStack/presentation/signup/presentation/atoms/profile_avatar_widget.dart';
 import 'package:FitStack/widgets/atoms/basic_view_header.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DashboardView extends StatelessWidget {
   const DashboardView({Key? key}) : super(key: key);
@@ -33,7 +35,10 @@ class DashboardView extends StatelessWidget {
                 title: "DASHBOARD",
                 trailing: Padding(
                   padding: const EdgeInsets.only(right: 15),
-                  child: ProfileCircularAvatar(),
+                  child: ProfileAvatar(
+                    profileUrl: context.read<AppBloc>().state.user?.photo_url,
+                    withBorder: false,
+                  ),
                 ),
               ),
               Padding(
