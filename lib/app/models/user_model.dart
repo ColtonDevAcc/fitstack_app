@@ -11,12 +11,11 @@ class User extends Equatable {
   final String? user_id;
   final String email;
   final String? password;
-  final String display_name;
+  final String? display_name;
   final String first_name;
   final String last_name;
   final String? phone_number;
   final DateTime date_of_birth;
-  final String? photo_url;
   final bool email_verified;
   final DateTime? updated_at;
   final DateTime? created_at;
@@ -35,7 +34,6 @@ class User extends Equatable {
     required this.date_of_birth,
     required this.email_verified,
     this.phone_number,
-    this.photo_url,
   });
 
   @override
@@ -49,7 +47,6 @@ class User extends Equatable {
         date_of_birth,
         email_verified,
         phone_number,
-        photo_url,
       ];
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
@@ -63,7 +60,6 @@ class User extends Equatable {
         date_of_birth: DateTime.now(),
         email_verified: false,
         phone_number: null,
-        photo_url: null,
         password: '',
         created_at: DateTime.now(),
         refresh_token: '',

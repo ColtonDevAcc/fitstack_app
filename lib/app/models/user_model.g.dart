@@ -11,7 +11,7 @@ abstract class _$UserCWProxy {
 
   User date_of_birth(DateTime date_of_birth);
 
-  User display_name(String display_name);
+  User display_name(String? display_name);
 
   User email(String email);
 
@@ -24,8 +24,6 @@ abstract class _$UserCWProxy {
   User password(String? password);
 
   User phone_number(String? phone_number);
-
-  User photo_url(String? photo_url);
 
   User refresh_token(String? refresh_token);
 
@@ -49,7 +47,6 @@ abstract class _$UserCWProxy {
     String? last_name,
     String? password,
     String? phone_number,
-    String? photo_url,
     String? refresh_token,
     DateTime? updated_at,
     String? user_id,
@@ -70,7 +67,7 @@ class _$UserCWProxyImpl implements _$UserCWProxy {
       this(date_of_birth: date_of_birth);
 
   @override
-  User display_name(String display_name) => this(display_name: display_name);
+  User display_name(String? display_name) => this(display_name: display_name);
 
   @override
   User email(String email) => this(email: email);
@@ -90,9 +87,6 @@ class _$UserCWProxyImpl implements _$UserCWProxy {
 
   @override
   User phone_number(String? phone_number) => this(phone_number: phone_number);
-
-  @override
-  User photo_url(String? photo_url) => this(photo_url: photo_url);
 
   @override
   User refresh_token(String? refresh_token) =>
@@ -122,7 +116,6 @@ class _$UserCWProxyImpl implements _$UserCWProxy {
     Object? last_name = const $CopyWithPlaceholder(),
     Object? password = const $CopyWithPlaceholder(),
     Object? phone_number = const $CopyWithPlaceholder(),
-    Object? photo_url = const $CopyWithPlaceholder(),
     Object? refresh_token = const $CopyWithPlaceholder(),
     Object? updated_at = const $CopyWithPlaceholder(),
     Object? user_id = const $CopyWithPlaceholder(),
@@ -137,11 +130,10 @@ class _$UserCWProxyImpl implements _$UserCWProxy {
               ? _value.date_of_birth
               // ignore: cast_nullable_to_non_nullable
               : date_of_birth as DateTime,
-      display_name:
-          display_name == const $CopyWithPlaceholder() || display_name == null
-              ? _value.display_name
-              // ignore: cast_nullable_to_non_nullable
-              : display_name as String,
+      display_name: display_name == const $CopyWithPlaceholder()
+          ? _value.display_name
+          // ignore: cast_nullable_to_non_nullable
+          : display_name as String?,
       email: email == const $CopyWithPlaceholder() || email == null
           ? _value.email
           // ignore: cast_nullable_to_non_nullable
@@ -168,10 +160,6 @@ class _$UserCWProxyImpl implements _$UserCWProxy {
           ? _value.phone_number
           // ignore: cast_nullable_to_non_nullable
           : phone_number as String?,
-      photo_url: photo_url == const $CopyWithPlaceholder()
-          ? _value.photo_url
-          // ignore: cast_nullable_to_non_nullable
-          : photo_url as String?,
       refresh_token: refresh_token == const $CopyWithPlaceholder()
           ? _value.refresh_token
           // ignore: cast_nullable_to_non_nullable
@@ -209,13 +197,12 @@ User _$UserFromJson(Map<String, dynamic> json) => User(
       refresh_token: json['refresh_token'] as String?,
       user_id: json['user_id'] as String?,
       email: json['email'] as String,
-      display_name: json['display_name'] as String,
+      display_name: json['display_name'] as String?,
       first_name: json['first_name'] as String,
       last_name: json['last_name'] as String,
       date_of_birth: DateTime.parse(json['date_of_birth'] as String),
       email_verified: json['email_verified'] as bool,
       phone_number: json['phone_number'] as String?,
-      photo_url: json['photo_url'] as String?,
     );
 
 const _$UserFieldMap = <String, String>{
@@ -227,7 +214,6 @@ const _$UserFieldMap = <String, String>{
   'last_name': 'last_name',
   'phone_number': 'phone_number',
   'date_of_birth': 'date_of_birth',
-  'photo_url': 'photo_url',
   'email_verified': 'email_verified',
   'updated_at': 'updated_at',
   'created_at': 'created_at',
@@ -243,7 +229,6 @@ Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
       'last_name': instance.last_name,
       'phone_number': instance.phone_number,
       'date_of_birth': instance.date_of_birth.toIso8601String(),
-      'photo_url': instance.photo_url,
       'email_verified': instance.email_verified,
       'updated_at': instance.updated_at?.toIso8601String(),
       'created_at': instance.created_at?.toIso8601String(),

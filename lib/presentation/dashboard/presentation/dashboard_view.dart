@@ -38,7 +38,7 @@ class DashboardView extends StatelessWidget {
                   padding: const EdgeInsets.only(right: 15),
                   child: ProfileAvatar(
                     onTap: () => GoRouter.of(context).push("/user/profile"),
-                    profileUrl: context.read<AppBloc>().state.user?.photo_url,
+                    profileUrl: '',
                     withBorder: false,
                     maxRadius: 17,
                   ),

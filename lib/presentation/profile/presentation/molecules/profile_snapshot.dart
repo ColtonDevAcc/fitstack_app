@@ -5,10 +5,10 @@ import 'package:FitStack/presentation/signup/presentation/atoms/profile_avatar_w
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class UserProfileHeader extends StatelessWidget {
+class ProfileSnapshot extends StatelessWidget {
   final void Function()? avatarOnTap;
-  final User user;
-  const UserProfileHeader({Key? key, this.avatarOnTap, required this.user}) : super(key: key);
+  final String? profileUrl;
+  const ProfileSnapshot({Key? key, this.avatarOnTap, required this.profileUrl}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class UserProfileHeader extends StatelessWidget {
               onTap: avatarOnTap,
               child: ProfileAvatar(
                 maxRadius: 31,
-                profileUrl: user.photo_url,
+                profileUrl: profileUrl,
                 withBorder: true,
               ),
             ),

@@ -1,16 +1,12 @@
-import 'dart:developer';
-
-import 'package:FitStack/app/injection/dependency_injection.dart';
 import 'package:FitStack/app/models/user_model.dart';
 import 'package:FitStack/app/providers/bloc/app/app_bloc.dart';
 import 'package:FitStack/app/providers/cubit/friendship/friendship_cubit.dart';
-import 'package:FitStack/app/repository/relationship_repository.dart';
 import 'package:FitStack/presentation/profile/cubit/profile_cubit.dart';
 import 'package:FitStack/presentation/profile/presentation/atoms/profile_featured_user_statistics.dart';
 import 'package:FitStack/presentation/profile/presentation/molecules/friendship_profile_card.dart';
 import 'package:FitStack/presentation/profile/presentation/molecules/user_profile_achievements_list.dart';
 import 'package:FitStack/presentation/profile/presentation/molecules/user_profile_challenge_badges_list.dart';
-import 'package:FitStack/presentation/profile/presentation/molecules/user_profile_header.dart';
+import 'package:FitStack/presentation/profile/presentation/molecules/profile_snapshot.dart';
 import 'package:FitStack/presentation/profile/presentation/organisms/profile_drawer.dart';
 import 'package:FitStack/widgets/atoms/list_header.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -26,7 +22,7 @@ class ProfileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final globalKey = GlobalKey<ScaffoldState>();
-    User user = BlocProvider.of<AppBloc>(context).state.user!;
+    User user = context.read<AppBloc>().state.user!;
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -71,7 +67,17 @@ class ProfileView extends StatelessWidget {
         elevation: 0,
       ),
       backgroundColor: Theme.of(context).colorScheme.background,
-      body: BlocBuilder<ProfileCubit, ProfileState>(
+      body: BlocConsumer<ProfileCubit, ProfileState>(
+        listener: (context, state) {
+          if (state.scaffoldMessageString != null) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                backgroundColor: Colors.green,
+                content: Text('Success', textAlign: TextAlign.center),
+              ),
+            );
+          }
+        },
         buildWhen: (previous, current) => previous.profileUrl != current.profileUrl,
         builder: (context, state) {
           return SingleChildScrollView(
@@ -82,11 +88,11 @@ class ProfileView extends StatelessWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.fromLTRB(20, 20, 20, 40),
-                  child: UserProfileHeader(
+                  child: ProfileSnapshot(
                     avatarOnTap: () {
                       context.read<ProfileCubit>().ChangeProfileUrl();
                     },
-                    user: context.read<AppBloc>().state.user ?? User.empty(),
+                    profileUrl: state.profileUrl,
                   ),
                 ),
                 Divider(height: 1, color: Theme.of(context).colorScheme.onBackground),
@@ -128,8 +134,8 @@ class ProfileView extends StatelessWidget {
                                       (e) => FriendshipProfileCard(
                                         colorTheme: Theme.of(context).colorScheme.primary,
                                         position: "1st",
-                                        username: e!.display_name,
-                                        profileUrl: e.photo_url,
+                                        username: e!.display_name ?? "",
+                                        profileUrl: e.photo_url ?? "",
                                       ),
                                     )
                                     .toList(),
