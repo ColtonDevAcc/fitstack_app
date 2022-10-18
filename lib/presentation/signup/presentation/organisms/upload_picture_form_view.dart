@@ -35,7 +35,7 @@ class UploadPictureFormView extends StatelessWidget {
                 },
                 child: ProfileAvatar(
                   maxRadius: 50,
-                  profileUrl: state.profileImage,
+                  avatar: state.profileImage,
                   withBorder: false,
                 ),
               ),

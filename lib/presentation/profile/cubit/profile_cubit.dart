@@ -6,13 +6,14 @@ import 'package:FitStack/app/repository/user_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:image_picker/image_picker.dart';
 
 part 'profile_state.dart';
 
 class ProfileCubit extends Cubit<ProfileState> {
   final UserRepository userRepository;
-  ProfileCubit({required this.userRepository}) : super(ProfileState(avatar: ''));
+  ProfileCubit({required this.userRepository}) : super(ProfileState(avatar: '', userProfile: UserProfile.empty()));
 
   void ChangeProfileUrl() async {
     await ImagePicker().pickImage(source: ImageSource.gallery).then((value) async {
@@ -27,9 +28,16 @@ class ProfileCubit extends Cubit<ProfileState> {
     );
   }
 
-  void getUserProfile() async {
-    var token = await FirebaseAuth.instance.currentUser?.getIdToken();
-    var userProfile = await userRepository.getUserProfile(token: token!);
-    emit(state.copyWith(userProfile: userProfile));
+  Future<void> getUserProfile() async {
+    try {
+      if (kDebugMode) log("getting user profile");
+      var token = await FirebaseAuth.instance.currentUser?.getIdToken();
+      log(" =============== $token ========== ");
+      var userProfile = await userRepository.getUserProfile(token: token!);
+      log("${userProfile.display_name}");
+      emit(state.copyWith(userProfile: userProfile));
+    } catch (e) {
+      log("$e");
+    }
   }
 }

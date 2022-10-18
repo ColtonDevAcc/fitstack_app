@@ -72,9 +72,8 @@ class UserRepository {
       );
 
       if (response.statusCode == 200) {
-      } else {
         return UserProfile.fromJson(response.data);
-      }
+      } else {}
     } on Error catch (e) {
       log('error: ${e}, stacktrace: ${e.stackTrace}');
     }

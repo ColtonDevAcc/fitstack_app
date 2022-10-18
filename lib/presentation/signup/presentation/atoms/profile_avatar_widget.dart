@@ -7,16 +7,22 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ProfileAvatar extends StatelessWidget {
   final double? maxRadius;
-  final String? profileUrl;
+  final String? avatar;
   final Bloc? bloc;
   final void Function()? onTap;
   final bool withBorder;
-  const ProfileAvatar({Key? key, this.maxRadius, required this.profileUrl, required this.withBorder, this.onTap, this.bloc}) : super(key: key);
+  const ProfileAvatar({Key? key, this.maxRadius, required this.avatar, required this.withBorder, this.onTap, this.bloc}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    String? url;
+    try {
+      if (avatar != null || avatar != "") url = avatar?.split("/")[2];
+    } catch (e) {
+      log("$e while trying to parse image");
+    }
     return FutureBuilder(
-      future: profileUrl == null || profileUrl == "" ? null : FirebaseStorage.instance.ref(profileUrl?.split("/")[2]).getDownloadURL(),
+      future: avatar == null || avatar == "" ? null : FirebaseStorage.instance.ref(url).getDownloadURL(),
       builder: (context, snapshot) {
         String? url = snapshot.hasData ? snapshot.data as String : null;
         log("LOADING NEW PROFILE IMAGE");

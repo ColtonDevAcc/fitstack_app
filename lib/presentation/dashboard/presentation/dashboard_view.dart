@@ -1,4 +1,3 @@
-import 'package:FitStack/app/providers/bloc/app/app_bloc.dart';
 import 'package:FitStack/presentation/dashboard/presentation/molecules/user_goal_graphs_list.dart';
 import 'package:FitStack/presentation/dashboard/presentation/molecules/workout_recommendations%20_list.dart';
 import 'package:FitStack/presentation/dashboard/presentation/molecules/statistics_dashboard.dart';
@@ -44,7 +43,7 @@ class DashboardView extends StatelessWidget {
                       }
                       return ProfileAvatar(
                         onTap: () => GoRouter.of(context).push("/user/profile"),
-                        profileUrl: state.avatar,
+                        avatar: state.avatar,
                         withBorder: false,
                         maxRadius: 17,
                       );

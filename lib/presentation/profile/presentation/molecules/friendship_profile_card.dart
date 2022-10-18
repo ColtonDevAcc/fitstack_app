@@ -6,14 +6,14 @@ class FriendshipProfileCard extends StatelessWidget {
   final Color colorTheme;
   final String position;
   final String username;
-  final String? profileUrl;
+  final String? avatar;
 
   const FriendshipProfileCard({
     Key? key,
     required this.colorTheme,
     required this.position,
     required this.username,
-    this.profileUrl,
+    this.avatar,
   }) : super(key: key);
 
   @override
@@ -33,7 +33,7 @@ class FriendshipProfileCard extends StatelessWidget {
               ),
             ),
             SizedBox(width: 3),
-            ProfileAvatar(withBorder: false, profileUrl: profileUrl),
+            ProfileAvatar(withBorder: false, avatar: avatar),
             SizedBox(width: 3),
             Expanded(
               child: Column(

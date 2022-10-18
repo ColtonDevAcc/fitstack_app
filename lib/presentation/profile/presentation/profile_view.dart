@@ -1,6 +1,6 @@
-import 'package:FitStack/app/models/user_model.dart';
-import 'package:FitStack/app/providers/bloc/app/app_bloc.dart';
-import 'package:FitStack/app/providers/cubit/friendship/friendship_cubit.dart';
+import 'dart:developer';
+
+import 'package:FitStack/app/models/user_profile_model.dart';
 import 'package:FitStack/presentation/profile/cubit/profile_cubit.dart';
 import 'package:FitStack/presentation/profile/presentation/atoms/profile_featured_user_statistics.dart';
 import 'package:FitStack/presentation/profile/presentation/molecules/friendship_profile_card.dart';
@@ -22,65 +22,57 @@ class ProfileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final globalKey = GlobalKey<ScaffoldState>();
-    User user = context.read<AppBloc>().state.user!;
 
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      key: globalKey,
-      endDrawer: ProfileDrawer(),
-      appBar: AppBar(
-        centerTitle: false,
-        title: AutoSizeText(
-          "${user.display_name}",
-          style: Theme.of(context).textTheme.headlineSmall?.apply(color: Theme.of(context).colorScheme.onBackground),
-          textAlign: TextAlign.center,
-        ),
-        leading: GestureDetector(
-          onTap: () => GoRouter.of(context).pop(),
-          child: Container(
-            padding: EdgeInsets.all(5),
-            child: Icon(
-              FontAwesomeIcons.arrowLeft,
-              color: Theme.of(context).colorScheme.onBackground,
+    return BlocBuilder<ProfileCubit, ProfileState>(
+      buildWhen: (previous, current) => previous.userProfile != current.userProfile,
+      builder: (context, state) {
+        if (state.userProfile == UserProfile.empty()) {
+          context.read<ProfileCubit>().getUserProfile();
+        }
+        return Scaffold(
+          resizeToAvoidBottomInset: false,
+          key: globalKey,
+          endDrawer: ProfileDrawer(),
+          appBar: AppBar(
+            centerTitle: false,
+            title: AutoSizeText(
+              "${state.userProfile.display_name}",
+              style: Theme.of(context).textTheme.headlineSmall?.apply(color: Theme.of(context).colorScheme.onBackground),
+              textAlign: TextAlign.center,
             ),
-          ),
-        ),
-        actions: [
-          GestureDetector(
-            onTap: () => globalKey.currentState!.openEndDrawer(),
-            child: Padding(
-              padding: const EdgeInsets.only(right: 10),
+            leading: GestureDetector(
+              onTap: () => GoRouter.of(context).pop(),
               child: Container(
                 padding: EdgeInsets.all(5),
-                child: Badge(
-                  badgeContent: Text("3", style: Theme.of(context).textTheme.labelLarge?.apply(color: Theme.of(context).colorScheme.background)),
-                  child: Icon(
-                    FontAwesomeIcons.bars,
-                    color: Theme.of(context).colorScheme.onBackground,
-                  ),
+                child: Icon(
+                  FontAwesomeIcons.arrowLeft,
+                  color: Theme.of(context).colorScheme.onBackground,
                 ),
               ),
             ),
-          ),
-        ],
-        backgroundColor: Theme.of(context).colorScheme.background,
-        elevation: 0,
-      ),
-      backgroundColor: Theme.of(context).colorScheme.background,
-      body: BlocConsumer<ProfileCubit, ProfileState>(
-        listener: (context, state) {
-          if (state.scaffoldMessageString != null) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                backgroundColor: Colors.green,
-                content: Text('Success', textAlign: TextAlign.center),
+            actions: [
+              GestureDetector(
+                onTap: () => globalKey.currentState!.openEndDrawer(),
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 10),
+                  child: Container(
+                    padding: EdgeInsets.all(5),
+                    child: Badge(
+                      badgeContent: Text("3", style: Theme.of(context).textTheme.labelLarge?.apply(color: Theme.of(context).colorScheme.background)),
+                      child: Icon(
+                        FontAwesomeIcons.bars,
+                        color: Theme.of(context).colorScheme.onBackground,
+                      ),
+                    ),
+                  ),
+                ),
               ),
-            );
-          }
-        },
-        buildWhen: (previous, current) => previous.avatar != current.avatar,
-        builder: (context, state) {
-          return SingleChildScrollView(
+            ],
+            backgroundColor: Theme.of(context).colorScheme.background,
+            elevation: 0,
+          ),
+          backgroundColor: Theme.of(context).colorScheme.background,
+          body: SingleChildScrollView(
             clipBehavior: Clip.none,
             scrollDirection: Axis.vertical,
             padding: EdgeInsets.zero,
@@ -92,7 +84,10 @@ class ProfileView extends StatelessWidget {
                     avatarOnTap: () {
                       context.read<ProfileCubit>().ChangeProfileUrl();
                     },
-                    profileUrl: state.avatar,
+                    avatar: state.userProfile.avatar,
+                    daysInARow: state.userProfile.days_logged_in_a_row,
+                    fit_credits: state.userProfile.fit_credits,
+                    socialPoints: state.userProfile.social_points,
                   ),
                 ),
                 Divider(height: 1, color: Theme.of(context).colorScheme.onBackground),
@@ -120,36 +115,29 @@ class ProfileView extends StatelessWidget {
                   child: Column(
                     children: [
                       ListHeader(title: "Friend Group", subtitle: "(2nd place)"),
-                      BlocBuilder<FriendshipCubit, FriendshipState>(
-                        buildWhen: (previous, current) => previous.friends != current.friends,
-                        builder: (context, state) {
-                          if (state.friends == null) {
-                            BlocProvider.of<FriendshipCubit>(context).getFriends();
-                          }
-                          return Column(
-                            children: state.friends == null
-                                ? []
-                                : state.friends!
-                                    .map(
-                                      (e) => FriendshipProfileCard(
-                                        colorTheme: Theme.of(context).colorScheme.primary,
-                                        position: "1st",
-                                        username: e!.display_name,
-                                        profileUrl: "",
-                                      ),
-                                    )
-                                    .toList(),
-                          );
-                        },
+                      SizedBox(height: 10),
+                      Column(
+                        children: state.userProfile.friends == null || state.userProfile.friends!.isEmpty
+                            ? []
+                            : state.userProfile.friends!
+                                .map(
+                                  (e) => FriendshipProfileCard(
+                                    colorTheme: Theme.of(context).colorScheme.primary,
+                                    position: "1st",
+                                    username: e.display_name,
+                                    avatar: e.avatar,
+                                  ),
+                                )
+                                .toList(),
                       ),
                     ],
                   ),
                 )
               ],
             ),
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 }

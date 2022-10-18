@@ -1,4 +1,3 @@
-import 'package:FitStack/app/models/user_model.dart';
 import 'package:FitStack/presentation/profile/presentation/atoms/profile_featured_statistics_graph.dart';
 import 'package:FitStack/presentation/profile/presentation/atoms/profile_social_currency_icon.dart';
 import 'package:FitStack/presentation/signup/presentation/atoms/profile_avatar_widget.dart';
@@ -7,8 +6,18 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ProfileSnapshot extends StatelessWidget {
   final void Function()? avatarOnTap;
-  final String? profileUrl;
-  const ProfileSnapshot({Key? key, this.avatarOnTap, required this.profileUrl}) : super(key: key);
+  final String? avatar;
+  final int daysInARow;
+  final int fit_credits;
+  final int socialPoints;
+  const ProfileSnapshot({
+    Key? key,
+    this.avatarOnTap,
+    required this.avatar,
+    required this.daysInARow,
+    required this.fit_credits,
+    required this.socialPoints,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,13 +33,13 @@ class ProfileSnapshot extends StatelessWidget {
               onTap: avatarOnTap,
               child: ProfileAvatar(
                 maxRadius: 31,
-                profileUrl: profileUrl,
+                avatar: avatar,
                 withBorder: true,
               ),
             ),
-            ProfileSocialCurrencyIcon(icon: FontAwesomeIcons.chartSimple, value: "15", color: Colors.blue),
-            ProfileSocialCurrencyIcon(icon: FontAwesomeIcons.shekelSign, value: "39", color: Theme.of(context).colorScheme.secondary),
-            ProfileSocialCurrencyIcon(icon: FontAwesomeIcons.fireFlameCurved, value: "4", color: Theme.of(context).colorScheme.error),
+            ProfileSocialCurrencyIcon(icon: FontAwesomeIcons.chartSimple, value: "$socialPoints", color: Colors.blue),
+            ProfileSocialCurrencyIcon(icon: FontAwesomeIcons.shekelSign, value: "$fit_credits", color: Theme.of(context).colorScheme.secondary),
+            ProfileSocialCurrencyIcon(icon: FontAwesomeIcons.fireFlameCurved, value: "$daysInARow", color: Theme.of(context).colorScheme.error),
             SizedBox(),
           ],
         ),

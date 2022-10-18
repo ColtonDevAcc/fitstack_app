@@ -7,25 +7,27 @@ part of 'user_profile_model.dart';
 // **************************************************************************
 
 abstract class _$UserProfileCWProxy {
-  UserProfile achievements(List<dynamic> achievements);
+  UserProfile achievements(List<dynamic>? achievements);
 
   UserProfile avatar(String? avatar);
 
-  UserProfile challenges(List<dynamic> challenges);
+  UserProfile challenges(List<dynamic>? challenges);
 
-  UserProfile daysLoggedInARow(int daysLoggedInARow);
+  UserProfile days_logged_in_a_row(int days_logged_in_a_row);
 
   UserProfile display_name(String display_name);
 
-  UserProfile fitCredits(int fitCredits);
+  UserProfile fit_credits(int fit_credits);
+
+  UserProfile friends(List<UserProfile>? friends);
 
   UserProfile id(String id);
 
-  UserProfile socialPoints(int socialPoints);
+  UserProfile social_points(int social_points);
 
-  UserProfile updatedAt(DateTime updatedAt);
+  UserProfile updated_at(DateTime? updated_at);
 
-  UserProfile userStatistics(List<dynamic> userStatistics);
+  UserProfile user_statistics(List<dynamic>? user_statistics);
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `UserProfile(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
@@ -37,13 +39,14 @@ abstract class _$UserProfileCWProxy {
     List<dynamic>? achievements,
     String? avatar,
     List<dynamic>? challenges,
-    int? daysLoggedInARow,
+    int? days_logged_in_a_row,
     String? display_name,
-    int? fitCredits,
+    int? fit_credits,
+    List<UserProfile>? friends,
     String? id,
-    int? socialPoints,
-    DateTime? updatedAt,
-    List<dynamic>? userStatistics,
+    int? social_points,
+    DateTime? updated_at,
+    List<dynamic>? user_statistics,
   });
 }
 
@@ -54,40 +57,43 @@ class _$UserProfileCWProxyImpl implements _$UserProfileCWProxy {
   const _$UserProfileCWProxyImpl(this._value);
 
   @override
-  UserProfile achievements(List<dynamic> achievements) =>
+  UserProfile achievements(List<dynamic>? achievements) =>
       this(achievements: achievements);
 
   @override
   UserProfile avatar(String? avatar) => this(avatar: avatar);
 
   @override
-  UserProfile challenges(List<dynamic> challenges) =>
+  UserProfile challenges(List<dynamic>? challenges) =>
       this(challenges: challenges);
 
   @override
-  UserProfile daysLoggedInARow(int daysLoggedInARow) =>
-      this(daysLoggedInARow: daysLoggedInARow);
+  UserProfile days_logged_in_a_row(int days_logged_in_a_row) =>
+      this(days_logged_in_a_row: days_logged_in_a_row);
 
   @override
   UserProfile display_name(String display_name) =>
       this(display_name: display_name);
 
   @override
-  UserProfile fitCredits(int fitCredits) => this(fitCredits: fitCredits);
+  UserProfile fit_credits(int fit_credits) => this(fit_credits: fit_credits);
+
+  @override
+  UserProfile friends(List<UserProfile>? friends) => this(friends: friends);
 
   @override
   UserProfile id(String id) => this(id: id);
 
   @override
-  UserProfile socialPoints(int socialPoints) =>
-      this(socialPoints: socialPoints);
+  UserProfile social_points(int social_points) =>
+      this(social_points: social_points);
 
   @override
-  UserProfile updatedAt(DateTime updatedAt) => this(updatedAt: updatedAt);
+  UserProfile updated_at(DateTime? updated_at) => this(updated_at: updated_at);
 
   @override
-  UserProfile userStatistics(List<dynamic> userStatistics) =>
-      this(userStatistics: userStatistics);
+  UserProfile user_statistics(List<dynamic>? user_statistics) =>
+      this(user_statistics: user_statistics);
 
   @override
 
@@ -101,62 +107,65 @@ class _$UserProfileCWProxyImpl implements _$UserProfileCWProxy {
     Object? achievements = const $CopyWithPlaceholder(),
     Object? avatar = const $CopyWithPlaceholder(),
     Object? challenges = const $CopyWithPlaceholder(),
-    Object? daysLoggedInARow = const $CopyWithPlaceholder(),
+    Object? days_logged_in_a_row = const $CopyWithPlaceholder(),
     Object? display_name = const $CopyWithPlaceholder(),
-    Object? fitCredits = const $CopyWithPlaceholder(),
+    Object? fit_credits = const $CopyWithPlaceholder(),
+    Object? friends = const $CopyWithPlaceholder(),
     Object? id = const $CopyWithPlaceholder(),
-    Object? socialPoints = const $CopyWithPlaceholder(),
-    Object? updatedAt = const $CopyWithPlaceholder(),
-    Object? userStatistics = const $CopyWithPlaceholder(),
+    Object? social_points = const $CopyWithPlaceholder(),
+    Object? updated_at = const $CopyWithPlaceholder(),
+    Object? user_statistics = const $CopyWithPlaceholder(),
   }) {
     return UserProfile(
-      achievements:
-          achievements == const $CopyWithPlaceholder() || achievements == null
-              ? _value.achievements
-              // ignore: cast_nullable_to_non_nullable
-              : achievements as List<dynamic>,
+      achievements: achievements == const $CopyWithPlaceholder()
+          ? _value.achievements
+          // ignore: cast_nullable_to_non_nullable
+          : achievements as List<dynamic>?,
       avatar: avatar == const $CopyWithPlaceholder()
           ? _value.avatar
           // ignore: cast_nullable_to_non_nullable
           : avatar as String?,
-      challenges:
-          challenges == const $CopyWithPlaceholder() || challenges == null
-              ? _value.challenges
-              // ignore: cast_nullable_to_non_nullable
-              : challenges as List<dynamic>,
-      daysLoggedInARow: daysLoggedInARow == const $CopyWithPlaceholder() ||
-              daysLoggedInARow == null
-          ? _value.daysLoggedInARow
+      challenges: challenges == const $CopyWithPlaceholder()
+          ? _value.challenges
           // ignore: cast_nullable_to_non_nullable
-          : daysLoggedInARow as int,
+          : challenges as List<dynamic>?,
+      days_logged_in_a_row:
+          days_logged_in_a_row == const $CopyWithPlaceholder() ||
+                  days_logged_in_a_row == null
+              ? _value.days_logged_in_a_row
+              // ignore: cast_nullable_to_non_nullable
+              : days_logged_in_a_row as int,
       display_name:
           display_name == const $CopyWithPlaceholder() || display_name == null
               ? _value.display_name
               // ignore: cast_nullable_to_non_nullable
               : display_name as String,
-      fitCredits:
-          fitCredits == const $CopyWithPlaceholder() || fitCredits == null
-              ? _value.fitCredits
+      fit_credits:
+          fit_credits == const $CopyWithPlaceholder() || fit_credits == null
+              ? _value.fit_credits
               // ignore: cast_nullable_to_non_nullable
-              : fitCredits as int,
+              : fit_credits as int,
+      friends: friends == const $CopyWithPlaceholder()
+          ? _value.friends
+          // ignore: cast_nullable_to_non_nullable
+          : friends as List<UserProfile>?,
       id: id == const $CopyWithPlaceholder() || id == null
           ? _value.id
           // ignore: cast_nullable_to_non_nullable
           : id as String,
-      socialPoints:
-          socialPoints == const $CopyWithPlaceholder() || socialPoints == null
-              ? _value.socialPoints
+      social_points:
+          social_points == const $CopyWithPlaceholder() || social_points == null
+              ? _value.social_points
               // ignore: cast_nullable_to_non_nullable
-              : socialPoints as int,
-      updatedAt: updatedAt == const $CopyWithPlaceholder() || updatedAt == null
-          ? _value.updatedAt
+              : social_points as int,
+      updated_at: updated_at == const $CopyWithPlaceholder()
+          ? _value.updated_at
           // ignore: cast_nullable_to_non_nullable
-          : updatedAt as DateTime,
-      userStatistics: userStatistics == const $CopyWithPlaceholder() ||
-              userStatistics == null
-          ? _value.userStatistics
+          : updated_at as DateTime?,
+      user_statistics: user_statistics == const $CopyWithPlaceholder()
+          ? _value.user_statistics
           // ignore: cast_nullable_to_non_nullable
-          : userStatistics as List<dynamic>,
+          : user_statistics as List<dynamic>?,
     );
   }
 }
@@ -172,15 +181,20 @@ extension $UserProfileCopyWith on UserProfile {
 // **************************************************************************
 
 UserProfile _$UserProfileFromJson(Map<String, dynamic> json) => UserProfile(
+      friends: (json['friends'] as List<dynamic>?)
+          ?.map((e) => UserProfile.fromJson(e as Map<String, dynamic>))
+          .toList(),
       display_name: json['display_name'] as String,
       id: json['id'] as String,
-      challenges: json['challenges'] as List<dynamic>,
-      achievements: json['achievements'] as List<dynamic>,
-      userStatistics: json['userStatistics'] as List<dynamic>,
-      fitCredits: json['fitCredits'] as int,
-      socialPoints: json['socialPoints'] as int,
-      daysLoggedInARow: json['daysLoggedInARow'] as int,
-      updatedAt: DateTime.parse(json['updatedAt'] as String),
+      challenges: json['challenges'] as List<dynamic>?,
+      achievements: json['achievements'] as List<dynamic>?,
+      user_statistics: json['user_statistics'] as List<dynamic>?,
+      fit_credits: json['fit_credits'] as int,
+      social_points: json['social_points'] as int,
+      days_logged_in_a_row: json['days_logged_in_a_row'] as int,
+      updated_at: json['updated_at'] == null
+          ? null
+          : DateTime.parse(json['updated_at'] as String),
       avatar: json['avatar'] as String?,
     );
 
@@ -189,11 +203,12 @@ const _$UserProfileFieldMap = <String, String>{
   'display_name': 'display_name',
   'challenges': 'challenges',
   'achievements': 'achievements',
-  'userStatistics': 'userStatistics',
-  'fitCredits': 'fitCredits',
-  'socialPoints': 'socialPoints',
-  'daysLoggedInARow': 'daysLoggedInARow',
-  'updatedAt': 'updatedAt',
+  'user_statistics': 'user_statistics',
+  'friends': 'friends',
+  'fit_credits': 'fit_credits',
+  'social_points': 'social_points',
+  'days_logged_in_a_row': 'days_logged_in_a_row',
+  'updated_at': 'updated_at',
   'avatar': 'avatar',
 };
 
@@ -203,10 +218,11 @@ Map<String, dynamic> _$UserProfileToJson(UserProfile instance) =>
       'display_name': instance.display_name,
       'challenges': instance.challenges,
       'achievements': instance.achievements,
-      'userStatistics': instance.userStatistics,
-      'fitCredits': instance.fitCredits,
-      'socialPoints': instance.socialPoints,
-      'daysLoggedInARow': instance.daysLoggedInARow,
-      'updatedAt': instance.updatedAt.toIso8601String(),
+      'user_statistics': instance.user_statistics,
+      'friends': instance.friends,
+      'fit_credits': instance.fit_credits,
+      'social_points': instance.social_points,
+      'days_logged_in_a_row': instance.days_logged_in_a_row,
+      'updated_at': instance.updated_at?.toIso8601String(),
       'avatar': instance.avatar,
     };
