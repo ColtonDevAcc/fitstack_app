@@ -37,7 +37,6 @@ class ProfileCubit extends Cubit<ProfileState> {
     try {
       if (kDebugMode) log("getting user profile");
       var token = await FirebaseAuth.instance.currentUser?.getIdToken();
-      log(" =============== $token ========== ");
       var userProfile = await userRepository.getUserProfile(token: token!);
       log("${userProfile.display_name}");
       emit(state.copyWith(userProfile: userProfile));
