@@ -1,10 +1,9 @@
 import 'dart:developer';
-import 'dart:io';
-
 import 'package:FitStack/app/models/user_model.dart';
 import 'package:FitStack/app/models/user_profile_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:dio/dio.dart';
+import 'package:image_picker/image_picker.dart';
 
 class UserRepository {
   static String mainUrl = kDebugMode ? "http://localhost:8000" : "https://dev.fitstack.io";
@@ -31,7 +30,7 @@ class UserRepository {
     }
   }
 
-  Future<String?> updateProfileAvatar({required String token, required File file}) async {
+  Future<String?> updateProfileAvatar({required String token, required XFile file}) async {
     try {
       FormData data = FormData.fromMap({
         "file": await MultipartFile.fromFile(
