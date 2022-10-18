@@ -1,3 +1,4 @@
+import 'package:FitStack/app/models/user_profile_model.dart';
 import 'package:FitStack/presentation/dashboard/presentation/molecules/user_goal_graphs_list.dart';
 import 'package:FitStack/presentation/dashboard/presentation/molecules/workout_recommendations%20_list.dart';
 import 'package:FitStack/presentation/dashboard/presentation/molecules/statistics_dashboard.dart';
@@ -38,7 +39,7 @@ class DashboardView extends StatelessWidget {
                   padding: const EdgeInsets.only(right: 15),
                   child: BlocBuilder<ProfileCubit, ProfileState>(
                     builder: (context, state) {
-                      if (state.avatar == "") {
+                      if (state.userProfile == UserProfile.empty()) {
                         context.read<ProfileCubit>().getUserProfile();
                       }
                       return ProfileAvatar(
