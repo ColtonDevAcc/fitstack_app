@@ -43,7 +43,7 @@ class DashboardView extends StatelessWidget {
                       }
                       return ProfileAvatar(
                         onTap: () => GoRouter.of(context).push("/user/profile"),
-                        avatar: state.avatar,
+                        avatar: state.userProfile.avatar,
                         withBorder: false,
                         maxRadius: 17,
                       );

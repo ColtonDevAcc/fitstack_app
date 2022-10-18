@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:FitStack/app/models/user_profile_model.dart';
 import 'package:FitStack/presentation/profile/cubit/profile_cubit.dart';
 import 'package:FitStack/presentation/profile/presentation/atoms/profile_featured_user_statistics.dart';
@@ -82,7 +80,7 @@ class ProfileView extends StatelessWidget {
                   padding: const EdgeInsets.fromLTRB(20, 20, 20, 40),
                   child: ProfileSnapshot(
                     avatarOnTap: () {
-                      context.read<ProfileCubit>().ChangeProfileUrl();
+                      context.read<ProfileCubit>().changeProfileUrl();
                     },
                     avatar: state.userProfile.avatar,
                     daysInARow: state.userProfile.days_logged_in_a_row,

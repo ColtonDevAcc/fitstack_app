@@ -15,11 +15,16 @@ class ProfileCubit extends Cubit<ProfileState> {
   final UserRepository userRepository;
   ProfileCubit({required this.userRepository}) : super(ProfileState(avatar: '', userProfile: UserProfile.empty()));
 
-  void ChangeProfileUrl() async {
+  void changeProfileUrl() async {
     await ImagePicker().pickImage(source: ImageSource.gallery).then((value) async {
       var token = await FirebaseAuth.instance.currentUser?.getIdToken();
       var profileUrl = await userRepository.updateProfileAvatar(token: token!, file: File(value!.path));
-      emit(state.copyWith(profileUrl: profileUrl, scaffoldMessageString: "Changed user avatar image"));
+      emit(
+        state.copyWith(
+          userProfile: state.userProfile.copyWith(avatar: profileUrl),
+          scaffoldMessageString: "Changed user avatar image",
+        ),
+      );
     }).onError(
       (error, stackTrace) {
         log("${error}");
