@@ -78,7 +78,7 @@ class ProfileView extends StatelessWidget {
             );
           }
         },
-        buildWhen: (previous, current) => previous.profileUrl != current.profileUrl,
+        buildWhen: (previous, current) => previous.avatar != current.avatar,
         builder: (context, state) {
           return SingleChildScrollView(
             clipBehavior: Clip.none,
@@ -92,7 +92,7 @@ class ProfileView extends StatelessWidget {
                     avatarOnTap: () {
                       context.read<ProfileCubit>().ChangeProfileUrl();
                     },
-                    profileUrl: state.profileUrl,
+                    profileUrl: state.avatar,
                   ),
                 ),
                 Divider(height: 1, color: Theme.of(context).colorScheme.onBackground),
@@ -134,8 +134,8 @@ class ProfileView extends StatelessWidget {
                                       (e) => FriendshipProfileCard(
                                         colorTheme: Theme.of(context).colorScheme.primary,
                                         position: "1st",
-                                        username: e!.display_name ?? "",
-                                        profileUrl: e.photo_url ?? "",
+                                        username: e!.display_name,
+                                        profileUrl: "",
                                       ),
                                     )
                                     .toList(),

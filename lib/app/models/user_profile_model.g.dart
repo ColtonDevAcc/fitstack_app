@@ -15,6 +15,8 @@ abstract class _$UserProfileCWProxy {
 
   UserProfile daysLoggedInARow(int daysLoggedInARow);
 
+  UserProfile display_name(String display_name);
+
   UserProfile fitCredits(int fitCredits);
 
   UserProfile id(String id);
@@ -36,6 +38,7 @@ abstract class _$UserProfileCWProxy {
     String? avatar,
     List<dynamic>? challenges,
     int? daysLoggedInARow,
+    String? display_name,
     int? fitCredits,
     String? id,
     int? socialPoints,
@@ -64,6 +67,10 @@ class _$UserProfileCWProxyImpl implements _$UserProfileCWProxy {
   @override
   UserProfile daysLoggedInARow(int daysLoggedInARow) =>
       this(daysLoggedInARow: daysLoggedInARow);
+
+  @override
+  UserProfile display_name(String display_name) =>
+      this(display_name: display_name);
 
   @override
   UserProfile fitCredits(int fitCredits) => this(fitCredits: fitCredits);
@@ -95,6 +102,7 @@ class _$UserProfileCWProxyImpl implements _$UserProfileCWProxy {
     Object? avatar = const $CopyWithPlaceholder(),
     Object? challenges = const $CopyWithPlaceholder(),
     Object? daysLoggedInARow = const $CopyWithPlaceholder(),
+    Object? display_name = const $CopyWithPlaceholder(),
     Object? fitCredits = const $CopyWithPlaceholder(),
     Object? id = const $CopyWithPlaceholder(),
     Object? socialPoints = const $CopyWithPlaceholder(),
@@ -121,6 +129,11 @@ class _$UserProfileCWProxyImpl implements _$UserProfileCWProxy {
           ? _value.daysLoggedInARow
           // ignore: cast_nullable_to_non_nullable
           : daysLoggedInARow as int,
+      display_name:
+          display_name == const $CopyWithPlaceholder() || display_name == null
+              ? _value.display_name
+              // ignore: cast_nullable_to_non_nullable
+              : display_name as String,
       fitCredits:
           fitCredits == const $CopyWithPlaceholder() || fitCredits == null
               ? _value.fitCredits
@@ -159,6 +172,7 @@ extension $UserProfileCopyWith on UserProfile {
 // **************************************************************************
 
 UserProfile _$UserProfileFromJson(Map<String, dynamic> json) => UserProfile(
+      display_name: json['display_name'] as String,
       id: json['id'] as String,
       challenges: json['challenges'] as List<dynamic>,
       achievements: json['achievements'] as List<dynamic>,
@@ -172,6 +186,7 @@ UserProfile _$UserProfileFromJson(Map<String, dynamic> json) => UserProfile(
 
 const _$UserProfileFieldMap = <String, String>{
   'id': 'id',
+  'display_name': 'display_name',
   'challenges': 'challenges',
   'achievements': 'achievements',
   'userStatistics': 'userStatistics',
@@ -185,6 +200,7 @@ const _$UserProfileFieldMap = <String, String>{
 Map<String, dynamic> _$UserProfileToJson(UserProfile instance) =>
     <String, dynamic>{
       'id': instance.id,
+      'display_name': instance.display_name,
       'challenges': instance.challenges,
       'achievements': instance.achievements,
       'userStatistics': instance.userStatistics,

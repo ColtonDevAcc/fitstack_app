@@ -4,9 +4,8 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 
 class FriendListTile extends StatelessWidget {
   final bool accepted;
-  final String userFullName;
   final String username;
-  const FriendListTile({Key? key, required this.accepted, required this.userFullName, required this.username}) : super(key: key);
+  const FriendListTile({Key? key, required this.accepted, required this.username}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +13,7 @@ class FriendListTile extends StatelessWidget {
       child: ListTile(
         contentPadding: EdgeInsets.fromLTRB(15, 0, 15, 0),
         title: AutoSizeText(
-          userFullName,
+          username,
           style: Theme.of(context).textTheme.labelLarge?.copyWith(fontWeight: FontWeight.bold),
         ),
         subtitle: AutoSizeText(username, minFontSize: 6),

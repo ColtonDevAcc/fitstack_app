@@ -2,14 +2,16 @@ import 'dart:developer';
 
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ProfileAvatar extends StatelessWidget {
   final double? maxRadius;
   final String? profileUrl;
+  final Bloc? bloc;
   final void Function()? onTap;
   final bool withBorder;
-  const ProfileAvatar({Key? key, this.maxRadius, required this.profileUrl, required this.withBorder, this.onTap}) : super(key: key);
+  const ProfileAvatar({Key? key, this.maxRadius, required this.profileUrl, required this.withBorder, this.onTap, this.bloc}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

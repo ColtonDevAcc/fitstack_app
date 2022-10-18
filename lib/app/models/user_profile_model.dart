@@ -8,6 +8,7 @@ part 'user_profile_model.g.dart';
 @CopyWith()
 class UserProfile extends Equatable {
   final String id;
+  final String display_name;
   final List challenges;
   final List achievements;
   final List userStatistics;
@@ -17,6 +18,7 @@ class UserProfile extends Equatable {
   final DateTime updatedAt;
   final String? avatar;
   UserProfile({
+    required this.display_name,
     required this.id,
     required this.challenges,
     required this.achievements,
@@ -42,6 +44,7 @@ class UserProfile extends Equatable {
         socialPoints: 0,
         daysLoggedInARow: 0,
         updatedAt: DateTime.now(),
+        display_name: '',
       );
 }
 

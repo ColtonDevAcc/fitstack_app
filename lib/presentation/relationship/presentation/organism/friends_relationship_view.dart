@@ -59,7 +59,7 @@ class FriendsRelationshipView extends StatelessWidget {
                   //TODO: get accepted value
                   : state.friends!
                       .map(
-                        (e) => FriendListTile(accepted: true, userFullName: '${e!.first_name} ${e.last_name}', username: e.display_name),
+                        (e) => FriendListTile(accepted: true, username: e!.display_name),
                       )
                       .toList(),
             ),

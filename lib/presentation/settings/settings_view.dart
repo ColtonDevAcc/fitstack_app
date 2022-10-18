@@ -16,7 +16,7 @@ class _SettingsViewState extends State<SettingsView> {
     return BlocBuilder<ProfileCubit, ProfileState>(
       builder: (context, state) {
         return ProfileSnapshot(
-          profileUrl: state.profileUrl,
+          profileUrl: state.avatar,
         );
       },
     );

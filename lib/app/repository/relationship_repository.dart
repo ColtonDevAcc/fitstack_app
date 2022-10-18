@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:FitStack/app/models/friendship_model.dart';
 import 'package:FitStack/app/models/user_model.dart';
+import 'package:FitStack/app/models/user_profile_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:dio/dio.dart';
@@ -10,7 +11,7 @@ import 'package:dio/dio.dart';
 class RelationshipRepository {
   final Dio dio = Dio();
   final storage = new FlutterSecureStorage();
-  static String mainUrl = kDebugMode ? "http://localhost:8000" : "https://dev.fitstack.io";
+  static String mainUrl = kDebugMode ? "http://10.0.2.2:8000" : "https://dev.fitstack.io";
   final controller = StreamController<FriendStream>.broadcast();
 
   RelationshipRepository();
@@ -21,7 +22,7 @@ class RelationshipRepository {
     yield* controller.stream;
   }
 
-  Future<List<User?>?> getFriends({required String token}) async {
+  Future<List<UserProfile?>?> getFriends({required String token}) async {
     try {
       controller.add(FriendStream(friendship: [], status: FriendshipFetchStatus.loading));
       Response response = await dio.get(
@@ -34,7 +35,7 @@ class RelationshipRepository {
       if (response.statusCode == 200) {
         List responseJson = response.data as List;
 
-        var friends = responseJson.map((e) => User.fromJson(e)).toList();
+        var friends = responseJson.map((e) => UserProfile.fromJson(e)).toList();
         return friends;
       } else {
         log("error");

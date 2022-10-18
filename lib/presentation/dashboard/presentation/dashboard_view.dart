@@ -2,6 +2,7 @@ import 'package:FitStack/app/providers/bloc/app/app_bloc.dart';
 import 'package:FitStack/presentation/dashboard/presentation/molecules/user_goal_graphs_list.dart';
 import 'package:FitStack/presentation/dashboard/presentation/molecules/workout_recommendations%20_list.dart';
 import 'package:FitStack/presentation/dashboard/presentation/molecules/statistics_dashboard.dart';
+import 'package:FitStack/presentation/profile/cubit/profile_cubit.dart';
 import 'package:FitStack/presentation/signup/presentation/atoms/profile_avatar_widget.dart';
 import 'package:FitStack/widgets/atoms/basic_view_header.dart';
 import 'package:flutter/material.dart';
@@ -36,11 +37,18 @@ class DashboardView extends StatelessWidget {
                 title: "DASHBOARD",
                 trailing: Padding(
                   padding: const EdgeInsets.only(right: 15),
-                  child: ProfileAvatar(
-                    onTap: () => GoRouter.of(context).push("/user/profile"),
-                    profileUrl: '',
-                    withBorder: false,
-                    maxRadius: 17,
+                  child: BlocBuilder<ProfileCubit, ProfileState>(
+                    builder: (context, state) {
+                      if (state.avatar == "") {
+                        context.read<ProfileCubit>().getUserProfile();
+                      }
+                      return ProfileAvatar(
+                        onTap: () => GoRouter.of(context).push("/user/profile"),
+                        profileUrl: state.avatar,
+                        withBorder: false,
+                        maxRadius: 17,
+                      );
+                    },
                   ),
                 ),
               ),

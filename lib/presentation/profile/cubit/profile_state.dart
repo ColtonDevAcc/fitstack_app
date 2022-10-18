@@ -1,17 +1,18 @@
 part of 'profile_cubit.dart';
 
 class ProfileState extends Equatable {
-  final String profileUrl;
+  final String avatar;
   final String? scaffoldMessageString;
-  const ProfileState({this.scaffoldMessageString, required this.profileUrl});
+  final UserProfile? userProfile;
+  const ProfileState({this.userProfile, this.scaffoldMessageString, required this.avatar});
 
-  ProfileState copyWith({String? profileUrl, String? scaffoldMessageString}) {
+  ProfileState copyWith({String? profileUrl, String? scaffoldMessageString, UserProfile? userProfile}) {
     return ProfileState(
-      profileUrl: profileUrl ?? this.profileUrl,
-      scaffoldMessageString: scaffoldMessageString ?? this.scaffoldMessageString,
-    );
+        avatar: profileUrl ?? this.avatar,
+        scaffoldMessageString: scaffoldMessageString ?? this.scaffoldMessageString,
+        userProfile: userProfile ?? this.userProfile);
   }
 
   @override
-  List<Object?> get props => [profileUrl, scaffoldMessageString];
+  List<Object?> get props => [avatar, scaffoldMessageString, userProfile];
 }
