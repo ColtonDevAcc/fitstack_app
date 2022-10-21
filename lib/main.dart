@@ -40,8 +40,8 @@ class MyApp extends StatelessWidget {
           final AppRouter router = AppRouter(navigatorKey: navigatorKey, appBloc: context.read<AppBloc>());
           return MaterialApp.router(
             routerConfig: router.router,
-            theme: FlexThemeData.light(scheme: FlexScheme.hippieBlue, useMaterial3: true),
-            darkTheme: FlexThemeData.dark(scheme: FlexScheme.hippieBlue, useMaterial3: true),
+            theme: FSColorTheme.Light(context),
+            darkTheme: FSColorTheme.Dark(context),
           );
         },
       ),
