@@ -4,6 +4,7 @@
     "cupertino",
     "Diagnosticable",
     "FitStack",
+    "fluttertoast",
     "gameify",
     "ncipollo",
     "subosito"

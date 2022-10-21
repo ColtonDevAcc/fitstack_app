@@ -7,6 +7,8 @@ part of 'user_profile_model.dart';
 // **************************************************************************
 
 abstract class _$UserProfileCWProxy {
+  UserProfile accepted(bool? accepted);
+
   UserProfile achievements(List<dynamic>? achievements);
 
   UserProfile avatar(String? avatar);
@@ -36,6 +38,7 @@ abstract class _$UserProfileCWProxy {
   /// UserProfile(...).copyWith(id: 12, name: "My name")
   /// ````
   UserProfile call({
+    bool? accepted,
     List<dynamic>? achievements,
     String? avatar,
     List<dynamic>? challenges,
@@ -55,6 +58,9 @@ class _$UserProfileCWProxyImpl implements _$UserProfileCWProxy {
   final UserProfile _value;
 
   const _$UserProfileCWProxyImpl(this._value);
+
+  @override
+  UserProfile accepted(bool? accepted) => this(accepted: accepted);
 
   @override
   UserProfile achievements(List<dynamic>? achievements) =>
@@ -104,6 +110,7 @@ class _$UserProfileCWProxyImpl implements _$UserProfileCWProxy {
   /// UserProfile(...).copyWith(id: 12, name: "My name")
   /// ````
   UserProfile call({
+    Object? accepted = const $CopyWithPlaceholder(),
     Object? achievements = const $CopyWithPlaceholder(),
     Object? avatar = const $CopyWithPlaceholder(),
     Object? challenges = const $CopyWithPlaceholder(),
@@ -117,6 +124,10 @@ class _$UserProfileCWProxyImpl implements _$UserProfileCWProxy {
     Object? user_statistics = const $CopyWithPlaceholder(),
   }) {
     return UserProfile(
+      accepted: accepted == const $CopyWithPlaceholder()
+          ? _value.accepted
+          // ignore: cast_nullable_to_non_nullable
+          : accepted as bool?,
       achievements: achievements == const $CopyWithPlaceholder()
           ? _value.achievements
           // ignore: cast_nullable_to_non_nullable
@@ -181,6 +192,7 @@ extension $UserProfileCopyWith on UserProfile {
 // **************************************************************************
 
 UserProfile _$UserProfileFromJson(Map<String, dynamic> json) => UserProfile(
+      accepted: json['accepted'] as bool?,
       friends: (json['friends'] as List<dynamic>?)
           ?.map((e) => UserProfile.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -210,6 +222,7 @@ const _$UserProfileFieldMap = <String, String>{
   'days_logged_in_a_row': 'days_logged_in_a_row',
   'updated_at': 'updated_at',
   'avatar': 'avatar',
+  'accepted': 'accepted',
 };
 
 Map<String, dynamic> _$UserProfileToJson(UserProfile instance) =>
@@ -225,4 +238,5 @@ Map<String, dynamic> _$UserProfileToJson(UserProfile instance) =>
       'days_logged_in_a_row': instance.days_logged_in_a_row,
       'updated_at': instance.updated_at?.toIso8601String(),
       'avatar': instance.avatar,
+      'accepted': instance.accepted,
     };

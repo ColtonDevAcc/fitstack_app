@@ -1,6 +1,5 @@
 import 'dart:developer';
 
-import 'package:FitStack/app/injection/dependency_injection.dart';
 import 'package:FitStack/app/providers/bloc/app/app_bloc.dart';
 import 'package:FitStack/presentation/profile/presentation/atoms/profile_drawer_listtile.dart';
 import 'package:clipboard/clipboard.dart';
@@ -34,7 +33,7 @@ class ProfileDrawer extends StatelessWidget {
               icon: FontAwesomeIcons.gear,
             ),
             ProfileDrawerListTile(
-              onTap: () => getIt<AppBloc>().add(AuthenticationLogoutRequested()),
+              onTap: () => context.read<AppBloc>().add(AuthenticationLogoutRequested()),
               title: "Sign Out",
               icon: FontAwesomeIcons.rightFromBracket,
             ),

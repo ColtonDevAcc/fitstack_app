@@ -1,10 +1,11 @@
-import 'package:FitStack/app/injection/dependency_injection.dart';
 import 'package:FitStack/app/providers/bloc/app/app_bloc.dart';
-import 'package:FitStack/app/providers/bloc/relationship/relationship_bloc.dart';
-import 'package:FitStack/app/providers/cubit/friendship/friendship_cubit.dart';
 import 'package:FitStack/app/providers/cubit/main_view/main_view_cubit.dart';
+import 'package:FitStack/app/repository/auth_repository.dart';
+import 'package:FitStack/app/repository/relationship_repository.dart';
+import 'package:FitStack/app/repository/user_repository.dart';
 import 'package:FitStack/presentation/login/cubit/login_cubit.dart';
 import 'package:FitStack/presentation/profile/cubit/profile_cubit.dart';
+import 'package:FitStack/presentation/relationship/cubit/friendship/friendship_cubit.dart';
 import 'package:FitStack/presentation/signup/cubit/signup_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,31 +20,42 @@ class StateProviders extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //! blocs/repository registration
-    return MultiBlocProvider(
+    return MultiRepositoryProvider(
       providers: [
-        BlocProvider<AppBloc>(
-          create: (context) => getIt<AppBloc>(),
-        ),
-        BlocProvider<LoginCubit>(
-          create: (context) => getIt<LoginCubit>(),
-        ),
-        BlocProvider<SignupCubit>(
-          create: (context) => getIt<SignupCubit>(),
-        ),
-        BlocProvider<MainViewCubit>(
-          create: (context) => getIt<MainViewCubit>(),
-        ),
-        BlocProvider<RelationshipBloc>(
-          create: (context) => getIt<RelationshipBloc>(),
-        ),
-        BlocProvider<FriendshipCubit>(
-          create: (context) => getIt<FriendshipCubit>(),
-        ),
-        BlocProvider<ProfileCubit>(
-          create: (context) => getIt<ProfileCubit>(),
-        ),
+        RepositoryProvider(create: (context) => AuthenticationRepository()),
+        RepositoryProvider(create: (context) => UserRepository()),
+        RepositoryProvider(create: (context) => RelationshipRepository()),
       ],
-      child: child,
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider<AppBloc>(
+            create: (BuildContext context) => AppBloc(
+              authenticationRepository: context.read<AuthenticationRepository>(),
+              userRepository: context.read<UserRepository>(),
+            ),
+          ),
+          BlocProvider<LoginCubit>(
+            create: (BuildContext context) => LoginCubit(
+              authenticationRepository: context.read<AuthenticationRepository>()..persistLogin(),
+            ),
+          ),
+          BlocProvider<SignupCubit>(
+            create: (BuildContext context) => SignupCubit(
+              authRepository: context.read<AuthenticationRepository>(),
+            ),
+          ),
+          BlocProvider<MainViewCubit>(
+            create: (BuildContext context) => MainViewCubit(),
+          ),
+          BlocProvider<ProfileCubit>(
+            create: (BuildContext context) => ProfileCubit(userRepository: context.read<UserRepository>()),
+          ),
+          BlocProvider<FriendshipCubit>(
+            create: (BuildContext context) => FriendshipCubit(relationshipRepository: context.read<RelationshipRepository>()),
+          ),
+        ],
+        child: child,
+      ),
     );
   }
 }

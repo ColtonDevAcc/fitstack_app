@@ -1,13 +1,9 @@
-import 'dart:developer';
-
-import 'package:FitStack/app/injection/dependency_injection.dart';
-import 'package:FitStack/app/injection/development_dependencies.dart';
 import 'package:FitStack/app/injection/state_providers.dart';
 import 'package:FitStack/app/providers/bloc/app/app_bloc.dart';
-import 'package:FitStack/app/repository/auth_repository.dart';
 import 'package:FitStack/app/routing/app_router.dart';
 import 'package:FitStack/app/theme/color_Theme.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -20,60 +16,35 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   final storage = await HydratedStorage.build(storageDirectory: kIsWeb ? HydratedStorage.webStorageDirectory : await getTemporaryDirectory());
-  await DevelopmentDependencies().init();
 
   HydratedBlocOverrides.runZoned(
     () async {
       await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
-      FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+      if (!kDebugMode) FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
       runApp(MyApp());
     },
     storage: storage,
-    blocObserver: AppBlocObserver(),
   );
 }
 
 class MyApp extends StatelessWidget {
   MyApp({key}) : super(key: key);
 
+  final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
   @override
   Widget build(BuildContext context) {
-    final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey = GlobalKey(debugLabel: "ScaffoldMessengerKey");
-    final GlobalKey<NavigatorState> navigatorKey = GlobalKey(debugLabel: "GlobalNavigatorKey");
     return StateProviders(
-      child: BlocBuilder<AppBloc, AppState>(
-        buildWhen: (previous, current) => previous.status != current.status,
-        builder: (context, state) {
-          log("hot reload");
-          if (state.status != AuthenticationStatus.authenticated) {
-            getIt<AuthenticationRepository>().persistLogin();
-          }
-          final router = AppRouter(authStatus: state.status, navigatorKey: navigatorKey);
+      child: Builder(
+        builder: (context) {
+          final AppRouter router = AppRouter(navigatorKey: navigatorKey, appBloc: context.read<AppBloc>());
           return MaterialApp.router(
-            scaffoldMessengerKey: scaffoldMessengerKey,
-            theme: FSColorTheme.Light(context),
-            darkTheme: FSColorTheme.Dark(context),
-            routerDelegate: router.router.routerDelegate,
-            routeInformationParser: router.router.routeInformationParser,
-            routeInformationProvider: router.router.routeInformationProvider,
+            routerConfig: router.router,
+            theme: FlexThemeData.light(scheme: FlexScheme.hippieBlue, useMaterial3: true),
+            darkTheme: FlexThemeData.dark(scheme: FlexScheme.hippieBlue, useMaterial3: true),
           );
         },
       ),
     );
-  }
-}
-
-class AppBlocObserver extends BlocObserver {
-  @override
-  void onChange(BlocBase bloc, Change change) {
-    super.onChange(bloc, change);
-    if (bloc is Cubit) print(change);
-  }
-
-  @override
-  void onTransition(Bloc bloc, Transition transition) {
-    super.onTransition(bloc, transition);
-    print(transition);
   }
 }

@@ -1,7 +1,6 @@
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:FitStack/app/injection/dependency_injection.dart';
 import 'package:FitStack/app/models/user_model.dart' as fs;
 import 'package:FitStack/app/repository/auth_repository.dart';
 import 'package:bloc/bloc.dart';
@@ -17,7 +16,8 @@ import 'package:image_picker/image_picker.dart';
 part 'signup_state.dart';
 
 class SignupCubit extends Cubit<SignupState> {
-  SignupCubit({required AuthenticationRepository authenticationRepository}) : super(SignupState());
+  final AuthenticationRepository authRepository;
+  SignupCubit({required this.authRepository}) : super(SignupState());
 
   void usernameChanged(String username) {
     List<GlobalKey<FormBuilderState>>? formKeyList = state.formKey;
@@ -186,7 +186,7 @@ class SignupCubit extends Cubit<SignupState> {
     } else if (state.indexRange == state.index + 1 && isValid) {
       emit(state.copyWith(authState: AuthState.AUTHORIZING));
       try {
-        await getIt<AuthenticationRepository>()
+        await authRepository
             .userSignUp(
           user: fs.User(
             display_name: state.username,

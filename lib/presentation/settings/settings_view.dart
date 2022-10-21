@@ -50,6 +50,7 @@ class _SettingsViewState extends State<SettingsView> {
                 ),
                 SizedBox(height: 5),
                 ProfileDrawerListTile(
+                  onTap: () => context.go("/settings/theme"),
                   title: "themes",
                   icon: FontAwesomeIcons.moon,
                 ),

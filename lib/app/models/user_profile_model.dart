@@ -18,7 +18,9 @@ class UserProfile extends Equatable {
   final int days_logged_in_a_row;
   final DateTime? updated_at;
   final String? avatar;
+  final bool? accepted;
   UserProfile({
+    required this.accepted,
     required this.friends,
     required this.display_name,
     required this.id,
@@ -61,5 +63,6 @@ class UserProfile extends Equatable {
         display_name: '',
         friends: [],
         avatar: '',
+        accepted: null,
       );
 }

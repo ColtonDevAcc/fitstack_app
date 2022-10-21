@@ -1,11 +1,11 @@
 import 'package:FitStack/app/models/user_profile_model.dart';
 import 'package:FitStack/presentation/profile/cubit/profile_cubit.dart';
 import 'package:FitStack/presentation/profile/presentation/atoms/profile_featured_user_statistics.dart';
-import 'package:FitStack/presentation/profile/presentation/molecules/friendship_profile_card.dart';
 import 'package:FitStack/presentation/profile/presentation/molecules/user_profile_achievements_list.dart';
 import 'package:FitStack/presentation/profile/presentation/molecules/user_profile_challenge_badges_list.dart';
 import 'package:FitStack/presentation/profile/presentation/molecules/profile_snapshot.dart';
 import 'package:FitStack/presentation/profile/presentation/organisms/profile_drawer.dart';
+import 'package:FitStack/presentation/relationship/presentation/molecules/friendship_profile_card.dart';
 import 'package:FitStack/widgets/atoms/list_header.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:badges/badges.dart';
@@ -112,7 +112,11 @@ class ProfileView extends StatelessWidget {
                   color: Theme.of(context).colorScheme.surface,
                   child: Column(
                     children: [
-                      ListHeader(title: "Friend Group", subtitle: "(2nd place)"),
+                      ListHeader(
+                        title: "Friend Group",
+                        subtitle: "(2nd place)",
+                        onTap: () => GoRouter.of(context).push("/friendship"),
+                      ),
                       SizedBox(height: 10),
                       Column(
                         children: state.userProfile.friends == null || state.userProfile.friends!.isEmpty
@@ -130,7 +134,8 @@ class ProfileView extends StatelessWidget {
                       ),
                     ],
                   ),
-                )
+                ),
+                SizedBox(height: 40)
               ],
             ),
           ),

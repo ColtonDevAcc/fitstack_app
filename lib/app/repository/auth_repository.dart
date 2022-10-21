@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:FitStack/app/cache/auth_cache.dart';
-import 'package:FitStack/app/injection/dependency_injection.dart';
 import 'package:FitStack/app/models/user_model.dart';
 import 'package:FitStack/app/repository/user_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart' as fb;
@@ -35,7 +34,7 @@ class AuthenticationRepository {
         String? token = await getTokenFromRefresh(refresh_token: refreshToken);
 
         if (token != null && token != "") {
-          User? user = await getIt<UserRepository>().getUser(token: token);
+          User? user = await UserRepository().getUser(token: token);
           if (user != null && user != User.empty()) {
             controller.add(AuthStream(user: user, status: AuthenticationStatus.authenticated));
           }
@@ -48,7 +47,7 @@ class AuthenticationRepository {
       try {
         log('getting user from persistent token');
         var token = await fb.FirebaseAuth.instance.currentUser?.getIdToken();
-        User? user = await getIt<UserRepository>().getUser(token: token);
+        User? user = await UserRepository().getUser(token: token);
         controller.add(AuthStream(user: user!, status: AuthenticationStatus.authenticated));
       } on Error catch (e) {
         log('error: ${e}, stacktrace: ${e.stackTrace}');

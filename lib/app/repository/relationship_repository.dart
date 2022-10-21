@@ -47,6 +47,75 @@ class RelationshipRepository {
     return null;
   }
 
+  Future<List<UserProfile?>?> getFriendsList({required String token}) async {
+    try {
+      controller.add(FriendStream(friendship: [], status: FriendshipFetchStatus.loading));
+      Response response = await dio.get(
+        mainUrl + '/friendship/get-friends-list',
+        options: Options(
+          headers: {"Authorization": "Bearer ${token}"},
+        ),
+      );
+
+      if (response.statusCode == 200) {
+        List responseJson = response.data as List;
+
+        var friends = responseJson.map((e) => UserProfile.fromJson(e)).toList();
+        return friends;
+      } else {
+        log("error");
+      }
+    } on Error catch (e) {
+      controller.add(FriendStream(friendship: [], status: FriendshipFetchStatus.error));
+      log('error: ${e}, stacktrace: ${e.stackTrace}');
+      return null;
+    }
+    return null;
+  }
+
+  Future<UserProfile?> getFriend({required String token, required String email}) async {
+    try {
+      controller.add(FriendStream(friendship: [], status: FriendshipFetchStatus.loading));
+      Response response = await dio.post(mainUrl + '/friendship/get-friend',
+          options: Options(
+            headers: {"Authorization": "Bearer ${token}"},
+          ),
+          data: {"email": email});
+
+      if (response.statusCode == 200) {
+        var friend = UserProfile.fromJson(response.data);
+        return friend;
+      } else {
+        log("error");
+      }
+    } on Error catch (e) {
+      controller.add(FriendStream(friendship: [], status: FriendshipFetchStatus.error));
+      log('error: ${e}, stacktrace: ${e.stackTrace}');
+      return null;
+    }
+    return null;
+  }
+
+  Future<void> addFriend({required String token, required String uid}) async {
+    try {
+      controller.add(FriendStream(friendship: [], status: FriendshipFetchStatus.loading));
+      Response response = await dio.post(mainUrl + '/friendship/add',
+          options: Options(
+            headers: {"Authorization": "Bearer ${token}"},
+          ),
+          data: {"to_user": uid});
+
+      if (response.statusCode != 200) {
+        throw Error();
+      }
+    } on Error catch (e) {
+      controller.add(FriendStream(friendship: [], status: FriendshipFetchStatus.error));
+      log('error: ${e}, stacktrace: ${e.stackTrace}');
+      return null;
+    }
+    return null;
+  }
+
   void dispose() => controller.close();
 }
 

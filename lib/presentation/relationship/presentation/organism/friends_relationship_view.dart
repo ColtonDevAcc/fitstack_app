@@ -1,12 +1,13 @@
 import 'dart:developer';
 
-import 'package:FitStack/app/providers/cubit/friendship/friendship_cubit.dart';
-import 'package:FitStack/presentation/relationship/presentation/atom/friend_list_tile.dart';
+import 'package:FitStack/presentation/relationship/cubit/friendship/friendship_cubit.dart';
 import 'package:FitStack/presentation/relationship/presentation/molecules/add_friend_bottom_sheet.dart';
+import 'package:FitStack/presentation/relationship/presentation/molecules/friendship_profile_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class FriendsRelationshipView extends StatelessWidget {
   final bool? appBar;
@@ -15,57 +16,70 @@ class FriendsRelationshipView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final scaffoldKey = GlobalKey<ScaffoldState>();
-
-    return Scaffold(
-      key: scaffoldKey,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => scaffoldKey.currentState?.showBottomSheet((context) => AddFriendBottomSheet()),
-        backgroundColor: Theme.of(context).colorScheme.primary,
-        child: Icon(FontAwesomeIcons.plus),
-      ),
-      appBar: appBar == null
-          ? AppBar(
-              title: Text(
-                "Friends",
-                style: TextStyle(color: Theme.of(context).colorScheme.onBackground),
-              ),
-              leading: GestureDetector(
-                  onTap: () => GoRouter.of(context).pop(),
-                  child: Container(
-                    child: Icon(
-                      FontAwesomeIcons.arrowLeft,
-                      color: Theme.of(context).colorScheme.onBackground,
-                    ),
-                  )),
-              elevation: 0,
-              backgroundColor: Theme.of(context).colorScheme.background,
-            )
-          : null,
-      body: BlocBuilder<FriendshipCubit, FriendshipState>(
-        buildWhen: (previous, current) => previous.friends != current.friends,
-        builder: (context, state) {
-          log("friends: ${state.friends}");
-          //TODO: figure out how to persist cubit state
-          if (state.friends == null || state.friends!.isEmpty) {
-            BlocProvider.of<FriendshipCubit>(context).getFriends();
-          }
-          return SingleChildScrollView(
+    return BlocBuilder<FriendshipCubit, FriendshipState>(
+      buildWhen: (previous, current) =>
+          previous.friendsList != current.friendsList || previous.showAddFriend != current.showAddFriend || previous.friend != current.friend,
+      builder: (context, state) {
+        if (state.friends == null || state.friends!.isEmpty) {
+          BlocProvider.of<FriendshipCubit>(context).getFriendsList();
+        }
+        return Scaffold(
+          key: scaffoldKey,
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              context.read<FriendshipCubit>().setShowAddFriend(true);
+              showMaterialModalBottomSheet(
+                context: context,
+                useRootNavigator: true,
+                builder: (context) => Container(
+                  height: 450,
+                  child: AddFriendBottomSheet(
+                    friend: context.watch<FriendshipCubit>().state.friend,
+                  ),
+                ),
+              );
+            },
+            backgroundColor: Theme.of(context).colorScheme.primary,
+            child: Icon(FontAwesomeIcons.plus),
+          ),
+          appBar: appBar == null
+              ? AppBar(
+                  title: Text(
+                    "Friends",
+                    style: TextStyle(color: Theme.of(context).colorScheme.onBackground),
+                  ),
+                  leading: GestureDetector(
+                      onTap: () => GoRouter.of(context).pop(),
+                      child: Container(
+                        child: Icon(
+                          FontAwesomeIcons.arrowLeft,
+                          color: Theme.of(context).colorScheme.onBackground,
+                        ),
+                      )),
+                  elevation: 0,
+                  backgroundColor: Theme.of(context).colorScheme.background,
+                )
+              : null,
+          body: SingleChildScrollView(
             clipBehavior: Clip.none,
             scrollDirection: Axis.vertical,
             padding: EdgeInsets.zero,
             child: Column(
-              children: state.friends == null
+              children: state.friendsList == null
                   ? []
-                  //TODO: get accepted value
-                  : state.friends!
+                  : state.friendsList!
                       .map(
-                        (e) => FriendListTile(accepted: true, username: e!.display_name),
+                        (e) => FriendshipProfileCard(
+                          accepted: e!.accepted,
+                          username: e.display_name,
+                          colorTheme: Colors.red,
+                        ),
                       )
                       .toList(),
             ),
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 }
