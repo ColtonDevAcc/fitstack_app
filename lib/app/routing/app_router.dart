@@ -12,7 +12,8 @@ import 'package:FitStack/presentation/relationship/presentation/relationship_vie
 import 'package:FitStack/presentation/settings/presentation/organisms/theme_page.dart';
 import 'package:FitStack/presentation/settings/settings_view.dart';
 import 'package:FitStack/presentation/signup/presentation/signup_page.dart';
-import 'package:FitStack/presentation/workout/presentation/workout_view.dart';
+import 'package:FitStack/presentation/workout/presentation/organisms/workout_view.dart';
+import 'package:FitStack/presentation/workout/presentation/programs_view.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +29,7 @@ class AppRouter {
   static FirebaseAnalyticsObserver observer = FirebaseAnalyticsObserver(analytics: analytics);
   late final router = GoRouter(
     navigatorKey: navigatorKey,
-    initialLocation: kDebugMode ? "/settings" : "/",
+    initialLocation: kDebugMode ? "/programs/workout" : "/",
     refreshListenable: GoRouterRefreshStream(appBloc.stream),
     debugLogDiagnostics: true,
     observers: [
@@ -61,9 +62,16 @@ class AppRouter {
         builder: (context, state) => const NutritionView(),
       ),
       GoRoute(
-        path: '/workout',
-        name: "workout",
-        builder: (context, state) => const WorkoutView(),
+        path: '/programs',
+        name: "programs",
+        builder: (context, state) => const ProgramsView(),
+        routes: [
+          GoRoute(
+            path: 'workout',
+            name: 'workout',
+            builder: (context, state) => const WorkoutView(),
+          ),
+        ],
       ),
       GoRoute(
         path: '/settings',

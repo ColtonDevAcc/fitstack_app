@@ -49,8 +49,9 @@ class WorkoutCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'data',
-                    style: Theme.of(context).textTheme.labelLarge,
+                    'Title',
+                    style:
+                        Theme.of(context).textTheme.labelLarge?.copyWith(color: Theme.of(context).colorScheme.primary, fontWeight: FontWeight.bold),
                     textScaleFactor: 1.3,
                   ),
                   Text(

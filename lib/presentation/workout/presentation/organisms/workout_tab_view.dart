@@ -15,9 +15,6 @@ class WorkoutTabView extends StatelessWidget {
           child: Column(
             children: [
               WorkoutCard(),
-              WorkoutCard(),
-              WorkoutCard(),
-              WorkoutCard(),
             ],
           ),
         ),
