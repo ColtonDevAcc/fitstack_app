@@ -6,7 +6,7 @@ import 'package:dio/dio.dart';
 import 'package:image_picker/image_picker.dart';
 
 class UserRepository {
-  static String mainUrl = kDebugMode ? "http://10.0.2.2:8000" : "https://dev.fitstack.io";
+  static String mainUrl = kDebugMode ? "http://localhost:8000" : "https://dev.fitstack.io";
   final Dio dio = Dio();
 
   Future<User?> getUser({required token}) async {
