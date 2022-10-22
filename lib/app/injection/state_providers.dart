@@ -6,6 +6,7 @@ import 'package:FitStack/app/repository/user_repository.dart';
 import 'package:FitStack/presentation/login/cubit/login_cubit.dart';
 import 'package:FitStack/presentation/profile/cubit/profile_cubit.dart';
 import 'package:FitStack/presentation/relationship/cubit/friendship/friendship_cubit.dart';
+import 'package:FitStack/presentation/settings/cubit/settings_cubit.dart';
 import 'package:FitStack/presentation/signup/cubit/signup_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -52,6 +53,9 @@ class StateProviders extends StatelessWidget {
           ),
           BlocProvider<FriendshipCubit>(
             create: (BuildContext context) => FriendshipCubit(relationshipRepository: context.read<RelationshipRepository>()),
+          ),
+          BlocProvider<SettingsCubit>(
+            create: (BuildContext context) => SettingsCubit(),
           ),
         ],
         child: child,

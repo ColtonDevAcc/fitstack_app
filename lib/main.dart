@@ -2,6 +2,7 @@ import 'package:FitStack/app/injection/state_providers.dart';
 import 'package:FitStack/app/providers/bloc/app/app_bloc.dart';
 import 'package:FitStack/app/routing/app_router.dart';
 import 'package:FitStack/app/theme/color_Theme.dart';
+import 'package:FitStack/presentation/settings/cubit/settings_cubit.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/foundation.dart';
@@ -38,10 +39,11 @@ class MyApp extends StatelessWidget {
       child: Builder(
         builder: (context) {
           final AppRouter router = AppRouter(navigatorKey: navigatorKey, appBloc: context.read<AppBloc>());
+          var theme = context.watch<SettingsCubit>().state.theme;
           return MaterialApp.router(
             routerConfig: router.router,
-            theme: FSColorTheme.Light(context),
-            darkTheme: FSColorTheme.Dark(context),
+            theme: theme["light"] ?? FSColorTheme.Light(context),
+            darkTheme: theme["dark"] ?? FSColorTheme.Light(context),
           );
         },
       ),
