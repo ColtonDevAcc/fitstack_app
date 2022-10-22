@@ -29,7 +29,7 @@ class AppRouter {
   static FirebaseAnalyticsObserver observer = FirebaseAnalyticsObserver(analytics: analytics);
   late final router = GoRouter(
     navigatorKey: navigatorKey,
-    initialLocation: kDebugMode ? "/" : "/",
+    initialLocation: kDebugMode ? "/programs/workout" : "/",
     refreshListenable: GoRouterRefreshStream(appBloc.stream),
     debugLogDiagnostics: true,
     observers: [
