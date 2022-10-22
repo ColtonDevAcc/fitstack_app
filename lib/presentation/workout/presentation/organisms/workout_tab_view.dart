@@ -1,5 +1,6 @@
 import 'package:FitStack/presentation/workout/presentation/molecules/workout_card.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class WorkoutTabView extends StatelessWidget {
   const WorkoutTabView({Key? key}) : super(key: key);
@@ -14,7 +15,10 @@ class WorkoutTabView extends StatelessWidget {
           hasScrollBody: false,
           child: Column(
             children: [
-              WorkoutCard(),
+              GestureDetector(
+                onTap: () => context.go('/programs/workout'),
+                child: WorkoutCard(),
+              ),
             ],
           ),
         ),

@@ -9,6 +9,7 @@ class ExerciseCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ExpansionTileCard(
+      borderRadius: BorderRadius.circular(15),
       expandedTextColor: Theme.of(context).colorScheme.secondary,
       subtitle: Text('Shoulders'),
       title: Text('Exercise'),
@@ -16,6 +17,7 @@ class ExerciseCard extends StatelessWidget {
         SizedBox(
           width: double.infinity,
           child: DataTable(
+            decoration: BoxDecoration(),
             columns: [
               DataColumn(label: Text('set'), numeric: true),
               DataColumn(label: Text('reps'), numeric: true),
