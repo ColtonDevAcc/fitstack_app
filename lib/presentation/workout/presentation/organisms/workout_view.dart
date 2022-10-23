@@ -1,7 +1,5 @@
 import 'package:FitStack/presentation/workout/presentation/molecules/exercise_card.dart';
-import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:flutter/material.dart';
-import 'package:pluto_grid/pluto_grid.dart';
 import 'package:timelines/timelines.dart';
 
 class WorkoutView extends StatelessWidget {
