@@ -107,10 +107,11 @@ dev_dependencies:
 flutter_icons:
   android: true
   ios: true
-  image_path: 'assets/app/icons/FitStackIosLauncherIcon.png'
+  image_path: 'assets/app/AppIcons/appstore.png'
 
 flutter:
   uses-material-design: true
   assets:
     - assets/app/icons/
     - assets/app/images/
+    - assets/app/Appicons/
