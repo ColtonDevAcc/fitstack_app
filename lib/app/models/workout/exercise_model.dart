@@ -10,14 +10,14 @@ part 'exercise_model.g.dart';
 @JsonSerializable()
 @CopyWith()
 class Exercise extends Equatable {
-  final String id;
-  final String name;
-  final String description;
-  final String image;
-  final double met_value;
-  final ExerciseType exercise_type;
-  final ExerciseEquipment exercise_equipment;
-  final MuscleTarget muscle_target;
+  final int? id;
+  final String? name;
+  final String? description;
+  final String? image;
+  final double? met_value;
+  final ExerciseType? exercise_type;
+  final ExerciseEquipment? exercise_equipment;
+  final MuscleTarget? muscle_target;
 
   Exercise({
     required this.muscle_target,
@@ -36,7 +36,7 @@ class Exercise extends Equatable {
   factory Exercise.fromJson(Map<String, dynamic> json) => _$ExerciseFromJson(json);
   Map<String, dynamic> toJson() => _$ExerciseToJson(this);
   factory Exercise.empty() => Exercise(
-        id: '',
+        id: 0,
         name: '',
         description: '',
         image: '',

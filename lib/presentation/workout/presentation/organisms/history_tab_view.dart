@@ -49,11 +49,17 @@ class HistoryTabView extends StatelessWidget {
                     Step(
                       title: const Text('workout 1'),
                       subtitle: Text('10/05/1999'),
-                      content: WorkoutCard(),
+                      content: WorkoutCard(
+                        description: '',
+                        title: '',
+                      ),
                     ),
                     Step(
                       title: const Text('workout 1'),
-                      content: WorkoutCard(),
+                      content: WorkoutCard(
+                        description: '',
+                        title: '',
+                      ),
                     ),
                     Step(
                       title: const Text('workout 1'),

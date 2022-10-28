@@ -7,7 +7,11 @@ part of 'workout_model.dart';
 // **************************************************************************
 
 abstract class _$WorkoutCWProxy {
-  Workout name(String name);
+  Workout id(int? id);
+
+  Workout name(String? name);
+
+  Workout workout_sets(List<WorkoutSets>? workout_sets);
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `Workout(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
@@ -16,7 +20,9 @@ abstract class _$WorkoutCWProxy {
   /// Workout(...).copyWith(id: 12, name: "My name")
   /// ````
   Workout call({
+    int? id,
     String? name,
+    List<WorkoutSets>? workout_sets,
   });
 }
 
@@ -27,7 +33,14 @@ class _$WorkoutCWProxyImpl implements _$WorkoutCWProxy {
   const _$WorkoutCWProxyImpl(this._value);
 
   @override
-  Workout name(String name) => this(name: name);
+  Workout id(int? id) => this(id: id);
+
+  @override
+  Workout name(String? name) => this(name: name);
+
+  @override
+  Workout workout_sets(List<WorkoutSets>? workout_sets) =>
+      this(workout_sets: workout_sets);
 
   @override
 
@@ -38,13 +51,23 @@ class _$WorkoutCWProxyImpl implements _$WorkoutCWProxy {
   /// Workout(...).copyWith(id: 12, name: "My name")
   /// ````
   Workout call({
+    Object? id = const $CopyWithPlaceholder(),
     Object? name = const $CopyWithPlaceholder(),
+    Object? workout_sets = const $CopyWithPlaceholder(),
   }) {
     return Workout(
-      name: name == const $CopyWithPlaceholder() || name == null
+      id: id == const $CopyWithPlaceholder()
+          ? _value.id
+          // ignore: cast_nullable_to_non_nullable
+          : id as int?,
+      name: name == const $CopyWithPlaceholder()
           ? _value.name
           // ignore: cast_nullable_to_non_nullable
-          : name as String,
+          : name as String?,
+      workout_sets: workout_sets == const $CopyWithPlaceholder()
+          ? _value.workout_sets
+          // ignore: cast_nullable_to_non_nullable
+          : workout_sets as List<WorkoutSets>?,
     );
   }
 }
@@ -60,13 +83,21 @@ extension $WorkoutCopyWith on Workout {
 // **************************************************************************
 
 Workout _$WorkoutFromJson(Map<String, dynamic> json) => Workout(
-      name: json['name'] as String,
+      id: json['id'] as int?,
+      workout_sets: (json['workout_sets'] as List<dynamic>?)
+          ?.map((e) => WorkoutSets.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      name: json['name'] as String?,
     );
 
 const _$WorkoutFieldMap = <String, String>{
+  'id': 'id',
   'name': 'name',
+  'workout_sets': 'workout_sets',
 };
 
 Map<String, dynamic> _$WorkoutToJson(Workout instance) => <String, dynamic>{
+      'id': instance.id,
       'name': instance.name,
+      'workout_sets': instance.workout_sets,
     };

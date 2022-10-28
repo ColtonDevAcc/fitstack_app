@@ -31,7 +31,6 @@ class AppRouter {
     navigatorKey: navigatorKey,
     initialLocation: kDebugMode ? "/" : "/",
     refreshListenable: GoRouterRefreshStream(appBloc.stream),
-    debugLogDiagnostics: true,
     observers: [
       if (!kDebugMode) GoRouterObserver(analytics: analytics),
     ],

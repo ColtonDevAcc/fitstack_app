@@ -1,14 +1,13 @@
 import 'package:FitStack/presentation/workout/presentation/atoms/saved_workout_icon.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_lorem/flutter_lorem.dart';
 
 class WorkoutCard extends StatelessWidget {
-  const WorkoutCard({Key? key}) : super(key: key);
+  final String title;
+  final String description;
+  const WorkoutCard({Key? key, required this.title, required this.description}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    String text = lorem(paragraphs: 1, words: 60);
-
     return Padding(
       padding: const EdgeInsets.only(top: 20),
       child: Container(
@@ -49,13 +48,15 @@ class WorkoutCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Title',
-                    style:
-                        Theme.of(context).textTheme.labelLarge?.copyWith(color: Theme.of(context).colorScheme.primary, fontWeight: FontWeight.bold),
+                    title.toUpperCase(),
+                    style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                          color: Theme.of(context).colorScheme.primary,
+                          fontWeight: FontWeight.bold,
+                        ),
                     textScaleFactor: 1.3,
                   ),
                   Text(
-                    text,
+                    description,
                     maxLines: 5,
                     overflow: TextOverflow.ellipsis,
                     style: Theme.of(context).textTheme.bodySmall,

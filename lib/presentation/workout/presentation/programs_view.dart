@@ -1,6 +1,6 @@
 import 'package:FitStack/presentation/workout/presentation/organisms/custom_tab_view.dart';
 import 'package:FitStack/presentation/workout/presentation/organisms/history_tab_view.dart';
-import 'package:FitStack/presentation/workout/presentation/organisms/workout_tab_view.dart';
+import 'package:FitStack/presentation/workout/presentation/organisms/program_tab_view.dart';
 import 'package:FitStack/widgets/atoms/basic_view_header.dart';
 import 'package:flutter/material.dart';
 
@@ -21,7 +21,7 @@ class ProgramsView extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.only(bottom: 15),
-                child: BasicViewHeader(title: "MY WORKOUTS", color: Theme.of(context).colorScheme.onBackground),
+                child: BasicViewHeader(title: "EXERCISE", color: Theme.of(context).colorScheme.onBackground),
               ),
               Container(
                 height: 40,
@@ -38,8 +38,8 @@ class ProgramsView extends StatelessWidget {
                       color: Theme.of(context).colorScheme.primary,
                     ),
                     tabs: [
-                      Text('Saved'),
-                      Text('Custom'),
+                      Text('Programs'),
+                      Text('Workouts'),
                       Text('History'),
                     ],
                   ),
@@ -48,7 +48,7 @@ class ProgramsView extends StatelessWidget {
               Expanded(
                 child: TabBarView(
                   children: [
-                    WorkoutTabView(),
+                    ProgramTabView(),
                     CustomTabView(),
                     HistoryTabView(),
                   ],
