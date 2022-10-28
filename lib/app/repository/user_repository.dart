@@ -1,6 +1,6 @@
 import 'dart:developer';
-import 'package:FitStack/app/models/user_model.dart';
-import 'package:FitStack/app/models/user_profile_model.dart';
+import 'package:FitStack/app/models/user/user_model.dart';
+import 'package:FitStack/app/models/user/user_profile_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:dio/dio.dart';
 import 'package:image_picker/image_picker.dart';

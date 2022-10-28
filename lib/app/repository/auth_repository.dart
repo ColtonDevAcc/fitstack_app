@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:FitStack/app/cache/auth_cache.dart';
-import 'package:FitStack/app/models/user_model.dart';
+import 'package:FitStack/app/models/user/user_model.dart';
 import 'package:FitStack/app/repository/user_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart' as fb;
 import 'package:flutter/foundation.dart';

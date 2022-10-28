@@ -1,4 +1,4 @@
-import 'package:FitStack/app/models/user_profile_model.dart';
+import 'package:FitStack/app/models/user/user_profile_model.dart';
 import 'package:FitStack/presentation/profile/cubit/profile_cubit.dart';
 import 'package:FitStack/presentation/profile/presentation/atoms/profile_featured_user_statistics.dart';
 import 'package:FitStack/presentation/profile/presentation/molecules/user_profile_achievements_list.dart';

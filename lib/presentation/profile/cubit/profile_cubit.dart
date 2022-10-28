@@ -1,7 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:FitStack/app/models/user_profile_model.dart';
+import 'package:FitStack/app/models/user/user_profile_model.dart';
 import 'package:FitStack/app/repository/user_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';

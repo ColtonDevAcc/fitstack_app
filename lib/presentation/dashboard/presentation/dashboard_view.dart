@@ -1,4 +1,4 @@
-import 'package:FitStack/app/models/user_profile_model.dart';
+import 'package:FitStack/app/models/user/user_profile_model.dart';
 import 'package:FitStack/presentation/dashboard/presentation/molecules/user_goal_graphs_list.dart';
 import 'package:FitStack/presentation/dashboard/presentation/molecules/workout_recommendations%20_list.dart';
 import 'package:FitStack/presentation/dashboard/presentation/molecules/statistics_dashboard.dart';

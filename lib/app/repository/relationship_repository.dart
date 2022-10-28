@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:developer';
 
-import 'package:FitStack/app/models/friendship_model.dart';
-import 'package:FitStack/app/models/user_profile_model.dart';
+import 'package:FitStack/app/models/user/friendship_model.dart';
+import 'package:FitStack/app/models/user/user_profile_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:dio/dio.dart';

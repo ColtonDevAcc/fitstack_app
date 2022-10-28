@@ -1,4 +1,4 @@
-import 'package:FitStack/app/models/user_profile_model.dart';
+import 'package:FitStack/app/models/user/user_profile_model.dart';
 import 'package:FitStack/presentation/relationship/cubit/friendship/friendship_cubit.dart';
 import 'package:FitStack/presentation/relationship/presentation/molecules/friendship_profile_card.dart';
 import 'package:email_validator/email_validator.dart';

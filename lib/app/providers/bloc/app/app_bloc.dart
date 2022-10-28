@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:FitStack/app/models/user_model.dart';
+import 'package:FitStack/app/models/user/user_model.dart';
 import 'package:FitStack/app/repository/auth_repository.dart';
 import 'package:FitStack/app/repository/user_repository.dart';
 import 'package:bloc/bloc.dart';

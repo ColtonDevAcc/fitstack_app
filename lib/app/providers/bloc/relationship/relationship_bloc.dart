@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:FitStack/app/models/friendship_model.dart';
+import 'package:FitStack/app/models/user/friendship_model.dart';
 import 'package:FitStack/app/repository/relationship_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';

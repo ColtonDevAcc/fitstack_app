@@ -1,9 +1,8 @@
 import 'dart:convert';
 
+import 'package:FitStack/app/models/user/user_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get_storage/get_storage.dart';
-
-import '../models/user_model.dart';
 
 class AuthCache {
   AuthCache();
