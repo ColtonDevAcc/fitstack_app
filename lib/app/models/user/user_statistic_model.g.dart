@@ -11,13 +11,13 @@ abstract class _$UserStatisticCWProxy {
 
   UserStatistic body_fat_log(List<BodyFatLog>? body_fat_log);
 
-  UserStatistic created_at(DateTime created_at);
+  UserStatistic created_at(DateTime? created_at);
 
   UserStatistic height_log(List<HeightLog>? height_log);
 
-  UserStatistic id(String id);
+  UserStatistic id(String? id);
 
-  UserStatistic updated_at(DateTime updated_at);
+  UserStatistic updated_at(DateTime? updated_at);
 
   UserStatistic weight_log(List<WeightLog>? weight_log);
 
@@ -52,17 +52,19 @@ class _$UserStatisticCWProxyImpl implements _$UserStatisticCWProxy {
       this(body_fat_log: body_fat_log);
 
   @override
-  UserStatistic created_at(DateTime created_at) => this(created_at: created_at);
+  UserStatistic created_at(DateTime? created_at) =>
+      this(created_at: created_at);
 
   @override
   UserStatistic height_log(List<HeightLog>? height_log) =>
       this(height_log: height_log);
 
   @override
-  UserStatistic id(String id) => this(id: id);
+  UserStatistic id(String? id) => this(id: id);
 
   @override
-  UserStatistic updated_at(DateTime updated_at) => this(updated_at: updated_at);
+  UserStatistic updated_at(DateTime? updated_at) =>
+      this(updated_at: updated_at);
 
   @override
   UserStatistic weight_log(List<WeightLog>? weight_log) =>
@@ -94,24 +96,22 @@ class _$UserStatisticCWProxyImpl implements _$UserStatisticCWProxy {
           ? _value.body_fat_log
           // ignore: cast_nullable_to_non_nullable
           : body_fat_log as List<BodyFatLog>?,
-      created_at:
-          created_at == const $CopyWithPlaceholder() || created_at == null
-              ? _value.created_at
-              // ignore: cast_nullable_to_non_nullable
-              : created_at as DateTime,
+      created_at: created_at == const $CopyWithPlaceholder()
+          ? _value.created_at
+          // ignore: cast_nullable_to_non_nullable
+          : created_at as DateTime?,
       height_log: height_log == const $CopyWithPlaceholder()
           ? _value.height_log
           // ignore: cast_nullable_to_non_nullable
           : height_log as List<HeightLog>?,
-      id: id == const $CopyWithPlaceholder() || id == null
+      id: id == const $CopyWithPlaceholder()
           ? _value.id
           // ignore: cast_nullable_to_non_nullable
-          : id as String,
-      updated_at:
-          updated_at == const $CopyWithPlaceholder() || updated_at == null
-              ? _value.updated_at
-              // ignore: cast_nullable_to_non_nullable
-              : updated_at as DateTime,
+          : id as String?,
+      updated_at: updated_at == const $CopyWithPlaceholder()
+          ? _value.updated_at
+          // ignore: cast_nullable_to_non_nullable
+          : updated_at as DateTime?,
       weight_log: weight_log == const $CopyWithPlaceholder()
           ? _value.weight_log
           // ignore: cast_nullable_to_non_nullable
@@ -144,9 +144,13 @@ UserStatistic _$UserStatisticFromJson(Map<String, dynamic> json) =>
       body_fat_log: (json['body_fat_log'] as List<dynamic>?)
           ?.map((e) => BodyFatLog.fromJson(e as Map<String, dynamic>))
           .toList(),
-      updated_at: DateTime.parse(json['updated_at'] as String),
-      created_at: DateTime.parse(json['created_at'] as String),
-      id: json['id'] as String,
+      updated_at: json['updated_at'] == null
+          ? null
+          : DateTime.parse(json['updated_at'] as String),
+      created_at: json['created_at'] == null
+          ? null
+          : DateTime.parse(json['created_at'] as String),
+      id: json['id'] as String?,
     );
 
 const _$UserStatisticFieldMap = <String, String>{
@@ -166,6 +170,6 @@ Map<String, dynamic> _$UserStatisticToJson(UserStatistic instance) =>
       'weight_log': instance.weight_log,
       'bmi_log': instance.bmi_log,
       'body_fat_log': instance.body_fat_log,
-      'updated_at': instance.updated_at.toIso8601String(),
-      'created_at': instance.created_at.toIso8601String(),
+      'updated_at': instance.updated_at?.toIso8601String(),
+      'created_at': instance.created_at?.toIso8601String(),
     };

@@ -7,15 +7,15 @@ part of 'height_log_model.dart';
 // **************************************************************************
 
 abstract class _$HeightLogCWProxy {
-  HeightLog created_at(DateTime created_at);
+  HeightLog created_at(DateTime? created_at);
 
   HeightLog height(double height);
 
-  HeightLog id(int id);
+  HeightLog id(int? id);
 
-  HeightLog updated_at(DateTime updated_at);
+  HeightLog updated_at(DateTime? updated_at);
 
-  HeightLog user_statistic_id(String user_statistic_id);
+  HeightLog user_statistic_id(String? user_statistic_id);
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `HeightLog(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
@@ -39,19 +39,19 @@ class _$HeightLogCWProxyImpl implements _$HeightLogCWProxy {
   const _$HeightLogCWProxyImpl(this._value);
 
   @override
-  HeightLog created_at(DateTime created_at) => this(created_at: created_at);
+  HeightLog created_at(DateTime? created_at) => this(created_at: created_at);
 
   @override
   HeightLog height(double height) => this(height: height);
 
   @override
-  HeightLog id(int id) => this(id: id);
+  HeightLog id(int? id) => this(id: id);
 
   @override
-  HeightLog updated_at(DateTime updated_at) => this(updated_at: updated_at);
+  HeightLog updated_at(DateTime? updated_at) => this(updated_at: updated_at);
 
   @override
-  HeightLog user_statistic_id(String user_statistic_id) =>
+  HeightLog user_statistic_id(String? user_statistic_id) =>
       this(user_statistic_id: user_statistic_id);
 
   @override
@@ -70,29 +70,26 @@ class _$HeightLogCWProxyImpl implements _$HeightLogCWProxy {
     Object? user_statistic_id = const $CopyWithPlaceholder(),
   }) {
     return HeightLog(
-      created_at:
-          created_at == const $CopyWithPlaceholder() || created_at == null
-              ? _value.created_at
-              // ignore: cast_nullable_to_non_nullable
-              : created_at as DateTime,
+      created_at: created_at == const $CopyWithPlaceholder()
+          ? _value.created_at
+          // ignore: cast_nullable_to_non_nullable
+          : created_at as DateTime?,
       height: height == const $CopyWithPlaceholder() || height == null
           ? _value.height
           // ignore: cast_nullable_to_non_nullable
           : height as double,
-      id: id == const $CopyWithPlaceholder() || id == null
+      id: id == const $CopyWithPlaceholder()
           ? _value.id
           // ignore: cast_nullable_to_non_nullable
-          : id as int,
-      updated_at:
-          updated_at == const $CopyWithPlaceholder() || updated_at == null
-              ? _value.updated_at
-              // ignore: cast_nullable_to_non_nullable
-              : updated_at as DateTime,
-      user_statistic_id: user_statistic_id == const $CopyWithPlaceholder() ||
-              user_statistic_id == null
+          : id as int?,
+      updated_at: updated_at == const $CopyWithPlaceholder()
+          ? _value.updated_at
+          // ignore: cast_nullable_to_non_nullable
+          : updated_at as DateTime?,
+      user_statistic_id: user_statistic_id == const $CopyWithPlaceholder()
           ? _value.user_statistic_id
           // ignore: cast_nullable_to_non_nullable
-          : user_statistic_id as String,
+          : user_statistic_id as String?,
     );
   }
 }
@@ -108,11 +105,15 @@ extension $HeightLogCopyWith on HeightLog {
 // **************************************************************************
 
 HeightLog _$HeightLogFromJson(Map<String, dynamic> json) => HeightLog(
-      user_statistic_id: json['user_statistic_id'] as String,
+      user_statistic_id: json['user_statistic_id'] as String?,
       height: (json['height'] as num).toDouble(),
-      updated_at: DateTime.parse(json['updated_at'] as String),
-      created_at: DateTime.parse(json['created_at'] as String),
-      id: json['id'] as int,
+      updated_at: json['updated_at'] == null
+          ? null
+          : DateTime.parse(json['updated_at'] as String),
+      created_at: json['created_at'] == null
+          ? null
+          : DateTime.parse(json['created_at'] as String),
+      id: json['id'] as int?,
     );
 
 const _$HeightLogFieldMap = <String, String>{
@@ -127,6 +128,6 @@ Map<String, dynamic> _$HeightLogToJson(HeightLog instance) => <String, dynamic>{
       'id': instance.id,
       'user_statistic_id': instance.user_statistic_id,
       'height': instance.height,
-      'updated_at': instance.updated_at.toIso8601String(),
-      'created_at': instance.created_at.toIso8601String(),
+      'updated_at': instance.updated_at?.toIso8601String(),
+      'created_at': instance.created_at?.toIso8601String(),
     };

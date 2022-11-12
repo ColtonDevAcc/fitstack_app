@@ -50,7 +50,7 @@ class UserGoalStatisticsGraph extends StatelessWidget {
             Expanded(
               child: LineChart(
                 LineChartData(
-                  clipData: FlClipData.all(),
+                  clipData: FlClipData.none(),
                   gridData: FlGridData(
                     show: false,
                   ),
@@ -62,7 +62,6 @@ class UserGoalStatisticsGraph extends StatelessWidget {
                   ),
                   lineBarsData: [
                     LineChartBarData(
-                      //use weight log data to chart line chart
                       spots: spots ?? [],
                       isCurved: true,
                       preventCurveOverShooting: true,

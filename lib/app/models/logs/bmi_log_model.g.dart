@@ -9,13 +9,13 @@ part of 'bmi_log_model.dart';
 abstract class _$BMILogCWProxy {
   BMILog bmi(double bmi);
 
-  BMILog created_at(DateTime created_at);
+  BMILog created_at(DateTime? created_at);
 
-  BMILog id(int id);
+  BMILog id(int? id);
 
-  BMILog updated_at(DateTime updated_at);
+  BMILog updated_at(DateTime? updated_at);
 
-  BMILog user_statistic_id(String user_statistic_id);
+  BMILog user_statistic_id(String? user_statistic_id);
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `BMILog(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
@@ -42,16 +42,16 @@ class _$BMILogCWProxyImpl implements _$BMILogCWProxy {
   BMILog bmi(double bmi) => this(bmi: bmi);
 
   @override
-  BMILog created_at(DateTime created_at) => this(created_at: created_at);
+  BMILog created_at(DateTime? created_at) => this(created_at: created_at);
 
   @override
-  BMILog id(int id) => this(id: id);
+  BMILog id(int? id) => this(id: id);
 
   @override
-  BMILog updated_at(DateTime updated_at) => this(updated_at: updated_at);
+  BMILog updated_at(DateTime? updated_at) => this(updated_at: updated_at);
 
   @override
-  BMILog user_statistic_id(String user_statistic_id) =>
+  BMILog user_statistic_id(String? user_statistic_id) =>
       this(user_statistic_id: user_statistic_id);
 
   @override
@@ -74,25 +74,22 @@ class _$BMILogCWProxyImpl implements _$BMILogCWProxy {
           ? _value.bmi
           // ignore: cast_nullable_to_non_nullable
           : bmi as double,
-      created_at:
-          created_at == const $CopyWithPlaceholder() || created_at == null
-              ? _value.created_at
-              // ignore: cast_nullable_to_non_nullable
-              : created_at as DateTime,
-      id: id == const $CopyWithPlaceholder() || id == null
+      created_at: created_at == const $CopyWithPlaceholder()
+          ? _value.created_at
+          // ignore: cast_nullable_to_non_nullable
+          : created_at as DateTime?,
+      id: id == const $CopyWithPlaceholder()
           ? _value.id
           // ignore: cast_nullable_to_non_nullable
-          : id as int,
-      updated_at:
-          updated_at == const $CopyWithPlaceholder() || updated_at == null
-              ? _value.updated_at
-              // ignore: cast_nullable_to_non_nullable
-              : updated_at as DateTime,
-      user_statistic_id: user_statistic_id == const $CopyWithPlaceholder() ||
-              user_statistic_id == null
+          : id as int?,
+      updated_at: updated_at == const $CopyWithPlaceholder()
+          ? _value.updated_at
+          // ignore: cast_nullable_to_non_nullable
+          : updated_at as DateTime?,
+      user_statistic_id: user_statistic_id == const $CopyWithPlaceholder()
           ? _value.user_statistic_id
           // ignore: cast_nullable_to_non_nullable
-          : user_statistic_id as String,
+          : user_statistic_id as String?,
     );
   }
 }
@@ -108,11 +105,15 @@ extension $BMILogCopyWith on BMILog {
 // **************************************************************************
 
 BMILog _$BMILogFromJson(Map<String, dynamic> json) => BMILog(
-      user_statistic_id: json['user_statistic_id'] as String,
+      user_statistic_id: json['user_statistic_id'] as String?,
       bmi: (json['bmi'] as num).toDouble(),
-      updated_at: DateTime.parse(json['updated_at'] as String),
-      created_at: DateTime.parse(json['created_at'] as String),
-      id: json['id'] as int,
+      updated_at: json['updated_at'] == null
+          ? null
+          : DateTime.parse(json['updated_at'] as String),
+      created_at: json['created_at'] == null
+          ? null
+          : DateTime.parse(json['created_at'] as String),
+      id: json['id'] as int?,
     );
 
 const _$BMILogFieldMap = <String, String>{
@@ -127,6 +128,6 @@ Map<String, dynamic> _$BMILogToJson(BMILog instance) => <String, dynamic>{
       'id': instance.id,
       'user_statistic_id': instance.user_statistic_id,
       'bmi': instance.bmi,
-      'updated_at': instance.updated_at.toIso8601String(),
-      'created_at': instance.created_at.toIso8601String(),
+      'updated_at': instance.updated_at?.toIso8601String(),
+      'created_at': instance.created_at?.toIso8601String(),
     };

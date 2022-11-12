@@ -10,7 +10,7 @@ import 'package:dio/dio.dart';
 class RelationshipRepository {
   final Dio dio = Dio();
   final storage = new FlutterSecureStorage();
-  static String mainUrl = kDebugMode ? "http://localhost:8081" : "https://dev.fitstack.io";
+  static String mainUrl = kDebugMode ? "http://192.168.0.203:8080" : "https://dev.fitstack.io";
   final controller = StreamController<FriendStream>.broadcast();
 
   RelationshipRepository();

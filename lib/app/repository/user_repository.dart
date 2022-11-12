@@ -7,7 +7,7 @@ import 'package:dio/dio.dart';
 import 'package:image_picker/image_picker.dart';
 
 class UserRepository {
-  static String mainUrl = kDebugMode ? "http://localhost:8081" : "https://dev.fitstack.io";
+  static String mainUrl = kDebugMode ? "http://192.168.0.203:8080" : "https://dev.fitstack.io";
   final Dio dio = Dio();
 
   Future<User?> getUser({required token}) async {
@@ -100,5 +100,22 @@ class UserRepository {
       log('error: ${e}, stacktrace: ${e.stackTrace}');
     }
     return UserStatistic.empty();
+  }
+
+  Future<void> updateStatistics({required UserStatistic statistic, required String token}) async {
+    try {
+      log("${statistic.toJson()}");
+      await dio.post(
+        mainUrl + '/user/statistics',
+        options: Options(
+          headers: {
+            "Authorization": "Bearer ${token}",
+          },
+        ),
+        data: statistic.toJson(),
+      );
+    } catch (e) {
+      log("$e");
+    }
   }
 }

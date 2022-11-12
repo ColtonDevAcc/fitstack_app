@@ -89,9 +89,9 @@ class DashboardView extends StatelessWidget {
                         var bodyFatGained;
 
                         if (state.status == UserStatisticsStatus.loaded) {
-                          weightGained = context.read<UserStatisticCubit>().getWeightDifference();
-                          bmiGained = context.read<UserStatisticCubit>().getBMIRangeDifference();
-                          bodyFatGained = context.read<UserStatisticCubit>().getFatPercentageDifference();
+                          weightGained = context.read<UserStatisticCubit>().getWeightDifference().roundToDouble();
+                          bmiGained = context.read<UserStatisticCubit>().getBMIRangeDifference().roundToDouble();
+                          bodyFatGained = context.read<UserStatisticCubit>().getFatPercentageDifference().roundToDouble();
                         }
 
                         return ListView(
@@ -104,24 +104,33 @@ class DashboardView extends StatelessWidget {
                                   )
                                 ]
                               : [
-                                  UserGoalStatisticsGraph(
-                                    spots: state.userStatistic.weight_log?.map((e) => FlSpot(e.created_at.day.toDouble(), e.weight)).toList() ?? [],
-                                    color: Theme.of(context).colorScheme.primary,
-                                    subtitle: 'Weight Gained',
-                                    title: '$weightGained LBS',
-                                  ),
-                                  UserGoalStatisticsGraph(
-                                    spots: state.userStatistic.bmi_log?.map((e) => FlSpot(e.created_at.day.toDouble(), e.bmi)).toList() ?? [],
-                                    color: Theme.of(context).colorScheme.primary,
-                                    subtitle: 'BMI Lost',
-                                    title: '$bmiGained BMI',
-                                  ),
-                                  UserGoalStatisticsGraph(
-                                    spots: state.userStatistic.bmi_log?.map((e) => FlSpot(e.created_at.day.toDouble(), e.bmi)).toList() ?? [],
-                                    color: Theme.of(context).colorScheme.primary,
-                                    subtitle: 'Body Fat Lost',
-                                    title: '$bodyFatGained BMI',
-                                  ),
+                                  if (state.userStatistic.weight_log != null)
+                                    UserGoalStatisticsGraph(
+                                      spots: state.userStatistic.weight_log
+                                          ?.map((e) => FlSpot(e.created_at!.millisecondsSinceEpoch.toDouble(), e.weight.roundToDouble()))
+                                          .toList(),
+                                      color: Theme.of(context).colorScheme.primary,
+                                      subtitle: 'Weight Gained',
+                                      title: '$weightGained LBS',
+                                    ),
+                                  if (state.userStatistic.bmi_log != null)
+                                    UserGoalStatisticsGraph(
+                                      spots: state.userStatistic.bmi_log
+                                          ?.map((e) => FlSpot(e.created_at!.millisecondsSinceEpoch.toDouble(), e.bmi.roundToDouble()))
+                                          .toList(),
+                                      color: Theme.of(context).colorScheme.primary,
+                                      subtitle: 'BMI Lost',
+                                      title: '$bmiGained BMI',
+                                    ),
+                                  if (state.userStatistic.body_fat_log != null)
+                                    UserGoalStatisticsGraph(
+                                      spots: state.userStatistic.body_fat_log
+                                          ?.map((e) => FlSpot(e.created_at!.millisecondsSinceEpoch.toDouble(), e.body_fat.roundToDouble()))
+                                          .toList(),
+                                      color: Theme.of(context).colorScheme.primary,
+                                      subtitle: 'Body Fat Lost',
+                                      title: '$bodyFatGained BMI',
+                                    ),
                                 ],
                         );
                       },

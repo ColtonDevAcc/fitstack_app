@@ -11,21 +11,21 @@ part 'user_statistic_model.g.dart';
 @JsonSerializable()
 @CopyWith()
 class UserStatistic extends Equatable {
-  final String id;
+  final String? id;
   final List<HeightLog>? height_log;
   final List<WeightLog>? weight_log;
   final List<BMILog>? bmi_log;
   final List<BodyFatLog>? body_fat_log;
-  final DateTime updated_at;
-  final DateTime created_at;
+  final DateTime? updated_at;
+  final DateTime? created_at;
   UserStatistic({
-    required this.height_log,
-    required this.weight_log,
-    required this.bmi_log,
-    required this.body_fat_log,
-    required this.updated_at,
-    required this.created_at,
-    required this.id,
+    this.height_log,
+    this.weight_log,
+    this.bmi_log,
+    this.body_fat_log,
+    this.updated_at,
+    this.created_at,
+    this.id,
   });
 
   @override

@@ -7,17 +7,17 @@ part 'height_log_model.g.dart';
 @JsonSerializable()
 @CopyWith()
 class HeightLog extends Equatable {
-  final int id;
-  final String user_statistic_id;
+  final int? id;
+  final String? user_statistic_id;
   final double height;
-  final DateTime updated_at;
-  final DateTime created_at;
+  final DateTime? updated_at;
+  final DateTime? created_at;
   HeightLog({
-    required this.user_statistic_id,
+    this.user_statistic_id,
     required this.height,
-    required this.updated_at,
-    required this.created_at,
-    required this.id,
+    this.updated_at,
+    this.created_at,
+    this.id,
   });
 
   @override
@@ -25,7 +25,8 @@ class HeightLog extends Equatable {
 
   factory HeightLog.fromJson(Map<String, dynamic> json) => _$HeightLogFromJson(json);
   Map<String, dynamic> toJson() => _$HeightLogToJson(this);
-  factory HeightLog.empty() => HeightLog(created_at: DateTime.now(), height: 0, id: 0, updated_at: DateTime.now(), user_statistic_id: '');
+  factory HeightLog.empty() =>
+      HeightLog(created_at: DateTime.now().toUtc(), height: 0, id: 0, updated_at: DateTime.now().toUtc(), user_statistic_id: '');
 }
 //  type HeightLog struct {
 // 	ID              uint           `json:"id" gorm:"primaryKey;autoIncrement;not null"`

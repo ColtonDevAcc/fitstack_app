@@ -7,17 +7,17 @@ part 'bmi_log_model.g.dart';
 @JsonSerializable()
 @CopyWith()
 class BMILog extends Equatable {
-  final int id;
-  final String user_statistic_id;
+  final int? id;
+  final String? user_statistic_id;
   final double bmi;
-  final DateTime updated_at;
-  final DateTime created_at;
+  final DateTime? updated_at;
+  final DateTime? created_at;
   BMILog({
-    required this.user_statistic_id,
+    this.user_statistic_id,
     required this.bmi,
-    required this.updated_at,
-    required this.created_at,
-    required this.id,
+    this.updated_at,
+    this.created_at,
+    this.id,
   });
 
   @override

@@ -7,17 +7,17 @@ part 'body_fat_log_model.g.dart';
 @JsonSerializable()
 @CopyWith()
 class BodyFatLog extends Equatable {
-  final int id;
-  final String user_statistic_id;
+  final int? id;
+  final String? user_statistic_id;
   final double body_fat;
-  final DateTime updated_at;
-  final DateTime created_at;
+  final DateTime? updated_at;
+  final DateTime? created_at;
   BodyFatLog({
-    required this.user_statistic_id,
+    this.user_statistic_id,
     required this.body_fat,
-    required this.updated_at,
-    required this.created_at,
-    required this.id,
+    this.updated_at,
+    this.created_at,
+    this.id,
   });
 
   @override
