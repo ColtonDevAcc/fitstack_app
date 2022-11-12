@@ -1,4 +1,3 @@
-import 'package:FitStack/app/providers/bloc/app/app_bloc.dart';
 import 'package:FitStack/presentation/signup/cubit/signup_cubit.dart';
 import 'package:FitStack/presentation/signup/presentation/atoms/profile_avatar_widget.dart';
 import 'package:FitStack/presentation/signup/presentation/atoms/signup_form_header.dart';

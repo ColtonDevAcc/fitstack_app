@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:FitStack/app/models/user/user_model.dart' as fs;
+import 'package:FitStack/app/models/user/user_profile_model.dart';
 import 'package:FitStack/app/repository/auth_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
@@ -189,7 +190,18 @@ class SignupCubit extends Cubit<SignupState> {
         await authRepository
             .userSignUp(
           user: fs.User(
-            display_name: state.username,
+            profile: UserProfile(
+              display_name: state.username,
+              id: '',
+              achievements: [],
+              avatar: '',
+              challenges: [],
+              days_logged_in_a_row: 0,
+              fit_credits: 0,
+              social_points: 0,
+              updated_at: null,
+              user_statistics: null,
+            ),
             date_of_birth: state.dob!,
             first_name: state.firstLastName.split(" ")[0],
             last_name: state.firstLastName.split(" ")[1],

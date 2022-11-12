@@ -1,5 +1,5 @@
 import 'package:FitStack/presentation/workout/presentation/atoms/history_stepper_control_button.dart';
-import 'package:FitStack/presentation/workout/presentation/molecules/workout_card.dart';
+import 'package:FitStack/presentation/workout/presentation/molecules/program_card.dart';
 import 'package:flutter/material.dart';
 
 class HistoryTabView extends StatelessWidget {
@@ -49,14 +49,14 @@ class HistoryTabView extends StatelessWidget {
                     Step(
                       title: const Text('workout 1'),
                       subtitle: Text('10/05/1999'),
-                      content: WorkoutCard(
+                      content: ProgramCard(
                         description: '',
                         title: '',
                       ),
                     ),
                     Step(
                       title: const Text('workout 1'),
-                      content: WorkoutCard(
+                      content: ProgramCard(
                         description: '',
                         title: '',
                       ),

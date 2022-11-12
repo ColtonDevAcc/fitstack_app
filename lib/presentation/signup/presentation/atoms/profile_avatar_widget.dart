@@ -37,7 +37,7 @@ class ProfileAvatar extends StatelessWidget {
                   ),
                   child: CircleAvatar(
                     maxRadius: maxRadius ?? 30,
-                    child: url == null || url == "" ? FaIcon(FontAwesomeIcons.camera) : null,
+                    child: url == null || url == "" ? FaIcon(FontAwesomeIcons.userLarge) : null,
                     foregroundImage: url == null || url == "" ? null : NetworkImage(url),
                   ),
                 ),
@@ -46,7 +46,7 @@ class ProfileAvatar extends StatelessWidget {
                 onTap: onTap,
                 child: CircleAvatar(
                   maxRadius: maxRadius ?? 30,
-                  child: url == null || url == "" ? FaIcon(FontAwesomeIcons.camera) : null,
+                  child: url == null || url == "" ? FaIcon(FontAwesomeIcons.userLarge, size: 15) : null,
                   foregroundImage: url == null || url == "" ? null : NetworkImage(url),
                 ),
               );

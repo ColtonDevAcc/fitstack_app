@@ -52,7 +52,7 @@ class ProfileDrawer extends StatelessWidget {
                 var userId = await FirebaseAuth.instance.currentUser?.getIdToken();
                 FlutterClipboard.copy(userId ?? "");
                 log("========================\nuser refresh token ${user.refresh_token}\n========================");
-                log("========================\nuser refresh token ${user.user_id}\n========================");
+                log("========================\nuser refresh token ${user.id}\n========================");
                 log("========================\nuser token ${userId}\n========================");
               },
               title: "Developer",

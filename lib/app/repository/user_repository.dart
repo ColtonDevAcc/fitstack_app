@@ -1,12 +1,13 @@
 import 'dart:developer';
 import 'package:FitStack/app/models/user/user_model.dart';
 import 'package:FitStack/app/models/user/user_profile_model.dart';
+import 'package:FitStack/app/models/user/user_statistic_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:dio/dio.dart';
 import 'package:image_picker/image_picker.dart';
 
 class UserRepository {
-  static String mainUrl = kDebugMode ? "http://localhost:8000" : "https://dev.fitstack.io";
+  static String mainUrl = kDebugMode ? "http://localhost:8081" : "https://dev.fitstack.io";
   final Dio dio = Dio();
 
   Future<User?> getUser({required token}) async {
@@ -77,5 +78,27 @@ class UserRepository {
       log('error: ${e}, stacktrace: ${e.stackTrace}');
     }
     return UserProfile.empty();
+  }
+
+  Future<UserStatistic> getStatistics({required String token}) async {
+    try {
+      Response response = await dio.get(
+        mainUrl + '/user/statistics',
+        options: Options(
+          headers: {
+            "Authorization": "Bearer ${token}",
+          },
+        ),
+      );
+
+      if (response.statusCode == 200) {
+        return UserStatistic.fromJson(response.data);
+      } else {
+        log("${response.data}");
+      }
+    } on Error catch (e) {
+      log('error: ${e}, stacktrace: ${e.stackTrace}');
+    }
+    return UserStatistic.empty();
   }
 }

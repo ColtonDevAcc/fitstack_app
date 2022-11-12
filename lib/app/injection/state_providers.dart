@@ -1,4 +1,5 @@
 import 'package:FitStack/app/providers/bloc/app/app_bloc.dart';
+import 'package:FitStack/app/providers/bloc/statistic/statistic_bloc.dart';
 import 'package:FitStack/app/providers/cubit/main_view/main_view_cubit.dart';
 import 'package:FitStack/app/repository/auth_repository.dart';
 import 'package:FitStack/app/repository/program_repository.dart';
@@ -52,7 +53,10 @@ class StateProviders extends StatelessWidget {
             create: (BuildContext context) => MainViewCubit(),
           ),
           BlocProvider<ProfileCubit>(
-            create: (BuildContext context) => ProfileCubit(userRepository: context.read<UserRepository>()),
+            create: (BuildContext context) => ProfileCubit(
+              user: context.read<AppBloc>().state.user,
+              userRepository: context.read<UserRepository>(),
+            ),
           ),
           BlocProvider<FriendshipCubit>(
             create: (BuildContext context) => FriendshipCubit(relationshipRepository: context.read<RelationshipRepository>()),
@@ -62,6 +66,9 @@ class StateProviders extends StatelessWidget {
           ),
           BlocProvider<ProgramCubit>(
             create: (BuildContext context) => ProgramCubit(programRepository: context.read<ProgramRepository>()),
+          ),
+          BlocProvider<StatisticBloc>(
+            create: (BuildContext context) => StatisticBloc(userRepository: context.read<UserRepository>())..add(LoadStatistics()),
           ),
         ],
         child: child,

@@ -2,7 +2,6 @@ import 'package:FitStack/app/injection/state_providers.dart';
 import 'package:FitStack/app/providers/bloc/app/app_bloc.dart';
 import 'package:FitStack/app/routing/app_router.dart';
 import 'package:FitStack/app/theme/color_Theme.dart';
-import 'package:FitStack/presentation/settings/cubit/settings_cubit.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -17,15 +16,10 @@ Future<void> main() async {
 
   final storage = await HydratedStorage.build(storageDirectory: kIsWeb ? HydratedStorage.webStorageDirectory : await getTemporaryDirectory());
 
-  HydratedBlocOverrides.runZoned(
-    () async {
-      await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
-      if (!kDebugMode) FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
-      runApp(MyApp());
-    },
-    storage: storage,
-  );
+  if (!kDebugMode) FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -35,18 +29,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StateProviders(
-      child: BlocBuilder<SettingsCubit, SettingsState>(
-        builder: (context, state) {
-          final AppRouter router = AppRouter(navigatorKey: navigatorKey, appBloc: context.read<AppBloc>());
-          var theme = context.watch<SettingsCubit>().state.theme;
+      child: Builder(builder: (context) {
+        final AppRouter router = AppRouter(navigatorKey: navigatorKey, appBloc: context.read<AppBloc>());
 
-          return MaterialApp.router(
-            routerConfig: router.router,
-            theme: theme["light"] ?? FSColorTheme.Light(context),
-            darkTheme: theme["dark"] ?? FSColorTheme.Light(context),
-          );
-        },
-      ),
+        return MaterialApp.router(
+          routerConfig: router.router,
+          theme: FSColorTheme.Light(context),
+          darkTheme: FSColorTheme.Light(context),
+        );
+      }),
     );
   }
 }

@@ -27,9 +27,9 @@ class AppRouter {
 
   static FirebaseAnalytics analytics = FirebaseAnalytics.instance;
   static FirebaseAnalyticsObserver observer = FirebaseAnalyticsObserver(analytics: analytics);
+
   late final router = GoRouter(
     navigatorKey: navigatorKey,
-    initialLocation: kDebugMode ? "/" : "/",
     refreshListenable: GoRouterRefreshStream(appBloc.stream),
     observers: [
       if (!kDebugMode) GoRouterObserver(analytics: analytics),
@@ -97,8 +97,9 @@ class AppRouter {
       GoRoute(
         path: '/user',
         name: 'user',
-        parentNavigatorKey: navigatorKey,
-        builder: (context, state) => const ProfileView(),
+        builder: (context, state) => ProfileView(
+          key: state.pageKey,
+        ),
       ),
     ],
     redirect: (context, state) {

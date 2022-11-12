@@ -1,4 +1,5 @@
 import 'package:FitStack/app/models/user/user_profile_model.dart';
+import 'package:FitStack/app/providers/bloc/app/app_bloc.dart';
 import 'package:FitStack/presentation/profile/cubit/profile_cubit.dart';
 import 'package:FitStack/presentation/profile/presentation/atoms/profile_featured_user_statistics.dart';
 import 'package:FitStack/presentation/profile/presentation/molecules/user_profile_achievements_list.dart';
@@ -25,7 +26,7 @@ class ProfileView extends StatelessWidget {
       buildWhen: (previous, current) => previous.userProfile != current.userProfile,
       builder: (context, state) {
         if (state.userProfile == UserProfile.empty()) {
-          context.read<ProfileCubit>().getUserProfile();
+          context.read<AppBloc>().state.user ?? context.read<ProfileCubit>().getUserProfile();
         }
         return Scaffold(
           resizeToAvoidBottomInset: false,

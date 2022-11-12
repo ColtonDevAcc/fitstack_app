@@ -1,3 +1,4 @@
+import 'package:FitStack/app/models/user/user_statistic_model.dart';
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
@@ -11,26 +12,26 @@ class UserProfile extends Equatable {
   final String display_name;
   final List? challenges;
   final List? achievements;
-  final List? user_statistics;
+  final UserStatistic? user_statistics;
   final List<UserProfile>? friends;
   final int fit_credits;
   final int social_points;
   final int days_logged_in_a_row;
-  final DateTime? updated_at;
   final String? avatar;
-  final bool? accepted;
+  final DateTime? updated_at;
+  final DateTime? created_at;
   UserProfile({
-    required this.accepted,
-    required this.friends,
+    this.friends,
+    this.user_statistics,
+    this.updated_at,
+    this.created_at,
     required this.display_name,
     required this.id,
     required this.challenges,
     required this.achievements,
-    required this.user_statistics,
     required this.fit_credits,
     required this.social_points,
     required this.days_logged_in_a_row,
-    required this.updated_at,
     required this.avatar,
   });
 
@@ -47,6 +48,7 @@ class UserProfile extends Equatable {
         days_logged_in_a_row,
         updated_at,
         avatar,
+        created_at,
       ];
 
   factory UserProfile.fromJson(Map<String, dynamic> json) => _$UserProfileFromJson(json);
@@ -55,14 +57,13 @@ class UserProfile extends Equatable {
         id: 'id',
         challenges: [],
         achievements: [],
-        user_statistics: [],
+        user_statistics: UserStatistic.empty(),
         fit_credits: 0,
         social_points: 0,
         days_logged_in_a_row: 0,
-        updated_at: null,
-        display_name: '',
-        friends: [],
+        updated_at: DateTime.now(),
+        display_name: 'null',
         avatar: '',
-        accepted: null,
+        created_at: DateTime.now(),
       );
 }

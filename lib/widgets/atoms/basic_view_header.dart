@@ -5,22 +5,34 @@ class BasicViewHeader extends StatelessWidget {
   final String title;
   final Widget? trailing;
   final Color? color;
-  const BasicViewHeader({Key? key, required this.title, this.trailing, this.color}) : super(key: key);
+  final Widget? leading;
+  const BasicViewHeader({Key? key, required this.title, this.trailing, this.color, this.leading}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        AutoSizeText(
-          title,
-          maxLines: 1,
-          style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-                color: color ?? Theme.of(context).colorScheme.primary,
+        Stack(
+          alignment: Alignment.center,
+          children: [
+            Align(
+              alignment: Alignment.center,
+              child: AutoSizeText(
+                title,
+                maxLines: 1,
+                style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                      color: color ?? Theme.of(context).colorScheme.primary,
+                    ),
               ),
+            ),
+            Align(
+              alignment: Alignment.centerRight,
+              child: trailing ?? SizedBox(),
+            )
+          ],
         ),
-        trailing ?? SizedBox(),
       ],
     );
   }

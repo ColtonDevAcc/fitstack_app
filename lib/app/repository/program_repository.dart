@@ -8,7 +8,7 @@ import 'package:dio/dio.dart';
 class ProgramRepository {
   final Dio dio = Dio();
   final storage = new FlutterSecureStorage();
-  static String mainUrl = kDebugMode ? "http://localhost:8000" : "https://dev.fitstack.io";
+  static String mainUrl = kDebugMode ? "http://localhost:8081" : "https://dev.fitstack.io";
 
   ProgramRepository();
 
@@ -23,8 +23,7 @@ class ProgramRepository {
 
       if (response.statusCode == 200) {
         List responseJson = response.data as List;
-
-        var programs = responseJson.map((e) => Program.fromJson(e)).toList();
+        List<Program> programs = responseJson.map((e) => Program.fromJson(e)).toList();
         return programs;
       }
     } on Error catch (e) {

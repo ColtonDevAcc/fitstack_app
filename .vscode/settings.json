@@ -8,6 +8,7 @@
     "gameify",
     "ncipollo",
     "reorderables",
+    "struct",
     "subosito"
   ]
 }

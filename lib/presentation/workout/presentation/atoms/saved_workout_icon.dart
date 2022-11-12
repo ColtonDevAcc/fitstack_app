@@ -10,11 +10,11 @@ class SavedWorkoutIcon extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: CircleAvatar(
-        radius: 18,
+        radius: 12,
         backgroundColor: Theme.of(context).colorScheme.background,
         child: Icon(
           FontAwesomeIcons.solidHeart,
-          size: 17,
+          size: 10,
           color: Theme.of(context).colorScheme.onSecondaryContainer,
         ),
       ),

@@ -1,11 +1,10 @@
 import 'dart:developer';
-import 'dart:io';
-
+import 'package:FitStack/app/models/user/user_model.dart';
 import 'package:FitStack/app/models/user/user_profile_model.dart';
 import 'package:FitStack/app/repository/user_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' as fb;
 import 'package:flutter/foundation.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -13,11 +12,16 @@ part 'profile_state.dart';
 
 class ProfileCubit extends Cubit<ProfileState> {
   final UserRepository userRepository;
-  ProfileCubit({required this.userRepository}) : super(ProfileState(avatar: '', userProfile: UserProfile.empty()));
+  final User? user;
+  ProfileCubit({required this.user, required this.userRepository})
+      : super(ProfileState(
+          avatar: user?.profile.avatar ?? "",
+          userProfile: user?.profile ?? UserProfile.empty(),
+        ));
 
   void changeProfileUrl() async {
     await ImagePicker().pickImage(source: ImageSource.gallery).then((value) async {
-      var token = await FirebaseAuth.instance.currentUser?.getIdToken();
+      var token = await fb.FirebaseAuth.instance.currentUser?.getIdToken();
       var profileUrl = await userRepository.updateProfileAvatar(token: token!, file: XFile(value!.path));
       emit(
         state.copyWith(
@@ -36,7 +40,7 @@ class ProfileCubit extends Cubit<ProfileState> {
   Future<void> getUserProfile() async {
     try {
       if (kDebugMode) log("getting user profile");
-      var token = await FirebaseAuth.instance.currentUser?.getIdToken();
+      var token = await fb.FirebaseAuth.instance.currentUser?.getIdToken();
       var userProfile = await userRepository.getUserProfile(token: token!);
       log("${userProfile.display_name}");
       emit(state.copyWith(userProfile: userProfile));

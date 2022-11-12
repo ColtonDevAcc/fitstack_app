@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:FitStack/presentation/relationship/cubit/friendship/friendship_cubit.dart';
 import 'package:FitStack/presentation/relationship/presentation/molecules/add_friend_bottom_sheet.dart';
 import 'package:FitStack/presentation/relationship/presentation/molecules/friendship_profile_card.dart';
@@ -70,8 +68,7 @@ class FriendsRelationshipView extends StatelessWidget {
                   : state.friendsList!
                       .map(
                         (e) => FriendshipProfileCard(
-                          accepted: e!.accepted,
-                          username: e.display_name,
+                          username: e!.display_name,
                           colorTheme: Colors.red,
                         ),
                       )

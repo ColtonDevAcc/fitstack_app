@@ -1,10 +1,12 @@
-import 'package:FitStack/app/models/user/user_profile_model.dart';
-import 'package:FitStack/presentation/dashboard/presentation/molecules/user_goal_graphs_list.dart';
+import 'package:FitStack/app/providers/bloc/app/app_bloc.dart';
+import 'package:FitStack/app/providers/bloc/statistic/statistic_bloc.dart';
+import 'package:FitStack/presentation/dashboard/presentation/atoms/user_goal_statistics_graph.dart';
 import 'package:FitStack/presentation/dashboard/presentation/molecules/workout_recommendations%20_list.dart';
 import 'package:FitStack/presentation/dashboard/presentation/molecules/statistics_dashboard.dart';
 import 'package:FitStack/presentation/profile/cubit/profile_cubit.dart';
 import 'package:FitStack/presentation/signup/presentation/atoms/profile_avatar_widget.dart';
 import 'package:FitStack/widgets/atoms/basic_view_header.dart';
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -28,62 +30,99 @@ class DashboardView extends StatelessWidget {
       scrollDirection: Axis.vertical,
       padding: EdgeInsets.zero,
       child: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              BasicViewHeader(
-                title: "DASHBOARD",
-                trailing: Padding(
-                  padding: const EdgeInsets.only(right: 15),
-                  child: BlocBuilder<ProfileCubit, ProfileState>(
-                    builder: (context, state) {
-                      if (state.userProfile == UserProfile.empty()) {
-                        context.read<ProfileCubit>().getUserProfile();
-                      }
-                      return ProfileAvatar(
-                        onTap: () => GoRouter.of(context).push("/user"),
-                        avatar: state.userProfile.avatar,
-                        withBorder: false,
-                        maxRadius: 17,
-                      );
-                    },
+        child: Column(
+          children: [
+            BasicViewHeader(
+              title: "DASHBOARD",
+              trailing: Padding(
+                padding: const EdgeInsets.only(right: 15),
+                child: BlocBuilder<ProfileCubit, ProfileState>(
+                  builder: (context, state) {
+                    return ProfileAvatar(
+                      onTap: () => context.go("/user"),
+                      avatar: context.read<AppBloc>().state.user?.profile.avatar,
+                      withBorder: false,
+                      maxRadius: 17,
+                    );
+                  },
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0, topPadding - 5, 0, 0),
+                    child: Text(
+                      "Stats",
+                      textScaleFactor: textLabelScale,
+                      style: labelTextStyle,
+                    ),
                   ),
-                ),
+                  Statistics_Dashboard(),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0, topPadding, 0, bottomPadding),
+                    child: Text(
+                      "Daily Workouts",
+                      textScaleFactor: textLabelScale,
+                      style: labelTextStyle,
+                    ),
+                  ),
+                  Workout_Recommendation_List(pageController: pageController),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0, topPadding, 0, bottomPadding),
+                    child: Text(
+                      "Progress",
+                      textScaleFactor: textLabelScale,
+                      style: labelTextStyle,
+                    ),
+                  ),
+                  Container(
+                    height: MediaQuery.of(context).size.height * .2,
+                    child: BlocBuilder<StatisticBloc, StatisticState>(
+                      buildWhen: (previous, current) => previous.userStatistic != current.userStatistic,
+                      builder: (context, state) {
+                        var bmiGained;
+                        var weightGained;
+
+                        if (state.userStatistic.bmi_log == []) {
+                          weightGained = context.read<StatisticBloc>().getWeightRangeDifference();
+                          bmiGained = context.read<StatisticBloc>().getBMIRangeDifference();
+                        }
+
+                        return ListView(
+                          padding: EdgeInsets.zero,
+                          scrollDirection: Axis.horizontal,
+                          children: state.userStatistic.weight_log == []
+                              ? [
+                                  Center(
+                                    child: CircularProgressIndicator(),
+                                  )
+                                ]
+                              : [
+                                  UserGoalStatisticsGraph(
+                                    spots: state.userStatistic.weight_log?.map((e) => FlSpot(e.created_at.day.toDouble(), e.weight)).toList() ?? [],
+                                    color: Theme.of(context).colorScheme.primary,
+                                    subtitle: 'Weight Gained',
+                                    title: '$weightGained LBS',
+                                  ),
+                                  UserGoalStatisticsGraph(
+                                    spots: state.userStatistic.bmi_log?.map((e) => FlSpot(e.created_at.day.toDouble(), e.bmi)).toList() ?? [],
+                                    color: Theme.of(context).colorScheme.primary,
+                                    subtitle: 'BMI',
+                                    title: '$bmiGained BMI',
+                                  ),
+                                ],
+                        );
+                      },
+                    ),
+                  ),
+                ],
               ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(0, topPadding - 5, 0, 0),
-                child: Text(
-                  "Stats",
-                  textScaleFactor: textLabelScale,
-                  style: labelTextStyle,
-                ),
-              ),
-              Statistics_Dashboard(),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(0, topPadding, 0, bottomPadding),
-                child: Text(
-                  "Daily Workouts",
-                  textScaleFactor: textLabelScale,
-                  style: labelTextStyle,
-                ),
-              ),
-              Workout_Recommendation_List(pageController: pageController),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(0, topPadding, 0, bottomPadding),
-                child: Text(
-                  "Progress",
-                  textScaleFactor: textLabelScale,
-                  style: labelTextStyle,
-                ),
-              ),
-              Container(
-                height: MediaQuery.of(context).size.height * .2,
-                child: UserGoalGraphsList(),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

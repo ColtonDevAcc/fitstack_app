@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:FitStack/presentation/workout/cubit/program_cubit.dart';
-import 'package:FitStack/presentation/workout/presentation/molecules/workout_card.dart';
+import 'package:FitStack/presentation/workout/presentation/molecules/program_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -27,15 +27,16 @@ class ProgramTabView extends StatelessWidget {
 
             return SliverFillRemaining(
               hasScrollBody: false,
-              child: Column(
+              child: Wrap(
+                alignment: WrapAlignment.spaceBetween,
                 children: state.programs == null
                     ? []
                     : state.programs!
                         .map(
                           (program) => GestureDetector(
                             onTap: () => context.go('/programs/workout'),
-                            child: WorkoutCard(
-                              description: program.title,
+                            child: ProgramCard(
+                              description: program.creator?.profile.display_name ?? "Community",
                               title: program.title,
                             ),
                           ),
