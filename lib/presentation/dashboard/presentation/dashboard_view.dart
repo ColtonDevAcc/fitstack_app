@@ -1,5 +1,5 @@
 import 'package:FitStack/app/providers/bloc/app/app_bloc.dart';
-import 'package:FitStack/app/providers/bloc/statistic/statistic_bloc.dart';
+import 'package:FitStack/app/providers/cubit/user_statistic/user_statistic_cubit.dart';
 import 'package:FitStack/presentation/dashboard/presentation/atoms/user_goal_statistics_graph.dart';
 import 'package:FitStack/presentation/dashboard/presentation/molecules/workout_recommendations%20_list.dart';
 import 'package:FitStack/presentation/dashboard/presentation/molecules/statistics_dashboard.dart';
@@ -81,21 +81,23 @@ class DashboardView extends StatelessWidget {
                   ),
                   Container(
                     height: MediaQuery.of(context).size.height * .2,
-                    child: BlocBuilder<StatisticBloc, StatisticState>(
+                    child: BlocBuilder<UserStatisticCubit, UserStatisticState>(
                       buildWhen: (previous, current) => previous.userStatistic != current.userStatistic,
                       builder: (context, state) {
                         var bmiGained;
                         var weightGained;
+                        var bodyFatGained;
 
-                        if (state.userStatistic.bmi_log == []) {
-                          weightGained = context.read<StatisticBloc>().getWeightRangeDifference();
-                          bmiGained = context.read<StatisticBloc>().getBMIRangeDifference();
+                        if (state.status == UserStatisticsStatus.loaded) {
+                          weightGained = context.read<UserStatisticCubit>().getWeightDifference();
+                          bmiGained = context.read<UserStatisticCubit>().getBMIRangeDifference();
+                          bodyFatGained = context.read<UserStatisticCubit>().getFatPercentageDifference();
                         }
 
                         return ListView(
                           padding: EdgeInsets.zero,
                           scrollDirection: Axis.horizontal,
-                          children: state.userStatistic.weight_log == []
+                          children: state.status == UserStatisticsStatus.loading
                               ? [
                                   Center(
                                     child: CircularProgressIndicator(),
@@ -111,8 +113,14 @@ class DashboardView extends StatelessWidget {
                                   UserGoalStatisticsGraph(
                                     spots: state.userStatistic.bmi_log?.map((e) => FlSpot(e.created_at.day.toDouble(), e.bmi)).toList() ?? [],
                                     color: Theme.of(context).colorScheme.primary,
-                                    subtitle: 'BMI',
+                                    subtitle: 'BMI Lost',
                                     title: '$bmiGained BMI',
+                                  ),
+                                  UserGoalStatisticsGraph(
+                                    spots: state.userStatistic.bmi_log?.map((e) => FlSpot(e.created_at.day.toDouble(), e.bmi)).toList() ?? [],
+                                    color: Theme.of(context).colorScheme.primary,
+                                    subtitle: 'Body Fat Lost',
+                                    title: '$bodyFatGained BMI',
                                   ),
                                 ],
                         );
