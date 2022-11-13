@@ -88,13 +88,13 @@ dependencies:
   go_router: ^5.1.5
 
   #firebase
-  firebase_core: ^2.1.0
+  firebase_core: ^2.2.0
   firebase_crashlytics: ^3.0.2
   firebase_analytics: ^10.0.2
-  firebase_performance: ^0.9.0+2
-  firebase_storage: ^11.0.2
+  firebase_performance: ^0.9.0+5
+  firebase_storage: ^11.0.5
   firebase_dynamic_links: ^5.0.2
-  firebase_auth: ^4.0.2
+  firebase_auth: ^4.1.2
 
 dev_dependencies:
   flutter_test:
