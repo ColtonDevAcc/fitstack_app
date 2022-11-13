@@ -7,7 +7,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 
 class WorkoutRepository {
-  static String mainUrl = kDebugMode ? "http://localhost:8080" : "https://dev.fitstack.io";
+  static String mainUrl = kDebugMode ? "http://192.168.0.203:8080" : "https://dev.fitstack.io";
   final Dio dio = Dio();
   final workoutStreamController = StreamController<List<Workout>>.broadcast();
 
@@ -36,6 +36,7 @@ class WorkoutRepository {
   }
 
   Stream<List<Workout>> getWorkouts() {
+    log("subscribing to workouts stream");
     return workoutStreamController.stream;
   }
 }

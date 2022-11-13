@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:FitStack/app/models/workout/workout_model.dart';
 import 'package:FitStack/app/repository/workout_repository.dart';
 import 'package:bloc/bloc.dart';
@@ -10,13 +12,18 @@ part 'workout_state.dart';
 
 class WorkoutBloc extends Bloc<WorkoutEvent, WorkoutState> {
   final WorkoutRepository workoutRepository;
-  WorkoutBloc({required this.workoutRepository}) : super(WorkoutState(status: WorkoutsStatus.initial, workouts: [])) {
-    on<WorkoutEvent>((event, emit) {});
-    on<CreateWorkout>((event, emit) => onCreateWorkout);
-    on<AddWorkout>((event, emit) => onAddWorkout);
-    on<DeleteWorkout>((event, emit) => onDeleteWorkout);
-    on<UpdateWorkout>((event, emit) => onUpdateWorkout);
-    on<WorkoutStreamSubscriptionRequested>((event, emit) => onStreamSubscriptionRequested);
+  WorkoutBloc({required this.workoutRepository})
+      : super(
+          WorkoutState(
+            status: WorkoutsStatus.initial,
+            workouts: [],
+          ),
+        ) {
+    on<CreateWorkout>(onCreateWorkout);
+    on<AddWorkout>(onAddWorkout);
+    on<DeleteWorkout>(onDeleteWorkout);
+    on<UpdateWorkout>(onUpdateWorkout);
+    on<WorkoutStreamSubscriptionRequested>(onStreamSubscriptionRequested);
   }
 
   void onCreateWorkout(CreateWorkout event, Emitter<WorkoutState> emit) {
@@ -55,15 +62,18 @@ class WorkoutBloc extends Bloc<WorkoutEvent, WorkoutState> {
     }
   }
 
-  Future<void> onStreamSubscriptionRequested(WorkoutStreamSubscriptionRequested event, Emitter<WorkoutState> emit) async {
-    emit(state.copyWith(status: WorkoutsStatus.loading));
+  void onStreamSubscriptionRequested(WorkoutStreamSubscriptionRequested event, Emitter<WorkoutState> emit) async {
+    log("onStreamSubscriptionRequested");
 
+    emit(state.copyWith(status: WorkoutsStatus.loading));
     await emit.forEach<List<Workout>>(
       workoutRepository.getWorkouts(),
-      onData: (workouts) => state.copyWith(
-        status: WorkoutsStatus.loaded,
-        workouts: workouts,
-      ),
+      onData: (workouts) {
+        return state.copyWith(
+          status: WorkoutsStatus.loaded,
+          workouts: workouts,
+        );
+      },
       onError: (obj, st) {
         Fluttertoast.showToast(
           msg: "error loading workouts${obj.toString()}",

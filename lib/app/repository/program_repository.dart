@@ -8,7 +8,7 @@ import 'package:dio/dio.dart';
 class ProgramRepository {
   final Dio dio = Dio();
   final storage = new FlutterSecureStorage();
-  static String mainUrl = kDebugMode ? "http://localhost:8080" : "https://dev.fitstack.io";
+  static String mainUrl = kDebugMode ? "http://192.168.0.203:8080" : "https://dev.fitstack.io";
 
   ProgramRepository();
 

@@ -1,7 +1,18 @@
 import 'dart:developer';
 
+import 'package:FitStack/app/models/logs/active_energy_log_model.dart';
+import 'package:FitStack/app/models/logs/active_minutes_log_model.dart';
+import 'package:FitStack/app/models/logs/basal_energy_log_model.dart';
+import 'package:FitStack/app/models/logs/blood_pressure_log_model.dart';
 import 'package:FitStack/app/models/logs/bmi_log_model.dart';
 import 'package:FitStack/app/models/logs/body_fat_log_model.dart';
+import 'package:FitStack/app/models/logs/body_temperature_log_model.dart';
+import 'package:FitStack/app/models/logs/distance_log_model.dart';
+import 'package:FitStack/app/models/logs/heart_rate_log_model.dart';
+import 'package:FitStack/app/models/logs/oxygen_saturation_log_model.dart';
+import 'package:FitStack/app/models/logs/respiratory_log_model.dart';
+import 'package:FitStack/app/models/logs/sleep_log_model.dart';
+import 'package:FitStack/app/models/logs/step_log_model.dart';
 import 'package:FitStack/app/models/logs/weight_log_model.dart';
 import 'package:FitStack/app/models/user/user_statistic_model.dart';
 import 'package:FitStack/app/repository/user_repository.dart';
@@ -55,13 +66,26 @@ class UserStatisticCubit extends Cubit<UserStatisticState> {
     HealthFactory health = HealthFactory();
     var today = DateTime.now();
     var types = [
-      HealthDataType.BODY_FAT_PERCENTAGE,
-      HealthDataType.BODY_MASS_INDEX,
       HealthDataType.WEIGHT,
+      HealthDataType.BODY_MASS_INDEX,
+      HealthDataType.BODY_FAT_PERCENTAGE,
+      HealthDataType.STEPS,
+      HealthDataType.DISTANCE_WALKING_RUNNING,
+      // HealthDataType.MOVE_MINUTES,
+      HealthDataType.HEART_RATE,
+      HealthDataType.SLEEP_IN_BED,
+      HealthDataType.BLOOD_PRESSURE_DIASTOLIC,
+      HealthDataType.BLOOD_PRESSURE_SYSTOLIC,
+      HealthDataType.BLOOD_OXYGEN,
+      HealthDataType.BODY_TEMPERATURE,
+      //! RespiratoryRate.
+      //! OxygenSaturation
+      HealthDataType.ACTIVE_ENERGY_BURNED,
+      HealthDataType.BASAL_ENERGY_BURNED,
     ];
     //check if last update is today
     try {
-      if (today.difference(state.userStatistic.updated_at!.toUtc()).inDays > 0) {
+      if (today.difference(state.userStatistic.updated_at!.toUtc()).inHours > 2) {
         var lastFetch = state.userStatistic.updated_at;
         var healthData = await health.getHealthDataFromTypes(
           lastFetch ?? today.subtract(Duration(days: 365)),
@@ -74,43 +98,111 @@ class UserStatisticCubit extends Cubit<UserStatisticState> {
         List<WeightLog> userWeightLogs = [];
         List<BMILog> userBmiLogs = [];
         List<BodyFatLog> userBodyFatLogs = [];
+        List<StepLog> step_log = [];
+        List<DistanceLog> distance_log = [];
+        List<ActiveMinutesLog> active_minutes_log = [];
+        List<HeartRateLog> heart_rate_log = [];
+        List<SleepLog> sleep_log = [];
+        List<BloodPressureLog> blood_pressure_log = [];
+        List<BodyTemperatureLog> body_temperature = [];
+        List<OxygenSaturationLog> oxygen_saturation = [];
+        //! List<RespiratoryLog> respiratory_rate = [];
+        List<ActiveEnergyLog> active_energy = [];
+        List<BasalEnergyLog> basal_energy = [];
 
         healthData.forEach((element) {
           var value = double.parse((element.value).toString());
-          if (element.type == HealthDataType.WEIGHT) {
-            var weight = WeightLog.empty().fromKgToLbs(weight: value);
-            userWeightLogs.add(
-              WeightLog(
-                weight: weight,
-                updated_at: DateTime.now().toUtc(),
+          log("parsing statistics data for api");
+          switch (element.type) {
+            case HealthDataType.WEIGHT:
+              userWeightLogs.add(WeightLog(
+                weight: value,
                 created_at: element.dateFrom.toUtc(),
-                id: null,
-                user_statistic_id: '',
-              ),
-            );
-          } else if (element.type == HealthDataType.BODY_MASS_INDEX) {
-            print(element);
-            userBmiLogs.add(
-              BMILog(
+              ));
+              break;
+            case HealthDataType.BODY_MASS_INDEX:
+              userBmiLogs.add(BMILog(
                 bmi: value,
-                updated_at: DateTime.now().toUtc(),
                 created_at: element.dateFrom.toUtc(),
-                id: null,
-                user_statistic_id: '',
-              ),
-            );
-          } else if (element.type == HealthDataType.BODY_FAT_PERCENTAGE) {
-            var bodyFat = BodyFatLog.empty().toWholePercent(bodyFat: value);
-
-            userBodyFatLogs.add(
-              BodyFatLog(
-                body_fat: bodyFat,
-                updated_at: DateTime.now().toUtc(),
+              ));
+              break;
+            case HealthDataType.BODY_FAT_PERCENTAGE:
+              userBodyFatLogs.add(BodyFatLog(
+                body_fat: value,
                 created_at: element.dateFrom.toUtc(),
-                id: null,
-                user_statistic_id: '',
-              ),
-            );
+              ));
+              break;
+            case HealthDataType.STEPS:
+              step_log.add(StepLog(
+                step_count: value.toInt(),
+                created_at: element.dateFrom.toUtc(),
+              ));
+              break;
+            case HealthDataType.DISTANCE_DELTA:
+              distance_log.add(DistanceLog(
+                distance: value,
+                created_at: element.dateFrom.toUtc(),
+              ));
+              break;
+            case HealthDataType.MOVE_MINUTES:
+              active_minutes_log.add(ActiveMinutesLog(
+                active_minutes: value,
+                created_at: element.dateFrom.toUtc(),
+              ));
+              break;
+            case HealthDataType.HEART_RATE:
+              heart_rate_log.add(HeartRateLog(
+                heart_rate: value,
+                created_at: element.dateFrom.toUtc(),
+              ));
+              break;
+            case HealthDataType.SLEEP_IN_BED:
+              {
+                sleep_log.add(SleepLog(
+                  sleep: value,
+                  created_at: element.dateFrom.toUtc(),
+                ));
+                break;
+              }
+            case HealthDataType.BLOOD_PRESSURE_DIASTOLIC:
+              blood_pressure_log.add(BloodPressureLog(
+                diastolic: value,
+                created_at: element.dateFrom.toUtc(),
+              ));
+              break;
+            case HealthDataType.BLOOD_PRESSURE_SYSTOLIC:
+              blood_pressure_log.add(BloodPressureLog(
+                systolic: value,
+                created_at: element.dateFrom.toUtc(),
+              ));
+              break;
+            case HealthDataType.BLOOD_OXYGEN:
+              oxygen_saturation.add(OxygenSaturationLog(
+                oxygen_saturation: value,
+                created_at: element.dateFrom.toUtc(),
+              ));
+              break;
+            case HealthDataType.BODY_TEMPERATURE:
+              body_temperature.add(BodyTemperatureLog(
+                body_temperature: value,
+                created_at: element.dateFrom.toUtc(),
+              ));
+              break;
+            case HealthDataType.ACTIVE_ENERGY_BURNED:
+              active_energy.add(ActiveEnergyLog(
+                active_energy: value,
+                created_at: element.dateFrom.toUtc(),
+              ));
+              break;
+            case HealthDataType.BASAL_ENERGY_BURNED:
+              basal_energy.add(BasalEnergyLog(
+                basal_energy: value,
+                created_at: element.dateFrom.toUtc(),
+              ));
+              break;
+            default:
+              log("Error in checkUserStatistic: message: ${element.type} is not supported");
+              break;
           }
         });
 
@@ -177,7 +269,7 @@ class UserStatisticCubit extends Cubit<UserStatisticState> {
 
   double getFatPercentageDifference() {
     if (state.userStatistic != UserStatistic.empty() && state.userStatistic.body_fat_log != null && state.userStatistic.body_fat_log!.length > 2) {
-      log("body fat logs: ${state.userStatistic.body_fat_log}");
+      log("getFatPercentageDifference");
       kDebugMode ? log("getFatPercentageDifference") : null;
       double fatPercentageMax = state.userStatistic.body_fat_log?.first.body_fat ?? 0;
       double fatPercentageMin = state.userStatistic.body_fat_log?.last.body_fat ?? 0;

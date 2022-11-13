@@ -74,8 +74,9 @@ class StateProviders extends StatelessWidget {
             create: (BuildContext context) => UserStatisticCubit(userRepository: context.read<UserRepository>())..getUserStatistic(),
           ),
           BlocProvider<WorkoutBloc>(
-            create: (BuildContext context) =>
-                WorkoutBloc(workoutRepository: context.read<WorkoutRepository>())..add(WorkoutStreamSubscriptionRequested()),
+            create: (BuildContext context) => WorkoutBloc(
+              workoutRepository: context.read<WorkoutRepository>(),
+            )..add(WorkoutStreamSubscriptionRequested()),
           ),
         ],
         child: child,

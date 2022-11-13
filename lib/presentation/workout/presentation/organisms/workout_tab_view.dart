@@ -20,13 +20,16 @@ class WorkoutTabView extends StatelessWidget {
               child: Wrap(
                 alignment: WrapAlignment.spaceBetween,
                 children: state.workouts.isEmpty
-                    ? [Center(child: CircularProgressIndicator())]
+                    ? [
+                        SizedBox(height: 20),
+                        Center(child: CircularProgressIndicator()),
+                      ]
                     : state.workouts
                         .map(
                           (workout) => GestureDetector(
                             child: ProgramCard(
-                              description: workout.name ?? "asdf",
-                              title: workout.name ?? "asdf",
+                              description: workout.creator?.profile.display_name ?? "you",
+                              title: workout.title ?? "no title",
                             ),
                           ),
                         )

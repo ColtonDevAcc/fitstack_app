@@ -1,3 +1,4 @@
+import 'package:FitStack/app/models/user/user_model.dart';
 import 'package:FitStack/app/models/workout/workout_sets_model.dart';
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
@@ -9,13 +10,19 @@ part 'workout_model.g.dart';
 @CopyWith()
 class Workout extends Equatable {
   final int? id;
-  final String? name;
+  final String? title;
+  final String? description;
+  final User? creator;
+  final String? creator_id;
   final List<WorkoutSets>? workout_sets;
 
   Workout({
+    this.creator_id,
+    this.creator,
+    this.description,
     required this.id,
     required this.workout_sets,
-    required this.name,
+    required this.title,
   });
 
   @override
@@ -23,7 +30,7 @@ class Workout extends Equatable {
 
   factory Workout.fromJson(Map<String, dynamic> json) => _$WorkoutFromJson(json);
   Map<String, dynamic> toJson() => _$WorkoutToJson(this);
-  factory Workout.empty() => Workout(name: '', id: 0, workout_sets: null);
+  factory Workout.empty() => Workout(title: '', id: 0, workout_sets: null);
 }
 
 //  ID          *int           `json:"id" db:"workout.id"`

@@ -15,6 +15,7 @@ dependencies:
 
   #util
   device_info_plus: ^8.0.0
+  units_converter: ^2.0.1
 
   #annotation
   json_annotation: ^4.6.0
