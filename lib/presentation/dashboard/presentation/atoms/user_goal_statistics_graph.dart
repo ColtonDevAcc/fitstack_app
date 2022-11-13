@@ -6,7 +6,13 @@ class UserGoalStatisticsGraph extends StatelessWidget {
   final String title;
   final String subtitle;
   final List<FlSpot>? spots;
-  const UserGoalStatisticsGraph({Key? key, required this.color, required this.title, required this.subtitle, this.spots}) : super(key: key);
+  final double? maxX;
+  final double? maxY;
+  final double? minY;
+  final double? minX;
+  const UserGoalStatisticsGraph(
+      {Key? key, required this.color, required this.title, required this.subtitle, this.spots, this.maxX, this.maxY, this.minY, this.minX})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -50,6 +56,10 @@ class UserGoalStatisticsGraph extends StatelessWidget {
             Expanded(
               child: LineChart(
                 LineChartData(
+                  maxX: maxX,
+                  maxY: maxY,
+                  minY: minY,
+                  minX: minX,
                   clipData: FlClipData.none(),
                   gridData: FlGridData(
                     show: false,
@@ -66,10 +76,16 @@ class UserGoalStatisticsGraph extends StatelessWidget {
                       isCurved: true,
                       preventCurveOverShooting: true,
                       color: color,
-                      barWidth: 3,
+                      barWidth: 2,
                       isStrokeCapRound: true,
                       dotData: FlDotData(
-                        show: false,
+                        show: true,
+                        getDotPainter: (p0, p1, p2, p3) => FlDotCirclePainter(
+                          radius: 1,
+                          color: color,
+                          strokeWidth: 1,
+                          strokeColor: Theme.of(context).colorScheme.surface,
+                        ),
                       ),
                       belowBarData: BarAreaData(
                         show: true,

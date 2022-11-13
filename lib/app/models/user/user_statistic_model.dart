@@ -37,9 +37,9 @@ class UserStatistic extends Equatable {
         id: "0",
         bmi_log: [],
         body_fat_log: [],
-        created_at: DateTime.now(),
+        created_at: null,
         height_log: [],
-        updated_at: DateTime.now(),
+        updated_at: null,
         weight_log: [],
       );
 }

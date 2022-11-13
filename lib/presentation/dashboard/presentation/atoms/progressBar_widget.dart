@@ -47,7 +47,6 @@ class ProgressBar extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20),
                 child: SizedBox(
                   height: 6,
-                  //TODO make this not a media query
                   width: MediaQuery.of(context).size.width * .8 - 20,
                   child: LinearProgressIndicator(
                     backgroundColor: Theme.of(context).colorScheme.onBackground.withOpacity(.1),

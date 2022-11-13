@@ -26,6 +26,12 @@ class BodyFatLog extends Equatable {
   factory BodyFatLog.fromJson(Map<String, dynamic> json) => _$BodyFatLogFromJson(json);
   Map<String, dynamic> toJson() => _$BodyFatLogToJson(this);
   factory BodyFatLog.empty() => BodyFatLog(created_at: DateTime.now(), body_fat: 0, id: 0, updated_at: DateTime.now(), user_statistic_id: '');
+
+  // to whole percent method
+  double toWholePercent({required double bodyFat}) => bodyFat * 100;
+
+  // to decimal percent method
+  double toDecimalPercent({required double bodyFat}) => bodyFat / 100;
 }
 //  type HeightLog struct {
 // 	ID              uint           `json:"id" gorm:"primaryKey;autoIncrement;not null"`

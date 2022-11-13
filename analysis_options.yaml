@@ -2,8 +2,7 @@ linter:
   rules:
 
 analyzer:
-  exclude:
-    - '**/*.d.dart'
-    - '**/*.freezed.dart'
+  exclude: [build/**, lib/**.freezed.dart, lib/**.g.dart]
+
   errors:
     invalid_annotation_target: ignore

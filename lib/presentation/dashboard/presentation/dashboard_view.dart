@@ -74,7 +74,7 @@ class DashboardView extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(0, topPadding, 0, bottomPadding),
                     child: Text(
-                      "Progress",
+                      "Progress Snapshot",
                       textScaleFactor: textLabelScale,
                       style: labelTextStyle,
                     ),
@@ -82,57 +82,47 @@ class DashboardView extends StatelessWidget {
                   Container(
                     height: MediaQuery.of(context).size.height * .2,
                     child: BlocBuilder<UserStatisticCubit, UserStatisticState>(
-                      buildWhen: (previous, current) => previous.userStatistic != current.userStatistic,
+                      buildWhen: (previous, current) =>
+                          previous.userStatistic != current.userStatistic ||
+                          previous.status != current.status ||
+                          previous.weightDifference != current.weightDifference ||
+                          previous.weightDifference != current.weightDifference ||
+                          previous.weightDifference != current.weightDifference,
                       builder: (context, state) {
-                        var bmiGained;
-                        var weightGained;
-                        var bodyFatGained;
-
-                        if (state.status == UserStatisticsStatus.loaded) {
-                          weightGained = context.read<UserStatisticCubit>().getWeightDifference().roundToDouble();
-                          bmiGained = context.read<UserStatisticCubit>().getBMIRangeDifference().roundToDouble();
-                          bodyFatGained = context.read<UserStatisticCubit>().getFatPercentageDifference().roundToDouble();
-                        }
-
-                        return ListView(
-                          padding: EdgeInsets.zero,
-                          scrollDirection: Axis.horizontal,
-                          children: state.status == UserStatisticsStatus.loading
-                              ? [
-                                  Center(
-                                    child: CircularProgressIndicator(),
-                                  )
-                                ]
-                              : [
-                                  if (state.userStatistic.weight_log != null)
-                                    UserGoalStatisticsGraph(
-                                      spots: state.userStatistic.weight_log
-                                          ?.map((e) => FlSpot(e.created_at!.millisecondsSinceEpoch.toDouble(), e.weight.roundToDouble()))
-                                          .toList(),
-                                      color: Theme.of(context).colorScheme.primary,
-                                      subtitle: 'Weight Gained',
-                                      title: '$weightGained LBS',
-                                    ),
-                                  if (state.userStatistic.bmi_log != null)
-                                    UserGoalStatisticsGraph(
-                                      spots: state.userStatistic.bmi_log
-                                          ?.map((e) => FlSpot(e.created_at!.millisecondsSinceEpoch.toDouble(), e.bmi.roundToDouble()))
-                                          .toList(),
-                                      color: Theme.of(context).colorScheme.primary,
-                                      subtitle: 'BMI Lost',
-                                      title: '$bmiGained BMI',
-                                    ),
-                                  if (state.userStatistic.body_fat_log != null)
-                                    UserGoalStatisticsGraph(
-                                      spots: state.userStatistic.body_fat_log
-                                          ?.map((e) => FlSpot(e.created_at!.millisecondsSinceEpoch.toDouble(), e.body_fat.roundToDouble()))
-                                          .toList(),
-                                      color: Theme.of(context).colorScheme.primary,
-                                      subtitle: 'Body Fat Lost',
-                                      title: '$bodyFatGained BMI',
-                                    ),
-                                ],
-                        );
+                        return state.status != UserStatisticsStatus.loaded
+                            ? Center(
+                                child: CircularProgressIndicator(),
+                              )
+                            : ListView(padding: EdgeInsets.zero, scrollDirection: Axis.horizontal, children: [
+                                if (state.userStatistic.weight_log != null && state.userStatistic.weight_log!.length > 2)
+                                  UserGoalStatisticsGraph(
+                                    spots: state.userStatistic.weight_log
+                                        ?.map((e) => FlSpot(e.created_at!.difference(DateTime.now()).inHours.toDouble(), e.weight.roundToDouble()))
+                                        .toList(),
+                                    color: Theme.of(context).colorScheme.primary,
+                                    subtitle: 'Weight Difference',
+                                    title: '${state.weightDifference} LBS',
+                                  ),
+                                if (state.userStatistic.bmi_log != null && state.userStatistic.weight_log!.length > 2)
+                                  UserGoalStatisticsGraph(
+                                    spots: state.userStatistic.bmi_log
+                                        ?.map((e) => FlSpot(e.created_at!.difference(DateTime.now()).inHours.toDouble(), e.bmi.roundToDouble()))
+                                        .toList(),
+                                    color: Theme.of(context).colorScheme.secondary,
+                                    subtitle: 'BMI Difference',
+                                    title: '${state.bmiDifference} BMI',
+                                  ),
+                                if (state.userStatistic.body_fat_log != null && state.userStatistic.body_fat_log!.length > 2)
+                                  UserGoalStatisticsGraph(
+                                    maxY: state.userStatistic.body_fat_log!.last.body_fat + 8,
+                                    spots: state.userStatistic.body_fat_log
+                                        ?.map((e) => FlSpot(e.created_at!.difference(DateTime.now()).inHours.toDouble(), e.body_fat.roundToDouble()))
+                                        .toList(),
+                                    color: Theme.of(context).colorScheme.error,
+                                    subtitle: 'Body Fat Difference',
+                                    title: '${state.fatPercentageDifference} BMI',
+                                  ),
+                              ]);
                       },
                     ),
                   ),

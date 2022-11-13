@@ -14,7 +14,6 @@ class Social_Auth_Buttons extends StatelessWidget {
         return AnimatedContainer(
           duration: Duration(milliseconds: 400),
           curve: Curves.decelerate,
-          //TODO make this size the size of the login row for auth buttons
           height: state.index == 0 ? MediaQuery.of(context).size.height * .045 : 0,
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
