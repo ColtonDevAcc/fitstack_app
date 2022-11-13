@@ -3,10 +3,10 @@ import 'package:FitStack/app/providers/cubit/user_statistic/user_statistic_cubit
 import 'package:FitStack/presentation/dashboard/presentation/atoms/user_goal_statistics_graph.dart';
 import 'package:FitStack/presentation/dashboard/presentation/molecules/workout_recommendations%20_list.dart';
 import 'package:FitStack/presentation/dashboard/presentation/molecules/statistics_dashboard.dart';
+import 'package:FitStack/presentation/dashboard/presentation/organisms/user_progress_snpashot_list.dart';
 import 'package:FitStack/presentation/profile/cubit/profile_cubit.dart';
 import 'package:FitStack/presentation/signup/presentation/atoms/profile_avatar_widget.dart';
 import 'package:FitStack/widgets/atoms/basic_view_header.dart';
-import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -39,7 +39,7 @@ class DashboardView extends StatelessWidget {
                 child: BlocBuilder<ProfileCubit, ProfileState>(
                   builder: (context, state) {
                     return ProfileAvatar(
-                      onTap: () => context.go("/user"),
+                      onTap: () => context.push("/user"),
                       avatar: context.read<AppBloc>().state.user?.profile.avatar,
                       withBorder: false,
                       maxRadius: 17,
@@ -81,50 +81,7 @@ class DashboardView extends StatelessWidget {
                   ),
                   Container(
                     height: MediaQuery.of(context).size.height * .2,
-                    child: BlocBuilder<UserStatisticCubit, UserStatisticState>(
-                      buildWhen: (previous, current) =>
-                          previous.userStatistic != current.userStatistic ||
-                          previous.status != current.status ||
-                          previous.weightDifference != current.weightDifference ||
-                          previous.weightDifference != current.weightDifference ||
-                          previous.weightDifference != current.weightDifference,
-                      builder: (context, state) {
-                        return state.status != UserStatisticsStatus.loaded
-                            ? Center(
-                                child: CircularProgressIndicator(),
-                              )
-                            : ListView(padding: EdgeInsets.zero, scrollDirection: Axis.horizontal, children: [
-                                if (state.userStatistic.weight_log != null && state.userStatistic.weight_log!.length > 2)
-                                  UserGoalStatisticsGraph(
-                                    spots: state.userStatistic.weight_log
-                                        ?.map((e) => FlSpot(e.created_at!.difference(DateTime.now()).inHours.toDouble(), e.weight.roundToDouble()))
-                                        .toList(),
-                                    color: Theme.of(context).colorScheme.primary,
-                                    subtitle: 'Weight Difference',
-                                    title: '${state.weightDifference} LBS',
-                                  ),
-                                if (state.userStatistic.bmi_log != null && state.userStatistic.weight_log!.length > 2)
-                                  UserGoalStatisticsGraph(
-                                    spots: state.userStatistic.bmi_log
-                                        ?.map((e) => FlSpot(e.created_at!.difference(DateTime.now()).inHours.toDouble(), e.bmi.roundToDouble()))
-                                        .toList(),
-                                    color: Theme.of(context).colorScheme.secondary,
-                                    subtitle: 'BMI Difference',
-                                    title: '${state.bmiDifference} BMI',
-                                  ),
-                                if (state.userStatistic.body_fat_log != null && state.userStatistic.body_fat_log!.length > 2)
-                                  UserGoalStatisticsGraph(
-                                    maxY: state.userStatistic.body_fat_log!.last.body_fat + 8,
-                                    spots: state.userStatistic.body_fat_log
-                                        ?.map((e) => FlSpot(e.created_at!.difference(DateTime.now()).inHours.toDouble(), e.body_fat.roundToDouble()))
-                                        .toList(),
-                                    color: Theme.of(context).colorScheme.error,
-                                    subtitle: 'Body Fat Difference',
-                                    title: '${state.fatPercentageDifference} BMI',
-                                  ),
-                              ]);
-                      },
-                    ),
+                    child: UserProgressSnapshotList(),
                   ),
                 ],
               ),

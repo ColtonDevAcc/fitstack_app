@@ -13,7 +13,7 @@ class AuthenticationRepository {
   final controller = StreamController<AuthStream>.broadcast();
   final Dio dio = Dio();
   final storage = new FlutterSecureStorage();
-  static String mainUrl = kDebugMode ? "http://192.168.0.203:8080" : "https://dev.fitstack.io";
+  static String mainUrl = kDebugMode ? "http://localhost:8080" : "https://dev.fitstack.io";
 
   AuthenticationRepository({
     fb.FirebaseAuth? firebaseAuth,

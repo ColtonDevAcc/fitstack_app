@@ -1,4 +1,4 @@
-import 'package:FitStack/presentation/workout/presentation/organisms/custom_tab_view.dart';
+import 'package:FitStack/presentation/workout/presentation/organisms/workout_tab_view.dart';
 import 'package:FitStack/presentation/workout/presentation/organisms/history_tab_view.dart';
 import 'package:FitStack/presentation/workout/presentation/organisms/program_tab_view.dart';
 import 'package:FitStack/widgets/atoms/basic_view_header.dart';
@@ -53,7 +53,7 @@ class ProgramsView extends StatelessWidget {
                 child: TabBarView(
                   children: [
                     ProgramTabView(),
-                    CustomTabView(),
+                    WorkoutTabView(),
                     HistoryTabView(),
                   ],
                 ),

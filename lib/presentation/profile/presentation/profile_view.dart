@@ -40,7 +40,7 @@ class ProfileView extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             leading: GestureDetector(
-              onTap: () => GoRouter.of(context).pop(),
+              onTap: () => context.pop(),
               child: Container(
                 padding: EdgeInsets.all(5),
                 child: Icon(

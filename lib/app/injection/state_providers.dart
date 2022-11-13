@@ -1,10 +1,12 @@
 import 'package:FitStack/app/providers/bloc/app/app_bloc.dart';
+import 'package:FitStack/app/providers/bloc/workout/workout_bloc.dart';
 import 'package:FitStack/app/providers/cubit/main_view/main_view_cubit.dart';
 import 'package:FitStack/app/providers/cubit/user_statistic/user_statistic_cubit.dart';
 import 'package:FitStack/app/repository/auth_repository.dart';
 import 'package:FitStack/app/repository/program_repository.dart';
 import 'package:FitStack/app/repository/relationship_repository.dart';
 import 'package:FitStack/app/repository/user_repository.dart';
+import 'package:FitStack/app/repository/workout_repository.dart';
 import 'package:FitStack/presentation/login/cubit/login_cubit.dart';
 import 'package:FitStack/presentation/profile/cubit/profile_cubit.dart';
 import 'package:FitStack/presentation/relationship/cubit/friendship/friendship_cubit.dart';
@@ -29,7 +31,8 @@ class StateProviders extends StatelessWidget {
         RepositoryProvider(create: (context) => AuthenticationRepository()),
         RepositoryProvider(create: (context) => UserRepository()),
         RepositoryProvider(create: (context) => RelationshipRepository()),
-        RepositoryProvider(create: (context) => ProgramRepository())
+        RepositoryProvider(create: (context) => ProgramRepository()),
+        RepositoryProvider(create: (context) => WorkoutRepository()),
       ],
       child: MultiBlocProvider(
         providers: [
@@ -69,6 +72,10 @@ class StateProviders extends StatelessWidget {
           ),
           BlocProvider<UserStatisticCubit>(
             create: (BuildContext context) => UserStatisticCubit(userRepository: context.read<UserRepository>())..getUserStatistic(),
+          ),
+          BlocProvider<WorkoutBloc>(
+            create: (BuildContext context) =>
+                WorkoutBloc(workoutRepository: context.read<WorkoutRepository>())..add(WorkoutStreamSubscriptionRequested()),
           ),
         ],
         child: child,

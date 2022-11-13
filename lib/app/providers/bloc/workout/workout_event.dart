@@ -14,3 +14,5 @@ class CreateWorkout extends WorkoutEvent {}
 class DeleteWorkout extends WorkoutEvent {}
 
 class UpdateWorkout extends WorkoutEvent {}
+
+class WorkoutStreamSubscriptionRequested extends WorkoutEvent {}
