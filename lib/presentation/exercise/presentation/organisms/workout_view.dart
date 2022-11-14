@@ -1,4 +1,4 @@
-import 'package:FitStack/presentation/workout/presentation/molecules/exercise_card.dart';
+import 'package:FitStack/presentation/exercise/presentation/molecules/exercise_card.dart';
 import 'package:flutter/material.dart';
 import 'package:timelines/timelines.dart';
 

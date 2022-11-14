@@ -1,9 +1,9 @@
 import 'package:FitStack/app/providers/cubit/main_view/main_view_cubit.dart';
 import 'package:FitStack/presentation/dashboard/presentation/dashboard_view.dart';
+import 'package:FitStack/presentation/exercise/exercise_screen.dart';
 import 'package:FitStack/presentation/nutrition/presentation/nutrition_view.dart';
 import 'package:FitStack/presentation/relationship/presentation/relationship_view.dart';
 import 'package:FitStack/presentation/settings/settings_view.dart';
-import 'package:FitStack/presentation/workout/presentation/programs_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,7 +18,7 @@ class Main_View extends StatelessWidget {
     List<Widget> pages = [
       DashboardView(),
       NutritionView(),
-      ProgramsView(),
+      ExerciseScreen(),
       RelationshipView(),
       SettingsView(),
     ];

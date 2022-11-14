@@ -1,5 +1,5 @@
-import 'package:FitStack/presentation/workout/presentation/atoms/history_stepper_control_button.dart';
-import 'package:FitStack/presentation/workout/presentation/molecules/program_card.dart';
+import 'package:FitStack/presentation/exercise/presentation/atoms/history_stepper_control_button.dart';
+import 'package:FitStack/presentation/exercise/presentation/molecules/program_card.dart';
 import 'package:flutter/material.dart';
 
 class HistoryTabView extends StatelessWidget {

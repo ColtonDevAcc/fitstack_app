@@ -1,4 +1,4 @@
-import 'package:FitStack/presentation/workout/presentation/atoms/saved_workout_icon.dart';
+import 'package:FitStack/presentation/exercise/presentation/atoms/saved_workout_icon.dart';
 import 'package:flutter/material.dart';
 
 class ProgramCard extends StatelessWidget {

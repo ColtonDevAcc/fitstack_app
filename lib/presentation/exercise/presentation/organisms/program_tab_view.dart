@@ -1,7 +1,7 @@
 import 'dart:developer';
 
-import 'package:FitStack/presentation/workout/cubit/program_cubit.dart';
-import 'package:FitStack/presentation/workout/presentation/molecules/program_card.dart';
+import 'package:FitStack/presentation/exercise/cubit/program_cubit.dart';
+import 'package:FitStack/presentation/exercise/presentation/molecules/program_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';

@@ -60,6 +60,9 @@ dependencies:
   animations: ^2.0.7
   fl_chart: ^0.55.2
 
+  #animations
+  animate_do: ^3.0.1
+
   #theme
   flex_color_scheme: ^6.0.1
 
