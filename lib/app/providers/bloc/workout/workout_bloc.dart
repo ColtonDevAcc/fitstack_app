@@ -44,12 +44,23 @@ class WorkoutBloc extends Bloc<WorkoutEvent, WorkoutState> {
     }
   }
 
-  void onDeleteWorkout(DeleteWorkout event, Emitter<WorkoutState> emit) {
+  void onDeleteWorkout(DeleteWorkout event, Emitter<WorkoutState> emit) async {
     emit(state.copyWith(status: WorkoutsStatus.loading));
     try {
-      emit(state.copyWith(status: WorkoutsStatus.loaded, workouts: [...state.workouts]));
+      await workoutRepository.deleteWorkout(id: event.id);
+      var newWorkoutList = [...state.workouts]..removeWhere((element) => element.id == event.id);
+      emit(state.copyWith(workouts: newWorkoutList));
     } catch (e) {
       emit(state.copyWith(status: WorkoutsStatus.error));
+      log("error deleting workout: $e");
+      Fluttertoast.showToast(
+          msg: "Error deleting workout",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0);
     }
   }
 

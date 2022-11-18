@@ -2,18 +2,18 @@ import 'package:FitStack/app/providers/bloc/app/app_bloc.dart';
 import 'package:FitStack/app/repository/auth_repository.dart';
 import 'package:FitStack/app/routing/navigation_observers.dart';
 import 'package:FitStack/app/services/go_router_refresh_stream.dart';
-import 'package:FitStack/presentation/exercise/exercise_screen.dart';
-import 'package:FitStack/presentation/exercise/presentation/organisms/workout_view.dart';
-import 'package:FitStack/presentation/mainView.dart';
-import 'package:FitStack/presentation/dashboard/presentation/dashboard_view.dart';
-import 'package:FitStack/presentation/login/presentation/login_page.dart';
-import 'package:FitStack/presentation/nutrition/presentation/nutrition_view.dart';
-import 'package:FitStack/presentation/profile/presentation/profile_view.dart';
-import 'package:FitStack/presentation/relationship/presentation/organism/friends_relationship_view.dart';
-import 'package:FitStack/presentation/relationship/presentation/relationship_view.dart';
-import 'package:FitStack/presentation/settings/presentation/organisms/theme_page.dart';
-import 'package:FitStack/presentation/settings/settings_view.dart';
-import 'package:FitStack/presentation/signup/presentation/signup_page.dart';
+import 'package:FitStack/pages/exercise_page.dart';
+import 'package:FitStack/features/exercise/presentation/organisms/workout_view.dart';
+import 'package:FitStack/pages/main_page.dart';
+import 'package:FitStack/pages/dashboard_page.dart';
+import 'package:FitStack/pages/login_page.dart';
+import 'package:FitStack/pages/nutrition_page.dart';
+import 'package:FitStack/pages/profile_page.dart';
+import 'package:FitStack/features/relationship/presentation/organism/friends_relationship_view.dart';
+import 'package:FitStack/pages/relationship_page.dart';
+import 'package:FitStack/features/settings/presentation/organisms/theme_page.dart';
+import 'package:FitStack/pages/settings_page.dart';
+import 'package:FitStack/pages/signup_page.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -48,22 +48,22 @@ class AppRouter {
       GoRoute(
         path: '/',
         name: 'home',
-        builder: (context, state) => const Main_View(),
+        builder: (context, state) => const MainPage(),
       ),
       GoRoute(
         path: '/dashBoard',
         name: "dashboard",
-        builder: (context, state) => const DashboardView(),
+        builder: (context, state) => const DashboardPage(),
       ),
       GoRoute(
         path: '/nutrition',
         name: "nutrition",
-        builder: (context, state) => const NutritionView(),
+        builder: (context, state) => const NutritionPage(),
       ),
       GoRoute(
         path: '/programs',
         name: "programs",
-        builder: (context, state) => const ExerciseScreen(),
+        builder: (context, state) => const ExercisePage(),
         routes: [
           GoRoute(
             path: 'workout',
@@ -75,7 +75,7 @@ class AppRouter {
       GoRoute(
         path: '/settings',
         name: "settings",
-        builder: (context, state) => const SettingsView(),
+        builder: (context, state) => const SettingsPage(),
         routes: [
           GoRoute(
             path: 'theme',
@@ -87,7 +87,7 @@ class AppRouter {
       GoRoute(
         path: '/relationship',
         name: "relationship",
-        builder: (context, state) => const RelationshipView(),
+        builder: (context, state) => const RelationshipPage(),
       ),
       GoRoute(
         path: '/friendship',
@@ -97,7 +97,7 @@ class AppRouter {
       GoRoute(
         path: '/user',
         name: 'user',
-        builder: (context, state) => ProfileView(
+        builder: (context, state) => ProfilePage(
           key: state.pageKey,
         ),
       ),

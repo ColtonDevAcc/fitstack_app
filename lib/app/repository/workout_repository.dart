@@ -7,9 +7,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 
 class WorkoutRepository {
-  static String mainUrl = kDebugMode ? "http://192.168.0.203:8080" : "https://dev.fitstack.io";
+  static String mainUrl = kDebugMode ? "http://localhost:8080" : "https://dev.fitstack.io";
   final Dio dio = Dio();
   final workoutStreamController = StreamController<List<Workout>>.broadcast();
+  Future<String>? token = FirebaseAuth.instance.currentUser!.getIdToken();
 
   WorkoutRepository() : super() {
     init();
@@ -32,6 +33,26 @@ class WorkoutRepository {
       workoutStreamController.add(data.map((e) => Workout.fromJson(e)).toList());
     } else {
       log("${response.statusCode}: ${response.statusMessage}");
+    }
+  }
+
+  Future<void> deleteWorkout({required int id}) async {
+    String userToken = await token!;
+    Response response = await dio.post(
+      mainUrl + '/workout/delete',
+      options: Options(
+        headers: {
+          "Authorization": "Bearer ${userToken}",
+        },
+      ),
+      data: {
+        "id": id,
+      },
+    );
+
+    if (response.statusCode == 200) {
+    } else {
+      throw Exception("${response.statusCode}: ${response.statusMessage}");
     }
   }
 

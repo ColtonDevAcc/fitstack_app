@@ -6,19 +6,20 @@ class FSTextTheme {
     return GoogleFonts.latoTextTheme().copyWith(
       titleLarge: GoogleFonts.bebasNeue(),
       titleMedium: GoogleFonts.roboto(fontSize: 24, fontWeight: FontWeight.normal),
-      titleSmall: GoogleFonts.montserrat(),
-      headlineLarge: GoogleFonts.bebasNeue(),
-      headlineMedium: GoogleFonts.bebasNeue(),
-      headlineSmall: GoogleFonts.bebasNeue(),
-      // bodyLarge:  GoogleFonts.bebasNeue()
-      bodyMedium: GoogleFonts.montserrat(),
-      labelLarge: GoogleFonts.questrial(
+      titleSmall: GoogleFonts.roboto(),
+      headlineLarge: GoogleFonts.roboto(fontSize: 28, fontWeight: FontWeight.bold, color: Colors.black),
+      headlineMedium: GoogleFonts.roboto(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black),
+      headlineSmall: GoogleFonts.roboto(fontSize: 16, fontWeight: FontWeight.normal, color: Colors.black),
+      bodyLarge: GoogleFonts.roboto(fontSize: 16),
+      bodyMedium: GoogleFonts.roboto(),
+      bodySmall: GoogleFonts.roboto(),
+      labelLarge: GoogleFonts.roboto(
         letterSpacing: 1,
       ),
-      labelMedium: GoogleFonts.questrial(
+      labelMedium: GoogleFonts.roboto(
         letterSpacing: 1,
       ),
-      labelSmall: GoogleFonts.questrial(
+      labelSmall: GoogleFonts.roboto(
         letterSpacing: 1,
       ),
     );
