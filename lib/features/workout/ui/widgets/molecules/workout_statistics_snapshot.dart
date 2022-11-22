@@ -1,4 +1,4 @@
-import 'package:FitStack/features/exercise/presentation/atoms/circular_statistics_progressIndicator.dart';
+import 'package:FitStack/features/workout/ui/widgets/atoms/circular_statistics_progressIndicator.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
@@ -14,6 +14,9 @@ class WorkoutStatisticsSnapshot extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const labelSize = 15.0;
+    const valueSize = 19.0;
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -25,11 +28,11 @@ class WorkoutStatisticsSnapshot extends StatelessWidget {
               AutoSizeText.rich(
                 TextSpan(
                   text: "260 lbs\n",
-                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontSize: 19, fontWeight: FontWeight.bold),
+                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontSize: valueSize, fontWeight: FontWeight.bold),
                   children: [
                     TextSpan(
                       text: "Current weight",
-                      style: Theme.of(context).textTheme.bodyText1?.copyWith(fontSize: 13),
+                      style: Theme.of(context).textTheme.bodyText1?.copyWith(fontSize: labelSize),
                     ),
                   ],
                 ),
@@ -39,11 +42,11 @@ class WorkoutStatisticsSnapshot extends StatelessWidget {
               AutoSizeText.rich(
                 TextSpan(
                   text: "280 lbs\n",
-                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontSize: 19, fontWeight: FontWeight.bold),
+                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontSize: valueSize, fontWeight: FontWeight.bold),
                   children: [
                     TextSpan(
                       text: "Goal weight",
-                      style: Theme.of(context).textTheme.bodyText1?.copyWith(fontSize: 13),
+                      style: Theme.of(context).textTheme.bodyText1?.copyWith(fontSize: labelSize),
                     ),
                   ],
                 ),
@@ -72,19 +75,21 @@ class WorkoutStatisticsSnapshot extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              AutoSizeText.rich(
-                TextSpan(
-                  text: "3/7\n",
-                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontSize: 19, fontWeight: FontWeight.bold),
-                  children: [
-                    TextSpan(
-                      text: "Week",
-                      style: Theme.of(context).textTheme.bodyText1?.copyWith(fontSize: 13),
-                    ),
-                  ],
+              Container(
+                child: AutoSizeText.rich(
+                  TextSpan(
+                    text: "3/7\n",
+                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontSize: valueSize, fontWeight: FontWeight.bold),
+                    children: [
+                      TextSpan(
+                        text: "Week",
+                        style: Theme.of(context).textTheme.bodyText1?.copyWith(fontSize: labelSize),
+                      ),
+                    ],
+                  ),
+                  minFontSize: minFontSize,
+                  maxFontSize: maxFontSize,
                 ),
-                minFontSize: minFontSize,
-                maxFontSize: maxFontSize,
               ),
               CircularStatisticsProgressIndicator(
                 ratio: 20,

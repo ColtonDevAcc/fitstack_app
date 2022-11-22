@@ -19,7 +19,7 @@ class RelationshipPage extends StatelessWidget {
           children: [
             Padding(
                 padding: const EdgeInsets.only(bottom: 15),
-                child: BasicViewHeader(title: "Relationships", color: Theme.of(context).colorScheme.onBackground)),
+                child: BasicPageHeader(title: "Relationships", color: Theme.of(context).colorScheme.onBackground)),
             Container(
               height: 40,
               decoration: BoxDecoration(

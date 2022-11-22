@@ -1,9 +1,12 @@
-import 'package:FitStack/app/models/workout/exercise_model.dart';
+import 'package:FitStack/app/providers/bloc/active_workout/active_workout_bloc.dart';
 import 'package:FitStack/app/providers/bloc/app/app_bloc.dart';
+import 'package:FitStack/app/providers/bloc/exercise/exercise_bloc.dart';
 import 'package:FitStack/app/providers/bloc/workout/workout_bloc.dart';
 import 'package:FitStack/app/providers/cubit/main_view/main_view_cubit.dart';
 import 'package:FitStack/app/providers/cubit/user_statistic/user_statistic_cubit.dart';
+import 'package:FitStack/app/repository/active_workout_repository.dart';
 import 'package:FitStack/app/repository/auth_repository.dart';
+import 'package:FitStack/app/repository/exercise_repository.dart';
 import 'package:FitStack/app/repository/program_repository.dart';
 import 'package:FitStack/app/repository/relationship_repository.dart';
 import 'package:FitStack/app/repository/user_repository.dart';
@@ -35,6 +38,8 @@ class StateProviders extends StatelessWidget {
         RepositoryProvider(create: (context) => RelationshipRepository()),
         RepositoryProvider(create: (context) => ProgramRepository()),
         RepositoryProvider(create: (context) => WorkoutRepository()),
+        RepositoryProvider(create: (context) => ActiveWorkoutRepository()),
+        RepositoryProvider(create: (context) => ExerciseRepository()),
       ],
       child: MultiBlocProvider(
         providers: [
@@ -80,8 +85,15 @@ class StateProviders extends StatelessWidget {
               workoutRepository: context.read<WorkoutRepository>(),
             )..add(WorkoutStreamSubscriptionRequested()),
           ),
+          BlocProvider<ActiveWorkoutBloc>(
+            create: (BuildContext context) =>
+                ActiveWorkoutBloc(activeWorkoutRepository: context.read<ActiveWorkoutRepository>())..add(LoadExerciseList()),
+          ),
           BlocProvider<ExerciseScreenCubit>(
             create: (BuildContext context) => ExerciseScreenCubit(),
+          ),
+          BlocProvider<ExerciseBloc>(
+            create: (BuildContext context) => ExerciseBloc(exerciseRepository: context.read<ExerciseRepository>())..add(LoadExercises()),
           ),
         ],
         child: child,

@@ -1,6 +1,6 @@
 import 'package:FitStack/features/signup/state/signup_cubit.dart';
-import 'package:FitStack/features/signup/ui/atoms/signup_form_header.dart';
 import 'package:FitStack/features/signup/ui/widgets/atoms/profile_avatar_widget.dart';
+import 'package:FitStack/features/signup/ui/widgets/atoms/signup_form_header.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';

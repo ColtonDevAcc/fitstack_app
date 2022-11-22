@@ -1,10 +1,13 @@
+import 'dart:developer';
+
 import 'package:FitStack/features/exercise/cubit/exercise_screen/exercise_screen_cubit.dart';
 import 'package:FitStack/features/exercise/presentation/organisms/history_tab_view.dart';
 import 'package:FitStack/features/exercise/presentation/organisms/program_tab_view.dart';
-import 'package:FitStack/features/exercise/presentation/organisms/workout_tab_view.dart';
+import 'package:FitStack/features/workout/ui/views/workout_view.dart';
 import 'package:FitStack/widgets/atoms/basic_view_header.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class ExercisePage extends StatelessWidget {
   const ExercisePage({Key? key}) : super(key: key);
@@ -25,14 +28,32 @@ class ExercisePage extends StatelessWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.only(bottom: 15),
-                  child: BasicViewHeader(
+                  child: BasicPageHeader(
                     title: state.index == 0
                         ? 'Programs'
                         : state.index == 1
                             ? 'Workouts'
                             : 'History',
                     color: Theme.of(context).colorScheme.primary,
-                    trailing: Icon(Icons.add, color: Theme.of(context).colorScheme.primary),
+                    trailing: GestureDetector(
+                      onTap: () {
+                        switch (state.index) {
+                          case 0:
+                            // context.go('/exercise/program');
+                            break;
+                          case 1:
+                            context.push('/exercise/workout/create');
+                            break;
+                          case 2:
+                            // context.go('/exercise/history');
+                            break;
+                          default:
+                        }
+                      },
+                      child: Container(
+                        child: Icon(Icons.add, color: Theme.of(context).colorScheme.primary, size: 30),
+                      ),
+                    ),
                   ),
                 ),
                 Container(
@@ -63,7 +84,7 @@ class ExercisePage extends StatelessWidget {
                     controller: DefaultTabController.of(context),
                     children: [
                       ProgramTabView(),
-                      WorkoutTabView(),
+                      WorkoutView(),
                       HistoryTabView(),
                     ],
                   ),

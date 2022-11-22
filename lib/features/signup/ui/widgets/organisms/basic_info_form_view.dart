@@ -1,8 +1,8 @@
 import 'package:FitStack/features/signup/state/signup_cubit.dart';
-import 'package:FitStack/features/signup/ui/atoms/signup_form_header.dart';
 import 'package:FitStack/features/signup/ui/widgets/atoms/assigned_sex_button.dart';
 import 'package:FitStack/features/signup/ui/widgets/atoms/dateofbirth_button.dart';
 import 'package:FitStack/features/signup/ui/widgets/atoms/plat_health_fill_button.dart';
+import 'package:FitStack/features/signup/ui/widgets/atoms/signup_form_header.dart';
 import 'package:FitStack/features/signup/ui/widgets/atoms/signup_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

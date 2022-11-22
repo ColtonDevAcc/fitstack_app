@@ -1,19 +1,17 @@
-import 'package:FitStack/app/models/workout/workout_model.dart';
 import 'package:FitStack/app/providers/bloc/workout/workout_bloc.dart';
-import 'package:FitStack/features/exercise/presentation/atoms/workout_list_tile.dart';
-import 'package:FitStack/features/exercise/presentation/molecules/workout_statistics_snapshot.dart';
+import 'package:FitStack/features/workout/ui/widgets/atoms/workout_list_tile.dart';
+import 'package:FitStack/features/workout/ui/widgets/molecules/workout_statistics_snapshot.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 
-class WorkoutTabView extends StatelessWidget {
-  const WorkoutTabView({Key? key}) : super(key: key);
+class WorkoutView extends StatelessWidget {
+  const WorkoutView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     const double minFontSize = 8;
-    const double maxFontSize = 16;
+    const double maxFontSize = 18;
 
     return CustomScrollView(
       clipBehavior: Clip.none,
@@ -30,16 +28,10 @@ class WorkoutTabView extends StatelessWidget {
                   children: [
                     SlideInDown(
                       child: Container(
-                        height: 150,
+                        height: 200,
                         width: double.infinity,
-                        padding: EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.surface,
-                          borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(20),
-                            bottomRight: Radius.circular(20),
-                          ),
-                        ),
+                        padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+                        decoration: BoxDecoration(color: Theme.of(context).colorScheme.surface, borderRadius: BorderRadius.circular(20)),
                         child: WorkoutStatisticsSnapshot(minFontSize: minFontSize, maxFontSize: maxFontSize),
                       ),
                       duration: Duration(milliseconds: 300),
@@ -60,9 +52,9 @@ class WorkoutTabView extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                'Workouts',
-                                textScaleFactor: .8,
-                                style: Theme.of(context).textTheme.headlineLarge?.copyWith(fontSize: 22),
+                                'My Workouts',
+                                textScaleFactor: .9,
+                                style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontSize: 22),
                               ),
                             ],
                           ),

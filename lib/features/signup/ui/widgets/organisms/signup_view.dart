@@ -1,14 +1,14 @@
 import 'dart:developer';
 
 import 'package:FitStack/features/signup/state/signup_cubit.dart';
-import 'package:FitStack/features/signup/ui/organisms/user_account_auth_form_view.dart';
-import 'package:FitStack/features/signup/ui/organisms/username_form_view.dart';
-import 'package:FitStack/features/signup/ui/organisms/upload_picture_form_view.dart';
 import 'package:FitStack/features/signup/ui/widgets/atoms/signup_focused_button.dart';
 import 'package:FitStack/features/signup/ui/widgets/molecules/social_auth_buttons.dart';
 import 'package:FitStack/features/signup/ui/widgets/organisms/basic_info_form_view.dart';
 import 'package:FitStack/features/signup/ui/widgets/organisms/first_last_name_form_view.dart';
 import 'package:FitStack/features/signup/ui/widgets/organisms/health_stats_form_view.dart';
+import 'package:FitStack/features/signup/ui/widgets/organisms/upload_picture_form_view.dart';
+import 'package:FitStack/features/signup/ui/widgets/organisms/user_account_auth_form_view.dart';
+import 'package:FitStack/features/signup/ui/widgets/organisms/username_form_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

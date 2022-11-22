@@ -10,7 +10,7 @@ class WorkoutRepository {
   static String mainUrl = kDebugMode ? "http://localhost:8080" : "https://dev.fitstack.io";
   final Dio dio = Dio();
   final workoutStreamController = StreamController<List<Workout>>.broadcast();
-  Future<String>? token = FirebaseAuth.instance.currentUser!.getIdToken();
+  String? token;
 
   WorkoutRepository() : super() {
     init();
@@ -37,12 +37,12 @@ class WorkoutRepository {
   }
 
   Future<void> deleteWorkout({required int id}) async {
-    String userToken = await token!;
+    token = await FirebaseAuth.instance.currentUser!.getIdToken();
     Response response = await dio.post(
       mainUrl + '/workout/delete',
       options: Options(
         headers: {
-          "Authorization": "Bearer ${userToken}",
+          "Authorization": "Bearer ${token}",
         },
       ),
       data: {

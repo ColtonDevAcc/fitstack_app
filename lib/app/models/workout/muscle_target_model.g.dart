@@ -7,7 +7,13 @@ part of 'muscle_target_model.dart';
 // **************************************************************************
 
 abstract class _$MuscleTargetCWProxy {
+  MuscleTarget description(String? description);
+
   MuscleTarget id(String id);
+
+  MuscleTarget image(String? image);
+
+  MuscleTarget name(String name);
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `MuscleTarget(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
@@ -16,7 +22,10 @@ abstract class _$MuscleTargetCWProxy {
   /// MuscleTarget(...).copyWith(id: 12, name: "My name")
   /// ````
   MuscleTarget call({
+    String? description,
     String? id,
+    String? image,
+    String? name,
   });
 }
 
@@ -27,7 +36,17 @@ class _$MuscleTargetCWProxyImpl implements _$MuscleTargetCWProxy {
   const _$MuscleTargetCWProxyImpl(this._value);
 
   @override
+  MuscleTarget description(String? description) =>
+      this(description: description);
+
+  @override
   MuscleTarget id(String id) => this(id: id);
+
+  @override
+  MuscleTarget image(String? image) => this(image: image);
+
+  @override
+  MuscleTarget name(String name) => this(name: name);
 
   @override
 
@@ -38,13 +57,28 @@ class _$MuscleTargetCWProxyImpl implements _$MuscleTargetCWProxy {
   /// MuscleTarget(...).copyWith(id: 12, name: "My name")
   /// ````
   MuscleTarget call({
+    Object? description = const $CopyWithPlaceholder(),
     Object? id = const $CopyWithPlaceholder(),
+    Object? image = const $CopyWithPlaceholder(),
+    Object? name = const $CopyWithPlaceholder(),
   }) {
     return MuscleTarget(
+      description: description == const $CopyWithPlaceholder()
+          ? _value.description
+          // ignore: cast_nullable_to_non_nullable
+          : description as String?,
       id: id == const $CopyWithPlaceholder() || id == null
           ? _value.id
           // ignore: cast_nullable_to_non_nullable
           : id as String,
+      image: image == const $CopyWithPlaceholder()
+          ? _value.image
+          // ignore: cast_nullable_to_non_nullable
+          : image as String?,
+      name: name == const $CopyWithPlaceholder() || name == null
+          ? _value.name
+          // ignore: cast_nullable_to_non_nullable
+          : name as String,
     );
   }
 }
@@ -60,14 +94,23 @@ extension $MuscleTargetCopyWith on MuscleTarget {
 // **************************************************************************
 
 MuscleTarget _$MuscleTargetFromJson(Map<String, dynamic> json) => MuscleTarget(
+      image: json['image'] as String?,
+      description: json['description'] as String?,
+      name: json['name'] as String,
       id: json['id'] as String,
     );
 
 const _$MuscleTargetFieldMap = <String, String>{
   'id': 'id',
+  'name': 'name',
+  'description': 'description',
+  'image': 'image',
 };
 
 Map<String, dynamic> _$MuscleTargetToJson(MuscleTarget instance) =>
     <String, dynamic>{
       'id': instance.id,
+      'name': instance.name,
+      'description': instance.description,
+      'image': instance.image,
     };

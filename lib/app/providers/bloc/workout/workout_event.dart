@@ -26,3 +26,15 @@ class DeleteWorkout extends WorkoutEvent {
 class UpdateWorkout extends WorkoutEvent {}
 
 class WorkoutStreamSubscriptionRequested extends WorkoutEvent {}
+
+class UpdateWorkoutName extends WorkoutEvent {
+  final String name;
+
+  UpdateWorkoutName({required this.name});
+
+  @override
+  List<Object> get props => [name];
+
+  @override
+  String toString() => 'UpdateWorkoutName { name: $name }';
+}

@@ -1,5 +1,5 @@
-import 'package:FitStack/features/signup/ui/molecules/account_auth_form.dart';
-import 'package:FitStack/features/signup/ui/atoms/signup_form_header.dart';
+import 'package:FitStack/features/signup/ui/widgets/atoms/signup_form_header.dart';
+import 'package:FitStack/features/signup/ui/widgets/molecules/account_auth_form.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 

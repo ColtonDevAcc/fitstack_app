@@ -16,16 +16,27 @@ class WorkoutListTile extends StatelessWidget {
     return GestureDetector(
       child: Slidable(
         direction: Axis.horizontal,
-        child: ListTile(
-          contentPadding: EdgeInsets.zero,
-          title: Text(
-            workout.title ?? "Workout",
-            textScaleFactor: .8,
-            style: Theme.of(context).textTheme.headlineMedium,
+        child: Container(
+          // box decoration where the bottom is grey
+          decoration: BoxDecoration(
+            border: Border(
+              bottom: BorderSide(
+                color: Theme.of(context).colorScheme.onBackground.withOpacity(0.1),
+                width: 1,
+              ),
+            ),
           ),
-          subtitle: Text(
-            workout.description ?? "no description",
-            style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.normal, fontSize: 14),
+          child: ListTile(
+            contentPadding: EdgeInsets.zero,
+            title: Text(
+              workout.title ?? "Workout",
+              textScaleFactor: .9,
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
+            subtitle: Text(
+              workout.description ?? "no description",
+              style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.normal, fontSize: 14),
+            ),
           ),
         ),
         endActionPane: ActionPane(

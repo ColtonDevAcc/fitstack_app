@@ -28,7 +28,7 @@ class NutritionPage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  BasicViewHeader(title: 'NUTRITION'),
+                  BasicPageHeader(title: 'NUTRITION'),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(0, topPadding - 5, 0, bottomPadding),
                     child: Text(

@@ -2,8 +2,10 @@ import 'package:FitStack/app/providers/bloc/app/app_bloc.dart';
 import 'package:FitStack/app/repository/auth_repository.dart';
 import 'package:FitStack/app/routing/navigation_observers.dart';
 import 'package:FitStack/app/services/go_router_refresh_stream.dart';
+import 'package:FitStack/features/workout/ui/views/create_workout_view.dart';
+import 'package:FitStack/features/workout/ui/views/exercise_list_view.dart';
 import 'package:FitStack/pages/exercise_page.dart';
-import 'package:FitStack/features/exercise/presentation/organisms/workout_view.dart';
+import 'package:FitStack/features/workout/ui/views/active_workout_view.dart';
 import 'package:FitStack/pages/main_page.dart';
 import 'package:FitStack/pages/dashboard_page.dart';
 import 'package:FitStack/pages/login_page.dart';
@@ -31,6 +33,7 @@ class AppRouter {
   late final router = GoRouter(
     navigatorKey: navigatorKey,
     refreshListenable: GoRouterRefreshStream(appBloc.stream),
+    initialLocation: kDebugMode ? '/exercise/exercises' : '/',
     observers: [
       if (!kDebugMode) GoRouterObserver(analytics: analytics),
     ],
@@ -61,14 +64,26 @@ class AppRouter {
         builder: (context, state) => const NutritionPage(),
       ),
       GoRoute(
-        path: '/programs',
-        name: "programs",
+        path: '/exercise',
+        name: "exercise",
         builder: (context, state) => const ExercisePage(),
         routes: [
           GoRoute(
             path: 'workout',
             name: 'workout',
             builder: (context, state) => const WorkoutView(),
+            routes: [
+              GoRoute(
+                path: 'create',
+                name: 'create',
+                builder: (context, state) => const CreateWorkoutView(),
+              ),
+            ],
+          ),
+          GoRoute(
+            path: 'exercises',
+            name: 'exercises',
+            builder: (context, state) => const ExerciseListView(),
           ),
         ],
       ),

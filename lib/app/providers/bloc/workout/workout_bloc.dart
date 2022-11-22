@@ -17,6 +17,7 @@ class WorkoutBloc extends Bloc<WorkoutEvent, WorkoutState> {
           WorkoutState(
             status: WorkoutsStatus.initial,
             workouts: [],
+            WorkoutName: 'New Workout',
           ),
         ) {
     on<CreateWorkout>(onCreateWorkout);
@@ -24,6 +25,7 @@ class WorkoutBloc extends Bloc<WorkoutEvent, WorkoutState> {
     on<DeleteWorkout>(onDeleteWorkout);
     on<UpdateWorkout>(onUpdateWorkout);
     on<WorkoutStreamSubscriptionRequested>(onStreamSubscriptionRequested);
+    on<UpdateWorkoutName>(onUpdateWorkoutName);
   }
 
   void onCreateWorkout(CreateWorkout event, Emitter<WorkoutState> emit) {
@@ -100,5 +102,9 @@ class WorkoutBloc extends Bloc<WorkoutEvent, WorkoutState> {
         );
       },
     );
+  }
+
+  void onUpdateWorkoutName(UpdateWorkoutName event, Emitter<WorkoutState> emit) {
+    emit(state.copyWith(newWorkoutName: event.name));
   }
 }

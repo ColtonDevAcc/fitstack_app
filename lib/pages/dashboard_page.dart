@@ -30,7 +30,7 @@ class DashboardPage extends StatelessWidget {
       child: SafeArea(
         child: Column(
           children: [
-            BasicViewHeader(
+            BasicPageHeader(
               title: "DASHBOARD",
               trailing: Padding(
                 padding: const EdgeInsets.only(right: 15),

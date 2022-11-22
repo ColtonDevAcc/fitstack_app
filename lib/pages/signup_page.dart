@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'package:FitStack/features/signup/ui/organisms/signup_view.dart';
 import 'package:flutter/material.dart';
 
 class SignUp_Page extends StatefulWidget {
@@ -19,7 +18,7 @@ class _SignUp_PageState extends State<SignUp_Page> {
       body: SafeArea(
         child: Padding(
           padding: Platform.isAndroid ? const EdgeInsets.fromLTRB(0, 10, 0, 10) : EdgeInsets.all(0),
-          child: SignUp_View(),
+          child: SignUp_Page(),
         ),
       ),
     );

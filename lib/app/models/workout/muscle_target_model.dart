@@ -8,8 +8,14 @@ part 'muscle_target_model.g.dart';
 @CopyWith()
 class MuscleTarget extends Equatable {
   final String id;
+  final String name;
+  final String? description;
+  final String? image;
 
   MuscleTarget({
+    this.image,
+    this.description,
+    required this.name,
     required this.id,
   });
 
@@ -18,5 +24,5 @@ class MuscleTarget extends Equatable {
 
   factory MuscleTarget.fromJson(Map<String, dynamic> json) => _$MuscleTargetFromJson(json);
   Map<String, dynamic> toJson() => _$MuscleTargetToJson(this);
-  factory MuscleTarget.empty() => MuscleTarget(id: '');
+  factory MuscleTarget.empty() => MuscleTarget(id: '', description: '', name: '');
 }
