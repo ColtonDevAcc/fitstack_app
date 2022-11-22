@@ -88,7 +88,7 @@ dependencies:
   health: ^4.1.1
 
   # routing
-  go_router: ^5.1.5
+  go_router: ^5.2.0
 
   #firebase
   firebase_core: ^2.2.0

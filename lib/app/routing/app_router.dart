@@ -1,8 +1,10 @@
+import 'package:FitStack/app/models/workout/exercise_model.dart';
 import 'package:FitStack/app/providers/bloc/app/app_bloc.dart';
 import 'package:FitStack/app/repository/auth_repository.dart';
 import 'package:FitStack/app/routing/navigation_observers.dart';
 import 'package:FitStack/app/services/go_router_refresh_stream.dart';
 import 'package:FitStack/features/workout/ui/views/create_workout_view.dart';
+import 'package:FitStack/features/workout/ui/views/edit_exercise_view.dart';
 import 'package:FitStack/features/workout/ui/views/exercise_list_view.dart';
 import 'package:FitStack/pages/exercise_page.dart';
 import 'package:FitStack/features/workout/ui/views/active_workout_view.dart';
@@ -23,7 +25,7 @@ import 'package:go_router/go_router.dart';
 
 //flutter pub get && flutter pub run build_runner build --delete-conflicting-outputs
 class AppRouter {
-  final GlobalKey<NavigatorState> navigatorKey;
+  final GlobalKey<NavigatorState>? navigatorKey;
   final AppBloc appBloc;
   AppRouter({required this.appBloc, required this.navigatorKey});
 
@@ -33,7 +35,6 @@ class AppRouter {
   late final router = GoRouter(
     navigatorKey: navigatorKey,
     refreshListenable: GoRouterRefreshStream(appBloc.stream),
-    initialLocation: kDebugMode ? '/exercise/exercises' : '/',
     observers: [
       if (!kDebugMode) GoRouterObserver(analytics: analytics),
     ],
@@ -84,6 +85,17 @@ class AppRouter {
             path: 'exercises',
             name: 'exercises',
             builder: (context, state) => const ExerciseListView(),
+            routes: [
+              GoRoute(
+                path: 'edit',
+                name: 'edit',
+                builder: (context, state) {
+                  return EditExerciseView(
+                    exercise: state.queryParams['exercise'] as Exercise,
+                  );
+                },
+              ),
+            ],
           ),
         ],
       ),

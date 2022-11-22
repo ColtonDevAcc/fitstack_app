@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:FitStack/app/injection/state_providers.dart';
 import 'package:FitStack/app/providers/bloc/app/app_bloc.dart';
 import 'package:FitStack/app/routing/app_router.dart';
@@ -18,22 +20,33 @@ Future<void> main() async {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   MyApp({key}) : super(key: key);
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+  AppRouter? router;
+
   @override
   Widget build(BuildContext context) {
     return StateProviders(
-      child: Builder(builder: (context) {
-        final AppRouter router = AppRouter(navigatorKey: navigatorKey, appBloc: context.read<AppBloc>());
+      child: Builder(
+        builder: (context) {
+          if (router == null) {
+            router = AppRouter(navigatorKey: navigatorKey, appBloc: context.read<AppBloc>());
+          }
 
-        return MaterialApp.router(
-          routerConfig: router.router,
-          theme: FSColorTheme.Light(context),
-          darkTheme: FSColorTheme.Light(context),
-        );
-      }),
+          return MaterialApp.router(
+            routerConfig: router?.router,
+            theme: FSColorTheme.Light(context),
+            darkTheme: FSColorTheme.Light(context),
+          );
+        },
+      ),
     );
   }
 }
