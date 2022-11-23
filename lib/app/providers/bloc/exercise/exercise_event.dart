@@ -23,3 +23,12 @@ class DeleteExercise extends ExerciseEvent {
   final Exercise exercise;
   const DeleteExercise({required this.exercise});
 }
+
+class EditExercise extends ExerciseEvent {
+  final Exercise exercise;
+  const EditExercise({required this.exercise});
+}
+
+class EditExerciseImage extends ExerciseEvent {
+  const EditExerciseImage();
+}

@@ -3,7 +3,6 @@ import 'package:FitStack/features/dashboard/presentation/atoms/user_goal_statist
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:units_converter/models/conversion_node.dart';
 import 'package:units_converter/units_converter.dart';
 
 class UserProgressSnapshotList extends StatelessWidget {

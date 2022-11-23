@@ -9,13 +9,15 @@ part of 'exercise_model.dart';
 abstract class _$ExerciseCWProxy {
   Exercise creator(User creator);
 
+  Exercise creator_id(String creator_id);
+
   Exercise description(String? description);
 
   Exercise exercise_equipment(List<ExerciseEquipment>? exercise_equipment);
 
   Exercise id(int? id);
 
-  Exercise image(String? image);
+  Exercise images(List<String>? images);
 
   Exercise met_value(double? met_value);
 
@@ -33,10 +35,11 @@ abstract class _$ExerciseCWProxy {
   /// ````
   Exercise call({
     User? creator,
+    String? creator_id,
     String? description,
     List<ExerciseEquipment>? exercise_equipment,
     int? id,
-    String? image,
+    List<String>? images,
     double? met_value,
     List<MuscleTarget>? muscle_target,
     String? name,
@@ -54,6 +57,9 @@ class _$ExerciseCWProxyImpl implements _$ExerciseCWProxy {
   Exercise creator(User creator) => this(creator: creator);
 
   @override
+  Exercise creator_id(String creator_id) => this(creator_id: creator_id);
+
+  @override
   Exercise description(String? description) => this(description: description);
 
   @override
@@ -64,7 +70,7 @@ class _$ExerciseCWProxyImpl implements _$ExerciseCWProxy {
   Exercise id(int? id) => this(id: id);
 
   @override
-  Exercise image(String? image) => this(image: image);
+  Exercise images(List<String>? images) => this(images: images);
 
   @override
   Exercise met_value(double? met_value) => this(met_value: met_value);
@@ -89,10 +95,11 @@ class _$ExerciseCWProxyImpl implements _$ExerciseCWProxy {
   /// ````
   Exercise call({
     Object? creator = const $CopyWithPlaceholder(),
+    Object? creator_id = const $CopyWithPlaceholder(),
     Object? description = const $CopyWithPlaceholder(),
     Object? exercise_equipment = const $CopyWithPlaceholder(),
     Object? id = const $CopyWithPlaceholder(),
-    Object? image = const $CopyWithPlaceholder(),
+    Object? images = const $CopyWithPlaceholder(),
     Object? met_value = const $CopyWithPlaceholder(),
     Object? muscle_target = const $CopyWithPlaceholder(),
     Object? name = const $CopyWithPlaceholder(),
@@ -103,6 +110,11 @@ class _$ExerciseCWProxyImpl implements _$ExerciseCWProxy {
           ? _value.creator
           // ignore: cast_nullable_to_non_nullable
           : creator as User,
+      creator_id:
+          creator_id == const $CopyWithPlaceholder() || creator_id == null
+              ? _value.creator_id
+              // ignore: cast_nullable_to_non_nullable
+              : creator_id as String,
       description: description == const $CopyWithPlaceholder()
           ? _value.description
           // ignore: cast_nullable_to_non_nullable
@@ -115,10 +127,10 @@ class _$ExerciseCWProxyImpl implements _$ExerciseCWProxy {
           ? _value.id
           // ignore: cast_nullable_to_non_nullable
           : id as int?,
-      image: image == const $CopyWithPlaceholder()
-          ? _value.image
+      images: images == const $CopyWithPlaceholder()
+          ? _value.images
           // ignore: cast_nullable_to_non_nullable
-          : image as String?,
+          : images as List<String>?,
       met_value: met_value == const $CopyWithPlaceholder()
           ? _value.met_value
           // ignore: cast_nullable_to_non_nullable
@@ -150,13 +162,15 @@ extension $ExerciseCopyWith on Exercise {
 // **************************************************************************
 
 Exercise _$ExerciseFromJson(Map<String, dynamic> json) => Exercise(
+      creator_id: json['creator_id'] as String,
       creator: User.fromJson(json['creator'] as Map<String, dynamic>),
       muscle_target: (json['muscle_target'] as List<dynamic>?)
           ?.map((e) => MuscleTarget.fromJson(e as Map<String, dynamic>))
           .toList(),
       name: json['name'] as String?,
       description: json['description'] as String?,
-      image: json['image'] as String?,
+      images:
+          (json['images'] as List<dynamic>?)?.map((e) => e as String).toList(),
       met_value: (json['met_value'] as num?)?.toDouble(),
       type: $enumDecodeNullable(_$ExerciseTypeEnumMap, json['type']),
       exercise_equipment: (json['exercise_equipment'] as List<dynamic>?)
@@ -169,9 +183,10 @@ const _$ExerciseFieldMap = <String, String>{
   'id': 'id',
   'name': 'name',
   'description': 'description',
-  'image': 'image',
+  'images': 'images',
   'met_value': 'met_value',
   'creator': 'creator',
+  'creator_id': 'creator_id',
   'type': 'type',
   'exercise_equipment': 'exercise_equipment',
   'muscle_target': 'muscle_target',
@@ -181,9 +196,10 @@ Map<String, dynamic> _$ExerciseToJson(Exercise instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'description': instance.description,
-      'image': instance.image,
+      'images': instance.images,
       'met_value': instance.met_value,
       'creator': instance.creator,
+      'creator_id': instance.creator_id,
       'type': _$ExerciseTypeEnumMap[instance.type],
       'exercise_equipment': instance.exercise_equipment,
       'muscle_target': instance.muscle_target,

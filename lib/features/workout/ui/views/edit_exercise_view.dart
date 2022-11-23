@@ -1,25 +1,221 @@
 import 'package:FitStack/app/models/workout/exercise_model.dart';
+import 'package:FitStack/app/providers/bloc/exercise/exercise_bloc.dart';
+import 'package:FitStack/widgets/atoms/basic_view_header.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:go_router/go_router.dart';
 
 class EditExerciseView extends StatelessWidget {
-  final Exercise exercise;
-
-  const EditExerciseView({Key? key, required this.exercise}) : super(key: key);
+  const EditExerciseView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: CustomScrollView(
-        slivers: [
-          SliverFillRemaining(
-            child: Column(
-              children: [
-                //create forms for editing the exercise
-              ],
-            ),
-          )
-        ],
+      backgroundColor: Theme.of(context).colorScheme.background,
+      body: BlocBuilder<ExerciseBloc, ExerciseState>(
+        builder: (context, state) {
+          bool emptyImageList = state.currentlyEditingExercise.images == null || state.currentlyEditingExercise.images!.isEmpty;
+          return CustomScrollView(
+            slivers: [
+              SliverFillRemaining(
+                child: SafeArea(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      BasicPageHeader(
+                        title: "${state.currentlyEditingExercise.name}",
+                        leading: Padding(
+                          padding: const EdgeInsets.only(left: 15),
+                          child: GestureDetector(
+                            onTap: () {
+                              context.pop;
+                            },
+                            child: Container(
+                              child: Icon(
+                                Icons.arrow_back,
+                                color: Theme.of(context).colorScheme.onBackground,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Row(
+                              children: [
+                                Expanded(child: ExerciseTextField(label: "Name", hintText: state.currentlyEditingExercise.name ?? "")),
+                                SizedBox(width: 10),
+                                Expanded(child: ExerciseTextField(label: "MET", hintText: state.currentlyEditingExercise.met_value.toString())),
+                              ],
+                            ),
+                            SizedBox(height: 20),
+                            ExerciseTextField(label: "Description", hintText: state.currentlyEditingExercise.description ?? "", maxLines: 3),
+                            SizedBox(height: 20),
+                            ExerciseTextField(
+                              label: "Exercise Type",
+                              hintText: state.currentlyEditingExercise.type.toString(),
+                              maxLines: 1,
+                              dropDown: true,
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
+                        child: Text(
+                          "Images",
+                          style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                                color: Theme.of(context).colorScheme.onBackground.withOpacity(0.7),
+                              ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 400,
+                        width: double.infinity,
+                        child: ListView.builder(
+                          itemCount: emptyImageList ? 1 : state.currentlyEditingExercise.images!.length + 1,
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: const EdgeInsets.only(left: 20),
+                              child: GestureDetector(
+                                onTap: () {
+                                  if (emptyImageList && index == 0 || index == state.currentlyEditingExercise.images!.length) {
+                                    context.read<ExerciseBloc>().add(EditExerciseImage());
+                                  }
+                                },
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    image: emptyImageList || index == state.currentlyEditingExercise.images!.length
+                                        ? null
+                                        : DecorationImage(
+                                            image: NetworkImage(state.currentlyEditingExercise.images![index]),
+                                            fit: BoxFit.cover,
+                                          ),
+                                    color: Theme.of(context).colorScheme.onBackground.withOpacity(.1),
+                                  ),
+                                  width: 250,
+                                  child: emptyImageList || index == state.currentlyEditingExercise.images!.length
+                                      ? Center(
+                                          child: Icon(
+                                            Icons.add,
+                                            color: Theme.of(context).colorScheme.onBackground,
+                                          ),
+                                        )
+                                      : null,
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          );
+        },
       ),
+    );
+  }
+}
+
+class ExerciseTextField extends StatelessWidget {
+  final String label;
+  final String hintText;
+  final int? maxLines;
+  final bool? dropDown;
+  const ExerciseTextField({Key? key, required this.label, required this.hintText, this.maxLines, this.dropDown}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        if (dropDown != true)
+          FormBuilderTextField(
+            name: '$label',
+            maxLines: maxLines ?? 1,
+            decoration: InputDecoration(
+              fillColor: Theme.of(context).colorScheme.surface,
+              filled: true,
+              hintText: '$hintText',
+              hintStyle: TextStyle(
+                color: Theme.of(context).colorScheme.onBackground.withOpacity(0.5),
+                fontSize: 18,
+              ),
+              labelText: '$label',
+              labelStyle: TextStyle(
+                color: Theme.of(context).colorScheme.onBackground.withOpacity(0.5),
+                fontSize: 18,
+              ),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: BorderSide(color: Theme.of(context).colorScheme.secondary, width: 1.0),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: BorderSide(color: Theme.of(context).colorScheme.secondary, width: 1.0),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: BorderSide(color: Theme.of(context).colorScheme.surface, width: 1.0),
+              ),
+            ),
+          ),
+        if (dropDown == true)
+          FormBuilderDropdown(
+            name: label,
+            items: [
+              DropdownMenuItem(
+                child: Text("Push", style: TextStyle(fontSize: 20)),
+                value: ExerciseType.push,
+              ),
+              DropdownMenuItem(
+                child: Text("Pull", style: TextStyle(fontSize: 20)),
+                value: ExerciseType.pull,
+              ),
+              DropdownMenuItem(
+                child: Text("Legs", style: TextStyle(fontSize: 20)),
+                value: ExerciseType.legs,
+              ),
+              DropdownMenuItem(
+                child: Text("Core", style: TextStyle(fontSize: 20)),
+                value: ExerciseType.core,
+              ),
+              DropdownMenuItem(
+                child: Text("Other", style: TextStyle(fontSize: 20)),
+                value: ExerciseType.other,
+              ),
+            ],
+            decoration: InputDecoration(
+              labelText: label,
+              hintText: hintText,
+              labelStyle: TextStyle(
+                color: Theme.of(context).colorScheme.onBackground.withOpacity(0.5),
+                fontSize: 18,
+              ),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: BorderSide(color: Theme.of(context).colorScheme.secondary, width: 1.0),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: BorderSide(color: Theme.of(context).colorScheme.surface, width: 1.0),
+              ),
+              fillColor: Theme.of(context).colorScheme.surface,
+              filled: true,
+            ),
+          ),
+      ],
     );
   }
 }

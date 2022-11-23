@@ -10,7 +10,6 @@ import 'package:FitStack/app/models/logs/body_temperature_log_model.dart';
 import 'package:FitStack/app/models/logs/distance_log_model.dart';
 import 'package:FitStack/app/models/logs/heart_rate_log_model.dart';
 import 'package:FitStack/app/models/logs/oxygen_saturation_log_model.dart';
-import 'package:FitStack/app/models/logs/respiratory_log_model.dart';
 import 'package:FitStack/app/models/logs/sleep_log_model.dart';
 import 'package:FitStack/app/models/logs/step_log_model.dart';
 import 'package:FitStack/app/models/logs/weight_log_model.dart';

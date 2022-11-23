@@ -86,15 +86,7 @@ class AppRouter {
             name: 'exercises',
             builder: (context, state) => const ExerciseListView(),
             routes: [
-              GoRoute(
-                path: 'edit',
-                name: 'edit',
-                builder: (context, state) {
-                  return EditExerciseView(
-                    exercise: state.queryParams['exercise'] as Exercise,
-                  );
-                },
-              ),
+              GoRoute(path: 'edit', name: 'edit', builder: (context, state) => EditExerciseView()),
             ],
           ),
         ],

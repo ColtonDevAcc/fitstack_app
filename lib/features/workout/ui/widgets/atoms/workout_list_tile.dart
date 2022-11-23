@@ -17,7 +17,6 @@ class WorkoutListTile extends StatelessWidget {
       child: Slidable(
         direction: Axis.horizontal,
         child: Container(
-          // box decoration where the bottom is grey
           decoration: BoxDecoration(
             border: Border(
               bottom: BorderSide(

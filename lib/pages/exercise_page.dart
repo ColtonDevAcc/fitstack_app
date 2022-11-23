@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:FitStack/features/exercise/cubit/exercise_screen/exercise_screen_cubit.dart';
 import 'package:FitStack/features/exercise/presentation/organisms/history_tab_view.dart';
 import 'package:FitStack/features/exercise/presentation/organisms/program_tab_view.dart';

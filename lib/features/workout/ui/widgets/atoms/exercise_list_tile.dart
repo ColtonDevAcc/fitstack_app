@@ -1,6 +1,8 @@
 import 'package:FitStack/app/models/user/user_model.dart';
 import 'package:FitStack/app/models/workout/exercise_model.dart';
 import 'package:FitStack/app/providers/bloc/app/app_bloc.dart';
+import 'package:FitStack/app/providers/bloc/exercise/exercise_bloc.dart';
+import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -25,7 +27,8 @@ class ExerciseListTile extends StatelessWidget {
                 Expanded(
                   child: GestureDetector(
                     onTap: () {
-                      context.pushNamed("/exercise/exercises/edit", queryParams: {"exercise": exercise});
+                      context.read<ExerciseBloc>().add(EditExercise(exercise: exercise));
+                      context.pushNamed("edit");
                     },
                     child: Container(
                       color: Theme.of(context).colorScheme.secondary,
@@ -43,6 +46,16 @@ class ExerciseListTile extends StatelessWidget {
       child: ListTile(
         contentPadding: EdgeInsets.symmetric(horizontal: 10),
         title: Text(exercise.name ?? ""),
+        leading: exercise.images == null || exercise.images!.isEmpty
+            ? null
+            : ExtendedImage.network(
+                exercise.images?.first ?? "",
+                width: 50,
+                height: 50,
+                fit: BoxFit.cover,
+                printError: true,
+                cache: true,
+              ),
         subtitle: Wrap(
           spacing: 3,
           children: exercise.muscle_target != [] && exercise.muscle_target != null

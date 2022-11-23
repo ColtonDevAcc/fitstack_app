@@ -54,13 +54,20 @@ class ExerciseRepository {
     }
   }
 
-  Future<Exercise> updateExercise(Exercise exercise) async {
-    try {
-      final response = await dio.put("$mainUrl/exercise/${exercise.id}", data: exercise.toJson());
-      return Exercise.fromJson(response.data);
-    } catch (e) {
-      print(e);
-      return Exercise.empty();
+  Future<void> updateExercise(Exercise exercise) async {
+    log("exercise: ${exercise.toJson()}");
+    String token = await FirebaseAuth.instance.currentUser!.getIdToken();
+    final response = await dio.post(
+      "$mainUrl/exercise/update",
+      options: Options(
+        headers: {"Authorization": "Bearer ${token}"},
+      ),
+      data: exercise.toJson(),
+    );
+    if (response.statusCode == 200) {
+      return;
+    } else {
+      throw Exception("Failed to update exercise: ${response.data}");
     }
   }
 
