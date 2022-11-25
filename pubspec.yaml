@@ -101,6 +101,9 @@ dependencies:
 
   #image
   extended_image: ^6.3.2
+  svg_path_parser: ^1.1.1
+  touchable: ^1.0.2
+  xml: ^6.2.2
 
 dev_dependencies:
   flutter_test:

@@ -48,13 +48,17 @@ class ExerciseListTile extends StatelessWidget {
         title: Text(exercise.name ?? ""),
         leading: exercise.images == null || exercise.images!.isEmpty
             ? null
-            : ExtendedImage.network(
-                exercise.images?.first ?? "",
+            : Container(
                 width: 50,
-                height: 50,
-                fit: BoxFit.cover,
-                printError: true,
-                cache: true,
+                height: 75,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: Theme.of(context).colorScheme.background,
+                  image: DecorationImage(
+                    image: ExtendedNetworkImageProvider(exercise.images!.first),
+                    fit: BoxFit.cover,
+                  ),
+                ),
               ),
         subtitle: Wrap(
           spacing: 3,

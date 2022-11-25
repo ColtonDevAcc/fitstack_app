@@ -2,8 +2,10 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:FitStack/app/helpers/fitstack_error_toast.dart';
+import 'package:FitStack/app/models/muscle/muscle_model.dart';
 import 'package:FitStack/app/models/workout/exercise_model.dart';
 import 'package:FitStack/app/services/firebase_storage_service.dart';
+import 'package:FitStack/app/services/muscle_service.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -19,6 +21,9 @@ class ExerciseBloc extends Bloc<ExerciseEvent, ExerciseState> {
           exercises: [],
           status: ExerciseListStatus.initial,
           currentlyEditingExercise: Exercise.empty(),
+          minorMuscles: [],
+          muscleList: MuscleService().muscleList,
+          majorMuscles: [],
         )) {
     on<ExerciseEvent>((event, emit) {});
     on<LoadExercises>(onLoadExercises);
@@ -26,6 +31,8 @@ class ExerciseBloc extends Bloc<ExerciseEvent, ExerciseState> {
     on<UpdateExercise>(onUpdateExercise);
     on<EditExerciseImage>(onEditExerciseImage);
     on<EditExercise>(onEditExercise);
+    on<SelectMajorMuscle>(onSelectMajorMuscle);
+    on<SelectMinorMuscle>(onSelectMinorMuscle);
   }
 
   void onLoadExercises(LoadExercises event, Emitter<ExerciseState> emit) async {
@@ -80,5 +87,35 @@ class ExerciseBloc extends Bloc<ExerciseEvent, ExerciseState> {
 
   void onEditExercise(EditExercise event, Emitter<ExerciseState> emit) {
     emit(state.copyWith(editingExercise: event.exercise));
+  }
+
+  void onSelectMajorMuscle(SelectMajorMuscle event, Emitter<ExerciseState> emit) {
+    final selectedMuscles = List<Muscle>.from(state.majorMuscles);
+    final minorMuscles = List<Muscle>.from(state.minorMuscles);
+
+    if (selectedMuscles.contains(event.muscle)) {
+      selectedMuscles.remove(event.muscle);
+    } else if (minorMuscles.contains(event.muscle)) {
+      minorMuscles.remove(event.muscle);
+      emit(state.copyWith(minorMuscles: minorMuscles));
+    } else if (!minorMuscles.contains(event.muscle) && event.muscle.type != PrimaryMuscleGroups.empty) {
+      selectedMuscles.add(event.muscle);
+    }
+    emit(state.copyWith(majorMuscles: selectedMuscles));
+  }
+
+  void onSelectMinorMuscle(SelectMinorMuscle event, Emitter<ExerciseState> emit) {
+    final selectedMuscles = List<Muscle>.from(state.minorMuscles);
+    final majorMuscles = List<Muscle>.from(state.majorMuscles);
+
+    if (selectedMuscles.contains(event.muscle)) {
+      selectedMuscles.remove(event.muscle);
+    } else if (majorMuscles.contains(event.muscle)) {
+      majorMuscles.remove(event.muscle);
+      emit(state.copyWith(majorMuscles: majorMuscles));
+    } else if (!majorMuscles.contains(event.muscle) && event.muscle.type != PrimaryMuscleGroups.empty) {
+      selectedMuscles.add(event.muscle);
+    }
+    emit(state.copyWith(minorMuscles: selectedMuscles));
   }
 }

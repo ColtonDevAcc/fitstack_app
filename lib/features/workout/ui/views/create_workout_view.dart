@@ -29,7 +29,7 @@ class CreateWorkoutView extends StatelessWidget {
                           title: "${state.WorkoutName}",
                           leading: GestureDetector(
                             onTap: () {
-                              context.pop;
+                              context.pop();
                             },
                             child: Container(
                               child: Icon(

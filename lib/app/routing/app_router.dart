@@ -1,4 +1,3 @@
-import 'package:FitStack/app/models/workout/exercise_model.dart';
 import 'package:FitStack/app/providers/bloc/app/app_bloc.dart';
 import 'package:FitStack/app/repository/auth_repository.dart';
 import 'package:FitStack/app/routing/navigation_observers.dart';

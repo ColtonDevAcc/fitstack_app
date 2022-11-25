@@ -32,3 +32,13 @@ class EditExercise extends ExerciseEvent {
 class EditExerciseImage extends ExerciseEvent {
   const EditExerciseImage();
 }
+
+class SelectMajorMuscle extends ExerciseEvent {
+  final Muscle muscle;
+  const SelectMajorMuscle({required this.muscle});
+}
+
+class SelectMinorMuscle extends ExerciseEvent {
+  final Muscle muscle;
+  const SelectMinorMuscle({required this.muscle});
+}

@@ -4,6 +4,7 @@ import 'package:FitStack/widgets/atoms/basic_view_header.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 
 class ExerciseListView extends StatelessWidget {
   const ExerciseListView({Key? key}) : super(key: key);
@@ -27,7 +28,10 @@ class ExerciseListView extends StatelessWidget {
                   SafeArea(
                     child: BasicPageHeader(
                       title: 'Exercises',
-                      leading: Icon(FontAwesomeIcons.arrowLeftLong, color: Theme.of(context).colorScheme.onSurface),
+                      leading: GestureDetector(
+                        onTap: () => context.pop(),
+                        child: Icon(FontAwesomeIcons.arrowLeftLong, color: Theme.of(context).colorScheme.onSurface),
+                      ),
                     ),
                   ),
                   Text("Add an exercise", style: Theme.of(context).textTheme.headlineLarge),
