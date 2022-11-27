@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:FitStack/app/helpers/fitstack_error_toast.dart';
 import 'package:FitStack/app/models/user/user_model.dart';
 import 'package:FitStack/app/repository/auth_repository.dart';
 import 'package:FitStack/app/repository/user_repository.dart';
@@ -33,11 +34,17 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     switch (event.status.status) {
       case AuthenticationStatus.unauthenticated:
         return emit(const AppState.unauthenticated());
+
       case AuthenticationStatus.authenticated:
         final user = event.status.user;
         return emit(
           user != User.empty() ? AppState.authenticated(user) : const AppState.unauthenticated(),
         );
+
+      case AuthenticationStatus.error:
+        await FitStackErrorToast().show("error logging in ${event.status.message}");
+        return emit(const AppState.unauthenticated());
+
       case AuthenticationStatus.unknown:
         return emit(const AppState.unknown());
     }

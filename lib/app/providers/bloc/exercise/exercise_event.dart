@@ -42,3 +42,7 @@ class SelectMinorMuscle extends ExerciseEvent {
   final Muscle muscle;
   const SelectMinorMuscle({required this.muscle});
 }
+
+class RotateMuscleAnatomyView extends ExerciseEvent {
+  const RotateMuscleAnatomyView();
+}

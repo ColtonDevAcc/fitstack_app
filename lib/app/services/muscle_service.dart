@@ -9,7 +9,7 @@ import 'package:xml/xml.dart';
 
 class MuscleService {
   Future<List<Muscle>> ParseFrontMuscleList() async {
-    String generalString = await rootBundle.loadString("assets/muscles/model/muscle_front_inkscape_1.svg", cache: false);
+    String generalString = await rootBundle.loadString("assets/muscles/model/muscular_front.svg", cache: false);
     XmlDocument document = XmlDocument.parse(generalString);
     final paths = document.findAllElements('path');
     List<Muscle> muscles = [];
@@ -42,7 +42,7 @@ class MuscleService {
   }
 
   Future<List<Muscle>> ParseBackMuscleList() async {
-    String generalString = await rootBundle.loadString("assets/muscles/model/muscle_front.svg", cache: true);
+    String generalString = await rootBundle.loadString("assets/muscles/model/muscular_back.svg", cache: true);
     XmlDocument document = XmlDocument.parse(generalString);
     final paths = document.findAllElements('path');
     List<Muscle> muscles = [];
@@ -82,11 +82,13 @@ class MusclePainter extends CustomPainter {
   final List<Muscle>? minorMuscleList;
   final Color majorMuscleColor;
   final Color minorMuscleColor;
+  final int muscleAnatomyViewRotationIndex;
 
   final void Function(TapUpDetails, Muscle) onTapUp;
   final void Function(LongPressEndDetails, Muscle) onLongPressEnd;
 
   MusclePainter({
+    required this.muscleAnatomyViewRotationIndex,
     required this.majorMuscleColor,
     required this.minorMuscleColor,
     required this.onLongPressEnd,
@@ -100,16 +102,19 @@ class MusclePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     var _canvas = TouchyCanvas(context, canvas);
+    var xScale;
+    var yScale;
 
-    // var xScale = size.width * 2.39 / 2.9 / 1700;
-    // var yScale = size.height * 10 / 5.5 / 6400;
-    var xScale = size.width / 115;
-    var yScale = size.height / 297;
-    // var xScale = size.width;
-    // var yScale = size.height;
+    if (muscleAnatomyViewRotationIndex == 0) {
+      xScale = size.width / 1107.22900;
+      yScale = size.height / 3488.78076;
+    } else {
+      xScale = size.width / 1154.618;
+      yScale = size.height / 3491.132;
+    }
 
     final Matrix4 matrix4 = Matrix4.identity();
-    // matrix4.scale(xScale, yScale);
+    matrix4.scale(xScale, yScale);
 
     for (Muscle muscle in muscleList) {
       Color getMuscleColor(Muscle muscle) {
@@ -127,7 +132,7 @@ class MusclePainter extends CustomPainter {
         muscle.svgPath!.transform(matrix4.storage),
         Paint()
           ..color = getMuscleColor(muscle)
-          ..strokeWidth = 4.0,
+          ..strokeWidth = 2.0,
         onTapUp: (details) => onTapUp(details, muscle),
         onLongPressEnd: (details) => onLongPressEnd(details, muscle),
       );

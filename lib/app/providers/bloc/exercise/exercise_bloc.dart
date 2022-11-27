@@ -22,8 +22,10 @@ class ExerciseBloc extends Bloc<ExerciseEvent, ExerciseState> {
           status: ExerciseListStatus.initial,
           currentlyEditingExercise: Exercise.empty(),
           minorMuscles: [],
-          muscleList: [],
+          frontMuscleList: [],
           majorMuscles: [],
+          backMuscleList: [],
+          muscleAnatomyViewRotationIndex: 0,
         )) {
     on<ExerciseEvent>((event, emit) {});
     on<LoadExercises>(onLoadExercises);
@@ -33,6 +35,7 @@ class ExerciseBloc extends Bloc<ExerciseEvent, ExerciseState> {
     on<EditExercise>(onEditExercise);
     on<SelectMajorMuscle>(onSelectMajorMuscle);
     on<SelectMinorMuscle>(onSelectMinorMuscle);
+    on<RotateMuscleAnatomyView>(onRotateMuscleAnatomyView);
   }
 
   void onLoadExercises(LoadExercises event, Emitter<ExerciseState> emit) async {
@@ -81,13 +84,13 @@ class ExerciseBloc extends Bloc<ExerciseEvent, ExerciseState> {
       });
     } catch (e) {
       log("Failed to edit exercise image: $e");
-      FitStackErrorToast.show("Failed to edit exercise image");
+      await FitStackErrorToast().show("Failed to edit exercise image");
     }
   }
 
   Future<void> onEditExercise(EditExercise event, Emitter<ExerciseState> emit) async {
     final muscleList = await MuscleService().ParseFrontMuscleList();
-    emit(state.copyWith(editingExercise: event.exercise, muscleList: muscleList));
+    emit(state.copyWith(editingExercise: event.exercise, frontMuscleList: muscleList));
   }
 
   void onSelectMajorMuscle(SelectMajorMuscle event, Emitter<ExerciseState> emit) {
@@ -124,5 +127,23 @@ class ExerciseBloc extends Bloc<ExerciseEvent, ExerciseState> {
       selectedMuscles.add(event.muscle);
     }
     emit(state.copyWith(minorMuscles: selectedMuscles));
+  }
+
+  void onRotateMuscleAnatomyView(RotateMuscleAnatomyView event, Emitter<ExerciseState> emit) async {
+    int currentIndex = state.muscleAnatomyViewRotationIndex;
+    log("Current index: $currentIndex");
+    if (currentIndex == 0) {
+      if (state.backMuscleList.isEmpty) {
+        await MuscleService().ParseBackMuscleList().then((value) => emit(state.copyWith(backMuscleList: value, muscleAnatomyViewRotationIndex: 1)));
+      } else {
+        emit(state.copyWith(muscleAnatomyViewRotationIndex: 1));
+      }
+    } else {
+      emit(
+        state.copyWith(
+          muscleAnatomyViewRotationIndex: currentIndex >= 1 ? 0 : state.muscleAnatomyViewRotationIndex + 1,
+        ),
+      );
+    }
   }
 }

@@ -10,18 +10,7 @@ class Login_View extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<LoginCubit, LoginState>(
-      listener: (context, state) {
-        if (state.step == AuthStep.Error) {
-          ScaffoldMessenger.of(context)
-            ..hideCurrentSnackBar()
-            ..showSnackBar(
-              SnackBar(
-                content: Text(state.errorMessage ?? 'Authentication Failure'),
-              ),
-            );
-        }
-      },
+    return BlocBuilder<LoginCubit, LoginState>(
       builder: (context, state) {
         return Padding(
           padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),

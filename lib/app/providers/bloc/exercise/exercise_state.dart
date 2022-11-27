@@ -6,11 +6,15 @@ class ExerciseState extends Equatable {
   final Exercise currentlyEditingExercise;
   final List<Muscle> minorMuscles;
   final List<Muscle> majorMuscles;
-  final List<Muscle> muscleList;
+  final List<Muscle> frontMuscleList;
+  final List<Muscle> backMuscleList;
+  final int muscleAnatomyViewRotationIndex;
 
   const ExerciseState({
+    required this.muscleAnatomyViewRotationIndex,
+    required this.backMuscleList,
     required this.majorMuscles,
-    required this.muscleList,
+    required this.frontMuscleList,
     required this.minorMuscles,
     required this.currentlyEditingExercise,
     required this.status,
@@ -19,12 +23,14 @@ class ExerciseState extends Equatable {
 
   @override
   List<Object> get props => [
+        backMuscleList,
         exercises,
         status,
         currentlyEditingExercise,
         minorMuscles,
-        muscleList,
+        frontMuscleList,
         majorMuscles,
+        muscleAnatomyViewRotationIndex,
       ];
 
   ExerciseState copyWith({
@@ -32,16 +38,21 @@ class ExerciseState extends Equatable {
     ExerciseListStatus? status,
     Exercise? editingExercise,
     List<Muscle>? minorMuscles,
-    List<Muscle>? muscleList,
+    List<Muscle>? frontMuscleList,
     List<Muscle>? majorMuscles,
+    List<Muscle>? backMuscleList,
+    int? muscleAnatomyViewRotationIndex,
   }) {
     return ExerciseState(
-        exercises: exercises ?? this.exercises,
-        status: status ?? this.status,
-        currentlyEditingExercise: editingExercise ?? this.currentlyEditingExercise,
-        minorMuscles: minorMuscles ?? this.minorMuscles,
-        muscleList: muscleList ?? this.muscleList,
-        majorMuscles: majorMuscles ?? this.majorMuscles);
+      exercises: exercises ?? this.exercises,
+      status: status ?? this.status,
+      currentlyEditingExercise: editingExercise ?? this.currentlyEditingExercise,
+      minorMuscles: minorMuscles ?? this.minorMuscles,
+      frontMuscleList: frontMuscleList ?? this.frontMuscleList,
+      majorMuscles: majorMuscles ?? this.majorMuscles,
+      backMuscleList: backMuscleList ?? this.backMuscleList,
+      muscleAnatomyViewRotationIndex: muscleAnatomyViewRotationIndex ?? this.muscleAnatomyViewRotationIndex,
+    );
   }
 }
 

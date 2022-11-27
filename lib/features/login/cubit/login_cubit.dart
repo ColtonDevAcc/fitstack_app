@@ -1,3 +1,4 @@
+import 'package:FitStack/app/helpers/fitstack_error_toast.dart';
 import 'package:FitStack/app/repository/auth_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
@@ -33,7 +34,7 @@ class LoginCubit extends Cubit<LoginState> {
       );
     } catch (e) {
       emit(state.copyWith(step: AuthStep.Error, errorMessage: e.toString()));
-
+      await FitStackErrorToast().show("error logging in $e");
       return null;
     }
   }

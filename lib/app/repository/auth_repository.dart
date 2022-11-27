@@ -41,7 +41,7 @@ class AuthenticationRepository {
         }
       } on Error catch (e) {
         log('error: ${e}, stacktrace: ${e.stackTrace}');
-        controller.add(AuthStream(user: User.empty(), status: AuthenticationStatus.unauthenticated));
+        controller.add(AuthStream(user: User.empty(), status: AuthenticationStatus.error, message: "Error logging in with token $e"));
       }
     } else {
       try {
@@ -51,7 +51,7 @@ class AuthenticationRepository {
         controller.add(AuthStream(user: user!, status: AuthenticationStatus.authenticated));
       } on Error catch (e) {
         log('error: ${e}, stacktrace: ${e.stackTrace}');
-        controller.add(AuthStream(user: User.empty(), status: AuthenticationStatus.unauthenticated));
+        controller.add(AuthStream(user: User.empty(), status: AuthenticationStatus.error, message: "Error logging in with token $e"));
       }
     }
   }
@@ -93,6 +93,7 @@ class AuthenticationRepository {
       return null;
     } catch (e) {
       log("error logging in user $e");
+      controller.add(AuthStream(user: User.empty(), status: AuthenticationStatus.error, message: "error getting token $e"));
       return null;
     }
   }
@@ -124,7 +125,7 @@ class AuthenticationRepository {
       return User.empty();
     } on Error catch (e) {
       log('error: ${e}, stacktrace: ${e.stackTrace}');
-      controller.add(AuthStream(user: User.empty(), status: AuthenticationStatus.unauthenticated));
+      controller.add(AuthStream(user: User.empty(), status: AuthenticationStatus.error, message: "Error logging in with credentials $e"));
       return User.empty();
     }
   }
@@ -145,6 +146,7 @@ class AuthenticationRepository {
       return User.empty();
     } catch (e) {
       log("error while trying to signup user: $e");
+      controller.add(AuthStream(user: User.empty(), status: AuthenticationStatus.error, message: "error while trying to signup user: $e"));
       return User.empty();
     }
   }
@@ -161,7 +163,8 @@ class AuthenticationRepository {
 class AuthStream {
   User user;
   AuthenticationStatus status;
-  AuthStream({required this.user, required this.status});
+  String? message;
+  AuthStream({required this.user, required this.status, this.message});
 }
 
-enum AuthenticationStatus { unknown, authenticated, unauthenticated }
+enum AuthenticationStatus { unknown, authenticated, unauthenticated, error }

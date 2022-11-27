@@ -44,9 +44,7 @@ enum PrimaryMuscleGroups {
   pectoralis,
   biceps_brachii,
   triceps_brachii,
-  flexor_carpi_ulnaris,
   flexor_carpi_radialis,
-  brachioradialis,
   rectus_abdominis,
   rectus_femoris,
   vastus_lateralis,
@@ -55,12 +53,14 @@ enum PrimaryMuscleGroups {
   fibularis_longus,
   //! FRONT VIEW
 
-  //! BOTH SIDES
+  //? BOTH SIDES
   external_oblique,
   gluteus_medius,
   trapezius,
   deltoid,
-  //! BOTH SIDES
+  brachioradialis,
+  flexor_carpi_ulnaris,
+  //? BOTH SIDES
 
   //! BACK VIEW
   latissimus_dorsi,
@@ -69,6 +69,5 @@ enum PrimaryMuscleGroups {
   biceps_femoris,
   semitendinosus,
   gastrocnemius_soleus,
-
   //! BACK VIEW
 }
