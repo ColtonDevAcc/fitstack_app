@@ -68,7 +68,7 @@ class ExerciseMuscleSelector extends StatelessWidget {
         SizedBox(height: 20),
         Container(
           width: double.infinity,
-          height: MediaQuery.of(context).size.height * .7,
+          height: MediaQuery.of(context).size.height * .5,
           child: CanvasTouchDetector(
             gesturesToOverride: [GestureType.onTapUp, GestureType.onLongPressEnd],
             builder: (context) => CustomPaint(

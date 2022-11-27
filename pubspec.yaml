@@ -16,6 +16,7 @@ dependencies:
   #util
   device_info_plus: ^8.0.0
   units_converter: ^2.0.1
+  collection:
 
   #annotation
   json_annotation: ^4.6.0
@@ -103,7 +104,7 @@ dependencies:
   extended_image: ^6.3.2
   svg_path_parser: ^1.1.1
   touchable: ^1.0.2
-  xml: ^6.2.2
+  xml:
 
 dev_dependencies:
   flutter_test:
@@ -126,3 +127,5 @@ flutter:
     - assets/app/icons/
     - assets/app/images/
     - assets/app/Appicons/
+    - assets/muscles/model/
+    - assets/muscles/

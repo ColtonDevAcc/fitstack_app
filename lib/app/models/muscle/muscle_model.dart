@@ -33,22 +33,42 @@ class Muscle extends Equatable {
 }
 
 enum PrimaryMuscleGroups {
-  //Primary Muscle Groups
+  //! GENERAL
+  inner_outline,
+  outline,
   empty,
-  vastusLateralist,
+  //! GENERAL
+
+  //! FRONT VIEW
+  sternocleidomastoid,
+  pectoralis,
+  biceps_brachii,
+  triceps_brachii,
+  flexor_carpi_ulnaris,
+  flexor_carpi_radialis,
   brachioradialis,
-  hand,
-  abdominals, //The muscles that make up the front of your mid-section.
-  biceps, //The muscles located on the front of your arm between your shoulder and elbow.
-  calves, //The muscles that make up the lower portion of the back of your leg below your knee.
-  deltoids, //The muscles that make up a large portion of the curve of your shoulder.
-  forearms, //The muscles located on the lower arm between the elbow and wrist.
-  gluteals, //The muscles of your posterior.
-  hamstrings, //The muscles located on the back of your leg between your gluteals and knee.
-  latissimusDorsi, //The muscles located on the sides of your upper back under the arm pit.
-  pectorals, //The muscles of your chest.
-  obliques, //The muscles on the sides of your mid-section.
-  quadriceps, //The muscles located on the front of your leg between your hip and knee.
-  trapezius, //The muscles located on the sides of your neck.
-  triceps, //The muscles located on the back of your arm between your shoulder and elbow.
+  rectus_abdominis,
+  rectus_femoris,
+  vastus_lateralis,
+  vastus_medialis,
+  gastrocnemius,
+  fibularis_longus,
+  //! FRONT VIEW
+
+  //! BOTH SIDES
+  external_oblique,
+  gluteus_medius,
+  trapezius,
+  deltoid,
+  //! BOTH SIDES
+
+  //! BACK VIEW
+  latissimus_dorsi,
+  infraspinatus,
+  gluteus_maximus,
+  biceps_femoris,
+  semitendinosus,
+  gastrocnemius_soleus,
+
+  //! BACK VIEW
 }

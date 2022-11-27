@@ -22,7 +22,7 @@ class ExerciseBloc extends Bloc<ExerciseEvent, ExerciseState> {
           status: ExerciseListStatus.initial,
           currentlyEditingExercise: Exercise.empty(),
           minorMuscles: [],
-          muscleList: MuscleService().muscleList,
+          muscleList: [],
           majorMuscles: [],
         )) {
     on<ExerciseEvent>((event, emit) {});
@@ -85,8 +85,9 @@ class ExerciseBloc extends Bloc<ExerciseEvent, ExerciseState> {
     }
   }
 
-  void onEditExercise(EditExercise event, Emitter<ExerciseState> emit) {
-    emit(state.copyWith(editingExercise: event.exercise));
+  Future<void> onEditExercise(EditExercise event, Emitter<ExerciseState> emit) async {
+    final muscleList = await MuscleService().ParseFrontMuscleList();
+    emit(state.copyWith(editingExercise: event.exercise, muscleList: muscleList));
   }
 
   void onSelectMajorMuscle(SelectMajorMuscle event, Emitter<ExerciseState> emit) {
@@ -98,7 +99,10 @@ class ExerciseBloc extends Bloc<ExerciseEvent, ExerciseState> {
     } else if (minorMuscles.contains(event.muscle)) {
       minorMuscles.remove(event.muscle);
       emit(state.copyWith(minorMuscles: minorMuscles));
-    } else if (!minorMuscles.contains(event.muscle) && event.muscle.type != PrimaryMuscleGroups.empty) {
+    } else if (!minorMuscles.contains(event.muscle) &&
+        event.muscle.type != PrimaryMuscleGroups.empty &&
+        event.muscle.type != PrimaryMuscleGroups.outline &&
+        event.muscle.type != PrimaryMuscleGroups.inner_outline) {
       selectedMuscles.add(event.muscle);
     }
     emit(state.copyWith(majorMuscles: selectedMuscles));
@@ -113,7 +117,10 @@ class ExerciseBloc extends Bloc<ExerciseEvent, ExerciseState> {
     } else if (majorMuscles.contains(event.muscle)) {
       majorMuscles.remove(event.muscle);
       emit(state.copyWith(majorMuscles: majorMuscles));
-    } else if (!majorMuscles.contains(event.muscle) && event.muscle.type != PrimaryMuscleGroups.empty) {
+    } else if (!majorMuscles.contains(event.muscle) &&
+        event.muscle.type != PrimaryMuscleGroups.empty &&
+        event.muscle.type != PrimaryMuscleGroups.outline &&
+        event.muscle.type != PrimaryMuscleGroups.inner_outline) {
       selectedMuscles.add(event.muscle);
     }
     emit(state.copyWith(minorMuscles: selectedMuscles));

@@ -1,7 +1,5 @@
-import 'package:FitStack/app/models/muscle/muscle_model.dart';
 import 'package:FitStack/app/models/workout/exercise_model.dart';
 import 'package:FitStack/app/providers/bloc/exercise/exercise_bloc.dart';
-import 'package:FitStack/app/services/muscle_service.dart';
 import 'package:FitStack/features/workout/ui/widgets/atoms/exercise_muscle_selector.dart';
 import 'package:FitStack/widgets/atoms/basic_view_header.dart';
 import 'package:extended_image/extended_image.dart';
@@ -9,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:go_router/go_router.dart';
-import 'package:touchable/touchable.dart';
 
 class EditExerciseView extends StatelessWidget {
   const EditExerciseView({Key? key}) : super(key: key);
@@ -131,7 +128,8 @@ class EditExerciseView extends StatelessWidget {
                         onMajorMuscleSelected: (TapUpDetails, Muscle) => context.read<ExerciseBloc>().add(SelectMajorMuscle(muscle: Muscle)),
                         onMinorMuscleSelected: (LongPressEndDetails, Muscle) => context.read<ExerciseBloc>().add(SelectMinorMuscle(muscle: Muscle)),
                       ),
-                    )
+                    ),
+                    SizedBox(height: 20),
                   ],
                 ),
               ),
