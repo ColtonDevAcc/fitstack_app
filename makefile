@@ -7,4 +7,4 @@ new_icons:
 	flutter pub get && flutter pub run flutter_launcher_icons:main 
 
 upgrade_all_dep: 
-	flutter pub upgrade --major-versions
+	flutterfire update && flutter pub upgrade --major-versions
