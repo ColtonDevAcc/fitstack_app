@@ -2,6 +2,7 @@ import 'package:FitStack/app/providers/bloc/app/app_bloc.dart';
 import 'package:FitStack/app/repository/auth_repository.dart';
 import 'package:FitStack/app/routing/navigation_observers.dart';
 import 'package:FitStack/app/services/go_router_refresh_stream.dart';
+import 'package:FitStack/features/statistics/ui/views/statistic_view.dart';
 import 'package:FitStack/features/workout/ui/views/create_workout_view.dart';
 import 'package:FitStack/features/workout/ui/views/edit_exercise_view.dart';
 import 'package:FitStack/features/workout/ui/views/exercise_list_view.dart';
@@ -115,9 +116,14 @@ class AppRouter {
       GoRoute(
         path: '/user',
         name: 'user',
-        builder: (context, state) => ProfilePage(
-          key: state.pageKey,
-        ),
+        builder: (context, state) => ProfilePage(),
+        routes: [
+          GoRoute(
+            path: 'weight',
+            name: 'user weight',
+            builder: (context, state) => const StatisticView(),
+          ),
+        ],
       ),
     ],
     redirect: (context, state) {

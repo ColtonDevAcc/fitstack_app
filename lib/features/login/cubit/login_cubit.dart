@@ -34,7 +34,7 @@ class LoginCubit extends Cubit<LoginState> {
       );
     } catch (e) {
       emit(state.copyWith(step: AuthStep.Error, errorMessage: e.toString()));
-      await FitStackErrorToast().show("error logging in $e");
+      FitStackToast.showErrorToast("error logging in $e");
       return null;
     }
   }

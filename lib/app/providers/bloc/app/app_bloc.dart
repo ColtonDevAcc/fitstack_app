@@ -41,8 +41,11 @@ class AppBloc extends Bloc<AppEvent, AppState> {
           user != User.empty() ? AppState.authenticated(user) : const AppState.unauthenticated(),
         );
 
+      case AuthenticationStatus.authenticating:
+        return emit(const AppState.authenticating());
+
       case AuthenticationStatus.error:
-        await FitStackErrorToast().show("error logging in ${event.status.message}");
+        FitStackToast.showErrorToast("error logging in ${event.status.message}");
         return emit(const AppState.unauthenticated());
 
       case AuthenticationStatus.unknown:

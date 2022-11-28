@@ -10,17 +10,27 @@ class UserGoalStatisticsGraph extends StatelessWidget {
   final double? maxY;
   final double? minY;
   final double? minX;
-  const UserGoalStatisticsGraph(
-      {Key? key, required this.color, required this.title, required this.subtitle, this.spots, this.maxX, this.maxY, this.minY, this.minX})
-      : super(key: key);
+  final double? width;
+  const UserGoalStatisticsGraph({
+    Key? key,
+    required this.color,
+    required this.title,
+    required this.subtitle,
+    this.spots,
+    this.maxX,
+    this.maxY,
+    this.minY,
+    this.minX,
+    this.width,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(0, 0, 10, 3),
+      padding: EdgeInsets.fromLTRB(0, 0, width != null ? 0 : 10, width != null ? 0 : 3),
       child: Container(
         padding: EdgeInsets.all(10),
-        width: 150,
+        width: width ?? 150,
         height: 175,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),

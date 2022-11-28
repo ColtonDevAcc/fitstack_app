@@ -84,7 +84,7 @@ class ExerciseBloc extends Bloc<ExerciseEvent, ExerciseState> {
       });
     } catch (e) {
       log("Failed to edit exercise image: $e");
-      await FitStackErrorToast().show("Failed to edit exercise image");
+      FitStackToast.showErrorToast("Failed to edit exercise image");
     }
   }
 

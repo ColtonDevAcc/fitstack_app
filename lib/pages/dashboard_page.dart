@@ -76,11 +76,7 @@ class DashboardPage extends StatelessWidget {
                     padding: const EdgeInsets.fromLTRB(0, topPadding, 10, bottomPadding),
                     child: Row(
                       children: [
-                        Text(
-                          "Progress Snapshot",
-                          textScaleFactor: textLabelScale,
-                          style: labelTextStyle,
-                        ),
+                        Text("Progress Snapshot", textScaleFactor: textLabelScale, style: labelTextStyle),
                         Spacer(),
                         TextButton(
                           onPressed: () => context.read<UserStatisticCubit>().checkUserStatistic(),
@@ -100,9 +96,8 @@ class DashboardPage extends StatelessWidget {
                                   ),
                                   SizedBox(width: 5),
                                   Spin(
-                                    controller: (controller) {
-                                      state.status == UserStatisticsStatus.loading ? controller.repeat() : controller.stop();
-                                    },
+                                    controller: (controller) =>
+                                        state.status == UserStatisticsStatus.loading ? controller.repeat() : controller.stop(),
                                     infinite: true,
                                     child: Icon(
                                       FontAwesomeIcons.rotate,
@@ -118,10 +113,7 @@ class DashboardPage extends StatelessWidget {
                       ],
                     ),
                   ),
-                  Container(
-                    height: MediaQuery.of(context).size.height * .2,
-                    child: UserProgressSnapshotList(),
-                  ),
+                  Container(height: MediaQuery.of(context).size.height * .2, child: UserProgressSnapshotList()),
                 ],
               ),
             ),

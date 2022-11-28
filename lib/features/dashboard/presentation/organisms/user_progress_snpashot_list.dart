@@ -4,12 +4,11 @@ import 'package:FitStack/features/dashboard/presentation/atoms/user_goal_statist
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:units_converter/units_converter.dart';
 
 class UserProgressSnapshotList extends StatelessWidget {
-  const UserProgressSnapshotList({
-    Key? key,
-  }) : super(key: key);
+  const UserProgressSnapshotList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +21,7 @@ class UserProgressSnapshotList extends StatelessWidget {
             : ListView(padding: EdgeInsets.zero, scrollDirection: Axis.horizontal, children: [
                 if (state.userStatistic.weight_log != null && state.userStatistic.weight_log!.length > 2)
                   GestureDetector(
-                    // onTap: () => Navigator.of(context).pushNamed('/weight'),
+                    onTap: () => context.push('/user/weight'),
                     child: UserGoalStatisticsGraph(
                       spots: state.userStatistic.weight_log
                           ?.map((e) => FlSpot(
