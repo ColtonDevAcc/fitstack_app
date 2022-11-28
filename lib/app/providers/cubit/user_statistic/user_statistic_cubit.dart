@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:FitStack/app/helpers/fitstack_error_toast.dart';
 import 'package:FitStack/app/models/logs/active_energy_log_model.dart';
 import 'package:FitStack/app/models/logs/active_minutes_log_model.dart';
 import 'package:FitStack/app/models/logs/basal_energy_log_model.dart';
@@ -36,12 +37,7 @@ class UserStatisticCubit extends Cubit<UserStatisticState> {
       final token = await FirebaseAuth.instance.currentUser!.getIdToken();
 
       final userStatistic = await userRepository.getStatistics(token: token);
-      emit(
-        UserStatisticState(
-          status: UserStatisticsStatus.loaded,
-          userStatistic: userStatistic,
-        ),
-      );
+      emit(UserStatisticState(status: UserStatisticsStatus.loaded, userStatistic: userStatistic));
 
       await checkUserStatistic();
 
@@ -62,6 +58,7 @@ class UserStatisticCubit extends Cubit<UserStatisticState> {
   }
 
   Future<void> checkUserStatistic() async {
+    emit(state.copyWith(status: UserStatisticsStatus.loading));
     HealthFactory health = HealthFactory();
     var today = DateTime.now();
     var types = [
@@ -82,9 +79,10 @@ class UserStatisticCubit extends Cubit<UserStatisticState> {
       HealthDataType.ACTIVE_ENERGY_BURNED,
       HealthDataType.BASAL_ENERGY_BURNED,
     ];
+
     //check if last update is today
     try {
-      if (today.difference(state.userStatistic.updated_at!.toUtc()).inHours > 2) {
+      if (today.difference(state.userStatistic.updated_at!.toUtc()).inDays > 1) {
         var lastFetch = state.userStatistic.updated_at;
         var healthData = await health.getHealthDataFromTypes(
           lastFetch ?? today.subtract(Duration(days: 365)),
@@ -232,12 +230,15 @@ class UserStatisticCubit extends Cubit<UserStatisticState> {
           );
         } else
           log("No data to update");
+        FitStackErrorToast().show("error fetching statistics snapshot");
       } else {
         log("No new statistics data fetched");
       }
     } catch (e) {
       log("message: ${e.toString()}");
     }
+
+    emit(state.copyWith(status: UserStatisticsStatus.loaded));
   }
 
   double getWeightDifference() {

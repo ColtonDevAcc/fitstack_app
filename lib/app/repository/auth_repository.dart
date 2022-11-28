@@ -102,7 +102,6 @@ class AuthenticationRepository {
 
   Future<User> logInWithEmailAndPassword({email: String, password: String}) async {
     try {
-      log('signing user in');
       var userToken = await fb.FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password).then((value) async {
         return await value.user!.getIdToken();
       });
@@ -114,18 +113,17 @@ class AuthenticationRepository {
         ),
       );
 
-      log("${response.data}");
       User user = User.fromJson(response.data);
       await persistRefreshToken(token: userToken);
       controller.add(AuthStream(user: user, status: AuthenticationStatus.authenticated));
       return user;
     } on DioError catch (e) {
       log("error logging in user. message: ${e.message} response: ${e.response}");
-      controller.add(AuthStream(user: User.empty(), status: AuthenticationStatus.unauthenticated));
+      controller.add(AuthStream(user: User.empty(), status: AuthenticationStatus.error, message: "Error logging in user $e"));
       return User.empty();
     } on Error catch (e) {
       log('error: ${e}, stacktrace: ${e.stackTrace}');
-      controller.add(AuthStream(user: User.empty(), status: AuthenticationStatus.error, message: "Error logging in with credentials $e"));
+      controller.add(AuthStream(user: User.empty(), status: AuthenticationStatus.error, message: "Error logging in user $e"));
       return User.empty();
     }
   }
