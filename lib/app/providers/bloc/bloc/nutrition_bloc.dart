@@ -1,0 +1,61 @@
+import 'dart:developer';
+
+import 'package:FitStack/app/helpers/fitstack_error_toast.dart';
+import 'package:FitStack/app/repository/open_food_facts_repository.dart';
+import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
+import 'package:flutter/services.dart';
+import 'package:openfoodfacts/openfoodfacts.dart';
+import 'package:qr_code_scanner/qr_code_scanner.dart';
+
+part 'nutrition_event.dart';
+part 'nutrition_state.dart';
+
+class NutritionBloc extends Bloc<NutritionEvent, NutritionState> {
+  final OpenFoodFactsRepository openFoodFactsRepository;
+  NutritionBloc({required this.openFoodFactsRepository})
+      : super(NutritionState(
+          status: NutritionStatus.initial,
+          recentMeals: [],
+          barcode: '',
+        )) {
+    on<GetNutritionData>(onGetNutritionData);
+    on<ScanBarcode>(onScanBarcode);
+  }
+
+  Future<void> onGetNutritionData(GetNutritionData event, Emitter<NutritionState> emit) async {
+    try {
+      emit(state.copyWith(status: NutritionStatus.loading, barcode: event.barcode));
+
+      log("Getting Nutrition Data for ${event.barcode}");
+      final product = await openFoodFactsRepository.getProduct(barcode: event.barcode);
+      log("Product: ${product?.toJson()}");
+      emit(state.copyWith(status: NutritionStatus.success, product: product));
+    } on PlatformException {
+      FitStackToast.showErrorToast("Failed to get platform version");
+    }
+  }
+
+  Future<void> onScanBarcode(ScanBarcode event, Emitter<NutritionState> emit) async {
+    try {
+      event.controller.scannedDataStream.listen(
+        (barcode) {
+          if (barcode.code != null && state.barcode != barcode.code) {
+            event.controller.pauseCamera();
+            add(GetNutritionData(barcode: barcode.code!));
+          } else {
+            log("Barcode: ${barcode.code} is null");
+          }
+        },
+      );
+    } on PlatformException {
+      FitStackToast.showErrorToast("Failed to get platform version");
+    }
+  }
+
+  @override
+  Future<void> close() async {
+    state.scanController?.dispose();
+    super.close();
+  }
+}

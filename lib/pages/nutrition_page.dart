@@ -37,10 +37,7 @@ class NutritionPage extends StatelessWidget {
                       style: labelTextStyle,
                     ),
                   ),
-                  Expanded(
-                    flex: 1,
-                    child: UserConsumptionChart(),
-                  ),
+                  Expanded(flex: 1, child: UserConsumptionChart()),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(0, topPadding - 5, 0, bottomPadding),
                     child: Text(
@@ -49,10 +46,7 @@ class NutritionPage extends StatelessWidget {
                       style: labelTextStyle,
                     ),
                   ),
-                  Expanded(
-                    flex: 2,
-                    child: RecentMealsList(),
-                  ),
+                  Expanded(flex: 2, child: RecentMealsList()),
                 ],
               ),
             ),

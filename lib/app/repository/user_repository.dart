@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'package:FitStack/app/helpers/endpoints.dart';
 import 'package:FitStack/app/models/user/user_model.dart';
 import 'package:FitStack/app/models/user/user_profile_model.dart';
 import 'package:FitStack/app/models/user/user_statistic_model.dart';
@@ -8,12 +9,12 @@ import 'package:image_picker/image_picker.dart';
 
 class UserRepository {
   static String mainUrl = kDebugMode ? "http://localhost:8080" : "https://dev.fitstack.io";
-  final Dio dio = Dio();
+  final dio = Endpoints();
 
   Future<User?> getUser({required token}) async {
     try {
       Response response = await dio.post(
-        mainUrl + '/user/signin',
+        '/user/signin',
         options: Options(
           headers: {"Authorization": "Bearer ${token}"},
         ),
@@ -41,7 +42,7 @@ class UserRepository {
       });
 
       Response response = await dio.post(
-        mainUrl + '/user/update-avatar',
+        '/user/update-avatar',
         options: Options(
           headers: {
             "Authorization": "Bearer ${token}",
@@ -63,7 +64,7 @@ class UserRepository {
   Future<UserProfile> getUserProfile({required String token}) async {
     try {
       Response response = await dio.get(
-        mainUrl + '/user/profile',
+        '/user/profile',
         options: Options(
           headers: {
             "Authorization": "Bearer ${token}",
@@ -83,7 +84,7 @@ class UserRepository {
   Future<UserStatistic> getStatistics({required String token}) async {
     try {
       Response response = await dio.get(
-        mainUrl + '/user/statistics',
+        '/user/statistics',
         options: Options(
           headers: {
             "Authorization": "Bearer ${token}",
@@ -106,7 +107,7 @@ class UserRepository {
     try {
       log("${statistic.toJson()}");
       await dio.post(
-        mainUrl + '/user/statistics',
+        '/user/statistics',
         options: Options(
           headers: {
             "Authorization": "Bearer ${token}",

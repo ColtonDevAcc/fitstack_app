@@ -2,6 +2,7 @@ import 'package:FitStack/app/providers/bloc/app/app_bloc.dart';
 import 'package:FitStack/app/repository/auth_repository.dart';
 import 'package:FitStack/app/routing/navigation_observers.dart';
 import 'package:FitStack/app/services/go_router_refresh_stream.dart';
+import 'package:FitStack/features/nutrition/presentation/views/nutrition_scan_view.dart';
 import 'package:FitStack/features/statistics/ui/views/statistic_view.dart';
 import 'package:FitStack/features/workout/ui/views/create_workout_view.dart';
 import 'package:FitStack/features/workout/ui/views/edit_exercise_view.dart';
@@ -63,6 +64,13 @@ class AppRouter {
         path: '/nutrition',
         name: "nutrition",
         builder: (context, state) => const NutritionPage(),
+        routes: [
+          GoRoute(
+            path: 'scan',
+            name: 'nutrition scan',
+            builder: (context, state) => const NutritionScanView(),
+          ),
+        ],
       ),
       GoRoute(
         path: '/exercise',

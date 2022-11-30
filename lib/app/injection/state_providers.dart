@@ -1,5 +1,6 @@
 import 'package:FitStack/app/providers/bloc/active_workout/active_workout_bloc.dart';
 import 'package:FitStack/app/providers/bloc/app/app_bloc.dart';
+import 'package:FitStack/app/providers/bloc/bloc/nutrition_bloc.dart';
 import 'package:FitStack/app/providers/bloc/exercise/exercise_bloc.dart';
 import 'package:FitStack/app/providers/bloc/workout/workout_bloc.dart';
 import 'package:FitStack/app/providers/cubit/main_view/main_view_cubit.dart';
@@ -7,6 +8,7 @@ import 'package:FitStack/app/providers/cubit/user_statistic/user_statistic_cubit
 import 'package:FitStack/app/repository/active_workout_repository.dart';
 import 'package:FitStack/app/repository/auth_repository.dart';
 import 'package:FitStack/app/repository/exercise_repository.dart';
+import 'package:FitStack/app/repository/open_food_facts_repository.dart';
 import 'package:FitStack/app/repository/program_repository.dart';
 import 'package:FitStack/app/repository/relationship_repository.dart';
 import 'package:FitStack/app/repository/user_health_repository.dart';
@@ -42,6 +44,7 @@ class StateProviders extends StatelessWidget {
         RepositoryProvider(create: (context) => ActiveWorkoutRepository()),
         RepositoryProvider(create: (context) => ExerciseRepository()),
         RepositoryProvider(create: (context) => UserHealthRepository()),
+        RepositoryProvider(create: (context) => OpenFoodFactsRepository()),
       ],
       child: MultiBlocProvider(
         providers: [
@@ -99,6 +102,8 @@ class StateProviders extends StatelessWidget {
           BlocProvider<ExerciseBloc>(
             create: (BuildContext context) => ExerciseBloc(exerciseRepository: context.read<ExerciseRepository>())..add(LoadExercises()),
           ),
+          BlocProvider<NutritionBloc>(
+              create: (BuildContext context) => NutritionBloc(openFoodFactsRepository: context.read<OpenFoodFactsRepository>())),
         ],
         child: child,
       ),

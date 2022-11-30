@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:FitStack/app/cache/auth_cache.dart';
+import 'package:FitStack/app/helpers/endpoints.dart';
 import 'package:FitStack/app/models/user/user_model.dart';
 import 'package:FitStack/app/repository/user_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart' as fb;
@@ -11,9 +12,8 @@ import 'package:dio/dio.dart';
 
 class AuthenticationRepository {
   final controller = StreamController<AuthStream>.broadcast();
-  final Dio dio = Dio();
+  final dio = Endpoints();
   final storage = new FlutterSecureStorage();
-  static String mainUrl = kDebugMode ? "http://localhost:8080" : "https://dev.fitstack.io";
 
   AuthenticationRepository({fb.FirebaseAuth? firebaseAuth, AuthCache? authCache});
 
@@ -82,7 +82,7 @@ class AuthenticationRepository {
   Future<String?> getTokenFromRefresh({refresh_token: String}) async {
     try {
       Response response = await dio.post(
-        mainUrl + "/user/refresh-token",
+        "/user/refresh-token",
         data: {"refresh_token": refresh_token},
       );
       return response.data;
@@ -107,7 +107,7 @@ class AuthenticationRepository {
       });
 
       Response response = await dio.post(
-        mainUrl + "/user/signin",
+        "/user/signin",
         options: Options(
           headers: {"Authorization": "Bearer ${userToken}"},
         ),
@@ -128,7 +128,7 @@ class AuthenticationRepository {
     controller.add(AuthStream(user: User.empty(), status: AuthenticationStatus.authenticating));
     try {
       var response = await Dio().post(
-        mainUrl + "/user/signup",
+        "/user/signup",
         data: user.toJson(),
       );
 
