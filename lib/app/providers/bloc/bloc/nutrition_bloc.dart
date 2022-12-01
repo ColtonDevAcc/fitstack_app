@@ -7,6 +7,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/services.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
+import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 part 'nutrition_event.dart';
 part 'nutrition_state.dart';
@@ -18,6 +19,7 @@ class NutritionBloc extends Bloc<NutritionEvent, NutritionState> {
           status: NutritionStatus.initial,
           recentMeals: [],
           barcode: '',
+          panelController: PanelController(),
         )) {
     on<GetNutritionData>(onGetNutritionData);
     on<ScanBarcode>(onScanBarcode);
@@ -31,6 +33,7 @@ class NutritionBloc extends Bloc<NutritionEvent, NutritionState> {
       final product = await openFoodFactsRepository.getProduct(barcode: event.barcode);
       log("Product: ${product?.toJson()}");
       emit(state.copyWith(status: NutritionStatus.success, product: product));
+      state.panelController.open();
     } on PlatformException {
       FitStackToast.showErrorToast("Failed to get platform version");
     }

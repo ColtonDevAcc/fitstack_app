@@ -6,10 +6,18 @@ class NutritionState extends Equatable {
   final String barcode;
   final List<Product> recentMeals;
   final QRViewController? scanController;
-  const NutritionState({required this.barcode, this.scanController, required this.recentMeals, this.product, required this.status});
+  final PanelController panelController;
+  const NutritionState({
+    required this.panelController,
+    required this.barcode,
+    this.scanController,
+    required this.recentMeals,
+    this.product,
+    required this.status,
+  });
 
   @override
-  List<Object?> get props => [status, recentMeals, scanController, barcode];
+  List<Object?> get props => [status, recentMeals, scanController, barcode, product, panelController];
 
   NutritionState copyWith({
     Product? product,
@@ -17,6 +25,7 @@ class NutritionState extends Equatable {
     List<Product>? recentMeals,
     QRViewController? scanController,
     String? barcode,
+    PanelController? panelController,
   }) {
     return NutritionState(
       product: product ?? this.product,
@@ -24,6 +33,7 @@ class NutritionState extends Equatable {
       recentMeals: recentMeals ?? this.recentMeals,
       scanController: scanController ?? this.scanController,
       barcode: barcode ?? this.barcode,
+      panelController: panelController ?? this.panelController,
     );
   }
 }

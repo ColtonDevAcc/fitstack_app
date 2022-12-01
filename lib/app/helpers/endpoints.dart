@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 
 class Endpoints {
   // base url
-  static const String baseUrl = kDebugMode ? "http://10.16.2.14:8080" : "https://dev.fitstack.io";
+  static const String baseUrl = kDebugMode ? "http://172.20.10.4:8080" : "https://dev.fitstack.io";
   static const int receiveTimeout = 15000;
   static const int connectionTimeout = 15000;
   var dio = Dio(BaseOptions(baseUrl: baseUrl, receiveTimeout: receiveTimeout, connectTimeout: connectionTimeout));
