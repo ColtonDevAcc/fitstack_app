@@ -43,7 +43,7 @@ class NutritionBloc extends Bloc<NutritionEvent, NutritionState> {
     try {
       event.controller.scannedDataStream.listen(
         (barcode) {
-          if (barcode.code != null && state.barcode != barcode.code) {
+          if (barcode.code != null) {
             event.controller.pauseCamera();
             add(GetNutritionData(barcode: barcode.code!));
           } else {
