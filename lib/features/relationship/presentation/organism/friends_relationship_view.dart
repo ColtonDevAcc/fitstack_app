@@ -3,7 +3,7 @@ import 'package:FitStack/features/relationship/presentation/molecules/add_friend
 import 'package:FitStack/features/relationship/presentation/molecules/friendship_profile_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:icons_plus/icons_plus.dart';
 import 'package:go_router/go_router.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
@@ -38,7 +38,7 @@ class FriendsRelationshipView extends StatelessWidget {
               );
             },
             backgroundColor: Theme.of(context).colorScheme.primary,
-            child: Icon(FontAwesomeIcons.plus),
+            child: Icon(FontAwesome.plus),
           ),
           appBar: appBar == null
               ? AppBar(
@@ -50,7 +50,7 @@ class FriendsRelationshipView extends StatelessWidget {
                       onTap: () => GoRouter.of(context).pop(),
                       child: Container(
                         child: Icon(
-                          FontAwesomeIcons.arrowLeft,
+                          FontAwesome.arrow_left,
                           color: Theme.of(context).colorScheme.onBackground,
                         ),
                       )),

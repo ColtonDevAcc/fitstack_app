@@ -1,13 +1,10 @@
-import 'dart:math';
-
-import 'package:FitStack/app/models/logs/weight_log_model.dart';
 import 'package:FitStack/app/providers/cubit/user_statistic/user_statistic_cubit.dart';
 import 'package:FitStack/features/dashboard/presentation/atoms/user_goal_statistics_graph.dart';
 import 'package:FitStack/widgets/atoms/basic_view_header.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:icons_plus/icons_plus.dart';
 import 'package:go_router/go_router.dart';
 import 'package:units_converter/models/extension_converter.dart';
 import 'package:units_converter/properties/mass.dart';
@@ -28,7 +25,7 @@ class StatisticView extends StatelessWidget {
               title: "Weight",
               leading: IconButton(
                 onPressed: () => context.pop(),
-                icon: Icon(FontAwesomeIcons.arrowLeftLong, color: Theme.of(context).colorScheme.onBackground),
+                icon: Icon(FontAwesome.arrow_left_long, color: Theme.of(context).colorScheme.onBackground),
               ),
             ),
           ),

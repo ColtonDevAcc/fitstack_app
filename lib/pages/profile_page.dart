@@ -12,7 +12,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:icons_plus/icons_plus.dart';
 import 'package:go_router/go_router.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -44,7 +44,7 @@ class ProfilePage extends StatelessWidget {
               child: Container(
                 padding: EdgeInsets.all(5),
                 child: Icon(
-                  FontAwesomeIcons.arrowLeft,
+                  FontAwesome.arrow_left_long,
                   color: Theme.of(context).colorScheme.onBackground,
                 ),
               ),
@@ -59,7 +59,7 @@ class ProfilePage extends StatelessWidget {
                     child: Badge(
                       badgeContent: Text("3", style: Theme.of(context).textTheme.labelLarge?.apply(color: Theme.of(context).colorScheme.background)),
                       child: Icon(
-                        FontAwesomeIcons.bars,
+                        FontAwesome.bars,
                         color: Theme.of(context).colorScheme.onBackground,
                       ),
                     ),

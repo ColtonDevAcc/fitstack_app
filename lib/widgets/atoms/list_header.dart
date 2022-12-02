@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:icons_plus/icons_plus.dart';
 
 class ListHeader extends StatelessWidget {
   final String title;
@@ -33,7 +33,7 @@ class ListHeader extends StatelessWidget {
                 ),
               ),
               Icon(
-                FontAwesomeIcons.chevronRight,
+                FontAwesome.chevron_right,
                 color: Colors.blue,
                 size: 12,
               ),

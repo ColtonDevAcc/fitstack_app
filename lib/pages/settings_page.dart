@@ -3,7 +3,7 @@ import 'package:FitStack/features/profile/presentation/atoms/profile_drawer_list
 import 'package:FitStack/features/profile/presentation/molecules/profile_snapshot.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:icons_plus/icons_plus.dart';
 import 'package:go_router/go_router.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -37,23 +37,23 @@ class _SettingsPageState extends State<SettingsPage> {
                   ProfileDrawerListTile(
                     onTap: () => GoRouter.of(context).push('/friendship'),
                     title: "Friends",
-                    icon: FontAwesomeIcons.userGroup,
+                    icon: FontAwesome.user_group,
                   ),
                   SizedBox(height: 5),
                   ProfileDrawerListTile(
                     title: "settings",
-                    icon: FontAwesomeIcons.gear,
+                    icon: FontAwesome.gear,
                   ),
                   SizedBox(height: 5),
                   ProfileDrawerListTile(
                     title: "alerts",
-                    icon: FontAwesomeIcons.bell,
+                    icon: FontAwesome.bell,
                   ),
                   SizedBox(height: 5),
                   ProfileDrawerListTile(
                     onTap: () => context.go("/settings/theme"),
                     title: "themes",
-                    icon: FontAwesomeIcons.moon,
+                    icon: FontAwesome.moon,
                   ),
                 ],
               ),

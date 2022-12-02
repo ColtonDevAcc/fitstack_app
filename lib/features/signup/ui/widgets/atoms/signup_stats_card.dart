@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:icons_plus/icons_plus.dart';
 import 'package:health/health.dart';
 
 class SingUp_Stats_Card_widget extends StatelessWidget {
@@ -14,43 +14,43 @@ class SingUp_Stats_Card_widget extends StatelessWidget {
     Map<String, Map<String, Icon>> types = {
       "ACTIVE_ENERGY_BURNED": {
         "ACALORIES": Icon(
-          FontAwesomeIcons.fire,
+          FontAwesome.fire,
           color: Colors.red,
         )
       },
       "BODY_FAT_PERCENTAGE": {
         "BFP": Icon(
-          FontAwesomeIcons.percent,
+          FontAwesome.percent,
           color: Colors.amber,
         )
       },
       "BODY_MASS_INDEX": {
         "BMI": Icon(
-          FontAwesomeIcons.scaleUnbalanced,
+          FontAwesome.scale_unbalanced,
           color: Colors.black,
         )
       },
       "HEIGHT": {
         "HEIGHT": Icon(
-          FontAwesomeIcons.ruler,
+          FontAwesome.ruler,
           color: Colors.yellow,
         )
       },
       "STEPS": {
         "STEPS": Icon(
-          FontAwesomeIcons.personWalking,
+          FontAwesome.person_walking,
           color: Colors.purple,
         )
       },
       "WORKOUT": {
         "WORKOUT": Icon(
-          FontAwesomeIcons.dumbbell,
+          FontAwesome.dumbbell,
           color: Colors.black,
         )
       },
       "WEIGHT": {
         "WEIGHT": Icon(
-          FontAwesomeIcons.weightScale,
+          FontAwesome.weight_scale,
           color: Theme.of(context).colorScheme.secondary,
         )
       },
@@ -66,7 +66,7 @@ class SingUp_Stats_Card_widget extends StatelessWidget {
         types[healthData?.type.name] != null
             ? types[healthData?.type.name]!.values.toList().first
             : Icon(
-                FontAwesomeIcons.dumbbell,
+                FontAwesome.dumbbell,
               ),
         SizedBox(width: 6),
         Column(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:icons_plus/icons_plus.dart';
 
 class MealStatisticsCard extends StatelessWidget {
   final bool? empty;
@@ -111,7 +111,7 @@ class MealStatisticsCard extends StatelessWidget {
                     child: Padding(
                       padding: EdgeInsets.fromLTRB(15, 15, 15, 0),
                       child: Center(
-                        child: Icon(FontAwesomeIcons.plus),
+                        child: Icon(FontAwesome.plus),
                       ),
                     ),
                   ),

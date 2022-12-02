@@ -3,7 +3,7 @@ import 'package:FitStack/features/signup/ui/widgets/atoms/create_account_text.da
 import 'package:FitStack/features/signup/ui/widgets/atoms/signup_form_header_subtitle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:icons_plus/icons_plus.dart';
 
 class SignupFormHeader extends StatelessWidget {
   final IconData icon;
@@ -33,8 +33,8 @@ class SignupFormHeader extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    FaIcon(
-                      FontAwesomeIcons.arrowLeftLong,
+                    Icon(
+                      FontAwesome.arrow_left_long,
                       color: Theme.of(context).colorScheme.onBackground,
                       size: 18,
                     ),
@@ -47,7 +47,7 @@ class SignupFormHeader extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Center(child: FaIcon(icon, color: Theme.of(context).colorScheme.primary)),
+                Center(child: Icon(icon, color: Theme.of(context).colorScheme.primary)),
                 SizedBox(width: 5),
                 SignUp_Header_Text_Widget(text: text),
               ],

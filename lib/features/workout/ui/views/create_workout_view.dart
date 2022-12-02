@@ -3,7 +3,7 @@ import 'package:FitStack/features/workout/ui/widgets/atoms/workout_statistic_sna
 import 'package:FitStack/widgets/atoms/basic_view_header.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:icons_plus/icons_plus.dart';
 import 'package:go_router/go_router.dart';
 
 class CreateWorkoutView extends StatelessWidget {
@@ -33,7 +33,7 @@ class CreateWorkoutView extends StatelessWidget {
                             },
                             child: Container(
                               child: Icon(
-                                FontAwesomeIcons.arrowLeftLong,
+                                FontAwesome.arrow_left_long,
                                 color: Theme.of(context).colorScheme.onBackground,
                               ),
                             ),
@@ -50,7 +50,7 @@ class CreateWorkoutView extends StatelessWidget {
                             textScaleFactor: 1.5,
                           ),
                           SizedBox(width: 10),
-                          Icon(FontAwesomeIcons.pencil, size: 20, color: Theme.of(context).colorScheme.onBackground.withOpacity(.6)),
+                          Icon(FontAwesome.pencil, size: 20, color: Theme.of(context).colorScheme.onBackground.withOpacity(.6)),
                         ],
                       ),
                       Text(
@@ -68,7 +68,7 @@ class CreateWorkoutView extends StatelessWidget {
                             WorkoutStatisticBox(
                               label: 'Completions',
                               value: '30',
-                              icon: FontAwesomeIcons.check,
+                              icon: FontAwesome.check,
                             ),
                             WorkoutStatisticBox(
                               label: 'Volume Lifted',
@@ -83,7 +83,7 @@ class CreateWorkoutView extends StatelessWidget {
                             WorkoutStatisticBox(
                               label: 'Avg workout',
                               value: '60 min',
-                              icon: FontAwesomeIcons.stopwatch,
+                              icon: FontAwesome.stopwatch,
                             ),
                           ],
                         ),
@@ -151,7 +151,7 @@ class CreateWorkoutView extends StatelessWidget {
                                           ),
                                     ),
                                     trailing: Icon(
-                                      FontAwesomeIcons.ellipsisVertical,
+                                      FontAwesome.ellipsis_vertical,
                                       color: Theme.of(context).colorScheme.onBackground.withOpacity(0.7),
                                     ),
                                   ),

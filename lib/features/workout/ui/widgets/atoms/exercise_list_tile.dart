@@ -6,7 +6,7 @@ import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:icons_plus/icons_plus.dart';
 import 'package:go_router/go_router.dart';
 
 class ExerciseListTile extends StatelessWidget {
@@ -34,7 +34,7 @@ class ExerciseListTile extends StatelessWidget {
                       color: Theme.of(context).colorScheme.secondary,
                       height: 100,
                       child: Icon(
-                        FontAwesomeIcons.pencil,
+                        FontAwesome.pencil,
                         color: Theme.of(context).colorScheme.background,
                       ),
                     ),
@@ -68,7 +68,7 @@ class ExerciseListTile extends StatelessWidget {
                 }).toList()
               : [],
         ),
-        trailing: Icon(FontAwesomeIcons.plus, color: Theme.of(context).colorScheme.secondary, size: 20),
+        trailing: Icon(FontAwesome.plus, color: Theme.of(context).colorScheme.secondary, size: 20),
       ),
     );
   }

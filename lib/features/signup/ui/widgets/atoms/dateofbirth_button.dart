@@ -2,7 +2,7 @@ import 'package:FitStack/features/signup/state/signup_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:icons_plus/icons_plus.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:intl/intl.dart';
 
@@ -28,7 +28,7 @@ class DateOfBirthButton extends StatelessWidget {
               name: 'dateOfBirth',
               resetIcon: Padding(
                 padding: const EdgeInsets.only(right: 10),
-                child: Icon(FontAwesomeIcons.angleDown, size: 15),
+                child: Icon(FontAwesome.angle_down, size: 15),
               ),
               onChanged: (value) => BlocProvider.of<SignupCubit>(context).dateOfBirthChanged(value),
               inputType: InputType.date,
@@ -45,7 +45,7 @@ class DateOfBirthButton extends StatelessWidget {
                 suffixIconConstraints: BoxConstraints(maxHeight: 30, maxWidth: 40),
                 suffixIcon: Padding(
                   padding: const EdgeInsets.only(right: 10),
-                  child: Icon(FontAwesomeIcons.calendar),
+                  child: Icon(FontAwesome.calendar),
                 ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),

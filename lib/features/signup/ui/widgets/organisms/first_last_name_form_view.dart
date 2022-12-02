@@ -4,7 +4,7 @@ import 'package:FitStack/features/signup/ui/widgets/atoms/signup_fullscreen_text
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:icons_plus/icons_plus.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 
 class FirstLastNameFormView extends StatelessWidget {
@@ -18,7 +18,7 @@ class FirstLastNameFormView extends StatelessWidget {
       mainAxisSize: MainAxisSize.max,
       children: [
         SignupFormHeader(
-          icon: FontAwesomeIcons.weightScale,
+          icon: FontAwesome.weight_scale,
           text: "Personal Data",
           subtitle: "What is your first and last name?",
         ),

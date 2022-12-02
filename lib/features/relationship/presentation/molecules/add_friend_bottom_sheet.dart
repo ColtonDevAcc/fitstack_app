@@ -5,7 +5,7 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:icons_plus/icons_plus.dart';
 
 class AddFriendBottomSheet extends StatelessWidget {
   final UserProfile friend;
@@ -47,7 +47,7 @@ class AddFriendBottomSheet extends StatelessWidget {
                         hintStyle: TextStyle(color: Colors.grey, fontSize: 18),
                         prefixIcon: Container(
                           padding: EdgeInsets.all(15),
-                          child: Icon(FontAwesomeIcons.magnifyingGlass),
+                          child: Icon(FontAwesome.magnifying_glass),
                           width: 18,
                         ),
                       ),
@@ -65,7 +65,7 @@ class AddFriendBottomSheet extends StatelessWidget {
                     height: 30,
                     width: 30,
                     child: Icon(
-                      FontAwesomeIcons.arrowDownLong,
+                      FontAwesome.arrow_down_long,
                       size: 20,
                       color: Theme.of(context).colorScheme.onBackground,
                     ),
@@ -87,7 +87,7 @@ class AddFriendBottomSheet extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Icon(FontAwesomeIcons.plus)
+                      Icon(FontAwesome.plus)
                     ],
                   )
           ],

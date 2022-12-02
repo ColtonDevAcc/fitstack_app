@@ -1,7 +1,7 @@
 import 'package:FitStack/app/models/muscle/muscle_model.dart';
 import 'package:FitStack/app/services/muscle_service.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:icons_plus/icons_plus.dart';
 import 'package:touchable/touchable.dart';
 
 class ExerciseMuscleSelector extends StatelessWidget {
@@ -51,7 +51,7 @@ class ExerciseMuscleSelector extends StatelessWidget {
               alignment: Alignment.center,
               constraints: BoxConstraints(),
               visualDensity: VisualDensity.compact,
-              icon: Icon(FontAwesomeIcons.rotate),
+              icon: Icon(FontAwesome.rotate),
             )
           ],
         ),

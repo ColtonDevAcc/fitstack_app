@@ -7,7 +7,7 @@ import 'package:FitStack/features/signup/ui/widgets/atoms/signup_textfield.dart'
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:icons_plus/icons_plus.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 
 class BasicInfoFormView extends StatelessWidget {
@@ -20,7 +20,7 @@ class BasicInfoFormView extends StatelessWidget {
         SignupFormHeader(
           subtitle: "Enter you basic information",
           text: "Lets configure your account",
-          icon: FontAwesomeIcons.weightScale,
+          icon: FontAwesome.weight_scale,
         ),
         BlocBuilder<SignupCubit, SignupState>(
           buildWhen: (previous, current) =>

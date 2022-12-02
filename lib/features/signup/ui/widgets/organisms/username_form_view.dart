@@ -4,7 +4,7 @@ import 'package:FitStack/features/signup/ui/widgets/atoms/signup_fullscreen_text
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:icons_plus/icons_plus.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 
 class UsernameFormView extends StatelessWidget {
@@ -17,7 +17,7 @@ class UsernameFormView extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SignupFormHeader(
-          icon: FontAwesomeIcons.pencil,
+          icon: FontAwesome.pencil,
           text: 'Username',
           subtitle: "Enter a username",
         ),

@@ -3,7 +3,7 @@ import 'package:FitStack/features/workout/ui/widgets/atoms/exercise_list_tile.da
 import 'package:FitStack/widgets/atoms/basic_view_header.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:icons_plus/icons_plus.dart';
 import 'package:go_router/go_router.dart';
 
 class ExerciseListView extends StatelessWidget {
@@ -30,7 +30,7 @@ class ExerciseListView extends StatelessWidget {
                       title: 'Exercises',
                       leading: GestureDetector(
                         onTap: () => context.pop(),
-                        child: Icon(FontAwesomeIcons.arrowLeftLong, color: Theme.of(context).colorScheme.onSurface),
+                        child: Icon(FontAwesome.arrow_left_long, color: Theme.of(context).colorScheme.onSurface),
                       ),
                     ),
                   ),
@@ -46,7 +46,7 @@ class ExerciseListView extends StatelessWidget {
                             hintText: "Search",
                             hintStyle:
                                 Theme.of(context).textTheme.bodyLarge?.copyWith(color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7)),
-                            prefixIcon: Icon(FontAwesomeIcons.magnifyingGlass, color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7)),
+                            prefixIcon: Icon(FontAwesome.magnifying_glass, color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7)),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
                               borderSide: BorderSide.none,

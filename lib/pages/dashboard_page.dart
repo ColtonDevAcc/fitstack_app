@@ -9,7 +9,7 @@ import 'package:FitStack/widgets/atoms/basic_view_header.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:icons_plus/icons_plus.dart';
 import 'package:go_router/go_router.dart';
 
 class DashboardPage extends StatelessWidget {
@@ -100,7 +100,7 @@ class DashboardPage extends StatelessWidget {
                                         state.status == UserStatisticsStatus.loading ? controller.repeat() : controller.stop(),
                                     infinite: true,
                                     child: Icon(
-                                      FontAwesomeIcons.rotate,
+                                      FontAwesome.rotate,
                                       size: 15,
                                       color: Theme.of(context).colorScheme.onBackground,
                                     ),

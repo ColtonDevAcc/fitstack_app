@@ -2,7 +2,7 @@ import 'package:FitStack/features/profile/presentation/atoms/profile_featured_st
 import 'package:FitStack/features/profile/presentation/atoms/profile_social_currency_icon.dart';
 import 'package:FitStack/features/signup/ui/widgets/atoms/profile_avatar_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:icons_plus/icons_plus.dart';
 
 class ProfileSnapshot extends StatelessWidget {
   final void Function()? avatarOnTap;
@@ -37,9 +37,9 @@ class ProfileSnapshot extends StatelessWidget {
                 withBorder: true,
               ),
             ),
-            ProfileSocialCurrencyIcon(icon: FontAwesomeIcons.chartSimple, value: "$socialPoints", color: Colors.blue),
-            ProfileSocialCurrencyIcon(icon: FontAwesomeIcons.shekelSign, value: "$fit_credits", color: Theme.of(context).colorScheme.secondary),
-            ProfileSocialCurrencyIcon(icon: FontAwesomeIcons.fireFlameCurved, value: "$daysInARow", color: Theme.of(context).colorScheme.error),
+            ProfileSocialCurrencyIcon(icon: FontAwesome.chart_simple, value: "$socialPoints", color: Colors.blue),
+            ProfileSocialCurrencyIcon(icon: FontAwesome.shekel_sign, value: "$fit_credits", color: Theme.of(context).colorScheme.secondary),
+            ProfileSocialCurrencyIcon(icon: FontAwesome.fire_flame_curved, value: "$daysInARow", color: Theme.of(context).colorScheme.error),
             SizedBox(),
           ],
         ),

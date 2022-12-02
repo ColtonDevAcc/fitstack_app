@@ -1,7 +1,7 @@
 import 'package:FitStack/features/signup/ui/widgets/atoms/signup_form_header.dart';
 import 'package:FitStack/features/signup/ui/widgets/molecules/signup_health_statistics.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:icons_plus/icons_plus.dart';
 
 class HealthStatsFormView extends StatelessWidget {
   const HealthStatsFormView({Key? key}) : super(key: key);
@@ -11,7 +11,7 @@ class HealthStatsFormView extends StatelessWidget {
     return Column(
       children: [
         SignupFormHeader(
-          icon: FontAwesomeIcons.personRunning,
+          icon: FontAwesome.person_running,
           text: 'Statistics',
           subtitle: 'Lets import your progress',
         ),

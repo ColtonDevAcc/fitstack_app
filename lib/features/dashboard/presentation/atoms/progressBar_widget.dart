@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ProgressBar extends StatelessWidget {
   const ProgressBar({Key? key, required this.barColor, required this.totalValue, required this.partialValue, required this.icon}) : super(key: key);
@@ -23,7 +22,7 @@ class ProgressBar extends StatelessWidget {
               child: CircleAvatar(
                 backgroundColor: Theme.of(context).colorScheme.surface,
                 maxRadius: 18,
-                child: FaIcon(icon, color: barColor, size: 18),
+                child: Icon(icon, color: barColor, size: 18),
                 foregroundColor: Theme.of(context).colorScheme.surface,
               ),
             ),
@@ -62,23 +61,3 @@ class ProgressBar extends StatelessWidget {
     );
   }
 }
-
-// Stack(
-                //   children: [
-                //     Container(
-                //       decoration: BoxDecoration(
-                //         borderRadius: BorderRadius.circular(10),
-                //         color: Colors.grey[200],
-                //       ),
-                //     ),
-                //     FractionallySizedBox(
-                //       widthFactor: (partialValue / totalValue),
-                //       child: Container(
-                //         decoration: BoxDecoration(
-                //           borderRadius: BorderRadius.circular(10),
-                //           color: barColor,
-                //         ),
-                //       ),
-                //     )
-                //   ],
-                // ),

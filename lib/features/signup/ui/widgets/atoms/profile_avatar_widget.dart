@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:icons_plus/icons_plus.dart';
 
 class ProfileAvatar extends StatelessWidget {
   final double? maxRadius;
@@ -37,7 +37,7 @@ class ProfileAvatar extends StatelessWidget {
                   ),
                   child: CircleAvatar(
                     maxRadius: maxRadius ?? 30,
-                    child: url == null || url == "" ? FaIcon(FontAwesomeIcons.userLarge) : null,
+                    child: url == null || url == "" ? Icon(FontAwesome.user_large) : null,
                     foregroundImage: url == null || url == "" ? null : NetworkImage(url),
                   ),
                 ),
@@ -46,7 +46,7 @@ class ProfileAvatar extends StatelessWidget {
                 onTap: onTap,
                 child: CircleAvatar(
                   maxRadius: maxRadius ?? 30,
-                  child: url == null || url == "" ? FaIcon(FontAwesomeIcons.userLarge, size: 15) : null,
+                  child: url == null || url == "" ? Icon(FontAwesome.user_large, size: 15) : null,
                   foregroundImage: url == null || url == "" ? null : NetworkImage(url),
                 ),
               );

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:icons_plus/icons_plus.dart';
 
 class SavedWorkoutIcon extends StatelessWidget {
   final void Function()? onTap;
@@ -13,7 +13,7 @@ class SavedWorkoutIcon extends StatelessWidget {
         radius: 12,
         backgroundColor: Theme.of(context).colorScheme.background,
         child: Icon(
-          FontAwesomeIcons.solidHeart,
+          FontAwesome.heart,
           size: 10,
           color: Theme.of(context).colorScheme.onSecondaryContainer,
         ),

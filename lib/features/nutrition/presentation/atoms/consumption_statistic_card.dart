@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:icons_plus/icons_plus.dart';
 
 class ConsumptionStatisticCard extends StatelessWidget {
   const ConsumptionStatisticCard({Key? key}) : super(key: key);
@@ -12,7 +12,7 @@ class ConsumptionStatisticCard extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Icon(
-          FontAwesomeIcons.fire,
+          FontAwesome.fire,
           size: 30,
           color: Theme.of(context).colorScheme.error,
         ),

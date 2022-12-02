@@ -1,6 +1,6 @@
 import 'package:FitStack/features/signup/ui/widgets/atoms/profile_avatar_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:icons_plus/icons_plus.dart';
 
 class FriendshipProfileCard extends StatelessWidget {
   final Color colorTheme;
@@ -33,7 +33,7 @@ class FriendshipProfileCard extends StatelessWidget {
       ),
       trailing: accepted != null && accepted == false
           ? Container(
-              child: Icon(FontAwesomeIcons.check, color: Colors.green),
+              child: Icon(FontAwesome.check, color: Colors.green),
             )
           : SizedBox(),
     );

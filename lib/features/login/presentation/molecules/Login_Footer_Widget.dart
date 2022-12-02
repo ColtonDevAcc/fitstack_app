@@ -6,7 +6,7 @@ import 'package:FitStack/widgets/atoms/focusedButton_widget.dart';
 import 'package:FitStack/widgets/atoms/socialAuthButton_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:icons_plus/icons_plus.dart';
 
 class Login_Footer_Widget extends StatelessWidget {
   const Login_Footer_Widget({Key? key}) : super(key: key);
@@ -46,8 +46,8 @@ class Login_Footer_Widget extends StatelessWidget {
           children: [
             SocialAuthButton_Widget(
               color: Theme.of(context).colorScheme.primary,
-              child: FaIcon(
-                FontAwesomeIcons.facebookF,
+              child: Icon(
+                FontAwesome.facebook_f,
                 color: Theme.of(context).colorScheme.onPrimary,
               ),
             ),
@@ -55,8 +55,8 @@ class Login_Footer_Widget extends StatelessWidget {
             SocialAuthButton_Widget(
               onTap: () {},
               color: Theme.of(context).colorScheme.secondary,
-              child: FaIcon(
-                FontAwesomeIcons.google,
+              child: Icon(
+                FontAwesome.google,
                 color: Theme.of(context).colorScheme.onSecondary,
               ),
             ),

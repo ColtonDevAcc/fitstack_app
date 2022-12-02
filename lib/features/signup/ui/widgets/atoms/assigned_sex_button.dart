@@ -2,7 +2,7 @@ import 'package:FitStack/features/signup/state/signup_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:icons_plus/icons_plus.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 
 class AssignedSexButton extends StatelessWidget {
@@ -36,7 +36,7 @@ class AssignedSexButton extends StatelessWidget {
                 icon: Padding(
                   padding: const EdgeInsets.only(right: 10),
                   child: Icon(
-                    FontAwesomeIcons.angleDown,
+                    FontAwesome.angle_down,
                     size: 15,
                   ),
                 ),
@@ -45,7 +45,7 @@ class AssignedSexButton extends StatelessWidget {
                   suffixIcon: Padding(
                     padding: const EdgeInsets.only(right: 10),
                     child: Icon(
-                      FontAwesomeIcons.angleDown,
+                      FontAwesome.angle_down,
                       size: 15,
                     ),
                   ),
@@ -104,7 +104,7 @@ class AssignedSexButton extends StatelessWidget {
                 //     'Choose from list',
                 //     style: Theme.of(context).textTheme.subtitle2,
                 //   ),
-                //   icon: Icon(FontAwesomeIcons.angleDown),
+                //   icon: Icon(FontAwesome.angleDown),
                 //   items: [
                 //     DropdownMenuItem(
                 //       enabled: true,

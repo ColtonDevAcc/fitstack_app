@@ -1,6 +1,6 @@
 import 'package:FitStack/widgets/atoms/socialAuthButton_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:icons_plus/icons_plus.dart';
 
 class Login_SignIn_With_Google_Widget extends StatelessWidget {
   const Login_SignIn_With_Google_Widget({Key? key}) : super(key: key);
@@ -12,8 +12,8 @@ class Login_SignIn_With_Google_Widget extends StatelessWidget {
         // authenticateWithGoogle(context);
       },
       color: Color.fromRGBO(254, 78, 78, 1),
-      child: FaIcon(
-        FontAwesomeIcons.google,
+      child: Icon(
+        FontAwesome.google,
         color: Theme.of(context).colorScheme.onSecondary,
       ),
     );

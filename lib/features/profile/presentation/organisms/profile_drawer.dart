@@ -6,7 +6,7 @@ import 'package:clipboard/clipboard.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:icons_plus/icons_plus.dart';
 import 'package:go_router/go_router.dart';
 
 class ProfileDrawer extends StatelessWidget {
@@ -21,21 +21,21 @@ class ProfileDrawer extends StatelessWidget {
           children: [
             ProfileDrawerListTile(
               title: "Alerts",
-              icon: FontAwesomeIcons.bell,
+              icon: FontAwesome.bell,
             ),
             ProfileDrawerListTile(
               onTap: () => GoRouter.of(context).push('/friendship'),
               title: "Friends",
-              icon: FontAwesomeIcons.userGroup,
+              icon: FontAwesome.user_group,
             ),
             ProfileDrawerListTile(
               title: "Extra",
-              icon: FontAwesomeIcons.gear,
+              icon: FontAwesome.gear,
             ),
             ProfileDrawerListTile(
               onTap: () => context.read<AppBloc>().add(AuthenticationLogoutRequested()),
               title: "Sign Out",
-              icon: FontAwesomeIcons.rightFromBracket,
+              icon: FontAwesome.right_from_bracket,
             ),
             Spacer(
               flex: 1,
@@ -56,7 +56,7 @@ class ProfileDrawer extends StatelessWidget {
                 log("========================\nuser token ${userId}\n========================");
               },
               title: "Developer",
-              icon: FontAwesomeIcons.terminal,
+              icon: FontAwesome.terminal,
             ),
             Align(
               alignment: Alignment.bottomCenter,

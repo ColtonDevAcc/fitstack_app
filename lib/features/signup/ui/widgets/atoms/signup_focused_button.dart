@@ -2,7 +2,7 @@ import 'package:FitStack/features/signup/state/signup_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:icons_plus/icons_plus.dart';
 
 class SignUpFocusedButton extends StatelessWidget {
   final String text;
@@ -53,8 +53,8 @@ class SignUpFocusedButton extends StatelessWidget {
                 AnimatedRotation(
                   duration: Duration(milliseconds: 300),
                   turns: formKey.currentState != null && formKey.currentState!.isValid ? 0 : -.25,
-                  child: FaIcon(
-                    FontAwesomeIcons.arrowRight,
+                  child: Icon(
+                    FontAwesome.arrow_right,
                     color: Theme.of(context).colorScheme.onPrimary,
                     size: 15,
                   ),

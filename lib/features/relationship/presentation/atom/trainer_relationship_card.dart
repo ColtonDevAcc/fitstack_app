@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:icons_plus/icons_plus.dart';
 
 class TrainerRelationshipCard extends StatelessWidget {
   const TrainerRelationshipCard({
@@ -36,7 +36,7 @@ class TrainerRelationshipCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Icon(
-                FontAwesomeIcons.locationDot,
+                FontAwesome.location_dot,
                 color: Theme.of(context).colorScheme.secondary,
               ),
               Text(

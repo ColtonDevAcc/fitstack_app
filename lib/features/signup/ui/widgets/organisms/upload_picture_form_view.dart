@@ -4,7 +4,7 @@ import 'package:FitStack/features/signup/ui/widgets/atoms/signup_form_header.dar
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:icons_plus/icons_plus.dart';
 
 class UploadPictureFormView extends StatelessWidget {
   const UploadPictureFormView({Key? key}) : super(key: key);
@@ -14,7 +14,7 @@ class UploadPictureFormView extends StatelessWidget {
     return Column(
       children: [
         SignupFormHeader(
-          icon: FontAwesomeIcons.camera,
+          icon: FontAwesome.camera,
           text: 'Upload your avatar',
           subtitle: 'Upload a supported image',
         ),
