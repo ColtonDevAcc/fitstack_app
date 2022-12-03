@@ -115,7 +115,10 @@ dependencies:
 
 dependency_overrides:
   font_awesome_flutter:
-    path: packages/font_awesome_flutter
+    git: 
+      url: https://github.com/ColtonDevAcc/fa_flutter.git
+      ref: master
+
 
 dev_dependencies:
   flutter_test:
