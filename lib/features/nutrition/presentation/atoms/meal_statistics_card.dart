@@ -1,13 +1,18 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
 
 class MealStatisticsCard extends StatelessWidget {
+  final String? productName;
+  final String? calories;
+  final String? protein;
   final bool? empty;
   final void Function()? onTap;
-  const MealStatisticsCard({Key? key, this.empty, this.onTap}) : super(key: key);
+  const MealStatisticsCard({Key? key, this.empty, this.onTap, this.productName, this.calories, this.protein}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var name = productName?.split(" ");
     return empty == false || empty == null
         ? GestureDetector(
             onTap: onTap,
@@ -39,25 +44,25 @@ class MealStatisticsCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           //Title
-                          Text(
-                            'Meal 1',
+                          AutoSizeText(
+                            "${name?[0] ?? ""} ${name?[1] ?? ""}",
                             style: Theme.of(context).textTheme.labelLarge?.copyWith(fontWeight: FontWeight.bold),
                             textScaleFactor: 1.2,
                           ),
                           Spacer(flex: 1),
-                          Text(
-                            '800g',
+                          AutoSizeText(
+                            '$calories',
                             style: Theme.of(context).textTheme.labelLarge?.copyWith(fontWeight: FontWeight.bold),
                             textScaleFactor: 1.1,
                           ),
-                          Text('Calories', style: Theme.of(context).textTheme.labelLarge),
+                          AutoSizeText('Calories', style: Theme.of(context).textTheme.labelLarge),
                           Spacer(flex: 1),
-                          Text(
-                            '186g',
+                          AutoSizeText(
+                            '${protein}g',
                             style: Theme.of(context).textTheme.labelLarge?.copyWith(fontWeight: FontWeight.bold),
                             textScaleFactor: 1.1,
                           ),
-                          Text('Protein', style: Theme.of(context).textTheme.labelLarge),
+                          AutoSizeText('Protein', style: Theme.of(context).textTheme.labelLarge),
                           Spacer(flex: 1),
                         ],
                       ),

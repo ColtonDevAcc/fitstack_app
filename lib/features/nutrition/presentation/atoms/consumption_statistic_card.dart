@@ -1,31 +1,31 @@
 import 'package:flutter/material.dart';
-import 'package:icons_plus/icons_plus.dart';
 
 class ConsumptionStatisticCard extends StatelessWidget {
-  const ConsumptionStatisticCard({Key? key}) : super(key: key);
+  final String title;
+  final String value;
+  final Icon icon;
+  const ConsumptionStatisticCard({Key? key, required this.title, required this.value, required this.icon}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisSize: MainAxisSize.min,
       children: [
-        Icon(
-          FontAwesome.fire,
-          size: 30,
-          color: Theme.of(context).colorScheme.error,
-        ),
-        SizedBox(width: 5),
+        icon,
+        SizedBox(width: 10),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              '9000',
-              style: Theme.of(context).textTheme.labelLarge?.copyWith(fontWeight: FontWeight.bold),
+              value,
+              style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
             ),
             Text(
-              'Calories',
+              title,
               style: Theme.of(context).textTheme.labelLarge,
             ),
           ],

@@ -43,7 +43,7 @@ class ProductView extends StatelessWidget {
                 ),
                 Tab(
                   child: AutoSizeText(
-                    "Eco",
+                    "Images",
                     style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
                   ),
                 ),
@@ -109,37 +109,23 @@ class ProductView extends StatelessWidget {
                       child: ListView(
                         padding: EdgeInsets.zero,
                         children: [
-                          Row(
-                            children: [
-                              Text("Eco", style: Theme.of(context).textTheme.headlineSmall),
-                              Spacer(),
-                              Text("${product.ecoscoreScore ?? "N/A"}", style: Theme.of(context).textTheme.headlineSmall),
-                            ],
-                          ),
-                          SizedBox(height: 10),
-                          Row(
-                            children: [
-                              Text("Packaging", style: Theme.of(context).textTheme.headlineSmall),
-                              Spacer(),
-                              Text("${product.packaging ?? "N/A"}", style: Theme.of(context).textTheme.headlineSmall),
-                            ],
-                          ),
-                          SizedBox(height: 10),
-                          Row(
-                            children: [
-                              Text("Agribalyse", style: Theme.of(context).textTheme.headlineSmall),
-                              Spacer(),
-                              Text("${product.ecoscoreData?.agribalyse ?? "N/A"}", style: Theme.of(context).textTheme.headlineSmall),
-                            ],
-                          ),
-                          SizedBox(height: 10),
-                          Row(
-                            children: [
-                              Text("Carbon footprint", style: Theme.of(context).textTheme.headlineSmall),
-                              Spacer(),
-                              Text("${product.embCodes ?? "N/A"}", style: Theme.of(context).textTheme.headlineSmall),
-                            ],
-                          ),
+                          if (product.images != null && product.images!.isNotEmpty)
+                            for (var i = 0; i < product.images!.length; i++)
+                              Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 20.0),
+                                child: Container(
+                                  width: double.infinity,
+                                  height: 200,
+                                  decoration: BoxDecoration(
+                                    color: Theme.of(context).colorScheme.surface,
+                                    borderRadius: BorderRadius.circular(10),
+                                    image: DecorationImage(
+                                      image: NetworkImage(product.images![i].url ?? ""),
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                ),
+                              ),
                         ],
                       ),
                     ),

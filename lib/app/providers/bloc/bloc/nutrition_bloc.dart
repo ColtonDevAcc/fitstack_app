@@ -17,12 +17,14 @@ class NutritionBloc extends Bloc<NutritionEvent, NutritionState> {
   NutritionBloc({required this.openFoodFactsRepository})
       : super(NutritionState(
           status: NutritionStatus.initial,
-          recentMeals: [],
+          recentProducts: [],
           barcode: '',
           panelController: PanelController(),
         )) {
     on<GetNutritionData>(onGetNutritionData);
     on<ScanBarcode>(onScanBarcode);
+    on<GetNutritionDataFromProduct>(onGetNutritionDataFromProduct);
+    on<AddProductToHistory>(onAddProductToHistory);
   }
 
   Future<void> onGetNutritionData(GetNutritionData event, Emitter<NutritionState> emit) async {
@@ -51,6 +53,27 @@ class NutritionBloc extends Bloc<NutritionEvent, NutritionState> {
           }
         },
       );
+    } on PlatformException {
+      FitStackToast.showErrorToast("Failed to get platform version");
+    }
+  }
+
+  Future<void> onGetNutritionDataFromProduct(GetNutritionDataFromProduct event, Emitter<NutritionState> emit) async {
+    try {
+      emit(state.copyWith(status: NutritionStatus.loading, product: event.product));
+      log("Getting Nutrition Data for ${event.product.barcode}");
+      final product = await openFoodFactsRepository.getProduct(barcode: event.product.barcode ?? "no barcode");
+      log("Product: ${product?.toJson()}");
+      emit(state.copyWith(status: NutritionStatus.success, product: product));
+      state.panelController.open();
+    } on PlatformException {
+      FitStackToast.showErrorToast("Failed to get platform version");
+    }
+  }
+
+  Future<void> onAddProductToHistory(AddProductToHistory event, Emitter<NutritionState> emit) async {
+    try {
+      emit(state.copyWith(recentMeals: [...state.recentProducts, event.product]));
     } on PlatformException {
       FitStackToast.showErrorToast("Failed to get platform version");
     }

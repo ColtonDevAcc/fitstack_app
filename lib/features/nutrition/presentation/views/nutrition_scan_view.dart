@@ -5,6 +5,7 @@ import 'package:FitStack/widgets/atoms/basic_view_header.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
@@ -64,78 +65,88 @@ class NutritionScanView extends StatelessWidget {
                     ),
                   ),
                 ),
-                panel: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(height: 10),
-                    Container(
-                      height: 5,
-                      width: 50,
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.onBackground.withOpacity(0.4),
-                        borderRadius: BorderRadius.all(Radius.circular(12.0)),
+                panel: Scaffold(
+                  floatingActionButton: FloatingActionButton(
+                    onPressed: () {
+                      context.read<NutritionBloc>().add(AddProductToHistory(product: state.product!));
+                    },
+                    child: Icon(FontAwesomeIcons.plus),
+                    backgroundColor: Theme.of(context).colorScheme.primary,
+                  ),
+                  backgroundColor: Theme.of(context).colorScheme.background,
+                  body: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(height: 10),
+                      Container(
+                        height: 5,
+                        width: 50,
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).colorScheme.onBackground.withOpacity(0.4),
+                          borderRadius: BorderRadius.all(Radius.circular(12.0)),
+                        ),
                       ),
-                    ),
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
-                        child: Scrollbar(
-                          child: CustomScrollView(
-                            scrollDirection: Axis.vertical,
-                            slivers: [
-                              SliverToBoxAdapter(
-                                child: Column(
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Expanded(
-                                          child: Padding(
-                                            padding: const EdgeInsets.only(right: 10.0),
-                                            child: AutoSizeText(
-                                              "${state.product?.productName ?? "Scan a product"}",
-                                              overflow: TextOverflow.ellipsis,
-                                              style: Theme.of(context).textTheme.headlineMedium,
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
+                          child: Scrollbar(
+                            child: CustomScrollView(
+                              scrollDirection: Axis.vertical,
+                              slivers: [
+                                SliverToBoxAdapter(
+                                  child: Column(
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Expanded(
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(right: 10.0),
+                                              child: AutoSizeText(
+                                                "${state.product?.productName ?? "Scan a product"}",
+                                                overflow: TextOverflow.ellipsis,
+                                                style: Theme.of(context).textTheme.headlineMedium,
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                        if (state.product != null)
-                                          ProductNovaScoreCard(novaScore: state.product?.novaGroup, nutraScore: state.product?.nutriscore),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              SliverFillRemaining(
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    if (state.product != null)
-                                      Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            "${state.product?.ingredientsText ?? "no ingredients listed"}",
-                                            maxLines: 2,
-                                            overflow: TextOverflow.ellipsis,
-                                            style: Theme.of(context).textTheme.headlineSmall,
-                                          ),
-                                          SizedBox(height: 20),
-                                          ProductNutrientsSnapshot(nutrients: state.product?.nutriments),
+                                          if (state.product != null)
+                                            ProductNovaScoreCard(novaScore: state.product?.novaGroup, nutraScore: state.product?.nutriscore),
                                         ],
                                       ),
-                                    if (state.product != null) Expanded(child: ProductView(product: state.product!)),
-                                  ],
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            ],
+                                SliverFillRemaining(
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      if (state.product != null)
+                                        Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "${state.product?.ingredientsText ?? "no ingredients listed"}",
+                                              maxLines: 2,
+                                              overflow: TextOverflow.ellipsis,
+                                              style: Theme.of(context).textTheme.headlineSmall,
+                                            ),
+                                            SizedBox(height: 20),
+                                            ProductNutrientsSnapshot(nutrients: state.product?.nutriments),
+                                          ],
+                                        ),
+                                      if (state.product != null) Expanded(child: ProductView(product: state.product!)),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               );
             },

@@ -1,5 +1,6 @@
 import 'package:FitStack/features/nutrition/presentation/atoms/nutrients_score_chip.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:openfoodfacts/model/Nutrient.dart';
 import 'package:openfoodfacts/model/Nutriments.dart';
@@ -25,19 +26,19 @@ class ProductNutrientsSnapshot extends StatelessWidget {
         crossAxisAlignment: WrapCrossAlignment.start,
         children: [
           NutrientsScoreChip(
-            icon: FontAwesome.fire,
+            icon: FontAwesome.fire_flame_simple,
             value: "${energyKcal ?? energyKj ?? 0} ${energyKcal != null ? "kcal" : "kJ"}",
           ),
           NutrientsScoreChip(
-            icon: FontAwesome.drumstick_bite,
+            icon: FontAwesomeIcons.avocado,
             value: "${nutrients?.getValue(Nutrient.proteins, PerSize.serving) ?? 0}g protein",
           ),
           NutrientsScoreChip(
-            icon: FontAwesome.leaf,
+            icon: FontAwesomeIcons.wheat,
             value: "${nutrients?.getValue(Nutrient.carbohydrates, PerSize.serving) ?? 0}g carbs",
           ),
           NutrientsScoreChip(
-            icon: LineAwesome.prescription_bottle_solid,
+            icon: FontAwesomeIcons.pizzaSlice,
             value: "${nutrients?.getValue(Nutrient.fat, PerSize.serving) ?? 0}g fat",
           ),
         ],

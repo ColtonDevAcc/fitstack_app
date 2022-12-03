@@ -3,6 +3,8 @@ import 'package:FitStack/features/nutrition/presentation/atoms/meal_statistics_c
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:openfoodfacts/model/Nutrient.dart';
+import 'package:openfoodfacts/model/PerSize.dart';
 
 class RecentMealsList extends StatelessWidget {
   const RecentMealsList({Key? key}) : super(key: key);
@@ -16,11 +18,17 @@ class RecentMealsList extends StatelessWidget {
           alignment: WrapAlignment.spaceBetween,
           spacing: 20,
           runSpacing: 20,
-          children: state.recentMeals.isEmpty
+          children: state.recentProducts.isEmpty
               ? []
-              : state.recentMeals
+              : state.recentProducts
                   .map((meal) {
-                    return MealStatisticsCard();
+                    return MealStatisticsCard(
+                      productName: meal.productName,
+                      calories: meal.nutriments == null
+                          ? "${meal.nutriments?.getValue(Nutrient.energyKCal, PerSize.serving) ?? 0} kcal"
+                          : "${meal.nutriments?.getValue(Nutrient.energyKJ, PerSize.serving) ?? 0} kJ",
+                      protein: "${meal.nutriments?.getValue(Nutrient.proteins, PerSize.serving)}",
+                    );
                   })
                   .toList()
                   .cast()
