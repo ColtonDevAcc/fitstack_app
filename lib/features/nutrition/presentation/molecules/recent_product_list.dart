@@ -6,8 +6,8 @@ import 'package:go_router/go_router.dart';
 import 'package:openfoodfacts/model/Nutrient.dart';
 import 'package:openfoodfacts/model/PerSize.dart';
 
-class RecentMealsList extends StatelessWidget {
-  const RecentMealsList({Key? key}) : super(key: key);
+class RecentProductList extends StatelessWidget {
+  const RecentProductList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,18 +20,17 @@ class RecentMealsList extends StatelessWidget {
           runSpacing: 20,
           children: state.recentProducts.isEmpty
               ? []
-              : state.recentProducts
-                  .map((meal) {
+              : state.recentProducts.map(
+                  (meal) {
                     return MealStatisticsCard(
                       productName: meal.productName,
                       calories: meal.nutriments == null
                           ? "${meal.nutriments?.getValue(Nutrient.energyKCal, PerSize.serving) ?? 0} kcal"
                           : "${meal.nutriments?.getValue(Nutrient.energyKJ, PerSize.serving) ?? 0} kJ",
-                      protein: "${meal.nutriments?.getValue(Nutrient.proteins, PerSize.serving)}",
+                      protein: "${meal.nutriments?.getValue(Nutrient.proteins, PerSize.serving) ?? 0} g",
                     );
-                  })
-                  .toList()
-                  .cast()
+                  },
+                ).toList()
             ..add(
               MealStatisticsCard(
                 empty: true,

@@ -13,6 +13,7 @@ class MealStatisticsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var name = productName?.split(" ");
+
     return empty == false || empty == null
         ? GestureDetector(
             onTap: onTap,
@@ -45,7 +46,7 @@ class MealStatisticsCard extends StatelessWidget {
                         children: [
                           //Title
                           AutoSizeText(
-                            "${name?[0] ?? ""} ${name?[1] ?? ""}",
+                            name != null ? "${name[0]} ${name.length > 1 ? name[1] : ""}" : "",
                             style: Theme.of(context).textTheme.labelLarge?.copyWith(fontWeight: FontWeight.bold),
                             textScaleFactor: 1.2,
                           ),

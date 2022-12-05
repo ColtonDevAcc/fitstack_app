@@ -17,6 +17,8 @@ dependencies:
   device_info_plus: ^8.0.0
   units_converter: ^2.0.1
   collection:
+  very_good_performance: ^0.0.4
+  get_it: ^7.2.0
 
   #annotation
   json_annotation: ^4.6.0
@@ -115,10 +117,9 @@ dependencies:
 
 dependency_overrides:
   font_awesome_flutter:
-    git: 
+    git:
       url: https://github.com/ColtonDevAcc/fa_flutter.git
       ref: master
-
 
 dev_dependencies:
   flutter_test:

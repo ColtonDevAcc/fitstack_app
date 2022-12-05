@@ -1,5 +1,5 @@
 import 'package:FitStack/app/providers/bloc/bloc/nutrition_bloc.dart';
-import 'package:FitStack/features/nutrition/presentation/molecules/recent_meals_list.dart';
+import 'package:FitStack/features/nutrition/presentation/molecules/recent_product_list.dart';
 import 'package:FitStack/features/nutrition/presentation/molecules/user_consumption_chart.dart';
 import 'package:FitStack/widgets/atoms/basic_view_header.dart';
 import 'package:flutter/material.dart';
@@ -42,6 +42,7 @@ class NutritionPage extends StatelessWidget {
                   Expanded(
                     flex: 1,
                     child: BlocBuilder<NutritionBloc, NutritionState>(
+                      buildWhen: (previous, current) => previous.recentProducts != current.recentProducts,
                       builder: (context, state) {
                         return UserConsumptionChart(products: state.recentProducts);
                       },
@@ -55,7 +56,7 @@ class NutritionPage extends StatelessWidget {
                       style: labelTextStyle,
                     ),
                   ),
-                  Expanded(flex: 2, child: RecentMealsList()),
+                  Expanded(flex: 2, child: RecentProductList()),
                 ],
               ),
             ),

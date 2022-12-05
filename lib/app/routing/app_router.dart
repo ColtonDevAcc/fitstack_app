@@ -1,6 +1,6 @@
 import 'package:FitStack/app/providers/bloc/app/app_bloc.dart';
 import 'package:FitStack/app/repository/auth_repository.dart';
-import 'package:FitStack/app/routing/navigation_observers.dart';
+import 'package:FitStack/app/services/analytics_service.dart';
 import 'package:FitStack/app/services/go_router_refresh_stream.dart';
 import 'package:FitStack/features/nutrition/presentation/views/nutrition_scan_view.dart';
 import 'package:FitStack/features/statistics/ui/views/statistic_view.dart';
@@ -22,6 +22,7 @@ import 'package:FitStack/pages/signup_page.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 
 //flutter pub get && flutter pub run build_runner build --delete-conflicting-outputs
@@ -37,7 +38,7 @@ class AppRouter {
     navigatorKey: navigatorKey,
     refreshListenable: GoRouterRefreshStream(appBloc.stream),
     observers: [
-      if (!kDebugMode) GoRouterObserver(analytics: analytics),
+      if (kDebugMode) GetIt.instance<AnalyticsService>(),
     ],
     routes: [
       GoRoute(

@@ -1,13 +1,13 @@
 import 'dart:developer';
 
+import 'package:FitStack/app/helpers/endpoints.dart';
 import 'package:FitStack/app/models/workout/exercise_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:dio/dio.dart';
 
 class ExerciseRepository {
-  final Dio dio = Dio();
-  static String mainUrl = kDebugMode ? "http://localhost:8080" : "https://dev.fitstack.io";
+  final dio = Endpoints();
   String? token;
 
   ExerciseRepository();
@@ -16,7 +16,7 @@ class ExerciseRepository {
     try {
       final String userToken = await FirebaseAuth.instance.currentUser!.getIdToken();
       final response = await dio.get(
-        "$mainUrl/exercise/",
+        "/exercise/",
         options: Options(
           headers: {"Authorization": "Bearer ${userToken}"},
         ),
@@ -36,7 +36,7 @@ class ExerciseRepository {
 
   Future<Exercise> getExercise(String id) async {
     try {
-      final response = await dio.get("$mainUrl/exercise/$id");
+      final response = await dio.get("/exercise/$id");
       return Exercise.fromJson(response.data);
     } catch (e) {
       print(e);
@@ -46,7 +46,7 @@ class ExerciseRepository {
 
   Future<Exercise> addExercise(Exercise exercise) async {
     try {
-      final response = await dio.post("$mainUrl/exercise", data: exercise.toJson());
+      final response = await dio.post("/exercise", data: exercise.toJson());
       return Exercise.fromJson(response.data);
     } catch (e) {
       print(e);
@@ -58,7 +58,7 @@ class ExerciseRepository {
     log("exercise: ${exercise.toJson()}");
     String token = await FirebaseAuth.instance.currentUser!.getIdToken();
     final response = await dio.post(
-      "$mainUrl/exercise/update",
+      "/exercise/update",
       options: Options(
         headers: {"Authorization": "Bearer ${token}"},
       ),
@@ -73,7 +73,7 @@ class ExerciseRepository {
 
   Future<void> deleteExercise(String id) async {
     try {
-      await dio.delete("$mainUrl/exercise/$id");
+      await dio.delete("/exercise/$id");
     } catch (e) {
       print(e);
     }
@@ -81,7 +81,7 @@ class ExerciseRepository {
 
   Future<List<Exercise>> searchExercises(String query) async {
     try {
-      final response = await dio.get("$mainUrl/exercise/search/$query");
+      final response = await dio.get("/exercise/search/$query");
       return (response.data as List).map((e) => Exercise.fromJson(e)).toList();
     } catch (e) {
       print(e);

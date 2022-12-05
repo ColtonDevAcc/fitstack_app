@@ -3,12 +3,10 @@ import 'package:FitStack/app/helpers/endpoints.dart';
 import 'package:FitStack/app/models/user/user_model.dart';
 import 'package:FitStack/app/models/user/user_profile_model.dart';
 import 'package:FitStack/app/models/user/user_statistic_model.dart';
-import 'package:flutter/foundation.dart';
 import 'package:dio/dio.dart';
 import 'package:image_picker/image_picker.dart';
 
 class UserRepository {
-  static String mainUrl = kDebugMode ? "http://localhost:8080" : "https://dev.fitstack.io";
   final dio = Endpoints();
 
   Future<User?> getUser({required token}) async {

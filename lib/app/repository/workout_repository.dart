@@ -1,14 +1,13 @@
 import 'dart:async';
 import 'dart:developer';
 
+import 'package:FitStack/app/helpers/endpoints.dart';
 import 'package:FitStack/app/models/workout/workout_model.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
 
 class WorkoutRepository {
-  static String mainUrl = kDebugMode ? "http://localhost:8080" : "https://dev.fitstack.io";
-  final Dio dio = Dio();
+  final dio = Endpoints();
   final workoutStreamController = StreamController<List<Workout>>.broadcast();
   String? token;
 
@@ -20,7 +19,7 @@ class WorkoutRepository {
     var token = await FirebaseAuth.instance.currentUser!.getIdToken();
 
     Response response = await dio.get(
-      mainUrl + '/workout/get',
+      '/workout/get',
       options: Options(
         headers: {
           "Authorization": "Bearer ${token}",
@@ -39,7 +38,7 @@ class WorkoutRepository {
   Future<void> deleteWorkout({required int id}) async {
     token = await FirebaseAuth.instance.currentUser!.getIdToken();
     Response response = await dio.post(
-      mainUrl + '/workout/delete',
+      '/workout/delete',
       options: Options(
         headers: {
           "Authorization": "Bearer ${token}",

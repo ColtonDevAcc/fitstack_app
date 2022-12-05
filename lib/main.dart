@@ -1,27 +1,39 @@
-import 'package:FitStack/app/helpers/firebase_init.dart';
 import 'package:FitStack/app/injection/state_providers.dart';
 import 'package:FitStack/app/providers/bloc/app/app_bloc.dart';
 import 'package:FitStack/app/routing/app_router.dart';
+import 'package:FitStack/app/services/analytics_service.dart';
 import 'package:FitStack/app/theme/color_Theme.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:firebase_performance/firebase_performance.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 import 'firebase_options.dart';
+
+GetIt locator = GetIt.instance;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  if (const bool.fromEnvironment("USE_FIREBASE_EMU")) {
-    await FitStackFirebase.configureFirebaseAuth();
-    await FitStackFirebase.configureFirebaseStorage();
-    FitStackFirebase.configureFirebaseFirestore();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
+  if (!kDebugMode) {
+    FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+    FirebasePerformance.instance;
+    FirebaseAnalytics.instance;
+    FirebaseAuth.instance;
   } else {
-    await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+    FirebasePerformance.instance;
+    FirebaseAnalytics.instance;
+    FirebaseAuth.instance;
   }
 
-  if (!kDebugMode) FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+  locator.registerLazySingleton(() => AnalyticsService(debug: true));
+
   runApp(MyApp());
 }
 

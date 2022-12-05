@@ -1,16 +1,16 @@
 import 'package:FitStack/app/providers/bloc/bloc/nutrition_bloc.dart';
 import 'package:FitStack/features/nutrition/presentation/atoms/product_nova_score_card.dart';
+import 'package:FitStack/features/nutrition/presentation/atoms/product_nutrients_snapshot.dart';
 import 'package:FitStack/features/nutrition/presentation/views/product_view.dart';
 import 'package:FitStack/widgets/atoms/basic_view_header.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
-
-import '../atoms/product_nutrients_snapshot.dart';
 
 class NutritionScanView extends StatelessWidget {
   const NutritionScanView({Key? key}) : super(key: key);
@@ -69,6 +69,7 @@ class NutritionScanView extends StatelessWidget {
                   floatingActionButton: FloatingActionButton(
                     onPressed: () {
                       context.read<NutritionBloc>().add(AddProductToHistory(product: state.product!));
+                      context.go("/nutrition");
                     },
                     child: Icon(FontAwesomeIcons.plus),
                     backgroundColor: Theme.of(context).colorScheme.primary,

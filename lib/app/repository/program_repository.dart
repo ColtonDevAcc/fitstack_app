@@ -1,21 +1,20 @@
 import 'dart:developer';
 
+import 'package:FitStack/app/helpers/endpoints.dart';
 import 'package:FitStack/app/models/program/program_model.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:dio/dio.dart';
 
 class ProgramRepository {
-  final Dio dio = Dio();
+  final dio = Endpoints();
   final storage = new FlutterSecureStorage();
-  static String mainUrl = kDebugMode ? "http://localhost:8080" : "https://dev.fitstack.io";
 
   ProgramRepository();
 
   Future<List<Program>> getPrograms({token: String}) async {
     try {
       Response response = await dio.get(
-        mainUrl + '/program/get',
+        '/program/get',
         options: Options(
           headers: {"Authorization": "Bearer ${token}"},
         ),

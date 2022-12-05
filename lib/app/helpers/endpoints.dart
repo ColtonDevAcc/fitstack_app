@@ -1,12 +1,22 @@
+import 'package:FitStack/app/services/analytics_service.dart';
+import 'package:FitStack/main.dart';
 import 'package:flutter/foundation.dart';
 import 'package:dio/dio.dart';
 
 class Endpoints {
   // base url
-  static const String baseUrl = kDebugMode ? "http://192.168.0.203:8080" : "https://dev.fitstack.io";
+  static const String baseUrl = kDebugMode ? "http://172.20.10.4:8080" : "https://dev.fitstack.io";
   static const int receiveTimeout = 15000;
   static const int connectionTimeout = 15000;
-  var dio = Dio(BaseOptions(baseUrl: baseUrl, receiveTimeout: receiveTimeout, connectTimeout: connectionTimeout));
+  Future<Dio> dio = locator<AnalyticsService>().networkPerformanceInterceptor(
+    dio: Dio(
+      BaseOptions(
+        baseUrl: baseUrl,
+        receiveTimeout: receiveTimeout,
+        connectTimeout: connectionTimeout,
+      ),
+    ),
+  );
 
   // Get:-----------------------------------------------------------------------
   Future<Response> get(
@@ -17,13 +27,16 @@ class Endpoints {
     ProgressCallback? onReceiveProgress,
   }) async {
     try {
-      final Response response = await dio.get(
-        baseUrl + url,
-        queryParameters: queryParameters,
-        options: options,
-        cancelToken: cancelToken,
-        onReceiveProgress: onReceiveProgress,
+      final Response response = await dio.then(
+        (value) => value.get(
+          baseUrl + url,
+          queryParameters: queryParameters,
+          options: options,
+          cancelToken: cancelToken,
+          onReceiveProgress: onReceiveProgress,
+        ),
       );
+
       return response;
     } catch (e) {
       rethrow;
@@ -41,14 +54,16 @@ class Endpoints {
     ProgressCallback? onReceiveProgress,
   }) async {
     try {
-      final Response response = await dio.post(
-        baseUrl + uri,
-        data: data,
-        queryParameters: queryParameters,
-        options: options,
-        cancelToken: cancelToken,
-        onSendProgress: onSendProgress,
-        onReceiveProgress: onReceiveProgress,
+      final Response response = await dio.then(
+        (value) => value.post(
+          baseUrl + uri,
+          data: data,
+          queryParameters: queryParameters,
+          options: options,
+          cancelToken: cancelToken,
+          onSendProgress: onSendProgress,
+          onReceiveProgress: onReceiveProgress,
+        ),
       );
       return response;
     } catch (e) {
@@ -67,14 +82,16 @@ class Endpoints {
     ProgressCallback? onReceiveProgress,
   }) async {
     try {
-      final Response response = await dio.put(
-        baseUrl + uri,
-        data: data,
-        queryParameters: queryParameters,
-        options: options,
-        cancelToken: cancelToken,
-        onSendProgress: onSendProgress,
-        onReceiveProgress: onReceiveProgress,
+      final Response response = await dio.then(
+        (value) => value.put(
+          baseUrl + uri,
+          data: data,
+          queryParameters: queryParameters,
+          options: options,
+          cancelToken: cancelToken,
+          onSendProgress: onSendProgress,
+          onReceiveProgress: onReceiveProgress,
+        ),
       );
       return response;
     } catch (e) {
@@ -93,12 +110,14 @@ class Endpoints {
     ProgressCallback? onReceiveProgress,
   }) async {
     try {
-      final Response response = await dio.delete(
-        baseUrl + uri,
-        data: data,
-        queryParameters: queryParameters,
-        options: options,
-        cancelToken: cancelToken,
+      final Response response = await dio.then(
+        (value) async => value.delete(
+          baseUrl + uri,
+          data: data,
+          queryParameters: queryParameters,
+          options: options,
+          cancelToken: cancelToken,
+        ),
       );
       return response.data;
     } catch (e) {

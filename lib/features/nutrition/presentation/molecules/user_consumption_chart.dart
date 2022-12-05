@@ -24,36 +24,59 @@ class UserConsumptionChart extends StatelessWidget {
 
     return Container(
       width: double.infinity,
-      padding: EdgeInsets.all(15),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        color: Theme.of(context).colorScheme.surface,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.2),
-            spreadRadius: 2,
-            blurRadius: 5,
-            offset: Offset(1, 3),
-            blurStyle: BlurStyle.outer,
-          ),
-        ],
-      ),
       child: Wrap(
         runAlignment: WrapAlignment.spaceBetween,
-        crossAxisAlignment: WrapCrossAlignment.start,
         alignment: WrapAlignment.spaceBetween,
-        children: nutrients.entries
-            .map(
-              (e) => SizedBox(
-                width: MediaQuery.of(context).size.width * .3 - 30,
-                child: ConsumptionStatisticCard(
-                  title: e.key,
-                  value: e.value.toString(),
-                  icon: nutritionToIconMap[e.key] ?? Icon(FontAwesomeIcons.question),
-                ),
-              ),
-            )
-            .toList(),
+        children: [
+          ConsumptionStatisticCard(
+            title: 'Calories',
+            value: (nutrients['Calories'] ?? 0).toString(),
+            icon: Icon(
+              FontAwesomeIcons.fire,
+              color: Theme.of(context).colorScheme.primary,
+            ),
+          ),
+          ConsumptionStatisticCard(
+            title: 'Protein',
+            value: (nutrients['Protein'] ?? 0).toString(),
+            icon: Icon(
+              FontAwesomeIcons.cow,
+              color: Colors.brown,
+            ),
+          ),
+          ConsumptionStatisticCard(
+            title: 'Carbs',
+            value: (nutrients['Carbs'] ?? 0).toString(),
+            icon: Icon(
+              FontAwesomeIcons.breadSlice,
+              color: Colors.amber,
+            ),
+          ),
+          ConsumptionStatisticCard(
+            title: 'Fat',
+            value: (nutrients['Fat'] ?? 0).toString(),
+            icon: Icon(
+              FontAwesomeIcons.pizzaSlice,
+              color: Colors.deepOrange,
+            ),
+          ),
+          ConsumptionStatisticCard(
+            title: 'Fiber',
+            value: (nutrients['Fiber'] ?? 0).toString(),
+            icon: Icon(
+              FontAwesomeIcons.wheat,
+              color: Colors.orange,
+            ),
+          ),
+          ConsumptionStatisticCard(
+            title: 'Sodium',
+            value: (nutrients['Sodium'] ?? 0).toString(),
+            icon: Icon(
+              FontAwesomeIcons.saltShaker,
+              color: Colors.blue,
+            ),
+          ),
+        ],
       ),
     );
   }
