@@ -10,15 +10,14 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^1.0.2
 
-  #http
-  retrofit: ^3.0.1+1
-
-  #util
+  #util / services
   device_info_plus: ^8.0.0
   units_converter: ^2.0.1
   collection:
   very_good_performance: ^0.0.4
   get_it: ^7.2.0
+  permission_handler: ^10.2.0
+  dio: ^4.0.6
 
   #annotation
   json_annotation: ^4.6.0

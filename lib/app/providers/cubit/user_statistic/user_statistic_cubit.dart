@@ -7,11 +7,14 @@ import 'package:FitStack/app/models/logs/weight_log_model.dart';
 import 'package:FitStack/app/models/user/user_statistic_model.dart';
 import 'package:FitStack/app/repository/user_health_repository.dart';
 import 'package:FitStack/app/repository/user_repository.dart';
+import 'package:FitStack/app/services/analytics_service.dart';
+import 'package:FitStack/main.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:health/health.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 part 'user_statistic_state.dart';
 
@@ -52,41 +55,45 @@ class UserStatisticCubit extends Cubit<UserStatisticState> {
   Future<void> checkUserStatistic() async {
     emit(state.copyWith(status: UserStatisticsStatus.loading));
     HealthFactory health = HealthFactory();
+
     var today = DateTime.now();
+    var daySinceFetch = today.difference(state.userStatistic.updated_at!.toUtc());
     var types = [
       HealthDataType.WEIGHT,
       HealthDataType.BODY_MASS_INDEX,
       HealthDataType.BODY_FAT_PERCENTAGE,
       HealthDataType.STEPS,
-      HealthDataType.DISTANCE_WALKING_RUNNING,
-      // HealthDataType.MOVE_MINUTES,
-      HealthDataType.HEART_RATE,
-      HealthDataType.SLEEP_IN_BED,
-      HealthDataType.BLOOD_PRESSURE_DIASTOLIC,
-      HealthDataType.BLOOD_PRESSURE_SYSTOLIC,
-      HealthDataType.BLOOD_OXYGEN,
-      HealthDataType.BODY_TEMPERATURE,
-      //! RespiratoryRate.
-      //! OxygenSaturation
+      // HealthDataType.SLEEP_IN_BED,
       HealthDataType.ACTIVE_ENERGY_BURNED,
       HealthDataType.BASAL_ENERGY_BURNED,
     ];
 
-    //check if last update is today
+    String token = await FirebaseAuth.instance.currentUser!.getIdToken();
+    List<HealthDataAccess> permissions = [];
+    types.forEach((element) => permissions.add(HealthDataAccess.READ_WRITE));
+    //TODO: get the average for each day in case a user weighs in each day
     try {
-      if (today.difference(state.userStatistic.updated_at!.toUtc()).inDays > 1) {
-        var lastFetch = state.userStatistic.updated_at;
-        var healthData = await health.getHealthDataFromTypes(lastFetch ?? today.subtract(Duration(days: 365)), DateTime.now(), types);
-        var healthDataMap = await userHealthRepository.ParseUserHealthData(healthData: healthData);
-        String token = await FirebaseAuth.instance.currentUser!.getIdToken();
+      if (daySinceFetch.inDays >= 1) {
+        // The location permission is requested for Workouts using the Distance information.
+        health.requestAuthorization(types, permissions: permissions);
 
-        if (healthData.isEmpty == false) {
+        var healthData = await health.getHealthDataFromTypes(today.subtract(daySinceFetch), DateTime.now(), types);
+
+        log("health data: ${healthData.length}");
+
+        var healthDataMap = await userHealthRepository.ParseUserHealthData(healthData: healthData);
+
+        log("health data map: ${healthDataMap.length}");
+
+        if (healthData.isNotEmpty) {
+          var healthDataMap = await userHealthRepository.ParseUserHealthData(healthData: healthData);
+
           await userRepository
               .updateStatistics(
                 statistic: UserStatistic(
-                  weight_log: healthDataMap[HealthDataType.WEIGHT] as List<WeightLog>?,
-                  bmi_log: healthDataMap[HealthDataType.BODY_MASS_INDEX] as List<BMILog>?,
-                  body_fat_log: healthDataMap[HealthDataType.BODY_FAT_PERCENTAGE] as List<BodyFatLog>?,
+                  weight_log: List.from(healthDataMap[HealthDataType.WEIGHT] ?? []),
+                  bmi_log: List.from(healthDataMap[HealthDataType.BODY_MASS_INDEX] ?? []),
+                  body_fat_log: List.from(healthDataMap[HealthDataType.BODY_FAT_PERCENTAGE] ?? []),
                   updated_at: DateTime.now().toUtc(),
                 ),
                 token: token,
@@ -96,21 +103,21 @@ class UserStatisticCubit extends Cubit<UserStatisticState> {
                   state.copyWith(
                     status: UserStatisticsStatus.loaded,
                     userStatistic: state.userStatistic.copyWith(
-                      bmi_log: healthDataMap[HealthDataType.BODY_MASS_INDEX] as List<BMILog>?,
-                      weight_log: healthDataMap[HealthDataType.WEIGHT] as List<WeightLog>?,
-                      body_fat_log: healthDataMap[HealthDataType.BODY_FAT_PERCENTAGE] as List<BodyFatLog>?,
+                      bmi_log: List.from(healthDataMap[HealthDataType.BODY_MASS_INDEX] ?? []),
+                      weight_log: List.from(healthDataMap[HealthDataType.WEIGHT] ?? []),
+                      body_fat_log: List.from(healthDataMap[HealthDataType.BODY_FAT_PERCENTAGE] ?? []),
                       updated_at: DateTime.now().toUtc(),
                     ),
                   ),
                 ),
               );
         } else {
-          kDebugMode ? log("no new data to update") : null;
+          if (kDebugMode) log("data last fetched was ${daySinceFetch.inDays} day/s ago ");
         }
-        FitStackToast.showSuccessToast(healthData.length > 0 ? "User Statistic Updated ${healthData.length} Logs" : "already up to date");
       }
-    } catch (e) {
+    } on Error catch (e) {
       FitStackToast.showErrorToast("error fetching user statistics $e");
+      locator<AnalyticsService>().logError(exception: e.toString(), stacktrace: e.stackTrace, reason: "failed to fetch user statistics");
       kDebugMode ? log("message: ${e.toString()}") : null;
     }
 
