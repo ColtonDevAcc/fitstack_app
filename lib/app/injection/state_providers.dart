@@ -1,10 +1,10 @@
 import 'package:FitStack/app/providers/bloc/active_workout/active_workout_bloc.dart';
 import 'package:FitStack/app/providers/bloc/app/app_bloc.dart';
-import 'package:FitStack/app/providers/bloc/bloc/nutrition_bloc.dart';
 import 'package:FitStack/app/providers/bloc/exercise/exercise_bloc.dart';
+import 'package:FitStack/app/providers/bloc/nutrition/nutrition_bloc.dart';
+import 'package:FitStack/app/providers/bloc/user_statistics/user_statistics_bloc.dart';
 import 'package:FitStack/app/providers/bloc/workout/workout_bloc.dart';
 import 'package:FitStack/app/providers/cubit/main_view/main_view_cubit.dart';
-import 'package:FitStack/app/providers/cubit/user_statistic/user_statistic_cubit.dart';
 import 'package:FitStack/app/repository/active_workout_repository.dart';
 import 'package:FitStack/app/repository/auth_repository.dart';
 import 'package:FitStack/app/repository/exercise_repository.dart';
@@ -82,10 +82,10 @@ class StateProviders extends StatelessWidget {
           BlocProvider<ProgramCubit>(
             create: (BuildContext context) => ProgramCubit(programRepository: context.read<ProgramRepository>()),
           ),
-          BlocProvider<UserStatisticCubit>(
+          BlocProvider<UserStatisticsBloc>(
             create: (BuildContext context) =>
-                UserStatisticCubit(userRepository: context.read<UserRepository>(), userHealthRepository: context.read<UserHealthRepository>())
-                  ..getUserStatistic(),
+                UserStatisticsBloc(userRepository: context.read<UserRepository>(), userHealthRepository: context.read<UserHealthRepository>())
+                  ..add(UserStatisticsRequested()),
           ),
           BlocProvider<WorkoutBloc>(
             create: (BuildContext context) => WorkoutBloc(
@@ -103,7 +103,8 @@ class StateProviders extends StatelessWidget {
             create: (BuildContext context) => ExerciseBloc(exerciseRepository: context.read<ExerciseRepository>())..add(LoadExercises()),
           ),
           BlocProvider<NutritionBloc>(
-              create: (BuildContext context) => NutritionBloc(openFoodFactsRepository: context.read<OpenFoodFactsRepository>())),
+            create: (BuildContext context) => NutritionBloc(openFoodFactsRepository: context.read<OpenFoodFactsRepository>()),
+          ),
         ],
         child: child,
       ),

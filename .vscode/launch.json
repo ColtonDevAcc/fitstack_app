@@ -8,43 +8,6 @@
       "name": "Dart & Flutter",
       "request": "launch",
       "type": "dart"
-    },
-    {
-      "name": "LOCAL EMULATOR",
-      "cwd": "flutter_with_firebase_emulators",
-      "request": "launch",
-      "program": "lib/main.dart",
-      "type": "dart",
-      "toolArgs": ["--dart-define", "USE_FIREBASE_EMU=true"]
-    },
-    {
-      "name": "LOCAL DEVICE",
-      "cwd": "flutter_with_firebase_emulators",
-      "request": "launch",
-      "program": "lib/main.dart",
-      "type": "dart",
-      "toolArgs": [
-        "--dart-define",
-        "USE_FIREBASE_EMU=true",
-        "--dart-define",
-        "FIREBASE_EMU_URL=$(ip route get 8.8.8.8 | head -1 | awk '{print $7}')"
-      ]
-    },
-    {
-      "name": "PRODUCTION",
-      "cwd": "flutter_with_firebase_emulators",
-      "program": "lib/main.dart",
-      "request": "launch",
-      "type": "dart",
-      "toolArgs": ["--dart-define", "USE_FIREBASE_EMU=false"]
-    },
-    {
-      "name": "flutter_with_firebase_emulators (profile mode)",
-      "cwd": "flutter_with_firebase_emulators",
-      "request": "launch",
-      "program": "lib/main.dart",
-      "type": "dart",
-      "flutterMode": "profile"
     }
   ]
 }

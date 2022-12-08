@@ -1,8 +1,8 @@
 import 'package:FitStack/app/providers/bloc/app/app_bloc.dart';
-import 'package:FitStack/app/providers/cubit/user_statistic/user_statistic_cubit.dart';
+import 'package:FitStack/app/providers/bloc/user_statistics/user_statistics_bloc.dart';
 import 'package:FitStack/features/dashboard/presentation/molecules/workout_recommendations%20_list.dart';
 import 'package:FitStack/features/dashboard/presentation/molecules/statistics_dashboard.dart';
-import 'package:FitStack/features/dashboard/presentation/organisms/user_progress_snpashot_list.dart';
+import 'package:FitStack/features/dashboard/presentation/organisms/user_statistics_snpashot_list.dart';
 import 'package:FitStack/features/profile/cubit/profile_cubit.dart';
 import 'package:FitStack/features/signup/ui/widgets/atoms/profile_avatar_widget.dart';
 import 'package:FitStack/widgets/atoms/basic_view_header.dart';
@@ -79,8 +79,8 @@ class DashboardPage extends StatelessWidget {
                         Text("Progress Snapshot", textScaleFactor: textLabelScale, style: labelTextStyle),
                         Spacer(),
                         TextButton(
-                          onPressed: () => context.read<UserStatisticCubit>().checkUserStatistic(),
-                          child: BlocBuilder<UserStatisticCubit, UserStatisticState>(
+                          onPressed: () => context.read<UserStatisticsBloc>().add(UserStatisticsRequested()),
+                          child: BlocBuilder<UserStatisticsBloc, UserStatisticsState>(
                             builder: (context, state) {
                               return Row(
                                 mainAxisAlignment: MainAxisAlignment.center,

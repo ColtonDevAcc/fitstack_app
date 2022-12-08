@@ -1,4 +1,4 @@
-import 'package:FitStack/app/providers/bloc/bloc/nutrition_bloc.dart';
+import 'package:FitStack/app/providers/bloc/nutrition/nutrition_bloc.dart';
 import 'package:FitStack/features/nutrition/presentation/atoms/meal_statistics_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

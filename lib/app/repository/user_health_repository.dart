@@ -6,9 +6,11 @@ import 'package:FitStack/app/models/logs/bmi_log_model.dart';
 import 'package:FitStack/app/models/logs/body_fat_log_model.dart';
 import 'package:FitStack/app/models/logs/step_log_model.dart';
 import 'package:FitStack/app/models/logs/weight_log_model.dart';
+import 'package:FitStack/app/models/user/user_statistic_model.dart';
 import 'package:health/health.dart';
 
 class UserHealthRepository {
+  final HealthFactory health = HealthFactory();
   Future<Map<HealthDataType, List<dynamic>>> ParseUserHealthData({required List<HealthDataPoint> healthData}) async {
     Map<HealthDataType, List<dynamic>> healthDataMap = {};
 
@@ -124,4 +126,45 @@ class UserHealthRepository {
 
     return healthDataMap;
   }
+
+  Future<UserStatistic> getUserStatisticsSnapshot({required Duration fetchDate}) async {
+    log("getting user statistics snapshot");
+    List<HealthDataPoint> healthData = [];
+
+    try {
+      healthData = await health.getHealthDataFromTypes(
+        DateTime.now().subtract(fetchDate),
+        DateTime.now(),
+        snapshotHealthDataTypes,
+      );
+    } catch (e) {
+      log("Error in getUserStatisticsSnapshot: message: $e");
+    }
+
+    Map<HealthDataType, List<dynamic>> healthDataMap = await ParseUserHealthData(healthData: healthData);
+
+    if (healthDataMap.isEmpty) {
+      log("Error in getUserStatisticsSnapshot: message: healthDataMap is empty");
+      return UserStatistic.empty();
+    }
+
+    return UserStatistic(
+      step_log: (healthDataMap[HealthDataType.STEPS] != null ? healthDataMap[HealthDataType.STEPS] : null) as List<StepLog>?,
+      weight_log: (healthDataMap[HealthDataType.WEIGHT] != null ? healthDataMap[HealthDataType.WEIGHT]! : null) as List<WeightLog>?,
+      bmi_log: (healthDataMap[HealthDataType.BODY_MASS_INDEX] != null ? healthDataMap[HealthDataType.BODY_MASS_INDEX]! : null) as List<BMILog>?,
+      body_fat_log: (healthDataMap[HealthDataType.BODY_FAT_PERCENTAGE] != null ? healthDataMap[HealthDataType.BODY_FAT_PERCENTAGE]! : null)
+          as List<BodyFatLog>?,
+      active_energy: (healthDataMap[HealthDataType.ACTIVE_ENERGY_BURNED] != null ? healthDataMap[HealthDataType.ACTIVE_ENERGY_BURNED]! : null)
+          as List<ActiveEnergyLog>?,
+    );
+  }
 }
+
+const List<HealthDataType> snapshotHealthDataTypes = [
+  HealthDataType.STEPS,
+  HealthDataType.WEIGHT,
+  HealthDataType.BODY_MASS_INDEX,
+  HealthDataType.BODY_FAT_PERCENTAGE,
+  HealthDataType.DISTANCE_WALKING_RUNNING,
+  HealthDataType.ACTIVE_ENERGY_BURNED,
+];

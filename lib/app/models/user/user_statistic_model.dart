@@ -64,8 +64,8 @@ class UserStatistic extends Equatable {
   factory UserStatistic.fromJson(Map<String, dynamic> json) => _$UserStatisticFromJson(json);
   Map<String, dynamic> toJson() => _$UserStatisticToJson(this);
   factory UserStatistic.empty() => UserStatistic(
-        updated_at: DateTime.now(),
-        created_at: DateTime.now(),
+        updated_at: DateTime(1),
+        created_at: DateTime(1),
       );
 }
 

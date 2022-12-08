@@ -87,6 +87,7 @@ class UserGoalStatisticsGraph extends StatelessWidget {
                       color: color,
                       barWidth: 2,
                       isStrokeCapRound: true,
+                      preventCurveOverShooting: true,
                       dotData: FlDotData(
                         show: true,
                         getDotPainter: (p0, p1, p2, p3) => FlDotCirclePainter(

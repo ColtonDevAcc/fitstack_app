@@ -3,6 +3,9 @@ import 'package:FitStack/app/helpers/endpoints.dart';
 import 'package:FitStack/app/models/user/user_model.dart';
 import 'package:FitStack/app/models/user/user_profile_model.dart';
 import 'package:FitStack/app/models/user/user_statistic_model.dart';
+import 'package:FitStack/app/repository/user_health_repository.dart';
+import 'package:FitStack/app/services/analytics_service.dart';
+import 'package:FitStack/main.dart';
 import 'package:dio/dio.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -95,9 +98,33 @@ class UserRepository {
       } else {
         log("${response.data}");
       }
-    } on Error catch (e) {
-      log('error: ${e}, stacktrace: ${e.stackTrace}');
+    } catch (e) {
+      log('error: ${e}, stacktrace: ${e}');
+      locator<AnalyticsService>().logError(exception: e.toString(), reason: "error retrieving user statistics", stacktrace: StackTrace.current);
     }
+    return UserStatistic.empty();
+  }
+
+  Future<UserStatistic> getStatisticsSnapshot({required String token}) async {
+    try {
+      Response response = await dio.get(
+        '/user/statistics/snapshot',
+        options: Options(
+          headers: {
+            "Authorization": "Bearer ${token}",
+          },
+        ),
+      );
+
+      if (response.statusCode == 200) {
+        return UserStatistic.fromJson(response.data);
+      }
+    } catch (e) {
+      log('error: ${e}, stacktrace: ${e}');
+      locator<AnalyticsService>()
+          .logError(exception: e.toString(), reason: "error retrieving user statistics snapshot", stacktrace: StackTrace.current);
+    }
+
     return UserStatistic.empty();
   }
 
@@ -115,6 +142,31 @@ class UserRepository {
       );
     } catch (e) {
       log("$e");
+    }
+  }
+
+  Future<UserStatistic> updateStatisticsSnapshot({required String token, required Duration fetchDate}) async {
+    try {
+      UserStatistic statistic = await UserHealthRepository().getUserStatisticsSnapshot(fetchDate: fetchDate);
+      log("${statistic.toJson()}");
+      if (statistic != UserStatistic.empty()) {
+        await dio.post(
+          '/user/statistics',
+          options: Options(
+            headers: {
+              "Authorization": "Bearer ${token}",
+            },
+          ),
+          data: statistic.toJson(),
+        );
+      } else {
+        log("empty statistic");
+      }
+
+      return statistic;
+    } catch (e) {
+      log("$e");
+      throw Exception("error updating statistics snapshot");
     }
   }
 }

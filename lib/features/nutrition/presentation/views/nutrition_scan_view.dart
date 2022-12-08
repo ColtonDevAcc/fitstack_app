@@ -1,4 +1,4 @@
-import 'package:FitStack/app/providers/bloc/bloc/nutrition_bloc.dart';
+import 'package:FitStack/app/providers/bloc/nutrition/nutrition_bloc.dart';
 import 'package:FitStack/features/nutrition/presentation/atoms/product_nova_score_card.dart';
 import 'package:FitStack/features/nutrition/presentation/atoms/product_nutrients_snapshot.dart';
 import 'package:FitStack/features/nutrition/presentation/views/product_view.dart';

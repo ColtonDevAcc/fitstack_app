@@ -1,4 +1,4 @@
-import 'package:FitStack/app/providers/cubit/user_statistic/user_statistic_cubit.dart';
+import 'package:FitStack/app/providers/bloc/user_statistics/user_statistics_bloc.dart';
 import 'package:FitStack/features/dashboard/presentation/atoms/user_goal_statistics_graph.dart';
 import 'package:FitStack/widgets/atoms/basic_view_header.dart';
 import 'package:fl_chart/fl_chart.dart';
@@ -29,7 +29,7 @@ class StatisticView extends StatelessWidget {
               ),
             ),
           ),
-          BlocBuilder<UserStatisticCubit, UserStatisticState>(
+          BlocBuilder<UserStatisticsBloc, UserStatisticsState>(
             builder: (context, state) {
               return Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -64,7 +64,7 @@ class StatisticView extends StatelessWidget {
                       width: double.infinity,
                       color: Theme.of(context).colorScheme.primary,
                       subtitle: 'Weight Difference',
-                      title: '${state.weightDifference} LBS',
+                      title: '${state.userStatistic.weight_log!.first.weight - state.userStatistic.weight_log!.last.weight}',
                     ),
                     SizedBox(height: 20),
                     //create fl_chart that displays weight by day

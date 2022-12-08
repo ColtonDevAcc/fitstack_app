@@ -1,4 +1,4 @@
-import 'package:FitStack/app/providers/bloc/bloc/nutrition_bloc.dart';
+import 'package:FitStack/app/providers/bloc/nutrition/nutrition_bloc.dart';
 import 'package:FitStack/features/nutrition/presentation/molecules/recent_product_list.dart';
 import 'package:FitStack/features/nutrition/presentation/molecules/user_consumption_chart.dart';
 import 'package:FitStack/widgets/atoms/basic_view_header.dart';
