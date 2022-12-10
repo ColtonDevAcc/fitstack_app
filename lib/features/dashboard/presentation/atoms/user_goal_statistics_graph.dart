@@ -1,11 +1,14 @@
+import 'package:FitStack/app/repository/user_health_repository.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:health/health.dart';
 
 class UserGoalStatisticsGraph extends StatelessWidget {
   final Color color;
   final String title;
   final String subtitle;
-  final List<FlSpot>? spots;
+  final List<dynamic>? data;
+  final HealthDataType dataType;
   final double? maxX;
   final double? maxY;
   final double? minY;
@@ -16,16 +19,18 @@ class UserGoalStatisticsGraph extends StatelessWidget {
     required this.color,
     required this.title,
     required this.subtitle,
-    this.spots,
+    this.data,
     this.maxX,
     this.maxY,
     this.minY,
     this.minX,
     this.width,
+    required this.dataType,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var spotsForMonth = UserHealthRepository().convertListToFlSpots(data: data!, dataType: dataType);
     return Padding(
       padding: EdgeInsets.fromLTRB(0, 0, width != null ? 0 : 10, width != null ? 0 : 3),
       child: Container(
@@ -82,7 +87,8 @@ class UserGoalStatisticsGraph extends StatelessWidget {
                   ),
                   lineBarsData: [
                     LineChartBarData(
-                      spots: spots ?? [],
+                      spots: spotsForMonth,
+                      curveSmoothness: .9,
                       isCurved: true,
                       color: color,
                       barWidth: 2,

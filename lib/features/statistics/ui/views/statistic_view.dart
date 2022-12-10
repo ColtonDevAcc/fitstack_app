@@ -4,6 +4,7 @@ import 'package:FitStack/widgets/atoms/basic_view_header.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:health/health.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:go_router/go_router.dart';
 import 'package:units_converter/models/extension_converter.dart';
@@ -55,16 +56,12 @@ class StatisticView extends StatelessWidget {
                     ),
                     SizedBox(height: 20),
                     UserGoalStatisticsGraph(
-                      spots: state.userStatistic.weight_log
-                          ?.map((e) => FlSpot(
-                                e.created_at!.difference(DateTime.now()).inHours.toDouble(),
-                                e.weight.convertFromTo(MASS.kilograms, MASS.pounds)!,
-                              ))
-                          .toList(),
+                      data: state.userStatistic.weight_log,
                       width: double.infinity,
                       color: Theme.of(context).colorScheme.primary,
                       subtitle: 'Weight Difference',
                       title: '${state.userStatistic.weight_log!.first.weight - state.userStatistic.weight_log!.last.weight}',
+                      dataType: HealthDataType.WEIGHT,
                     ),
                     SizedBox(height: 20),
                     //create fl_chart that displays weight by day

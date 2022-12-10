@@ -7,7 +7,10 @@ import 'package:FitStack/app/models/logs/body_fat_log_model.dart';
 import 'package:FitStack/app/models/logs/step_log_model.dart';
 import 'package:FitStack/app/models/logs/weight_log_model.dart';
 import 'package:FitStack/app/models/user/user_statistic_model.dart';
+import 'package:fl_chart/fl_chart.dart';
 import 'package:health/health.dart';
+import 'package:units_converter/models/extension_converter.dart';
+import 'package:units_converter/properties/mass.dart';
 
 class UserHealthRepository {
   final HealthFactory health = HealthFactory();
@@ -157,6 +160,74 @@ class UserHealthRepository {
       active_energy: (healthDataMap[HealthDataType.ACTIVE_ENERGY_BURNED] != null ? healthDataMap[HealthDataType.ACTIVE_ENERGY_BURNED]! : null)
           as List<ActiveEnergyLog>?,
     );
+  }
+
+  List<FlSpot> convertListToFlSpots({required List<dynamic> data, required HealthDataType dataType}) {
+    // add an extra spot to the end of the list graph look better
+    final List<FlSpot> spotsForMonth = [];
+    int daysInMonth = DateTime(DateTime.now().year, DateTime.now().month + 1, 0).day;
+
+    int i = 0;
+    switch (dataType) {
+      case HealthDataType.WEIGHT:
+        var weight = data as List<WeightLog>;
+        var previousWeight = weight.first.weight.convertFromTo(MASS.kilograms, MASS.pounds)!;
+        for (var day = 1; day <= daysInMonth; day++) {
+          if (i < weight.length && weight[i].created_at?.day == day) {
+            var pounds = weight[i].weight.convertFromTo(MASS.kilograms, MASS.pounds);
+            spotsForMonth.add(
+              FlSpot(
+                day.toDouble(),
+                pounds ?? 0,
+              ),
+            );
+            previousWeight = weight[i].weight.convertFromTo(MASS.kilograms, MASS.pounds)!;
+            i++;
+          } else {
+            spotsForMonth.add(FlSpot(day.toDouble(), previousWeight));
+          }
+        }
+        break;
+      case HealthDataType.BODY_MASS_INDEX:
+        var bmi = data as List<BMILog>;
+        var previousBMI = bmi.first.bmi;
+        for (var day = 1; day <= daysInMonth; day++) {
+          if (i < bmi.length && bmi[i].created_at?.day == day) {
+            spotsForMonth.add(
+              FlSpot(
+                day.toDouble(),
+                bmi[i].bmi,
+              ),
+            );
+            previousBMI = bmi[i].bmi;
+            i++;
+          } else {
+            spotsForMonth.add(FlSpot(day.toDouble(), previousBMI));
+          }
+        }
+        break;
+      case HealthDataType.STEPS:
+        var steps = data as List<StepLog>;
+        var previousSteps = steps.first.step_count;
+        for (var day = 1; day <= daysInMonth; day++) {
+          if (i < steps.length && steps[i].created_at?.day == day) {
+            spotsForMonth.add(
+              FlSpot(
+                day.toDouble(),
+                steps[i].step_count.toDouble(),
+              ),
+            );
+            previousSteps = steps[i].step_count;
+            i++;
+          } else {
+            spotsForMonth.add(FlSpot(day.toDouble(), previousSteps.toDouble()));
+          }
+        }
+        break;
+
+      default:
+    }
+    return spotsForMonth;
   }
 }
 

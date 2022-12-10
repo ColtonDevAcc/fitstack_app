@@ -7,7 +7,7 @@ class Endpoints {
   // base url
   //iphone 172.20.10.4
   //wifi 192.168.0.203
-  static const String baseUrl = kDebugMode ? "http://192.168.0.203:8080" : "https://dev.fitstack.io";
+  static const String baseUrl = kDebugMode ? "http://localhost:8080" : "https://dev.fitstack.io";
   static const int receiveTimeout = 15000;
   static const int connectionTimeout = 15000;
   Future<Dio> dio = locator<AnalyticsService>().networkPerformanceInterceptor(
