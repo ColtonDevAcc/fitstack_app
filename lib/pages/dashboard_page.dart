@@ -26,11 +26,11 @@ class DashboardPage extends StatelessWidget {
           fontWeight: FontWeight.bold,
         );
 
-    return SingleChildScrollView(
-      clipBehavior: Clip.none,
-      scrollDirection: Axis.vertical,
-      padding: EdgeInsets.zero,
-      child: SafeArea(
+    return SafeArea(
+      child: SingleChildScrollView(
+        clipBehavior: Clip.none,
+        scrollDirection: Axis.vertical,
+        padding: EdgeInsets.zero,
         child: Column(
           children: [
             BasicPageHeader(
@@ -66,7 +66,7 @@ class DashboardPage extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(0, topPadding, 0, bottomPadding),
                     child: Text(
-                      "Daily Workouts",
+                      "Up Next",
                       textScaleFactor: textLabelScale,
                       style: labelTextStyle,
                     ),

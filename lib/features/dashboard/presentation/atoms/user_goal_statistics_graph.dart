@@ -1,36 +1,29 @@
-import 'package:FitStack/app/repository/user_health_repository.dart';
+import 'package:FitStack/app/models/logs/log_model.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:health/health.dart';
 
 class UserGoalStatisticsGraph extends StatelessWidget {
   final Color color;
-  final String title;
+
   final String subtitle;
-  final List<dynamic>? data;
+  final List<Log>? data;
   final HealthDataType dataType;
-  final double? maxX;
-  final double? maxY;
-  final double? minY;
-  final double? minX;
+
   final double? width;
   const UserGoalStatisticsGraph({
     Key? key,
     required this.color,
-    required this.title,
     required this.subtitle,
     this.data,
-    this.maxX,
-    this.maxY,
-    this.minY,
-    this.minX,
     this.width,
     required this.dataType,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    var spotsForMonth = UserHealthRepository().convertListToFlSpots(data: data!, dataType: dataType);
+    var difference = data!.first.value - data!.last.value;
     return Padding(
       padding: EdgeInsets.fromLTRB(0, 0, width != null ? 0 : 10, width != null ? 0 : 3),
       child: Container(
@@ -53,65 +46,91 @@ class UserGoalStatisticsGraph extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              title,
-              style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                    fontWeight: FontWeight.bold,
+            difference.isNegative
+                ? Row(
+                    children: [
+                      Icon(FontAwesomeIcons.arrowDown, size: 15, color: Theme.of(context).colorScheme.error),
+                      Text(
+                        "${(difference * -1).toStringAsFixed(1)}",
+                        style: Theme.of(context).textTheme.labelLarge?.copyWith(fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  )
+                : Row(
+                    children: [
+                      Icon(FontAwesomeIcons.arrowUp, size: 15, color: Colors.green),
+                      Text("${difference.toStringAsFixed(2)}", style: Theme.of(context).textTheme.labelLarge?.copyWith(fontWeight: FontWeight.bold)),
+                    ],
                   ),
-            ),
             Text(
               subtitle,
-              style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                    fontWeight: FontWeight.normal,
-                    color: Theme.of(context).colorScheme.onSurface.withOpacity(.5),
-                  ),
+              style: Theme.of(context)
+                  .textTheme
+                  .labelLarge
+                  ?.copyWith(fontWeight: FontWeight.normal, color: Theme.of(context).colorScheme.onSurface.withOpacity(.5)),
               textScaleFactor: .9,
             ),
             SizedBox(height: 5),
             Expanded(
               child: LineChart(
                 LineChartData(
-                  maxX: maxX,
-                  maxY: maxY,
-                  minY: minY,
-                  minX: minX,
+                  lineTouchData: LineTouchData(
+                    enabled: true,
+                    touchTooltipData: LineTouchTooltipData(
+                      tooltipBgColor: Theme.of(context).colorScheme.surface,
+                      tooltipRoundedRadius: 8,
+                      getTooltipItems: (List<LineBarSpot> touchedBarSpots) {
+                        return touchedBarSpots.map(
+                          (barSpot) {
+                            DateTime today = DateTime.now();
+                            final flSpot = barSpot;
+                            if (flSpot.x == today.day) {
+                              return LineTooltipItem(
+                                "${flSpot.y.toStringAsFixed(1)} recorded Today",
+                                TextStyle(color: Theme.of(context).colorScheme.onSurface, fontWeight: FontWeight.bold),
+                              );
+                            } else if (flSpot.x == today.day + 1) {
+                              return LineTooltipItem(
+                                "${flSpot.y.toStringAsFixed(1)} recorded Yesterday",
+                                TextStyle(color: Theme.of(context).colorScheme.onSurface, fontWeight: FontWeight.bold),
+                              );
+                            } else {
+                              return LineTooltipItem(
+                                ((today.difference(DateTime(today.year, today.month, flSpot.x.toInt())).inDays) * -1).isNegative
+                                    ? "not recorded"
+                                    : "${flSpot.y.toStringAsFixed(1)} recorded ${(today.difference(DateTime(today.year, today.month, flSpot.x.toInt())).inDays) * -1} days ago",
+                                TextStyle(color: Theme.of(context).colorScheme.onSurface, fontWeight: FontWeight.bold),
+                              );
+                            }
+                          },
+                        ).toList();
+                      },
+                    ),
+                  ),
                   clipData: FlClipData.none(),
-                  gridData: FlGridData(
-                    show: false,
-                  ),
-                  titlesData: FlTitlesData(
-                    show: false,
-                  ),
-                  borderData: FlBorderData(
-                    show: false,
-                  ),
+                  gridData: FlGridData(show: false),
+                  titlesData: FlTitlesData(show: false),
+                  borderData: FlBorderData(show: false),
+                  //determine min y and max y values from spotsForMonth to have some padding on the top and bottom of the graph
+                  minY: data!.map((e) => e.value).reduce((value, element) => value < element ? value : element) - 1,
+                  maxY: data!.map((e) => e.value).reduce((value, element) => value > element ? value : element) + 1,
                   lineBarsData: [
                     LineChartBarData(
-                      spots: spotsForMonth,
-                      curveSmoothness: .9,
+                      isStrokeJoinRound: true,
+                      spots: data!.map((e) {
+                        DateTime today = DateTime.now();
+                        return FlSpot(today.difference(DateTime(today.year, today.month, e.createdAt.day)).inDays * -1 + 1, e.value.toDouble());
+                      }).toList(),
                       isCurved: true,
                       color: color,
                       barWidth: 2,
                       isStrokeCapRound: true,
-                      preventCurveOverShooting: true,
-                      dotData: FlDotData(
-                        show: true,
-                        getDotPainter: (p0, p1, p2, p3) => FlDotCirclePainter(
-                          radius: 1,
-                          color: color,
-                          strokeWidth: 1,
-                          strokeColor: Theme.of(context).colorScheme.surface,
-                        ),
-                      ),
+                      dotData: FlDotData(show: false),
                       belowBarData: BarAreaData(
                         show: true,
                         color: color.withOpacity(.2),
                         gradient: LinearGradient(
-                          colors: [
-                            color.withOpacity(.2),
-                            color.withOpacity(.2),
-                            Colors.transparent,
-                          ],
+                          colors: [color.withOpacity(.2), color.withOpacity(.2), Colors.transparent],
                           begin: Alignment.topCenter,
                           end: Alignment.bottomCenter,
                         ),

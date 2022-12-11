@@ -7,17 +7,17 @@ part of 'routine_model.dart';
 // **************************************************************************
 
 abstract class _$RoutineCWProxy {
-  Routine description(String? description);
-
-  Routine id(int? id);
-
   Routine image_url(String? image_url);
 
   Routine schedule(RoutineSchedule? schedule);
 
+  Routine workouts(Workout? workouts);
+
+  Routine id(int? id);
+
   Routine title(String? title);
 
-  Routine workouts(Workout? workouts);
+  Routine description(String? description);
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `Routine(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
@@ -26,26 +26,20 @@ abstract class _$RoutineCWProxy {
   /// Routine(...).copyWith(id: 12, name: "My name")
   /// ````
   Routine call({
-    String? description,
-    int? id,
     String? image_url,
     RoutineSchedule? schedule,
-    String? title,
     Workout? workouts,
+    int? id,
+    String? title,
+    String? description,
   });
 }
 
 /// Proxy class for `copyWith` functionality. This is a callable class and can be used as follows: `instanceOfRoutine.copyWith(...)`. Additionally contains functions for specific fields e.g. `instanceOfRoutine.copyWith.fieldName(...)`
 class _$RoutineCWProxyImpl implements _$RoutineCWProxy {
-  final Routine _value;
-
   const _$RoutineCWProxyImpl(this._value);
 
-  @override
-  Routine description(String? description) => this(description: description);
-
-  @override
-  Routine id(int? id) => this(id: id);
+  final Routine _value;
 
   @override
   Routine image_url(String? image_url) => this(image_url: image_url);
@@ -54,10 +48,16 @@ class _$RoutineCWProxyImpl implements _$RoutineCWProxy {
   Routine schedule(RoutineSchedule? schedule) => this(schedule: schedule);
 
   @override
+  Routine workouts(Workout? workouts) => this(workouts: workouts);
+
+  @override
+  Routine id(int? id) => this(id: id);
+
+  @override
   Routine title(String? title) => this(title: title);
 
   @override
-  Routine workouts(Workout? workouts) => this(workouts: workouts);
+  Routine description(String? description) => this(description: description);
 
   @override
 
@@ -68,22 +68,14 @@ class _$RoutineCWProxyImpl implements _$RoutineCWProxy {
   /// Routine(...).copyWith(id: 12, name: "My name")
   /// ````
   Routine call({
-    Object? description = const $CopyWithPlaceholder(),
-    Object? id = const $CopyWithPlaceholder(),
     Object? image_url = const $CopyWithPlaceholder(),
     Object? schedule = const $CopyWithPlaceholder(),
-    Object? title = const $CopyWithPlaceholder(),
     Object? workouts = const $CopyWithPlaceholder(),
+    Object? id = const $CopyWithPlaceholder(),
+    Object? title = const $CopyWithPlaceholder(),
+    Object? description = const $CopyWithPlaceholder(),
   }) {
     return Routine(
-      description: description == const $CopyWithPlaceholder()
-          ? _value.description
-          // ignore: cast_nullable_to_non_nullable
-          : description as String?,
-      id: id == const $CopyWithPlaceholder()
-          ? _value.id
-          // ignore: cast_nullable_to_non_nullable
-          : id as int?,
       image_url: image_url == const $CopyWithPlaceholder()
           ? _value.image_url
           // ignore: cast_nullable_to_non_nullable
@@ -92,14 +84,22 @@ class _$RoutineCWProxyImpl implements _$RoutineCWProxy {
           ? _value.schedule
           // ignore: cast_nullable_to_non_nullable
           : schedule as RoutineSchedule?,
-      title: title == const $CopyWithPlaceholder()
-          ? _value.title
-          // ignore: cast_nullable_to_non_nullable
-          : title as String?,
       workouts: workouts == const $CopyWithPlaceholder()
           ? _value.workouts
           // ignore: cast_nullable_to_non_nullable
           : workouts as Workout?,
+      id: id == const $CopyWithPlaceholder()
+          ? _value.id
+          // ignore: cast_nullable_to_non_nullable
+          : id as int?,
+      title: title == const $CopyWithPlaceholder()
+          ? _value.title
+          // ignore: cast_nullable_to_non_nullable
+          : title as String?,
+      description: description == const $CopyWithPlaceholder()
+          ? _value.description
+          // ignore: cast_nullable_to_non_nullable
+          : description as String?,
     );
   }
 }

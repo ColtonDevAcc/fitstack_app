@@ -6,7 +6,7 @@ import 'package:copy_with_extension/copy_with_extension.dart';
 
 part 'routine_model.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(includeIfNull: true, explicitToJson: true, anyMap: true)
 @CopyWith()
 class Routine extends Equatable {
   final int? id;

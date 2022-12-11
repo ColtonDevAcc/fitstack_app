@@ -5,7 +5,7 @@ import 'package:FitStack/app/repository/user_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
+import 'package:health/health.dart';
 
 part 'user_statistics_event.dart';
 part 'user_statistics_state.dart';
@@ -18,6 +18,8 @@ class UserStatisticsBloc extends Bloc<UserStatisticsEvent, UserStatisticsState> 
       : super(UserStatisticsState(
           status: UserStatisticsStatus.initial,
           userStatistic: UserStatistic.empty(),
+          selected: UserStatistic.empty(),
+          snapshotUpdateStatus: StatisticsSnapshotUpdateStatus.initial,
         )) {
     on<UserStatisticsRequested>(onUserStatisticsRequested);
     on<UserStatisticsUpdated>(onUserStatisticsUpdated);
@@ -50,28 +52,44 @@ class UserStatisticsBloc extends Bloc<UserStatisticsEvent, UserStatisticsState> 
   }
 
   void onUserStatisticsSnapshotUpdateRequested(UserStatisticsSnapshotUpdateRequested event, Emitter<UserStatisticsState> emit) async {
-    String userToken = await FirebaseAuth.instance.currentUser?.getIdToken() ?? "";
-    Duration? fetchDate = state.userStatistic.updated_at?.difference(DateTime.now()) ?? Duration(days: 365);
-    UserStatistic statistic = await userRepository.updateStatisticsSnapshot(token: userToken, fetchDate: fetchDate);
+    try {
+      emit(state.copyWith(snapshotUpdateStatus: StatisticsSnapshotUpdateStatus.loading));
+      Duration? fetchDate;
+      if (state.userStatistic.updatedAt == null) {
+        fetchDate = Duration(days: 365);
+      } else {
+        fetchDate = DateTime.now().difference(state.userStatistic.updatedAt!);
+      }
 
-    emit(
-      state.copyWith(
-        userStatistic: state.userStatistic.copyWith(
-          updated_at: DateTime.now(),
-          bmi_log: statistic.bmi_log != null ? [...state.userStatistic.bmi_log ?? [] + statistic.bmi_log!] : state.userStatistic.bmi_log,
-          weight_log:
-              statistic.weight_log != null ? [...state.userStatistic.weight_log ?? [] + statistic.weight_log!] : state.userStatistic.weight_log,
-          active_energy:
-              statistic.active_energy != null ? state.userStatistic.active_energy! + statistic.active_energy! : state.userStatistic.active_energy,
-          active_minutes_log: statistic.active_minutes_log != null
-              ? [...state.userStatistic.active_minutes_log ?? [] + statistic.active_minutes_log!]
-              : state.userStatistic.active_minutes_log,
-          sleep_log: statistic.sleep_log != null ? [...state.userStatistic.sleep_log ?? [] + statistic.sleep_log!] : state.userStatistic.sleep_log,
-          step_log: statistic.step_log != null ? [...state.userStatistic.step_log ?? [] + statistic.step_log!] : state.userStatistic.step_log,
+      UserStatistic statistic = await userRepository.updateStatisticsSnapshot(fetchDate: fetchDate);
+
+      emit(
+        state.copyWith(
+          snapshotUpdateStatus: StatisticsSnapshotUpdateStatus.loaded,
+          userStatistic: state.userStatistic.copyWith(
+            updatedAt: DateTime.now(),
+            bodyMassIndexLogs: statistic.bodyMassIndexLogs != null
+                ? [...state.userStatistic.bodyMassIndexLogs ?? [] + statistic.bodyMassIndexLogs!]
+                : state.userStatistic.bodyMassIndexLogs,
+            weightLogs:
+                statistic.weightLogs != null ? [...state.userStatistic.weightLogs ?? [] + statistic.weightLogs!] : state.userStatistic.weightLogs,
+            activeEnergyBurned: statistic.activeEnergyBurned != null
+                ? state.userStatistic.activeEnergyBurned! + statistic.activeEnergyBurned!
+                : state.userStatistic.activeEnergyBurned,
+            sleepAsleepLogs: statistic.sleepAsleepLogs != null
+                ? [...state.userStatistic.sleepAsleepLogs ?? [] + statistic.sleepAsleepLogs!]
+                : state.userStatistic.sleepAsleepLogs,
+            stepsLogs: statistic.stepsLogs != null ? [...state.userStatistic.stepsLogs ?? [] + statistic.stepsLogs!] : state.userStatistic.stepsLogs,
+          ),
         ),
-      ),
-    );
+      );
+    } catch (e) {
+      emit(state.copyWith(snapshotUpdateStatus: StatisticsSnapshotUpdateStatus.error));
+      FitStackToast.showErrorToast("error updating user statistics snapshot");
+    }
   }
 }
 
 enum UserStatisticsStatus { initial, loading, loaded, error }
+
+enum StatisticsSnapshotUpdateStatus { initial, loading, loaded, error }

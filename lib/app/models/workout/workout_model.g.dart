@@ -7,17 +7,17 @@ part of 'workout_model.dart';
 // **************************************************************************
 
 abstract class _$WorkoutCWProxy {
-  Workout creator(User? creator);
-
   Workout creator_id(String? creator_id);
+
+  Workout creator(User? creator);
 
   Workout description(String? description);
 
   Workout id(int? id);
 
-  Workout title(String? title);
-
   Workout workout_sets(List<WorkoutSets>? workout_sets);
+
+  Workout title(String? title);
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `Workout(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
@@ -26,26 +26,26 @@ abstract class _$WorkoutCWProxy {
   /// Workout(...).copyWith(id: 12, name: "My name")
   /// ````
   Workout call({
-    User? creator,
     String? creator_id,
+    User? creator,
     String? description,
     int? id,
-    String? title,
     List<WorkoutSets>? workout_sets,
+    String? title,
   });
 }
 
 /// Proxy class for `copyWith` functionality. This is a callable class and can be used as follows: `instanceOfWorkout.copyWith(...)`. Additionally contains functions for specific fields e.g. `instanceOfWorkout.copyWith.fieldName(...)`
 class _$WorkoutCWProxyImpl implements _$WorkoutCWProxy {
-  final Workout _value;
-
   const _$WorkoutCWProxyImpl(this._value);
 
-  @override
-  Workout creator(User? creator) => this(creator: creator);
+  final Workout _value;
 
   @override
   Workout creator_id(String? creator_id) => this(creator_id: creator_id);
+
+  @override
+  Workout creator(User? creator) => this(creator: creator);
 
   @override
   Workout description(String? description) => this(description: description);
@@ -54,11 +54,11 @@ class _$WorkoutCWProxyImpl implements _$WorkoutCWProxy {
   Workout id(int? id) => this(id: id);
 
   @override
-  Workout title(String? title) => this(title: title);
-
-  @override
   Workout workout_sets(List<WorkoutSets>? workout_sets) =>
       this(workout_sets: workout_sets);
+
+  @override
+  Workout title(String? title) => this(title: title);
 
   @override
 
@@ -69,22 +69,22 @@ class _$WorkoutCWProxyImpl implements _$WorkoutCWProxy {
   /// Workout(...).copyWith(id: 12, name: "My name")
   /// ````
   Workout call({
-    Object? creator = const $CopyWithPlaceholder(),
     Object? creator_id = const $CopyWithPlaceholder(),
+    Object? creator = const $CopyWithPlaceholder(),
     Object? description = const $CopyWithPlaceholder(),
     Object? id = const $CopyWithPlaceholder(),
-    Object? title = const $CopyWithPlaceholder(),
     Object? workout_sets = const $CopyWithPlaceholder(),
+    Object? title = const $CopyWithPlaceholder(),
   }) {
     return Workout(
-      creator: creator == const $CopyWithPlaceholder()
-          ? _value.creator
-          // ignore: cast_nullable_to_non_nullable
-          : creator as User?,
       creator_id: creator_id == const $CopyWithPlaceholder()
           ? _value.creator_id
           // ignore: cast_nullable_to_non_nullable
           : creator_id as String?,
+      creator: creator == const $CopyWithPlaceholder()
+          ? _value.creator
+          // ignore: cast_nullable_to_non_nullable
+          : creator as User?,
       description: description == const $CopyWithPlaceholder()
           ? _value.description
           // ignore: cast_nullable_to_non_nullable
@@ -93,14 +93,14 @@ class _$WorkoutCWProxyImpl implements _$WorkoutCWProxy {
           ? _value.id
           // ignore: cast_nullable_to_non_nullable
           : id as int?,
-      title: title == const $CopyWithPlaceholder()
-          ? _value.title
-          // ignore: cast_nullable_to_non_nullable
-          : title as String?,
       workout_sets: workout_sets == const $CopyWithPlaceholder()
           ? _value.workout_sets
           // ignore: cast_nullable_to_non_nullable
           : workout_sets as List<WorkoutSets>?,
+      title: title == const $CopyWithPlaceholder()
+          ? _value.title
+          // ignore: cast_nullable_to_non_nullable
+          : title as String?,
     );
   }
 }

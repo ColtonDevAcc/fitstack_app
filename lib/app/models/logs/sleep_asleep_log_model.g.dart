@@ -1,31 +1,31 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'bmi_log_model.dart';
+part of 'sleep_asleep_log_model.dart';
 
 // **************************************************************************
 // CopyWithGenerator
 // **************************************************************************
 
-abstract class _$BodyMassIndexLogCWProxy {
-  BodyMassIndexLog id(String? id);
+abstract class _$SleepAsleepLogCWProxy {
+  SleepAsleepLog id(String? id);
 
-  BodyMassIndexLog createdAt(DateTime createdAt);
+  SleepAsleepLog createdAt(DateTime createdAt);
 
-  BodyMassIndexLog updatedAt(DateTime? updatedAt);
+  SleepAsleepLog updatedAt(DateTime? updatedAt);
 
-  BodyMassIndexLog userId(String? userId);
+  SleepAsleepLog userId(String? userId);
 
-  BodyMassIndexLog type(HealthDataType type);
+  SleepAsleepLog type(HealthDataType type);
 
-  BodyMassIndexLog value(num value);
+  SleepAsleepLog value(num value);
 
-  /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `BodyMassIndexLog(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
+  /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `SleepAsleepLog(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
   /// Usage
   /// ```dart
-  /// BodyMassIndexLog(...).copyWith(id: 12, name: "My name")
+  /// SleepAsleepLog(...).copyWith(id: 12, name: "My name")
   /// ````
-  BodyMassIndexLog call({
+  SleepAsleepLog call({
     String? id,
     DateTime? createdAt,
     DateTime? updatedAt,
@@ -35,39 +35,39 @@ abstract class _$BodyMassIndexLogCWProxy {
   });
 }
 
-/// Proxy class for `copyWith` functionality. This is a callable class and can be used as follows: `instanceOfBodyMassIndexLog.copyWith(...)`. Additionally contains functions for specific fields e.g. `instanceOfBodyMassIndexLog.copyWith.fieldName(...)`
-class _$BodyMassIndexLogCWProxyImpl implements _$BodyMassIndexLogCWProxy {
-  const _$BodyMassIndexLogCWProxyImpl(this._value);
+/// Proxy class for `copyWith` functionality. This is a callable class and can be used as follows: `instanceOfSleepAsleepLog.copyWith(...)`. Additionally contains functions for specific fields e.g. `instanceOfSleepAsleepLog.copyWith.fieldName(...)`
+class _$SleepAsleepLogCWProxyImpl implements _$SleepAsleepLogCWProxy {
+  const _$SleepAsleepLogCWProxyImpl(this._value);
 
-  final BodyMassIndexLog _value;
-
-  @override
-  BodyMassIndexLog id(String? id) => this(id: id);
+  final SleepAsleepLog _value;
 
   @override
-  BodyMassIndexLog createdAt(DateTime createdAt) => this(createdAt: createdAt);
+  SleepAsleepLog id(String? id) => this(id: id);
 
   @override
-  BodyMassIndexLog updatedAt(DateTime? updatedAt) => this(updatedAt: updatedAt);
+  SleepAsleepLog createdAt(DateTime createdAt) => this(createdAt: createdAt);
 
   @override
-  BodyMassIndexLog userId(String? userId) => this(userId: userId);
+  SleepAsleepLog updatedAt(DateTime? updatedAt) => this(updatedAt: updatedAt);
 
   @override
-  BodyMassIndexLog type(HealthDataType type) => this(type: type);
+  SleepAsleepLog userId(String? userId) => this(userId: userId);
 
   @override
-  BodyMassIndexLog value(num value) => this(value: value);
+  SleepAsleepLog type(HealthDataType type) => this(type: type);
+
+  @override
+  SleepAsleepLog value(num value) => this(value: value);
 
   @override
 
-  /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `BodyMassIndexLog(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
+  /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `SleepAsleepLog(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
   /// Usage
   /// ```dart
-  /// BodyMassIndexLog(...).copyWith(id: 12, name: "My name")
+  /// SleepAsleepLog(...).copyWith(id: 12, name: "My name")
   /// ````
-  BodyMassIndexLog call({
+  SleepAsleepLog call({
     Object? id = const $CopyWithPlaceholder(),
     Object? createdAt = const $CopyWithPlaceholder(),
     Object? updatedAt = const $CopyWithPlaceholder(),
@@ -75,7 +75,7 @@ class _$BodyMassIndexLogCWProxyImpl implements _$BodyMassIndexLogCWProxy {
     Object? type = const $CopyWithPlaceholder(),
     Object? value = const $CopyWithPlaceholder(),
   }) {
-    return BodyMassIndexLog(
+    return SleepAsleepLog(
       id: id == const $CopyWithPlaceholder()
           ? _value.id
           // ignore: cast_nullable_to_non_nullable
@@ -107,18 +107,18 @@ class _$BodyMassIndexLogCWProxyImpl implements _$BodyMassIndexLogCWProxy {
   }
 }
 
-extension $BodyMassIndexLogCopyWith on BodyMassIndexLog {
-  /// Returns a callable class that can be used as follows: `instanceOfBodyMassIndexLog.copyWith(...)` or like so:`instanceOfBodyMassIndexLog.copyWith.fieldName(...)`.
+extension $SleepAsleepLogCopyWith on SleepAsleepLog {
+  /// Returns a callable class that can be used as follows: `instanceOfSleepAsleepLog.copyWith(...)` or like so:`instanceOfSleepAsleepLog.copyWith.fieldName(...)`.
   // ignore: library_private_types_in_public_api
-  _$BodyMassIndexLogCWProxy get copyWith => _$BodyMassIndexLogCWProxyImpl(this);
+  _$SleepAsleepLogCWProxy get copyWith => _$SleepAsleepLogCWProxyImpl(this);
 }
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-BodyMassIndexLog _$BodyMassIndexLogFromJson(Map<String, dynamic> json) =>
-    BodyMassIndexLog(
+SleepAsleepLog _$SleepAsleepLogFromJson(Map<String, dynamic> json) =>
+    SleepAsleepLog(
       id: json['id'] as String?,
       createdAt: DateTime.parse(json['createdAt'] as String),
       updatedAt: json['updatedAt'] == null
@@ -129,7 +129,7 @@ BodyMassIndexLog _$BodyMassIndexLogFromJson(Map<String, dynamic> json) =>
       value: json['value'] as num,
     );
 
-const _$BodyMassIndexLogFieldMap = <String, String>{
+const _$SleepAsleepLogFieldMap = <String, String>{
   'id': 'id',
   'userId': 'userId',
   'type': 'type',
@@ -138,7 +138,7 @@ const _$BodyMassIndexLogFieldMap = <String, String>{
   'updatedAt': 'updatedAt',
 };
 
-Map<String, dynamic> _$BodyMassIndexLogToJson(BodyMassIndexLog instance) =>
+Map<String, dynamic> _$SleepAsleepLogToJson(SleepAsleepLog instance) =>
     <String, dynamic>{
       'id': instance.id,
       'userId': instance.userId,

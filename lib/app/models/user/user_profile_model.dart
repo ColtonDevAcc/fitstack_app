@@ -5,7 +5,7 @@ import 'package:copy_with_extension/copy_with_extension.dart';
 
 part 'user_profile_model.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(includeIfNull: true, explicitToJson: true, anyMap: true)
 @CopyWith()
 class UserProfile extends Equatable {
   final String id;

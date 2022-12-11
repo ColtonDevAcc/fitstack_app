@@ -25,9 +25,9 @@ abstract class _$WorkoutSetsCWProxy {
 
 /// Proxy class for `copyWith` functionality. This is a callable class and can be used as follows: `instanceOfWorkoutSets.copyWith(...)`. Additionally contains functions for specific fields e.g. `instanceOfWorkoutSets.copyWith.fieldName(...)`
 class _$WorkoutSetsCWProxyImpl implements _$WorkoutSetsCWProxy {
-  final WorkoutSets _value;
-
   const _$WorkoutSetsCWProxyImpl(this._value);
+
+  final WorkoutSets _value;
 
   @override
   WorkoutSets exercises(List<Exercise?>? exercises) =>

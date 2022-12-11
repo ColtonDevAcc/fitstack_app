@@ -1,3 +1,4 @@
+import 'package:FitStack/app/models/logs/log_model.dart';
 import 'package:FitStack/app/providers/bloc/app/app_bloc.dart';
 import 'package:FitStack/app/repository/auth_repository.dart';
 import 'package:FitStack/app/services/analytics_service.dart';
@@ -128,9 +129,13 @@ class AppRouter {
         builder: (context, state) => ProfilePage(),
         routes: [
           GoRoute(
-            path: 'weight',
-            name: 'user weight',
-            builder: (context, state) => const StatisticView(),
+            path: 'statistic',
+            name: 'user statistic',
+            builder: (context, state) {
+              return StatisticView(
+                data: state.extra as List<Log>,
+              );
+            },
           ),
         ],
       ),

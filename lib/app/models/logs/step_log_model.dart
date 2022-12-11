@@ -1,31 +1,58 @@
-import 'package:equatable/equatable.dart';
+import 'package:FitStack/app/models/logs/log_model.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
+import 'package:health/health.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'step_log_model.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(includeIfNull: true, explicitToJson: true, anyMap: true)
 @CopyWith()
-class StepLog extends Equatable {
-  final int? id;
-  final String? user_statistic_id;
-  final int step_count;
-  final DateTime? updated_at;
-  final DateTime? created_at;
-  StepLog({
-    this.user_statistic_id,
-    required this.step_count,
-    this.updated_at,
-    this.created_at,
-    this.id,
-  });
+class StepsLog extends Log {
+  StepsLog({
+    String? id,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+    String? userId,
+    HealthDataType? type,
+    num? value,
+  }) : super(
+          id: id,
+          createdAt: createdAt ?? DateTime.now(),
+          updatedAt: updatedAt,
+          userId: userId,
+          type: type ?? HealthDataType.STEPS,
+          value: value ?? 0,
+        );
 
   @override
-  List<Object?> get props => [id, user_statistic_id, step_count, updated_at, created_at];
+  String toString() {
+    return 'StepsLog { id: $id, created_at: $createdAt, userId: $userId, type: $type, value: $value }';
+  }
 
-  factory StepLog.fromJson(Map<String, dynamic> json) => _$StepLogFromJson(json);
-  Map<String, dynamic> toJson() => _$StepLogToJson(this);
+  Map<String, dynamic> toJson() => _$StepsLogToJson(this);
+  factory StepsLog.fromJson(Map<String, dynamic> json) => _$StepsLogFromJson(json);
 
-  factory StepLog.empty() =>
-      StepLog(created_at: DateTime.now().toUtc(), step_count: 0, id: 0, updated_at: DateTime.now().toUtc(), user_statistic_id: '');
+  @override
+  List<Object?> get props => [id, createdAt, updatedAt, userId, type, value];
+
+  @override
+  factory StepsLog.copyWith({String? id, DateTime? created_at, DateTime? updated_at, String? userId, HealthDataType? type, num? value}) {
+    return StepsLog();
+  }
+
+  @override
+  bool? get stringify => false;
+
+  @override
+  factory StepsLog.fromHealthData(HealthDataPoint data) {
+    var value = data.value as NumericHealthValue;
+    return StepsLog(
+      id: null,
+      userId: null,
+      type: data.type,
+      value: value.numericValue,
+      createdAt: data.dateFrom,
+      updatedAt: data.dateTo,
+    );
+  }
 }

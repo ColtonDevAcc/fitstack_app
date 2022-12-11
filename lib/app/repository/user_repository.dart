@@ -1,5 +1,14 @@
 import 'dart:developer';
 import 'package:FitStack/app/helpers/endpoints.dart';
+import 'package:FitStack/app/models/logs/active_energy_log_model.dart';
+import 'package:FitStack/app/models/logs/bmi_log_model.dart';
+import 'package:FitStack/app/models/logs/body_fat_log_model.dart';
+import 'package:FitStack/app/models/logs/heart_rate_log_model.dart';
+import 'package:FitStack/app/models/logs/height_log_model.dart';
+import 'package:FitStack/app/models/logs/log_model.dart';
+import 'package:FitStack/app/models/logs/sleep_asleep_log_model.dart';
+import 'package:FitStack/app/models/logs/step_log_model.dart';
+import 'package:FitStack/app/models/logs/weight_log_model.dart';
 import 'package:FitStack/app/models/user/user_model.dart';
 import 'package:FitStack/app/models/user/user_profile_model.dart';
 import 'package:FitStack/app/models/user/user_statistic_model.dart';
@@ -7,6 +16,8 @@ import 'package:FitStack/app/repository/user_health_repository.dart';
 import 'package:FitStack/app/services/analytics_service.dart';
 import 'package:FitStack/main.dart';
 import 'package:dio/dio.dart';
+import 'package:firebase_auth/firebase_auth.dart' as fb;
+import 'package:health/health.dart';
 import 'package:image_picker/image_picker.dart';
 
 class UserRepository {
@@ -145,11 +156,23 @@ class UserRepository {
     }
   }
 
-  Future<UserStatistic> updateStatisticsSnapshot({required String token, required Duration fetchDate}) async {
+  Future<UserStatistic> updateStatisticsSnapshot({required Duration fetchDate}) async {
+    fetchDate = Duration(days: 100);
     try {
-      UserStatistic statistic = await UserHealthRepository().getUserStatisticsSnapshot(fetchDate: fetchDate);
-      log("${statistic.toJson()}");
-      if (statistic != UserStatistic.empty()) {
+      String token = await fb.FirebaseAuth.instance.currentUser!.getIdToken();
+      Map<HealthDataType, List<Log>> statistics = await UserHealthRepository().getUserStatisticsSnapshot(fetchDate: fetchDate);
+
+      UserStatistic userStatistic = UserStatistic(
+        stepsLogs: statistics[HealthDataType.STEPS]?.map((e) => e as StepsLog).toList(),
+        weightLogs: statistics[HealthDataType.WEIGHT]?.map((e) => e as WeightLog).toList(),
+        heartRateLogs: statistics[HealthDataType.HEART_RATE]?.map((e) => e as HeartRateLog).toList(),
+        sleepAsleepLogs: statistics[HealthDataType.SLEEP_ASLEEP]?.map((e) => e as SleepAsleepLog).toList(),
+        bodyFatPercentageLogs: statistics[HealthDataType.BODY_FAT_PERCENTAGE]?.map((e) => e as BodyFatPercentageLog).toList(),
+        activeEnergyBurned: statistics[HealthDataType.ACTIVE_ENERGY_BURNED]?.map((e) => e as ActiveEnergyBurnedLog).toList(),
+        bodyMassIndexLogs: statistics[HealthDataType.BODY_MASS_INDEX]?.map((e) => e as BodyMassIndexLog).toList(),
+      );
+
+      if (userStatistic != UserStatistic.empty()) {
         await dio.post(
           '/user/statistics',
           options: Options(
@@ -157,16 +180,33 @@ class UserRepository {
               "Authorization": "Bearer ${token}",
             },
           ),
-          data: statistic.toJson(),
+          data: userStatistic.toJson(),
         );
       } else {
         log("empty statistic");
       }
 
-      return statistic;
+      return userStatistic;
     } catch (e) {
-      log("$e");
+      log("error updating statistics snapshot: $e");
       throw Exception("error updating statistics snapshot");
     }
+  }
+
+  Future<UserStatistic> getStatistic({required HealthDataType type}) {
+    final token = fb.FirebaseAuth.instance.currentUser!.getIdToken();
+    var response = dio.post(
+      '/user/statistic',
+      options: Options(
+        headers: {
+          "Authorization": "Bearer ${token}",
+        },
+      ),
+      data: {
+        "type": type.toString(),
+      },
+    );
+
+    return response.then((value) => UserStatistic.fromJson(value.data));
   }
 }

@@ -6,7 +6,7 @@ import 'package:copy_with_extension/copy_with_extension.dart';
 
 part 'workout_model.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(includeIfNull: true, explicitToJson: true, anyMap: true)
 @CopyWith()
 class Workout extends Equatable {
   final int? id;

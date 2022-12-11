@@ -7,25 +7,25 @@ part of 'exercise_model.dart';
 // **************************************************************************
 
 abstract class _$ExerciseCWProxy {
-  Exercise creator(User creator);
-
   Exercise creator_id(String creator_id);
 
-  Exercise description(String? description);
-
-  Exercise exercise_equipment(List<ExerciseEquipment>? exercise_equipment);
-
-  Exercise id(int? id);
-
-  Exercise images(List<String>? images);
-
-  Exercise met_value(double? met_value);
+  Exercise creator(User creator);
 
   Exercise muscle_target(List<MuscleTarget>? muscle_target);
 
   Exercise name(String? name);
 
+  Exercise description(String? description);
+
+  Exercise images(List<String>? images);
+
+  Exercise met_value(double? met_value);
+
   Exercise type(ExerciseType? type);
+
+  Exercise exercise_equipment(List<ExerciseEquipment>? exercise_equipment);
+
+  Exercise id(int? id);
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `Exercise(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
@@ -34,46 +34,30 @@ abstract class _$ExerciseCWProxy {
   /// Exercise(...).copyWith(id: 12, name: "My name")
   /// ````
   Exercise call({
-    User? creator,
     String? creator_id,
-    String? description,
-    List<ExerciseEquipment>? exercise_equipment,
-    int? id,
-    List<String>? images,
-    double? met_value,
+    User? creator,
     List<MuscleTarget>? muscle_target,
     String? name,
+    String? description,
+    List<String>? images,
+    double? met_value,
     ExerciseType? type,
+    List<ExerciseEquipment>? exercise_equipment,
+    int? id,
   });
 }
 
 /// Proxy class for `copyWith` functionality. This is a callable class and can be used as follows: `instanceOfExercise.copyWith(...)`. Additionally contains functions for specific fields e.g. `instanceOfExercise.copyWith.fieldName(...)`
 class _$ExerciseCWProxyImpl implements _$ExerciseCWProxy {
-  final Exercise _value;
-
   const _$ExerciseCWProxyImpl(this._value);
 
-  @override
-  Exercise creator(User creator) => this(creator: creator);
+  final Exercise _value;
 
   @override
   Exercise creator_id(String creator_id) => this(creator_id: creator_id);
 
   @override
-  Exercise description(String? description) => this(description: description);
-
-  @override
-  Exercise exercise_equipment(List<ExerciseEquipment>? exercise_equipment) =>
-      this(exercise_equipment: exercise_equipment);
-
-  @override
-  Exercise id(int? id) => this(id: id);
-
-  @override
-  Exercise images(List<String>? images) => this(images: images);
-
-  @override
-  Exercise met_value(double? met_value) => this(met_value: met_value);
+  Exercise creator(User creator) => this(creator: creator);
 
   @override
   Exercise muscle_target(List<MuscleTarget>? muscle_target) =>
@@ -83,7 +67,23 @@ class _$ExerciseCWProxyImpl implements _$ExerciseCWProxy {
   Exercise name(String? name) => this(name: name);
 
   @override
+  Exercise description(String? description) => this(description: description);
+
+  @override
+  Exercise images(List<String>? images) => this(images: images);
+
+  @override
+  Exercise met_value(double? met_value) => this(met_value: met_value);
+
+  @override
   Exercise type(ExerciseType? type) => this(type: type);
+
+  @override
+  Exercise exercise_equipment(List<ExerciseEquipment>? exercise_equipment) =>
+      this(exercise_equipment: exercise_equipment);
+
+  @override
+  Exercise id(int? id) => this(id: id);
 
   @override
 
@@ -94,47 +94,29 @@ class _$ExerciseCWProxyImpl implements _$ExerciseCWProxy {
   /// Exercise(...).copyWith(id: 12, name: "My name")
   /// ````
   Exercise call({
-    Object? creator = const $CopyWithPlaceholder(),
     Object? creator_id = const $CopyWithPlaceholder(),
-    Object? description = const $CopyWithPlaceholder(),
-    Object? exercise_equipment = const $CopyWithPlaceholder(),
-    Object? id = const $CopyWithPlaceholder(),
-    Object? images = const $CopyWithPlaceholder(),
-    Object? met_value = const $CopyWithPlaceholder(),
+    Object? creator = const $CopyWithPlaceholder(),
     Object? muscle_target = const $CopyWithPlaceholder(),
     Object? name = const $CopyWithPlaceholder(),
+    Object? description = const $CopyWithPlaceholder(),
+    Object? images = const $CopyWithPlaceholder(),
+    Object? met_value = const $CopyWithPlaceholder(),
     Object? type = const $CopyWithPlaceholder(),
+    Object? exercise_equipment = const $CopyWithPlaceholder(),
+    Object? id = const $CopyWithPlaceholder(),
   }) {
     return Exercise(
-      creator: creator == const $CopyWithPlaceholder() || creator == null
-          ? _value.creator
-          // ignore: cast_nullable_to_non_nullable
-          : creator as User,
       creator_id:
           creator_id == const $CopyWithPlaceholder() || creator_id == null
-              ? _value.creator_id
+              // ignore: unnecessary_non_null_assertion
+              ? _value.creator_id!
               // ignore: cast_nullable_to_non_nullable
               : creator_id as String,
-      description: description == const $CopyWithPlaceholder()
-          ? _value.description
+      creator: creator == const $CopyWithPlaceholder() || creator == null
+          // ignore: unnecessary_non_null_assertion
+          ? _value.creator!
           // ignore: cast_nullable_to_non_nullable
-          : description as String?,
-      exercise_equipment: exercise_equipment == const $CopyWithPlaceholder()
-          ? _value.exercise_equipment
-          // ignore: cast_nullable_to_non_nullable
-          : exercise_equipment as List<ExerciseEquipment>?,
-      id: id == const $CopyWithPlaceholder()
-          ? _value.id
-          // ignore: cast_nullable_to_non_nullable
-          : id as int?,
-      images: images == const $CopyWithPlaceholder()
-          ? _value.images
-          // ignore: cast_nullable_to_non_nullable
-          : images as List<String>?,
-      met_value: met_value == const $CopyWithPlaceholder()
-          ? _value.met_value
-          // ignore: cast_nullable_to_non_nullable
-          : met_value as double?,
+          : creator as User,
       muscle_target: muscle_target == const $CopyWithPlaceholder()
           ? _value.muscle_target
           // ignore: cast_nullable_to_non_nullable
@@ -143,10 +125,30 @@ class _$ExerciseCWProxyImpl implements _$ExerciseCWProxy {
           ? _value.name
           // ignore: cast_nullable_to_non_nullable
           : name as String?,
+      description: description == const $CopyWithPlaceholder()
+          ? _value.description
+          // ignore: cast_nullable_to_non_nullable
+          : description as String?,
+      images: images == const $CopyWithPlaceholder()
+          ? _value.images
+          // ignore: cast_nullable_to_non_nullable
+          : images as List<String>?,
+      met_value: met_value == const $CopyWithPlaceholder()
+          ? _value.met_value
+          // ignore: cast_nullable_to_non_nullable
+          : met_value as double?,
       type: type == const $CopyWithPlaceholder()
           ? _value.type
           // ignore: cast_nullable_to_non_nullable
           : type as ExerciseType?,
+      exercise_equipment: exercise_equipment == const $CopyWithPlaceholder()
+          ? _value.exercise_equipment
+          // ignore: cast_nullable_to_non_nullable
+          : exercise_equipment as List<ExerciseEquipment>?,
+      id: id == const $CopyWithPlaceholder()
+          ? _value.id
+          // ignore: cast_nullable_to_non_nullable
+          : id as int?,
     );
   }
 }

@@ -22,9 +22,9 @@ abstract class _$ExerciseEquipmentCWProxy {
 
 /// Proxy class for `copyWith` functionality. This is a callable class and can be used as follows: `instanceOfExerciseEquipment.copyWith(...)`. Additionally contains functions for specific fields e.g. `instanceOfExerciseEquipment.copyWith.fieldName(...)`
 class _$ExerciseEquipmentCWProxyImpl implements _$ExerciseEquipmentCWProxy {
-  final ExerciseEquipment _value;
-
   const _$ExerciseEquipmentCWProxyImpl(this._value);
+
+  final ExerciseEquipment _value;
 
   @override
   ExerciseEquipment id(String id) => this(id: id);
@@ -42,7 +42,8 @@ class _$ExerciseEquipmentCWProxyImpl implements _$ExerciseEquipmentCWProxy {
   }) {
     return ExerciseEquipment(
       id: id == const $CopyWithPlaceholder() || id == null
-          ? _value.id
+          // ignore: unnecessary_non_null_assertion
+          ? _value.id!
           // ignore: cast_nullable_to_non_nullable
           : id as String,
     );

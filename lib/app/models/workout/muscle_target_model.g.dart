@@ -7,13 +7,13 @@ part of 'muscle_target_model.dart';
 // **************************************************************************
 
 abstract class _$MuscleTargetCWProxy {
-  MuscleTarget description(String? description);
-
-  MuscleTarget id(String id);
-
   MuscleTarget image(String? image);
 
+  MuscleTarget description(String? description);
+
   MuscleTarget name(String name);
+
+  MuscleTarget id(String id);
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `MuscleTarget(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
@@ -22,31 +22,31 @@ abstract class _$MuscleTargetCWProxy {
   /// MuscleTarget(...).copyWith(id: 12, name: "My name")
   /// ````
   MuscleTarget call({
-    String? description,
-    String? id,
     String? image,
+    String? description,
     String? name,
+    String? id,
   });
 }
 
 /// Proxy class for `copyWith` functionality. This is a callable class and can be used as follows: `instanceOfMuscleTarget.copyWith(...)`. Additionally contains functions for specific fields e.g. `instanceOfMuscleTarget.copyWith.fieldName(...)`
 class _$MuscleTargetCWProxyImpl implements _$MuscleTargetCWProxy {
+  const _$MuscleTargetCWProxyImpl(this._value);
+
   final MuscleTarget _value;
 
-  const _$MuscleTargetCWProxyImpl(this._value);
+  @override
+  MuscleTarget image(String? image) => this(image: image);
 
   @override
   MuscleTarget description(String? description) =>
       this(description: description);
 
   @override
-  MuscleTarget id(String id) => this(id: id);
-
-  @override
-  MuscleTarget image(String? image) => this(image: image);
-
-  @override
   MuscleTarget name(String name) => this(name: name);
+
+  @override
+  MuscleTarget id(String id) => this(id: id);
 
   @override
 
@@ -57,28 +57,30 @@ class _$MuscleTargetCWProxyImpl implements _$MuscleTargetCWProxy {
   /// MuscleTarget(...).copyWith(id: 12, name: "My name")
   /// ````
   MuscleTarget call({
-    Object? description = const $CopyWithPlaceholder(),
-    Object? id = const $CopyWithPlaceholder(),
     Object? image = const $CopyWithPlaceholder(),
+    Object? description = const $CopyWithPlaceholder(),
     Object? name = const $CopyWithPlaceholder(),
+    Object? id = const $CopyWithPlaceholder(),
   }) {
     return MuscleTarget(
-      description: description == const $CopyWithPlaceholder()
-          ? _value.description
-          // ignore: cast_nullable_to_non_nullable
-          : description as String?,
-      id: id == const $CopyWithPlaceholder() || id == null
-          ? _value.id
-          // ignore: cast_nullable_to_non_nullable
-          : id as String,
       image: image == const $CopyWithPlaceholder()
           ? _value.image
           // ignore: cast_nullable_to_non_nullable
           : image as String?,
+      description: description == const $CopyWithPlaceholder()
+          ? _value.description
+          // ignore: cast_nullable_to_non_nullable
+          : description as String?,
       name: name == const $CopyWithPlaceholder() || name == null
-          ? _value.name
+          // ignore: unnecessary_non_null_assertion
+          ? _value.name!
           // ignore: cast_nullable_to_non_nullable
           : name as String,
+      id: id == const $CopyWithPlaceholder() || id == null
+          // ignore: unnecessary_non_null_assertion
+          ? _value.id!
+          // ignore: cast_nullable_to_non_nullable
+          : id as String,
     );
   }
 }

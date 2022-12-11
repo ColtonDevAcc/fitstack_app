@@ -6,7 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart' as fb;
 
 part 'user_model.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(includeIfNull: true, explicitToJson: true, anyMap: true)
 @CopyWith()
 class User extends Equatable {
   final String? id;

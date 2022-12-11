@@ -9,19 +9,19 @@ part of 'program_model.dart';
 abstract class _$ProgramCWProxy {
   Program createdAt(DateTime? createdAt);
 
-  Program creator(User? creator);
+  Program updatedAt(DateTime? updatedAt);
 
   Program deletedAt(DateTime? deletedAt);
 
-  Program description(String description);
-
   Program id(int id);
-
-  Program routine(Routine? routine);
 
   Program title(String title);
 
-  Program updatedAt(DateTime? updatedAt);
+  Program description(String description);
+
+  Program creator(User? creator);
+
+  Program routine(Routine? routine);
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `Program(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
@@ -31,45 +31,45 @@ abstract class _$ProgramCWProxy {
   /// ````
   Program call({
     DateTime? createdAt,
-    User? creator,
-    DateTime? deletedAt,
-    String? description,
-    int? id,
-    Routine? routine,
-    String? title,
     DateTime? updatedAt,
+    DateTime? deletedAt,
+    int? id,
+    String? title,
+    String? description,
+    User? creator,
+    Routine? routine,
   });
 }
 
 /// Proxy class for `copyWith` functionality. This is a callable class and can be used as follows: `instanceOfProgram.copyWith(...)`. Additionally contains functions for specific fields e.g. `instanceOfProgram.copyWith.fieldName(...)`
 class _$ProgramCWProxyImpl implements _$ProgramCWProxy {
-  final Program _value;
-
   const _$ProgramCWProxyImpl(this._value);
+
+  final Program _value;
 
   @override
   Program createdAt(DateTime? createdAt) => this(createdAt: createdAt);
 
   @override
-  Program creator(User? creator) => this(creator: creator);
+  Program updatedAt(DateTime? updatedAt) => this(updatedAt: updatedAt);
 
   @override
   Program deletedAt(DateTime? deletedAt) => this(deletedAt: deletedAt);
 
   @override
-  Program description(String description) => this(description: description);
-
-  @override
   Program id(int id) => this(id: id);
-
-  @override
-  Program routine(Routine? routine) => this(routine: routine);
 
   @override
   Program title(String title) => this(title: title);
 
   @override
-  Program updatedAt(DateTime? updatedAt) => this(updatedAt: updatedAt);
+  Program description(String description) => this(description: description);
+
+  @override
+  Program creator(User? creator) => this(creator: creator);
+
+  @override
+  Program routine(Routine? routine) => this(routine: routine);
 
   @override
 
@@ -81,48 +81,51 @@ class _$ProgramCWProxyImpl implements _$ProgramCWProxy {
   /// ````
   Program call({
     Object? createdAt = const $CopyWithPlaceholder(),
-    Object? creator = const $CopyWithPlaceholder(),
-    Object? deletedAt = const $CopyWithPlaceholder(),
-    Object? description = const $CopyWithPlaceholder(),
-    Object? id = const $CopyWithPlaceholder(),
-    Object? routine = const $CopyWithPlaceholder(),
-    Object? title = const $CopyWithPlaceholder(),
     Object? updatedAt = const $CopyWithPlaceholder(),
+    Object? deletedAt = const $CopyWithPlaceholder(),
+    Object? id = const $CopyWithPlaceholder(),
+    Object? title = const $CopyWithPlaceholder(),
+    Object? description = const $CopyWithPlaceholder(),
+    Object? creator = const $CopyWithPlaceholder(),
+    Object? routine = const $CopyWithPlaceholder(),
   }) {
     return Program(
       createdAt: createdAt == const $CopyWithPlaceholder()
           ? _value.createdAt
           // ignore: cast_nullable_to_non_nullable
           : createdAt as DateTime?,
-      creator: creator == const $CopyWithPlaceholder()
-          ? _value.creator
-          // ignore: cast_nullable_to_non_nullable
-          : creator as User?,
-      deletedAt: deletedAt == const $CopyWithPlaceholder()
-          ? _value.deletedAt
-          // ignore: cast_nullable_to_non_nullable
-          : deletedAt as DateTime?,
-      description:
-          description == const $CopyWithPlaceholder() || description == null
-              ? _value.description
-              // ignore: cast_nullable_to_non_nullable
-              : description as String,
-      id: id == const $CopyWithPlaceholder() || id == null
-          ? _value.id
-          // ignore: cast_nullable_to_non_nullable
-          : id as int,
-      routine: routine == const $CopyWithPlaceholder()
-          ? _value.routine
-          // ignore: cast_nullable_to_non_nullable
-          : routine as Routine?,
-      title: title == const $CopyWithPlaceholder() || title == null
-          ? _value.title
-          // ignore: cast_nullable_to_non_nullable
-          : title as String,
       updatedAt: updatedAt == const $CopyWithPlaceholder()
           ? _value.updatedAt
           // ignore: cast_nullable_to_non_nullable
           : updatedAt as DateTime?,
+      deletedAt: deletedAt == const $CopyWithPlaceholder()
+          ? _value.deletedAt
+          // ignore: cast_nullable_to_non_nullable
+          : deletedAt as DateTime?,
+      id: id == const $CopyWithPlaceholder() || id == null
+          // ignore: unnecessary_non_null_assertion
+          ? _value.id!
+          // ignore: cast_nullable_to_non_nullable
+          : id as int,
+      title: title == const $CopyWithPlaceholder() || title == null
+          // ignore: unnecessary_non_null_assertion
+          ? _value.title!
+          // ignore: cast_nullable_to_non_nullable
+          : title as String,
+      description:
+          description == const $CopyWithPlaceholder() || description == null
+              // ignore: unnecessary_non_null_assertion
+              ? _value.description!
+              // ignore: cast_nullable_to_non_nullable
+              : description as String,
+      creator: creator == const $CopyWithPlaceholder()
+          ? _value.creator
+          // ignore: cast_nullable_to_non_nullable
+          : creator as User?,
+      routine: routine == const $CopyWithPlaceholder()
+          ? _value.routine
+          // ignore: cast_nullable_to_non_nullable
+          : routine as Routine?,
     );
   }
 }

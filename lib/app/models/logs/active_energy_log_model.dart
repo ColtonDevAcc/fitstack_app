@@ -1,30 +1,47 @@
-import 'package:equatable/equatable.dart';
-
+import 'package:FitStack/app/models/logs/log_model.dart';
+import 'package:health/health.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:copy_with_extension/copy_with_extension.dart';
-
 part 'active_energy_log_model.g.dart';
 
-@JsonSerializable()
-@CopyWith()
-class ActiveEnergyLog extends Equatable {
-  final int? id;
-  final String? user_statistic_id;
-  final double active_energy;
-  final DateTime? updated_at;
-  final DateTime? created_at;
-
-  ActiveEnergyLog({
-    this.id,
-    this.user_statistic_id,
-    required this.active_energy,
-    this.updated_at,
-    required this.created_at,
-  });
+@JsonSerializable(includeIfNull: true, explicitToJson: true, anyMap: true)
+class ActiveEnergyBurnedLog extends Log {
+  ActiveEnergyBurnedLog({
+    String? id,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+    String? userId,
+    HealthDataType? type,
+    num? value,
+  }) : super(
+          id: id,
+          createdAt: createdAt ?? DateTime.now(),
+          updatedAt: updatedAt,
+          userId: userId,
+          type: type ?? HealthDataType.ACTIVE_ENERGY_BURNED,
+          value: value ?? 0,
+        );
 
   @override
-  List<Object?> get props => [id, user_statistic_id, active_energy, updated_at, created_at];
+  String toString() {
+    return 'ActiveEnergyBurnedLog { id: $id, created_at: $createdAt, userId: $userId, type: $type, value: $value }';
+  }
 
-  factory ActiveEnergyLog.fromJson(Map<String, dynamic> json) => _$ActiveEnergyLogFromJson(json);
-  Map<String, dynamic> toJson() => _$ActiveEnergyLogToJson(this);
+  Map<String, dynamic> toJson() => _$ActiveEnergyBurnedLogToJson(this);
+  factory ActiveEnergyBurnedLog.fromJson(Map<String, dynamic> json) => _$ActiveEnergyBurnedLogFromJson(json);
+
+  @override
+  List<Object?> get props => [id, createdAt, updatedAt, userId, type, value];
+
+  @override
+  factory ActiveEnergyBurnedLog.fromHealthData(HealthDataPoint data) {
+    var value = data.value as NumericHealthValue;
+    return ActiveEnergyBurnedLog(
+      id: null,
+      userId: null,
+      type: data.type,
+      value: value.numericValue,
+      createdAt: data.dateFrom,
+      updatedAt: data.dateTo,
+    );
+  }
 }

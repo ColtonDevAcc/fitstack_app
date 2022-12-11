@@ -22,3 +22,15 @@ class UserStatisticsUpdated extends UserStatisticsEvent {
 }
 
 class UserStatisticsSnapshotUpdateRequested extends UserStatisticsEvent {}
+
+class UserStatisticSelected extends UserStatisticsEvent {
+  final HealthDataType type;
+
+  const UserStatisticSelected(this.type);
+
+  @override
+  List<Object> get props => [type];
+
+  @override
+  String toString() => 'UserStatisticSelected { health data type: $type }';
+}

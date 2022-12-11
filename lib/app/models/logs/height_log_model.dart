@@ -1,38 +1,48 @@
-import 'package:equatable/equatable.dart';
+import 'package:FitStack/app/models/logs/log_model.dart';
+import 'package:health/health.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:copy_with_extension/copy_with_extension.dart';
 
 part 'height_log_model.g.dart';
 
-@JsonSerializable()
-@CopyWith()
-class HeightLog extends Equatable {
-  final int? id;
-  final String? user_statistic_id;
-  final double height;
-  final DateTime? updated_at;
-  final DateTime? created_at;
+@JsonSerializable(includeIfNull: true, explicitToJson: true, anyMap: true)
+class HeightLog extends Log {
   HeightLog({
-    this.user_statistic_id,
-    required this.height,
-    this.updated_at,
-    this.created_at,
-    this.id,
-  });
+    String? id,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+    String? userId,
+    HealthDataType? type,
+    num? value,
+  }) : super(
+          id: id,
+          createdAt: createdAt ?? DateTime.now(),
+          updatedAt: updatedAt,
+          userId: userId,
+          type: type ?? HealthDataType.HEIGHT,
+          value: value ?? 0,
+        );
 
   @override
-  List<Object?> get props => [id, user_statistic_id, height, updated_at, created_at];
+  String toString() {
+    return 'HeightLog { id: $id, created_at: $createdAt, userId: $userId, type: $type, value: $value }';
+  }
 
-  factory HeightLog.fromJson(Map<String, dynamic> json) => _$HeightLogFromJson(json);
   Map<String, dynamic> toJson() => _$HeightLogToJson(this);
-  factory HeightLog.empty() =>
-      HeightLog(created_at: DateTime.now().toUtc(), height: 0, id: 0, updated_at: DateTime.now().toUtc(), user_statistic_id: '');
+  factory HeightLog.fromJson(Map<String, dynamic> json) => _$HeightLogFromJson(json);
+
+  @override
+  List<Object?> get props => [id, createdAt, updatedAt, userId, type, value];
+
+  @override
+  factory HeightLog.fromHealthData(HealthDataPoint data) {
+    var value = data.value as NumericHealthValue;
+    return HeightLog(
+      id: null,
+      userId: null,
+      type: data.type,
+      value: value.numericValue,
+      createdAt: data.dateFrom,
+      updatedAt: data.dateTo,
+    );
+  }
 }
-//  type HeightLog struct {
-// 	ID              uint           `json:"id" gorm:"primaryKey;autoIncrement;not null"`
-// 	UserStatisticID string         `json:"user_statistic_id" gorm:"not null"`
-// 	Height          float32        `json:"height"`
-// 	CreatedAt       time.Time      `json:"created_at"`
-// 	UpdatedAt       time.Time      `json:"updated_at"`
-// 	DeletedAt       gorm.DeletedAt `json:"deleted_at" gorm:"index"`
-// }

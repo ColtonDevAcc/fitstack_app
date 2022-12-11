@@ -4,7 +4,7 @@ import 'package:copy_with_extension/copy_with_extension.dart';
 
 part 'muscle_target_model.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(includeIfNull: true, explicitToJson: true, anyMap: true)
 @CopyWith()
 class MuscleTarget extends Equatable {
   final String id;
