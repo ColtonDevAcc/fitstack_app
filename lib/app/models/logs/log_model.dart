@@ -10,7 +10,7 @@ abstract class Log extends Equatable {
   @JsonKey(name: 'created_at')
   final DateTime createdAt;
   @JsonKey(name: 'id')
-  final String? id;
+  final int? id;
   @JsonKey(name: 'user_id')
   final String? userId;
   @JsonKey(name: 'updated_at')
@@ -37,7 +37,7 @@ abstract class Log extends Equatable {
 
 // copy with factory
   factory Log.copyWith({
-    String? id,
+    int? id,
     DateTime? created_at,
     DateTime? updated_at,
     String? userId,

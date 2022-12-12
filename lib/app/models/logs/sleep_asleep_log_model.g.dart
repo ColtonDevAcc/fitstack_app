@@ -7,17 +7,17 @@ part of 'sleep_asleep_log_model.dart';
 // **************************************************************************
 
 abstract class _$SleepAsleepLogCWProxy {
-  SleepAsleepLog id(String? id);
+  SleepAsleepLog id(int? id);
 
-  SleepAsleepLog createdAt(DateTime createdAt);
+  SleepAsleepLog createdAt(DateTime? createdAt);
 
   SleepAsleepLog updatedAt(DateTime? updatedAt);
 
   SleepAsleepLog userId(String? userId);
 
-  SleepAsleepLog type(HealthDataType type);
+  SleepAsleepLog type(HealthDataType? type);
 
-  SleepAsleepLog value(num value);
+  SleepAsleepLog value(num? value);
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `SleepAsleepLog(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
@@ -26,7 +26,7 @@ abstract class _$SleepAsleepLogCWProxy {
   /// SleepAsleepLog(...).copyWith(id: 12, name: "My name")
   /// ````
   SleepAsleepLog call({
-    String? id,
+    int? id,
     DateTime? createdAt,
     DateTime? updatedAt,
     String? userId,
@@ -42,10 +42,10 @@ class _$SleepAsleepLogCWProxyImpl implements _$SleepAsleepLogCWProxy {
   final SleepAsleepLog _value;
 
   @override
-  SleepAsleepLog id(String? id) => this(id: id);
+  SleepAsleepLog id(int? id) => this(id: id);
 
   @override
-  SleepAsleepLog createdAt(DateTime createdAt) => this(createdAt: createdAt);
+  SleepAsleepLog createdAt(DateTime? createdAt) => this(createdAt: createdAt);
 
   @override
   SleepAsleepLog updatedAt(DateTime? updatedAt) => this(updatedAt: updatedAt);
@@ -54,10 +54,10 @@ class _$SleepAsleepLogCWProxyImpl implements _$SleepAsleepLogCWProxy {
   SleepAsleepLog userId(String? userId) => this(userId: userId);
 
   @override
-  SleepAsleepLog type(HealthDataType type) => this(type: type);
+  SleepAsleepLog type(HealthDataType? type) => this(type: type);
 
   @override
-  SleepAsleepLog value(num value) => this(value: value);
+  SleepAsleepLog value(num? value) => this(value: value);
 
   @override
 
@@ -79,12 +79,11 @@ class _$SleepAsleepLogCWProxyImpl implements _$SleepAsleepLogCWProxy {
       id: id == const $CopyWithPlaceholder()
           ? _value.id
           // ignore: cast_nullable_to_non_nullable
-          : id as String?,
-      createdAt: createdAt == const $CopyWithPlaceholder() || createdAt == null
-          // ignore: unnecessary_non_null_assertion
-          ? _value.createdAt!
+          : id as int?,
+      createdAt: createdAt == const $CopyWithPlaceholder()
+          ? _value.createdAt
           // ignore: cast_nullable_to_non_nullable
-          : createdAt as DateTime,
+          : createdAt as DateTime?,
       updatedAt: updatedAt == const $CopyWithPlaceholder()
           ? _value.updatedAt
           // ignore: cast_nullable_to_non_nullable
@@ -93,16 +92,14 @@ class _$SleepAsleepLogCWProxyImpl implements _$SleepAsleepLogCWProxy {
           ? _value.userId
           // ignore: cast_nullable_to_non_nullable
           : userId as String?,
-      type: type == const $CopyWithPlaceholder() || type == null
-          // ignore: unnecessary_non_null_assertion
-          ? _value.type!
+      type: type == const $CopyWithPlaceholder()
+          ? _value.type
           // ignore: cast_nullable_to_non_nullable
-          : type as HealthDataType,
-      value: value == const $CopyWithPlaceholder() || value == null
-          // ignore: unnecessary_non_null_assertion
-          ? _value.value!
+          : type as HealthDataType?,
+      value: value == const $CopyWithPlaceholder()
+          ? _value.value
           // ignore: cast_nullable_to_non_nullable
-          : value as num,
+          : value as num?,
     );
   }
 }
@@ -117,35 +114,36 @@ extension $SleepAsleepLogCopyWith on SleepAsleepLog {
 // JsonSerializableGenerator
 // **************************************************************************
 
-SleepAsleepLog _$SleepAsleepLogFromJson(Map<String, dynamic> json) =>
-    SleepAsleepLog(
-      id: json['id'] as String?,
-      createdAt: DateTime.parse(json['createdAt'] as String),
-      updatedAt: json['updatedAt'] == null
+SleepAsleepLog _$SleepAsleepLogFromJson(Map json) => SleepAsleepLog(
+      id: json['id'] as int?,
+      createdAt: json['created_at'] == null
           ? null
-          : DateTime.parse(json['updatedAt'] as String),
-      userId: json['userId'] as String?,
-      type: $enumDecode(_$HealthDataTypeEnumMap, json['type']),
-      value: json['value'] as num,
+          : DateTime.parse(json['created_at'] as String),
+      updatedAt: json['updated_at'] == null
+          ? null
+          : DateTime.parse(json['updated_at'] as String),
+      userId: json['user_id'] as String?,
+      type: $enumDecodeNullable(_$HealthDataTypeEnumMap, json['type']),
+      value: json['value'] as num?,
     );
 
 const _$SleepAsleepLogFieldMap = <String, String>{
-  'id': 'id',
-  'userId': 'userId',
   'type': 'type',
   'value': 'value',
-  'createdAt': 'createdAt',
-  'updatedAt': 'updatedAt',
+  'createdAt': 'created_at',
+  'id': 'id',
+  'userId': 'user_id',
+  'updatedAt': 'updated_at',
 };
 
 Map<String, dynamic> _$SleepAsleepLogToJson(SleepAsleepLog instance) =>
     <String, dynamic>{
-      'id': instance.id,
-      'userId': instance.userId,
       'type': _$HealthDataTypeEnumMap[instance.type]!,
       'value': instance.value,
-      'createdAt': instance.createdAt.toIso8601String(),
-      'updatedAt': instance.updatedAt?.toIso8601String(),
+      'created_at': instance.createdAt.toIso8601String(),
+      'id': instance.id,
+      'user_id': instance.userId,
+      'updated_at': instance.updatedAt?.toIso8601String(),
     };
 
 const _$HealthDataTypeEnumMap = {

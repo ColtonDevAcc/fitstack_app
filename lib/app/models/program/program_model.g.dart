@@ -140,7 +140,7 @@ extension $ProgramCopyWith on Program {
 // JsonSerializableGenerator
 // **************************************************************************
 
-Program _$ProgramFromJson(Map<String, dynamic> json) => Program(
+Program _$ProgramFromJson(Map json) => Program(
       createdAt: json['createdAt'] == null
           ? null
           : DateTime.parse(json['createdAt'] as String),
@@ -155,10 +155,10 @@ Program _$ProgramFromJson(Map<String, dynamic> json) => Program(
       description: json['description'] as String,
       creator: json['creator'] == null
           ? null
-          : User.fromJson(json['creator'] as Map<String, dynamic>),
+          : User.fromJson(Map<String, dynamic>.from(json['creator'] as Map)),
       routine: json['routine'] == null
           ? null
-          : Routine.fromJson(json['routine'] as Map<String, dynamic>),
+          : Routine.fromJson(Map<String, dynamic>.from(json['routine'] as Map)),
     );
 
 const _$ProgramFieldMap = <String, String>{
@@ -176,8 +176,8 @@ Map<String, dynamic> _$ProgramToJson(Program instance) => <String, dynamic>{
       'id': instance.id,
       'title': instance.title,
       'description': instance.description,
-      'creator': instance.creator,
-      'routine': instance.routine,
+      'creator': instance.creator?.toJson(),
+      'routine': instance.routine?.toJson(),
       'createdAt': instance.createdAt?.toIso8601String(),
       'updatedAt': instance.updatedAt?.toIso8601String(),
       'deletedAt': instance.deletedAt?.toIso8601String(),

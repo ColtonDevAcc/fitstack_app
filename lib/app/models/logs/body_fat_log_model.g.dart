@@ -7,17 +7,17 @@ part of 'body_fat_log_model.dart';
 // **************************************************************************
 
 abstract class _$BodyFatPercentageLogCWProxy {
-  BodyFatPercentageLog id(String? id);
+  BodyFatPercentageLog id(int? id);
 
-  BodyFatPercentageLog createdAt(DateTime createdAt);
+  BodyFatPercentageLog createdAt(DateTime? createdAt);
 
   BodyFatPercentageLog updatedAt(DateTime? updatedAt);
 
   BodyFatPercentageLog userId(String? userId);
 
-  BodyFatPercentageLog type(HealthDataType type);
+  BodyFatPercentageLog type(HealthDataType? type);
 
-  BodyFatPercentageLog value(num value);
+  BodyFatPercentageLog value(num? value);
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `BodyFatPercentageLog(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
@@ -26,7 +26,7 @@ abstract class _$BodyFatPercentageLogCWProxy {
   /// BodyFatPercentageLog(...).copyWith(id: 12, name: "My name")
   /// ````
   BodyFatPercentageLog call({
-    String? id,
+    int? id,
     DateTime? createdAt,
     DateTime? updatedAt,
     String? userId,
@@ -43,10 +43,10 @@ class _$BodyFatPercentageLogCWProxyImpl
   final BodyFatPercentageLog _value;
 
   @override
-  BodyFatPercentageLog id(String? id) => this(id: id);
+  BodyFatPercentageLog id(int? id) => this(id: id);
 
   @override
-  BodyFatPercentageLog createdAt(DateTime createdAt) =>
+  BodyFatPercentageLog createdAt(DateTime? createdAt) =>
       this(createdAt: createdAt);
 
   @override
@@ -57,10 +57,10 @@ class _$BodyFatPercentageLogCWProxyImpl
   BodyFatPercentageLog userId(String? userId) => this(userId: userId);
 
   @override
-  BodyFatPercentageLog type(HealthDataType type) => this(type: type);
+  BodyFatPercentageLog type(HealthDataType? type) => this(type: type);
 
   @override
-  BodyFatPercentageLog value(num value) => this(value: value);
+  BodyFatPercentageLog value(num? value) => this(value: value);
 
   @override
 
@@ -82,12 +82,11 @@ class _$BodyFatPercentageLogCWProxyImpl
       id: id == const $CopyWithPlaceholder()
           ? _value.id
           // ignore: cast_nullable_to_non_nullable
-          : id as String?,
-      createdAt: createdAt == const $CopyWithPlaceholder() || createdAt == null
-          // ignore: unnecessary_non_null_assertion
-          ? _value.createdAt!
+          : id as int?,
+      createdAt: createdAt == const $CopyWithPlaceholder()
+          ? _value.createdAt
           // ignore: cast_nullable_to_non_nullable
-          : createdAt as DateTime,
+          : createdAt as DateTime?,
       updatedAt: updatedAt == const $CopyWithPlaceholder()
           ? _value.updatedAt
           // ignore: cast_nullable_to_non_nullable
@@ -96,16 +95,14 @@ class _$BodyFatPercentageLogCWProxyImpl
           ? _value.userId
           // ignore: cast_nullable_to_non_nullable
           : userId as String?,
-      type: type == const $CopyWithPlaceholder() || type == null
-          // ignore: unnecessary_non_null_assertion
-          ? _value.type!
+      type: type == const $CopyWithPlaceholder()
+          ? _value.type
           // ignore: cast_nullable_to_non_nullable
-          : type as HealthDataType,
-      value: value == const $CopyWithPlaceholder() || value == null
-          // ignore: unnecessary_non_null_assertion
-          ? _value.value!
+          : type as HealthDataType?,
+      value: value == const $CopyWithPlaceholder()
+          ? _value.value
           // ignore: cast_nullable_to_non_nullable
-          : value as num,
+          : value as num?,
     );
   }
 }
@@ -121,37 +118,38 @@ extension $BodyFatPercentageLogCopyWith on BodyFatPercentageLog {
 // JsonSerializableGenerator
 // **************************************************************************
 
-BodyFatPercentageLog _$BodyFatPercentageLogFromJson(
-        Map<String, dynamic> json) =>
+BodyFatPercentageLog _$BodyFatPercentageLogFromJson(Map json) =>
     BodyFatPercentageLog(
-      id: json['id'] as String?,
-      createdAt: DateTime.parse(json['createdAt'] as String),
-      updatedAt: json['updatedAt'] == null
+      id: json['id'] as int?,
+      createdAt: json['created_at'] == null
           ? null
-          : DateTime.parse(json['updatedAt'] as String),
-      userId: json['userId'] as String?,
-      type: $enumDecode(_$HealthDataTypeEnumMap, json['type']),
-      value: json['value'] as num,
+          : DateTime.parse(json['created_at'] as String),
+      updatedAt: json['updated_at'] == null
+          ? null
+          : DateTime.parse(json['updated_at'] as String),
+      userId: json['user_id'] as String?,
+      type: $enumDecodeNullable(_$HealthDataTypeEnumMap, json['type']),
+      value: json['value'] as num?,
     );
 
 const _$BodyFatPercentageLogFieldMap = <String, String>{
-  'id': 'id',
-  'userId': 'userId',
   'type': 'type',
   'value': 'value',
-  'createdAt': 'createdAt',
-  'updatedAt': 'updatedAt',
+  'createdAt': 'created_at',
+  'id': 'id',
+  'userId': 'user_id',
+  'updatedAt': 'updated_at',
 };
 
 Map<String, dynamic> _$BodyFatPercentageLogToJson(
         BodyFatPercentageLog instance) =>
     <String, dynamic>{
-      'id': instance.id,
-      'userId': instance.userId,
       'type': _$HealthDataTypeEnumMap[instance.type]!,
       'value': instance.value,
-      'createdAt': instance.createdAt.toIso8601String(),
-      'updatedAt': instance.updatedAt?.toIso8601String(),
+      'created_at': instance.createdAt.toIso8601String(),
+      'id': instance.id,
+      'user_id': instance.userId,
+      'updated_at': instance.updatedAt?.toIso8601String(),
     };
 
 const _$HealthDataTypeEnumMap = {

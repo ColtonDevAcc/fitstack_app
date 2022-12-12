@@ -7,17 +7,17 @@ part of 'active_minutes_log_model.dart';
 // **************************************************************************
 
 abstract class _$ActiveMinutesLogCWProxy {
-  ActiveMinutesLog id(String? id);
+  ActiveMinutesLog id(int? id);
 
-  ActiveMinutesLog createdAt(DateTime createdAt);
+  ActiveMinutesLog createdAt(DateTime? createdAt);
 
   ActiveMinutesLog updatedAt(DateTime? updatedAt);
 
   ActiveMinutesLog userId(String? userId);
 
-  ActiveMinutesLog type(HealthDataType type);
+  ActiveMinutesLog type(HealthDataType? type);
 
-  ActiveMinutesLog value(num value);
+  ActiveMinutesLog value(num? value);
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `ActiveMinutesLog(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
@@ -26,7 +26,7 @@ abstract class _$ActiveMinutesLogCWProxy {
   /// ActiveMinutesLog(...).copyWith(id: 12, name: "My name")
   /// ````
   ActiveMinutesLog call({
-    String? id,
+    int? id,
     DateTime? createdAt,
     DateTime? updatedAt,
     String? userId,
@@ -42,10 +42,10 @@ class _$ActiveMinutesLogCWProxyImpl implements _$ActiveMinutesLogCWProxy {
   final ActiveMinutesLog _value;
 
   @override
-  ActiveMinutesLog id(String? id) => this(id: id);
+  ActiveMinutesLog id(int? id) => this(id: id);
 
   @override
-  ActiveMinutesLog createdAt(DateTime createdAt) => this(createdAt: createdAt);
+  ActiveMinutesLog createdAt(DateTime? createdAt) => this(createdAt: createdAt);
 
   @override
   ActiveMinutesLog updatedAt(DateTime? updatedAt) => this(updatedAt: updatedAt);
@@ -54,10 +54,10 @@ class _$ActiveMinutesLogCWProxyImpl implements _$ActiveMinutesLogCWProxy {
   ActiveMinutesLog userId(String? userId) => this(userId: userId);
 
   @override
-  ActiveMinutesLog type(HealthDataType type) => this(type: type);
+  ActiveMinutesLog type(HealthDataType? type) => this(type: type);
 
   @override
-  ActiveMinutesLog value(num value) => this(value: value);
+  ActiveMinutesLog value(num? value) => this(value: value);
 
   @override
 
@@ -79,12 +79,11 @@ class _$ActiveMinutesLogCWProxyImpl implements _$ActiveMinutesLogCWProxy {
       id: id == const $CopyWithPlaceholder()
           ? _value.id
           // ignore: cast_nullable_to_non_nullable
-          : id as String?,
-      createdAt: createdAt == const $CopyWithPlaceholder() || createdAt == null
-          // ignore: unnecessary_non_null_assertion
-          ? _value.createdAt!
+          : id as int?,
+      createdAt: createdAt == const $CopyWithPlaceholder()
+          ? _value.createdAt
           // ignore: cast_nullable_to_non_nullable
-          : createdAt as DateTime,
+          : createdAt as DateTime?,
       updatedAt: updatedAt == const $CopyWithPlaceholder()
           ? _value.updatedAt
           // ignore: cast_nullable_to_non_nullable
@@ -93,16 +92,14 @@ class _$ActiveMinutesLogCWProxyImpl implements _$ActiveMinutesLogCWProxy {
           ? _value.userId
           // ignore: cast_nullable_to_non_nullable
           : userId as String?,
-      type: type == const $CopyWithPlaceholder() || type == null
-          // ignore: unnecessary_non_null_assertion
-          ? _value.type!
+      type: type == const $CopyWithPlaceholder()
+          ? _value.type
           // ignore: cast_nullable_to_non_nullable
-          : type as HealthDataType,
-      value: value == const $CopyWithPlaceholder() || value == null
-          // ignore: unnecessary_non_null_assertion
-          ? _value.value!
+          : type as HealthDataType?,
+      value: value == const $CopyWithPlaceholder()
+          ? _value.value
           // ignore: cast_nullable_to_non_nullable
-          : value as num,
+          : value as num?,
     );
   }
 }
@@ -117,34 +114,35 @@ extension $ActiveMinutesLogCopyWith on ActiveMinutesLog {
 // JsonSerializableGenerator
 // **************************************************************************
 
-ActiveMinutesLog _$ActiveMinutesLogFromJson(Map<String, dynamic> json) =>
-    ActiveMinutesLog(
-      id: json['id'] as String?,
-      createdAt: DateTime.parse(json['created_at'] as String),
+ActiveMinutesLog _$ActiveMinutesLogFromJson(Map json) => ActiveMinutesLog(
+      id: json['id'] as int?,
+      createdAt: json['created_at'] == null
+          ? null
+          : DateTime.parse(json['created_at'] as String),
       updatedAt: json['updated_at'] == null
           ? null
           : DateTime.parse(json['updated_at'] as String),
       userId: json['user_id'] as String?,
-      type: $enumDecode(_$HealthDataTypeEnumMap, json['type']),
-      value: json['value'] as num,
+      type: $enumDecodeNullable(_$HealthDataTypeEnumMap, json['type']),
+      value: json['value'] as num?,
     );
 
 const _$ActiveMinutesLogFieldMap = <String, String>{
-  'id': 'id',
-  'userId': 'user_id',
   'type': 'type',
   'value': 'value',
   'createdAt': 'created_at',
+  'id': 'id',
+  'userId': 'user_id',
   'updatedAt': 'updated_at',
 };
 
 Map<String, dynamic> _$ActiveMinutesLogToJson(ActiveMinutesLog instance) =>
     <String, dynamic>{
-      'id': instance.id,
-      'user_id': instance.userId,
       'type': _$HealthDataTypeEnumMap[instance.type]!,
       'value': instance.value,
       'created_at': instance.createdAt.toIso8601String(),
+      'id': instance.id,
+      'user_id': instance.userId,
       'updated_at': instance.updatedAt?.toIso8601String(),
     };
 

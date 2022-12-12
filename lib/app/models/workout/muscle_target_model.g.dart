@@ -25,7 +25,7 @@ abstract class _$MuscleTargetCWProxy {
     String? image,
     String? description,
     String? name,
-    String? id,
+    int? id,
   });
 }
 
@@ -39,8 +39,7 @@ class _$MuscleTargetCWProxyImpl implements _$MuscleTargetCWProxy {
   MuscleTarget image(String? image) => this(image: image);
 
   @override
-  MuscleTarget description(String? description) =>
-      this(description: description);
+  MuscleTarget description(String? description) => this(description: description);
 
   @override
   MuscleTarget name(String name) => this(name: name);
@@ -95,7 +94,7 @@ extension $MuscleTargetCopyWith on MuscleTarget {
 // JsonSerializableGenerator
 // **************************************************************************
 
-MuscleTarget _$MuscleTargetFromJson(Map<String, dynamic> json) => MuscleTarget(
+MuscleTarget _$MuscleTargetFromJson(Map json) => MuscleTarget(
       image: json['image'] as String?,
       description: json['description'] as String?,
       name: json['name'] as String,
@@ -109,8 +108,7 @@ const _$MuscleTargetFieldMap = <String, String>{
   'image': 'image',
 };
 
-Map<String, dynamic> _$MuscleTargetToJson(MuscleTarget instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$MuscleTargetToJson(MuscleTarget instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'description': instance.description,

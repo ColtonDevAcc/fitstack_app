@@ -115,15 +115,16 @@ extension $WorkoutCopyWith on Workout {
 // JsonSerializableGenerator
 // **************************************************************************
 
-Workout _$WorkoutFromJson(Map<String, dynamic> json) => Workout(
+Workout _$WorkoutFromJson(Map json) => Workout(
       creator_id: json['creator_id'] as String?,
       creator: json['creator'] == null
           ? null
-          : User.fromJson(json['creator'] as Map<String, dynamic>),
+          : User.fromJson(Map<String, dynamic>.from(json['creator'] as Map)),
       description: json['description'] as String?,
       id: json['id'] as int?,
       workout_sets: (json['workout_sets'] as List<dynamic>?)
-          ?.map((e) => WorkoutSets.fromJson(e as Map<String, dynamic>))
+          ?.map(
+              (e) => WorkoutSets.fromJson(Map<String, dynamic>.from(e as Map)))
           .toList(),
       title: json['title'] as String?,
     );
@@ -141,7 +142,7 @@ Map<String, dynamic> _$WorkoutToJson(Workout instance) => <String, dynamic>{
       'id': instance.id,
       'title': instance.title,
       'description': instance.description,
-      'creator': instance.creator,
+      'creator': instance.creator?.toJson(),
       'creator_id': instance.creator_id,
-      'workout_sets': instance.workout_sets,
+      'workout_sets': instance.workout_sets?.map((e) => e.toJson()).toList(),
     };

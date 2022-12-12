@@ -7,17 +7,17 @@ part of 'heart_rate_log_model.dart';
 // **************************************************************************
 
 abstract class _$HeartRateLogCWProxy {
-  HeartRateLog id(String? id);
+  HeartRateLog id(int? id);
 
-  HeartRateLog createdAt(DateTime createdAt);
+  HeartRateLog createdAt(DateTime? createdAt);
 
   HeartRateLog updatedAt(DateTime? updatedAt);
 
   HeartRateLog userId(String? userId);
 
-  HeartRateLog type(HealthDataType type);
+  HeartRateLog type(HealthDataType? type);
 
-  HeartRateLog value(num value);
+  HeartRateLog value(num? value);
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `HeartRateLog(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
@@ -26,7 +26,7 @@ abstract class _$HeartRateLogCWProxy {
   /// HeartRateLog(...).copyWith(id: 12, name: "My name")
   /// ````
   HeartRateLog call({
-    String? id,
+    int? id,
     DateTime? createdAt,
     DateTime? updatedAt,
     String? userId,
@@ -42,10 +42,10 @@ class _$HeartRateLogCWProxyImpl implements _$HeartRateLogCWProxy {
   final HeartRateLog _value;
 
   @override
-  HeartRateLog id(String? id) => this(id: id);
+  HeartRateLog id(int? id) => this(id: id);
 
   @override
-  HeartRateLog createdAt(DateTime createdAt) => this(createdAt: createdAt);
+  HeartRateLog createdAt(DateTime? createdAt) => this(createdAt: createdAt);
 
   @override
   HeartRateLog updatedAt(DateTime? updatedAt) => this(updatedAt: updatedAt);
@@ -54,10 +54,10 @@ class _$HeartRateLogCWProxyImpl implements _$HeartRateLogCWProxy {
   HeartRateLog userId(String? userId) => this(userId: userId);
 
   @override
-  HeartRateLog type(HealthDataType type) => this(type: type);
+  HeartRateLog type(HealthDataType? type) => this(type: type);
 
   @override
-  HeartRateLog value(num value) => this(value: value);
+  HeartRateLog value(num? value) => this(value: value);
 
   @override
 
@@ -79,12 +79,11 @@ class _$HeartRateLogCWProxyImpl implements _$HeartRateLogCWProxy {
       id: id == const $CopyWithPlaceholder()
           ? _value.id
           // ignore: cast_nullable_to_non_nullable
-          : id as String?,
-      createdAt: createdAt == const $CopyWithPlaceholder() || createdAt == null
-          // ignore: unnecessary_non_null_assertion
-          ? _value.createdAt!
+          : id as int?,
+      createdAt: createdAt == const $CopyWithPlaceholder()
+          ? _value.createdAt
           // ignore: cast_nullable_to_non_nullable
-          : createdAt as DateTime,
+          : createdAt as DateTime?,
       updatedAt: updatedAt == const $CopyWithPlaceholder()
           ? _value.updatedAt
           // ignore: cast_nullable_to_non_nullable
@@ -93,16 +92,14 @@ class _$HeartRateLogCWProxyImpl implements _$HeartRateLogCWProxy {
           ? _value.userId
           // ignore: cast_nullable_to_non_nullable
           : userId as String?,
-      type: type == const $CopyWithPlaceholder() || type == null
-          // ignore: unnecessary_non_null_assertion
-          ? _value.type!
+      type: type == const $CopyWithPlaceholder()
+          ? _value.type
           // ignore: cast_nullable_to_non_nullable
-          : type as HealthDataType,
-      value: value == const $CopyWithPlaceholder() || value == null
-          // ignore: unnecessary_non_null_assertion
-          ? _value.value!
+          : type as HealthDataType?,
+      value: value == const $CopyWithPlaceholder()
+          ? _value.value
           // ignore: cast_nullable_to_non_nullable
-          : value as num,
+          : value as num?,
     );
   }
 }
@@ -117,34 +114,36 @@ extension $HeartRateLogCopyWith on HeartRateLog {
 // JsonSerializableGenerator
 // **************************************************************************
 
-HeartRateLog _$HeartRateLogFromJson(Map<String, dynamic> json) => HeartRateLog(
-      id: json['id'] as String?,
-      createdAt: DateTime.parse(json['createdAt'] as String),
-      updatedAt: json['updatedAt'] == null
+HeartRateLog _$HeartRateLogFromJson(Map json) => HeartRateLog(
+      id: json['id'] as int?,
+      createdAt: json['created_at'] == null
           ? null
-          : DateTime.parse(json['updatedAt'] as String),
-      userId: json['userId'] as String?,
-      type: $enumDecode(_$HealthDataTypeEnumMap, json['type']),
-      value: json['value'] as num,
+          : DateTime.parse(json['created_at'] as String),
+      updatedAt: json['updated_at'] == null
+          ? null
+          : DateTime.parse(json['updated_at'] as String),
+      userId: json['user_id'] as String?,
+      type: $enumDecodeNullable(_$HealthDataTypeEnumMap, json['type']),
+      value: json['value'] as num?,
     );
 
 const _$HeartRateLogFieldMap = <String, String>{
-  'id': 'id',
-  'userId': 'userId',
   'type': 'type',
   'value': 'value',
-  'createdAt': 'createdAt',
-  'updatedAt': 'updatedAt',
+  'createdAt': 'created_at',
+  'id': 'id',
+  'userId': 'user_id',
+  'updatedAt': 'updated_at',
 };
 
 Map<String, dynamic> _$HeartRateLogToJson(HeartRateLog instance) =>
     <String, dynamic>{
-      'id': instance.id,
-      'userId': instance.userId,
       'type': _$HealthDataTypeEnumMap[instance.type]!,
       'value': instance.value,
-      'createdAt': instance.createdAt.toIso8601String(),
-      'updatedAt': instance.updatedAt?.toIso8601String(),
+      'created_at': instance.createdAt.toIso8601String(),
+      'id': instance.id,
+      'user_id': instance.userId,
+      'updated_at': instance.updatedAt?.toIso8601String(),
     };
 
 const _$HealthDataTypeEnumMap = {

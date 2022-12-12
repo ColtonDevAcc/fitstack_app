@@ -214,10 +214,11 @@ extension $UserCopyWith on User {
 // JsonSerializableGenerator
 // **************************************************************************
 
-User _$UserFromJson(Map<String, dynamic> json) => User(
+User _$UserFromJson(Map json) => User(
       bmi_goal: (json['bmi_goal'] as num?)?.toDouble(),
       weight_goal: (json['weight_goal'] as num?)?.toDouble(),
-      profile: UserProfile.fromJson(json['profile'] as Map<String, dynamic>),
+      profile: UserProfile.fromJson(
+          Map<String, dynamic>.from(json['profile'] as Map)),
       password: json['password'] as String?,
       updated_at: json['updated_at'] == null
           ? null
@@ -266,5 +267,5 @@ Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
       'updated_at': instance.updated_at?.toIso8601String(),
       'created_at': instance.created_at?.toIso8601String(),
       'refresh_token': instance.refresh_token,
-      'profile': instance.profile,
+      'profile': instance.profile.toJson(),
     };

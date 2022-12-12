@@ -163,11 +163,12 @@ extension $ExerciseCopyWith on Exercise {
 // JsonSerializableGenerator
 // **************************************************************************
 
-Exercise _$ExerciseFromJson(Map<String, dynamic> json) => Exercise(
+Exercise _$ExerciseFromJson(Map json) => Exercise(
       creator_id: json['creator_id'] as String,
-      creator: User.fromJson(json['creator'] as Map<String, dynamic>),
+      creator: User.fromJson(Map<String, dynamic>.from(json['creator'] as Map)),
       muscle_target: (json['muscle_target'] as List<dynamic>?)
-          ?.map((e) => MuscleTarget.fromJson(e as Map<String, dynamic>))
+          ?.map(
+              (e) => MuscleTarget.fromJson(Map<String, dynamic>.from(e as Map)))
           .toList(),
       name: json['name'] as String?,
       description: json['description'] as String?,
@@ -176,7 +177,8 @@ Exercise _$ExerciseFromJson(Map<String, dynamic> json) => Exercise(
       met_value: (json['met_value'] as num?)?.toDouble(),
       type: $enumDecodeNullable(_$ExerciseTypeEnumMap, json['type']),
       exercise_equipment: (json['exercise_equipment'] as List<dynamic>?)
-          ?.map((e) => ExerciseEquipment.fromJson(e as Map<String, dynamic>))
+          ?.map((e) =>
+              ExerciseEquipment.fromJson(Map<String, dynamic>.from(e as Map)))
           .toList(),
       id: json['id'] as int?,
     );
@@ -200,11 +202,12 @@ Map<String, dynamic> _$ExerciseToJson(Exercise instance) => <String, dynamic>{
       'description': instance.description,
       'images': instance.images,
       'met_value': instance.met_value,
-      'creator': instance.creator,
+      'creator': instance.creator.toJson(),
       'creator_id': instance.creator_id,
       'type': _$ExerciseTypeEnumMap[instance.type],
-      'exercise_equipment': instance.exercise_equipment,
-      'muscle_target': instance.muscle_target,
+      'exercise_equipment':
+          instance.exercise_equipment?.map((e) => e.toJson()).toList(),
+      'muscle_target': instance.muscle_target?.map((e) => e.toJson()).toList(),
     };
 
 const _$ExerciseTypeEnumMap = {

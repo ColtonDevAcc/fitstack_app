@@ -114,14 +114,16 @@ extension $RoutineCopyWith on Routine {
 // JsonSerializableGenerator
 // **************************************************************************
 
-Routine _$RoutineFromJson(Map<String, dynamic> json) => Routine(
+Routine _$RoutineFromJson(Map json) => Routine(
       image_url: json['image_url'] as String?,
       schedule: json['schedule'] == null
           ? null
-          : RoutineSchedule.fromJson(json['schedule'] as Map<String, dynamic>),
+          : RoutineSchedule.fromJson(
+              Map<String, dynamic>.from(json['schedule'] as Map)),
       workouts: json['workouts'] == null
           ? null
-          : Workout.fromJson(json['workouts'] as Map<String, dynamic>),
+          : Workout.fromJson(
+              Map<String, dynamic>.from(json['workouts'] as Map)),
       id: json['id'] as int?,
       title: json['title'] as String?,
       description: json['description'] as String?,
@@ -141,6 +143,6 @@ Map<String, dynamic> _$RoutineToJson(Routine instance) => <String, dynamic>{
       'title': instance.title,
       'description': instance.description,
       'image_url': instance.image_url,
-      'schedule': instance.schedule,
-      'workouts': instance.workouts,
+      'schedule': instance.schedule?.toJson(),
+      'workouts': instance.workouts?.toJson(),
     };

@@ -6,33 +6,35 @@ part of 'height_log_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-HeightLog _$HeightLogFromJson(Map<String, dynamic> json) => HeightLog(
-      id: json['id'] as String?,
-      createdAt: DateTime.parse(json['createdAt'] as String),
-      updatedAt: json['updatedAt'] == null
+HeightLog _$HeightLogFromJson(Map json) => HeightLog(
+      id: json['id'] as int?,
+      createdAt: json['created_at'] == null
           ? null
-          : DateTime.parse(json['updatedAt'] as String),
-      userId: json['userId'] as String?,
-      type: $enumDecode(_$HealthDataTypeEnumMap, json['type']),
-      value: json['value'] as num,
+          : DateTime.parse(json['created_at'] as String),
+      updatedAt: json['updated_at'] == null
+          ? null
+          : DateTime.parse(json['updated_at'] as String),
+      userId: json['user_id'] as String?,
+      type: $enumDecodeNullable(_$HealthDataTypeEnumMap, json['type']),
+      value: json['value'] as num?,
     );
 
 const _$HeightLogFieldMap = <String, String>{
-  'id': 'id',
-  'userId': 'userId',
   'type': 'type',
   'value': 'value',
-  'createdAt': 'createdAt',
-  'updatedAt': 'updatedAt',
+  'createdAt': 'created_at',
+  'id': 'id',
+  'userId': 'user_id',
+  'updatedAt': 'updated_at',
 };
 
 Map<String, dynamic> _$HeightLogToJson(HeightLog instance) => <String, dynamic>{
-      'id': instance.id,
-      'userId': instance.userId,
       'type': _$HealthDataTypeEnumMap[instance.type]!,
       'value': instance.value,
-      'createdAt': instance.createdAt.toIso8601String(),
-      'updatedAt': instance.updatedAt?.toIso8601String(),
+      'created_at': instance.createdAt.toIso8601String(),
+      'id': instance.id,
+      'user_id': instance.userId,
+      'updated_at': instance.updatedAt?.toIso8601String(),
     };
 
 const _$HealthDataTypeEnumMap = {

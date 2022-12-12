@@ -6,7 +6,7 @@ part 'active_energy_log_model.g.dart';
 @JsonSerializable(includeIfNull: true, explicitToJson: true, anyMap: true)
 class ActiveEnergyBurnedLog extends Log {
   ActiveEnergyBurnedLog({
-    String? id,
+    int? id,
     DateTime? createdAt,
     DateTime? updatedAt,
     String? userId,
@@ -40,8 +40,8 @@ class ActiveEnergyBurnedLog extends Log {
       userId: null,
       type: data.type,
       value: value.numericValue,
-      createdAt: data.dateFrom,
-      updatedAt: data.dateTo,
+      createdAt: data.dateFrom.toUtc(),
+      updatedAt: data.dateTo.toUtc(),
     );
   }
 }

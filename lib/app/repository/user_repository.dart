@@ -157,10 +157,15 @@ class UserRepository {
   }
 
   Future<UserStatistic> updateStatisticsSnapshot({required Duration fetchDate}) async {
-    fetchDate = Duration(days: 100);
     try {
       String token = await fb.FirebaseAuth.instance.currentUser!.getIdToken();
       Map<HealthDataType, List<Log>> statistics = await UserHealthRepository().getUserStatisticsSnapshot(fetchDate: fetchDate);
+
+      // check if all the values in statistics are empty
+      if (statistics.values.every((element) => element.isEmpty)) {
+        log("all values are empty");
+        return UserStatistic.empty();
+      }
 
       UserStatistic userStatistic = UserStatistic(
         stepsLogs: statistics[HealthDataType.STEPS]?.map((e) => e as StepsLog).toList(),

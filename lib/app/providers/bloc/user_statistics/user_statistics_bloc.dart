@@ -1,4 +1,11 @@
+import 'dart:developer';
+
 import 'package:FitStack/app/helpers/fitstack_error_toast.dart';
+import 'package:FitStack/app/models/logs/active_energy_log_model.dart';
+import 'package:FitStack/app/models/logs/bmi_log_model.dart';
+import 'package:FitStack/app/models/logs/body_fat_log_model.dart';
+import 'package:FitStack/app/models/logs/step_log_model.dart';
+import 'package:FitStack/app/models/logs/weight_log_model.dart';
 import 'package:FitStack/app/models/user/user_statistic_model.dart';
 import 'package:FitStack/app/repository/user_health_repository.dart';
 import 'package:FitStack/app/repository/user_repository.dart';
@@ -63,29 +70,39 @@ class UserStatisticsBloc extends Bloc<UserStatisticsEvent, UserStatisticsState> 
 
       UserStatistic statistic = await userRepository.updateStatisticsSnapshot(fetchDate: fetchDate);
 
+      if (statistic == UserStatistic.empty()) {
+        emit(state.copyWith(snapshotUpdateStatus: StatisticsSnapshotUpdateStatus.loaded));
+        return;
+      }
+
+      List<StepsLog> steps = state.userStatistic.stepsLogs ?? []
+        ..addAll(statistic.stepsLogs ?? []);
+      List<WeightLog> weights = state.userStatistic.weightLogs ?? []
+        ..addAll(statistic.weightLogs ?? []);
+      List<BodyMassIndexLog> bmi = state.userStatistic.bodyMassIndexLogs ?? []
+        ..addAll(statistic.bodyMassIndexLogs ?? []);
+      List<ActiveEnergyBurnedLog> activeEnergy = state.userStatistic.activeEnergyBurned ?? []
+        ..addAll(statistic.activeEnergyBurned ?? []);
+      List<BodyFatPercentageLog> bodyFat = state.userStatistic.bodyFatPercentageLogs ?? []
+        ..addAll(statistic.bodyFatPercentageLogs ?? []);
+
       emit(
         state.copyWith(
           snapshotUpdateStatus: StatisticsSnapshotUpdateStatus.loaded,
           userStatistic: state.userStatistic.copyWith(
             updatedAt: DateTime.now(),
-            bodyMassIndexLogs: statistic.bodyMassIndexLogs != null
-                ? [...state.userStatistic.bodyMassIndexLogs ?? [] + statistic.bodyMassIndexLogs!]
-                : state.userStatistic.bodyMassIndexLogs,
-            weightLogs:
-                statistic.weightLogs != null ? [...state.userStatistic.weightLogs ?? [] + statistic.weightLogs!] : state.userStatistic.weightLogs,
-            activeEnergyBurned: statistic.activeEnergyBurned != null
-                ? state.userStatistic.activeEnergyBurned! + statistic.activeEnergyBurned!
-                : state.userStatistic.activeEnergyBurned,
-            sleepAsleepLogs: statistic.sleepAsleepLogs != null
-                ? [...state.userStatistic.sleepAsleepLogs ?? [] + statistic.sleepAsleepLogs!]
-                : state.userStatistic.sleepAsleepLogs,
-            stepsLogs: statistic.stepsLogs != null ? [...state.userStatistic.stepsLogs ?? [] + statistic.stepsLogs!] : state.userStatistic.stepsLogs,
+            stepsLogs: steps,
+            weightLogs: weights,
+            bodyMassIndexLogs: bmi,
+            activeEnergyBurned: activeEnergy,
+            bodyFatPercentageLogs: bodyFat,
           ),
         ),
       );
     } catch (e) {
       emit(state.copyWith(snapshotUpdateStatus: StatisticsSnapshotUpdateStatus.error));
       FitStackToast.showErrorToast("error updating user statistics snapshot");
+      log("error updating user statistics snapshot $e");
     }
   }
 }

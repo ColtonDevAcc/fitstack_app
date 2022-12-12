@@ -30,7 +30,7 @@ abstract class _$FriendshipCWProxy {
   /// Friendship(...).copyWith(id: 12, name: "My name")
   /// ````
   Friendship call({
-    String? id,
+    int? id,
     DateTime? updated_at,
     DateTime? deleted_at,
     String? sent_time,
@@ -60,8 +60,7 @@ class _$FriendshipCWProxyImpl implements _$FriendshipCWProxy {
   Friendship sent_time(String sent_time) => this(sent_time: sent_time);
 
   @override
-  Friendship response_time(String? response_time) =>
-      this(response_time: response_time);
+  Friendship response_time(String? response_time) => this(response_time: response_time);
 
   @override
   Friendship accepted(bool accepted) => this(accepted: accepted);
@@ -142,14 +141,10 @@ extension $FriendshipCopyWith on Friendship {
 // JsonSerializableGenerator
 // **************************************************************************
 
-Friendship _$FriendshipFromJson(Map<String, dynamic> json) => Friendship(
+Friendship _$FriendshipFromJson(Map json) => Friendship(
       id: json['id'] as String,
-      updated_at: json['updated_at'] == null
-          ? null
-          : DateTime.parse(json['updated_at'] as String),
-      deleted_at: json['deleted_at'] == null
-          ? null
-          : DateTime.parse(json['deleted_at'] as String),
+      updated_at: json['updated_at'] == null ? null : DateTime.parse(json['updated_at'] as String),
+      deleted_at: json['deleted_at'] == null ? null : DateTime.parse(json['deleted_at'] as String),
       sent_time: json['sent_time'] as String,
       response_time: json['response_time'] as String?,
       accepted: json['accepted'] as bool,
@@ -168,8 +163,7 @@ const _$FriendshipFieldMap = <String, String>{
   'deleted_at': 'deleted_at',
 };
 
-Map<String, dynamic> _$FriendshipToJson(Friendship instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$FriendshipToJson(Friendship instance) => <String, dynamic>{
       'id': instance.id,
       'from_user': instance.from_user,
       'to_user': instance.to_user,

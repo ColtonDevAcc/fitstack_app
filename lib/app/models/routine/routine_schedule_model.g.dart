@@ -83,8 +83,7 @@ extension $RoutineScheduleCopyWith on RoutineSchedule {
 // JsonSerializableGenerator
 // **************************************************************************
 
-RoutineSchedule _$RoutineScheduleFromJson(Map<String, dynamic> json) =>
-    RoutineSchedule(
+RoutineSchedule _$RoutineScheduleFromJson(Map json) => RoutineSchedule(
       start_date: json['start_date'] == null
           ? null
           : DateTime.parse(json['start_date'] as String),

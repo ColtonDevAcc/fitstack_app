@@ -7,17 +7,17 @@ part of 'blood_pressure_log_model.dart';
 // **************************************************************************
 
 abstract class _$BloodPressureLogCWProxy {
-  BloodPressureLog id(String? id);
+  BloodPressureLog id(int? id);
 
-  BloodPressureLog createdAt(DateTime createdAt);
+  BloodPressureLog createdAt(DateTime? createdAt);
 
   BloodPressureLog updatedAt(DateTime? updatedAt);
 
   BloodPressureLog userId(String? userId);
 
-  BloodPressureLog type(HealthDataType type);
+  BloodPressureLog type(HealthDataType? type);
 
-  BloodPressureLog value(num value);
+  BloodPressureLog value(num? value);
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `BloodPressureLog(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
@@ -26,7 +26,7 @@ abstract class _$BloodPressureLogCWProxy {
   /// BloodPressureLog(...).copyWith(id: 12, name: "My name")
   /// ````
   BloodPressureLog call({
-    String? id,
+    int? id,
     DateTime? createdAt,
     DateTime? updatedAt,
     String? userId,
@@ -42,10 +42,10 @@ class _$BloodPressureLogCWProxyImpl implements _$BloodPressureLogCWProxy {
   final BloodPressureLog _value;
 
   @override
-  BloodPressureLog id(String? id) => this(id: id);
+  BloodPressureLog id(int? id) => this(id: id);
 
   @override
-  BloodPressureLog createdAt(DateTime createdAt) => this(createdAt: createdAt);
+  BloodPressureLog createdAt(DateTime? createdAt) => this(createdAt: createdAt);
 
   @override
   BloodPressureLog updatedAt(DateTime? updatedAt) => this(updatedAt: updatedAt);
@@ -54,10 +54,10 @@ class _$BloodPressureLogCWProxyImpl implements _$BloodPressureLogCWProxy {
   BloodPressureLog userId(String? userId) => this(userId: userId);
 
   @override
-  BloodPressureLog type(HealthDataType type) => this(type: type);
+  BloodPressureLog type(HealthDataType? type) => this(type: type);
 
   @override
-  BloodPressureLog value(num value) => this(value: value);
+  BloodPressureLog value(num? value) => this(value: value);
 
   @override
 
@@ -79,12 +79,11 @@ class _$BloodPressureLogCWProxyImpl implements _$BloodPressureLogCWProxy {
       id: id == const $CopyWithPlaceholder()
           ? _value.id
           // ignore: cast_nullable_to_non_nullable
-          : id as String?,
-      createdAt: createdAt == const $CopyWithPlaceholder() || createdAt == null
-          // ignore: unnecessary_non_null_assertion
-          ? _value.createdAt!
+          : id as int?,
+      createdAt: createdAt == const $CopyWithPlaceholder()
+          ? _value.createdAt
           // ignore: cast_nullable_to_non_nullable
-          : createdAt as DateTime,
+          : createdAt as DateTime?,
       updatedAt: updatedAt == const $CopyWithPlaceholder()
           ? _value.updatedAt
           // ignore: cast_nullable_to_non_nullable
@@ -93,16 +92,14 @@ class _$BloodPressureLogCWProxyImpl implements _$BloodPressureLogCWProxy {
           ? _value.userId
           // ignore: cast_nullable_to_non_nullable
           : userId as String?,
-      type: type == const $CopyWithPlaceholder() || type == null
-          // ignore: unnecessary_non_null_assertion
-          ? _value.type!
+      type: type == const $CopyWithPlaceholder()
+          ? _value.type
           // ignore: cast_nullable_to_non_nullable
-          : type as HealthDataType,
-      value: value == const $CopyWithPlaceholder() || value == null
-          // ignore: unnecessary_non_null_assertion
-          ? _value.value!
+          : type as HealthDataType?,
+      value: value == const $CopyWithPlaceholder()
+          ? _value.value
           // ignore: cast_nullable_to_non_nullable
-          : value as num,
+          : value as num?,
     );
   }
 }
@@ -117,35 +114,36 @@ extension $BloodPressureLogCopyWith on BloodPressureLog {
 // JsonSerializableGenerator
 // **************************************************************************
 
-BloodPressureLog _$BloodPressureLogFromJson(Map<String, dynamic> json) =>
-    BloodPressureLog(
-      id: json['id'] as String?,
-      createdAt: DateTime.parse(json['createdAt'] as String),
-      updatedAt: json['updatedAt'] == null
+BloodPressureLog _$BloodPressureLogFromJson(Map json) => BloodPressureLog(
+      id: json['id'] as int?,
+      createdAt: json['created_at'] == null
           ? null
-          : DateTime.parse(json['updatedAt'] as String),
-      userId: json['userId'] as String?,
-      type: $enumDecode(_$HealthDataTypeEnumMap, json['type']),
-      value: json['value'] as num,
+          : DateTime.parse(json['created_at'] as String),
+      updatedAt: json['updated_at'] == null
+          ? null
+          : DateTime.parse(json['updated_at'] as String),
+      userId: json['user_id'] as String?,
+      type: $enumDecodeNullable(_$HealthDataTypeEnumMap, json['type']),
+      value: json['value'] as num?,
     );
 
 const _$BloodPressureLogFieldMap = <String, String>{
-  'id': 'id',
-  'userId': 'userId',
   'type': 'type',
   'value': 'value',
-  'createdAt': 'createdAt',
-  'updatedAt': 'updatedAt',
+  'createdAt': 'created_at',
+  'id': 'id',
+  'userId': 'user_id',
+  'updatedAt': 'updated_at',
 };
 
 Map<String, dynamic> _$BloodPressureLogToJson(BloodPressureLog instance) =>
     <String, dynamic>{
-      'id': instance.id,
-      'userId': instance.userId,
       'type': _$HealthDataTypeEnumMap[instance.type]!,
       'value': instance.value,
-      'createdAt': instance.createdAt.toIso8601String(),
-      'updatedAt': instance.updatedAt?.toIso8601String(),
+      'created_at': instance.createdAt.toIso8601String(),
+      'id': instance.id,
+      'user_id': instance.userId,
+      'updated_at': instance.updatedAt?.toIso8601String(),
     };
 
 const _$HealthDataTypeEnumMap = {

@@ -9,7 +9,7 @@ part 'bmi_log_model.g.dart';
 @CopyWith()
 class BodyMassIndexLog extends Log {
   BodyMassIndexLog({
-    String? id,
+    int? id,
     DateTime? createdAt,
     DateTime? updatedAt,
     String? userId,
@@ -51,8 +51,8 @@ class BodyMassIndexLog extends Log {
       userId: null,
       type: data.type,
       value: value.numericValue,
-      createdAt: data.dateFrom,
-      updatedAt: data.dateTo,
+      createdAt: data.dateFrom.toUtc(),
+      updatedAt: data.dateTo.toUtc(),
     );
   }
 }

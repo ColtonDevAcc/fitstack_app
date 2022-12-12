@@ -16,7 +16,7 @@ abstract class _$ExerciseEquipmentCWProxy {
   /// ExerciseEquipment(...).copyWith(id: 12, name: "My name")
   /// ````
   ExerciseEquipment call({
-    String? id,
+    int? id,
   });
 }
 
@@ -53,16 +53,14 @@ class _$ExerciseEquipmentCWProxyImpl implements _$ExerciseEquipmentCWProxy {
 extension $ExerciseEquipmentCopyWith on ExerciseEquipment {
   /// Returns a callable class that can be used as follows: `instanceOfExerciseEquipment.copyWith(...)` or like so:`instanceOfExerciseEquipment.copyWith.fieldName(...)`.
   // ignore: library_private_types_in_public_api
-  _$ExerciseEquipmentCWProxy get copyWith =>
-      _$ExerciseEquipmentCWProxyImpl(this);
+  _$ExerciseEquipmentCWProxy get copyWith => _$ExerciseEquipmentCWProxyImpl(this);
 }
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-ExerciseEquipment _$ExerciseEquipmentFromJson(Map<String, dynamic> json) =>
-    ExerciseEquipment(
+ExerciseEquipment _$ExerciseEquipmentFromJson(Map json) => ExerciseEquipment(
       id: json['id'] as String,
     );
 
@@ -70,7 +68,6 @@ const _$ExerciseEquipmentFieldMap = <String, String>{
   'id': 'id',
 };
 
-Map<String, dynamic> _$ExerciseEquipmentToJson(ExerciseEquipment instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$ExerciseEquipmentToJson(ExerciseEquipment instance) => <String, dynamic>{
       'id': instance.id,
     };

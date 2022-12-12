@@ -196,14 +196,15 @@ extension $UserProfileCopyWith on UserProfile {
 // JsonSerializableGenerator
 // **************************************************************************
 
-UserProfile _$UserProfileFromJson(Map<String, dynamic> json) => UserProfile(
+UserProfile _$UserProfileFromJson(Map json) => UserProfile(
       friends: (json['friends'] as List<dynamic>?)
-          ?.map((e) => UserProfile.fromJson(e as Map<String, dynamic>))
+          ?.map(
+              (e) => UserProfile.fromJson(Map<String, dynamic>.from(e as Map)))
           .toList(),
       user_statistics: json['user_statistics'] == null
           ? null
           : UserStatistic.fromJson(
-              json['user_statistics'] as Map<String, dynamic>),
+              Map<String, dynamic>.from(json['user_statistics'] as Map)),
       updated_at: json['updated_at'] == null
           ? null
           : DateTime.parse(json['updated_at'] as String),
@@ -241,8 +242,8 @@ Map<String, dynamic> _$UserProfileToJson(UserProfile instance) =>
       'display_name': instance.display_name,
       'challenges': instance.challenges,
       'achievements': instance.achievements,
-      'user_statistics': instance.user_statistics,
-      'friends': instance.friends,
+      'user_statistics': instance.user_statistics?.toJson(),
+      'friends': instance.friends?.map((e) => e.toJson()).toList(),
       'fit_credits': instance.fit_credits,
       'social_points': instance.social_points,
       'days_logged_in_a_row': instance.days_logged_in_a_row,

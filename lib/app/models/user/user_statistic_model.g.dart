@@ -170,31 +170,34 @@ extension $UserStatisticCopyWith on UserStatistic {
 // JsonSerializableGenerator
 // **************************************************************************
 
-UserStatistic _$UserStatisticFromJson(Map<String, dynamic> json) =>
-    UserStatistic(
+UserStatistic _$UserStatisticFromJson(Map json) => UserStatistic(
       stepsLogs: (json['steps_logs'] as List<dynamic>?)
-          ?.map((e) => StepsLog.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => StepsLog.fromJson(Map<String, dynamic>.from(e as Map)))
           .toList(),
       heartRateLogs: (json['heart_rate_logs'] as List<dynamic>?)
-          ?.map((e) => HeartRateLog.fromJson(e as Map<String, dynamic>))
+          ?.map(
+              (e) => HeartRateLog.fromJson(Map<String, dynamic>.from(e as Map)))
           .toList(),
       sleepAsleepLogs: (json['sleep_asleep_logs'] as List<dynamic>?)
-          ?.map((e) => SleepAsleepLog.fromJson(e as Map<String, dynamic>))
+          ?.map((e) =>
+              SleepAsleepLog.fromJson(Map<String, dynamic>.from(e as Map)))
           .toList(),
       activeEnergyBurned: (json['active_energy_burned_logs'] as List<dynamic>?)
-          ?.map(
-              (e) => ActiveEnergyBurnedLog.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => ActiveEnergyBurnedLog.fromJson(
+              Map<String, dynamic>.from(e as Map)))
           .toList(),
       weightLogs: (json['weight_logs'] as List<dynamic>?)
-          ?.map((e) => WeightLog.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => WeightLog.fromJson(Map<String, dynamic>.from(e as Map)))
           .toList(),
       bodyMassIndexLogs: (json['body_mass_index_logs'] as List<dynamic>?)
-          ?.map((e) => BodyMassIndexLog.fromJson(e as Map<String, dynamic>))
+          ?.map((e) =>
+              BodyMassIndexLog.fromJson(Map<String, dynamic>.from(e as Map)))
           .toList(),
-      bodyFatPercentageLogs: (json['body_fat_percentage_logs']
-              as List<dynamic>?)
-          ?.map((e) => BodyFatPercentageLog.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      bodyFatPercentageLogs:
+          (json['body_fat_percentage_logs'] as List<dynamic>?)
+              ?.map((e) => BodyFatPercentageLog.fromJson(
+                  Map<String, dynamic>.from(e as Map)))
+              .toList(),
       updatedAt: json['updated_at'] == null
           ? null
           : DateTime.parse(json['updated_at'] as String),
@@ -220,13 +223,18 @@ const _$UserStatisticFieldMap = <String, String>{
 Map<String, dynamic> _$UserStatisticToJson(UserStatistic instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'weight_logs': instance.weightLogs,
-      'body_mass_index_logs': instance.bodyMassIndexLogs,
-      'body_fat_percentage_logs': instance.bodyFatPercentageLogs,
-      'steps_logs': instance.stepsLogs,
-      'heart_rate_logs': instance.heartRateLogs,
-      'sleep_asleep_logs': instance.sleepAsleepLogs,
-      'active_energy_burned_logs': instance.activeEnergyBurned,
+      'weight_logs': instance.weightLogs?.map((e) => e.toJson()).toList(),
+      'body_mass_index_logs':
+          instance.bodyMassIndexLogs?.map((e) => e.toJson()).toList(),
+      'body_fat_percentage_logs':
+          instance.bodyFatPercentageLogs?.map((e) => e.toJson()).toList(),
+      'steps_logs': instance.stepsLogs?.map((e) => e.toJson()).toList(),
+      'heart_rate_logs':
+          instance.heartRateLogs?.map((e) => e.toJson()).toList(),
+      'sleep_asleep_logs':
+          instance.sleepAsleepLogs?.map((e) => e.toJson()).toList(),
+      'active_energy_burned_logs':
+          instance.activeEnergyBurned?.map((e) => e.toJson()).toList(),
       'updated_at': instance.updatedAt?.toIso8601String(),
       'created_at': instance.createdAt?.toIso8601String(),
     };

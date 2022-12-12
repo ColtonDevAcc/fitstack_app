@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:FitStack/app/models/logs/active_energy_log_model.dart';
 import 'package:FitStack/app/models/logs/bmi_log_model.dart';
 import 'package:FitStack/app/models/logs/body_fat_log_model.dart';
@@ -7,14 +6,27 @@ import 'package:FitStack/app/models/logs/log_model.dart';
 import 'package:FitStack/app/models/logs/sleep_asleep_log_model.dart';
 import 'package:FitStack/app/models/logs/step_log_model.dart';
 import 'package:FitStack/app/models/logs/weight_log_model.dart';
+import 'package:flutter/foundation.dart';
 import 'package:health/health.dart';
 
 class UserHealthRepository {
   final HealthFactory health = HealthFactory();
-  Future<Map<HealthDataType, List<Log>>> ParseUserHealthData({required List<HealthDataPoint> healthData}) async {
-    Map<HealthDataType, List<Log>> healthDataMap = {};
 
-    healthData.forEach(
+  Future<Map<HealthDataType, List<Log>>> isolateParseUserHealthData({required List<HealthDataPoint> data}) {
+    return compute(_parseUserHealthData, data);
+  }
+
+  Map<HealthDataType, List<Log>> _parseUserHealthData(List<HealthDataPoint> data) {
+    Map<HealthDataType, List<Log>> healthDataMap = {
+      HealthDataType.STEPS: <StepsLog>[],
+      HealthDataType.WEIGHT: <WeightLog>[],
+      HealthDataType.BODY_MASS_INDEX: <BodyMassIndexLog>[],
+      HealthDataType.BODY_FAT_PERCENTAGE: <BodyFatPercentageLog>[],
+      HealthDataType.ACTIVE_ENERGY_BURNED: <ActiveEnergyBurnedLog>[],
+      HealthDataType.SLEEP_ASLEEP: <SleepAsleepLog>[],
+    };
+
+    data.forEach(
       (element) {
         switch (element.type) {
           case HealthDataType.STEPS:
@@ -65,22 +77,18 @@ class UserHealthRepository {
         DateTime.now(),
         snapshotHealthDataTypes,
       );
-
-      log("data: $data");
-
-      HealthFactory.removeDuplicates(healthData);
+      healthData = HealthFactory.removeDuplicates(data);
     } catch (e) {
       log("Error in getUserStatisticsSnapshot: message: $e");
     }
 
-    Map<HealthDataType, List<Log>> healthDataMap = await ParseUserHealthData(healthData: healthData);
+    Map<HealthDataType, List<Log>> healthDataMap = await isolateParseUserHealthData(data: healthData);
 
     if (healthDataMap.isEmpty) {
       log("Error in getUserStatisticsSnapshot: message: healthDataMap is empty");
       return {};
     }
 
-    log("healthDataMap: $healthDataMap");
     return healthDataMap;
   }
 }

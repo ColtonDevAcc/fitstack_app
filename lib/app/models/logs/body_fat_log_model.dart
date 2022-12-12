@@ -9,7 +9,7 @@ part 'body_fat_log_model.g.dart';
 @CopyWith()
 class BodyFatPercentageLog extends Log {
   BodyFatPercentageLog({
-    String? id,
+    int? id,
     DateTime? createdAt,
     DateTime? updatedAt,
     String? userId,
@@ -51,8 +51,8 @@ class BodyFatPercentageLog extends Log {
       userId: null,
       type: data.type,
       value: value.numericValue,
-      createdAt: data.dateFrom,
-      updatedAt: data.dateTo,
+      createdAt: data.dateFrom.toUtc(),
+      updatedAt: data.dateTo.toUtc(),
     );
   }
 }

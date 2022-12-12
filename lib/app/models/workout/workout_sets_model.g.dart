@@ -71,10 +71,11 @@ extension $WorkoutSetsCopyWith on WorkoutSets {
 // JsonSerializableGenerator
 // **************************************************************************
 
-WorkoutSets _$WorkoutSetsFromJson(Map<String, dynamic> json) => WorkoutSets(
+WorkoutSets _$WorkoutSetsFromJson(Map json) => WorkoutSets(
       exercises: (json['exercises'] as List<dynamic>?)
-          ?.map((e) =>
-              e == null ? null : Exercise.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => e == null
+              ? null
+              : Exercise.fromJson(Map<String, dynamic>.from(e as Map)))
           .toList(),
       id: json['id'] as int?,
     );
@@ -87,5 +88,5 @@ const _$WorkoutSetsFieldMap = <String, String>{
 Map<String, dynamic> _$WorkoutSetsToJson(WorkoutSets instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'exercises': instance.exercises,
+      'exercises': instance.exercises?.map((e) => e?.toJson()).toList(),
     };
