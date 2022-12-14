@@ -118,8 +118,9 @@ class UserGoalStatisticsGraph extends StatelessWidget {
                     LineChartBarData(
                       isStrokeJoinRound: true,
                       spots: data!.map((e) {
-                        DateTime today = DateTime.now();
-                        return FlSpot(today.difference(DateTime(today.year, today.month, e.createdAt.day)).inDays * -1 + 1, e.value.toDouble());
+                        DateTime today = DateTime.now().toUtc();
+                        return FlSpot(
+                            today.difference(DateTime(e.createdAt.year, e.createdAt.month, e.createdAt.day)).inDays * -1 + 1, e.value.toDouble());
                       }).toList(),
                       isCurved: true,
                       color: color,

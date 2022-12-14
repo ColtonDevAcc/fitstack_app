@@ -4,6 +4,7 @@ import 'package:FitStack/app/helpers/fitstack_error_toast.dart';
 import 'package:FitStack/app/models/logs/active_energy_log_model.dart';
 import 'package:FitStack/app/models/logs/bmi_log_model.dart';
 import 'package:FitStack/app/models/logs/body_fat_log_model.dart';
+import 'package:FitStack/app/models/logs/log_model.dart';
 import 'package:FitStack/app/models/logs/step_log_model.dart';
 import 'package:FitStack/app/models/logs/weight_log_model.dart';
 import 'package:FitStack/app/models/user/user_statistic_model.dart';
@@ -75,27 +76,75 @@ class UserStatisticsBloc extends Bloc<UserStatisticsEvent, UserStatisticsState> 
         return;
       }
 
-      List<StepsLog> steps = state.userStatistic.stepsLogs ?? []
-        ..addAll(statistic.stepsLogs ?? []);
-      List<WeightLog> weights = state.userStatistic.weightLogs ?? []
-        ..addAll(statistic.weightLogs ?? []);
-      List<BodyMassIndexLog> bmi = state.userStatistic.bodyMassIndexLogs ?? []
-        ..addAll(statistic.bodyMassIndexLogs ?? []);
-      List<ActiveEnergyBurnedLog> activeEnergy = state.userStatistic.activeEnergyBurned ?? []
-        ..addAll(statistic.activeEnergyBurned ?? []);
-      List<BodyFatPercentageLog> bodyFat = state.userStatistic.bodyFatPercentageLogs ?? []
-        ..addAll(statistic.bodyFatPercentageLogs ?? []);
+      Map<HealthDataType, List<DateTime>> dateMap = {
+        HealthDataType.STEPS: [],
+        HealthDataType.WEIGHT: [],
+        HealthDataType.BODY_MASS_INDEX: [],
+        HealthDataType.ACTIVE_ENERGY_BURNED: [],
+        HealthDataType.BODY_FAT_PERCENTAGE: [],
+      };
+      List<StepsLog> steps = []..addAll(state.userStatistic.stepsLogs ?? []);
+      List<WeightLog> weight = []..addAll(state.userStatistic.weightLogs ?? []);
+      List<BodyMassIndexLog> bmi = []..addAll(state.userStatistic.bodyMassIndexLogs ?? []);
+      List<ActiveEnergyBurnedLog> activeEnergyBurned = []..addAll(state.userStatistic.activeEnergyBurned ?? []);
+      List<BodyFatPercentageLog> bodyFatPercentage = []..addAll(state.userStatistic.bodyFatPercentageLogs ?? []);
+
+      statistic.bodyMassIndexLogs?.forEach(
+        (element) {
+          var createdAtDifference = DateTime.now().difference(element.createdAt);
+          if (createdAtDifference.inDays < 30 && dateMap[element.type]!.contains(element.createdAt)) {
+            bmi.add(element);
+            dateMap[element.type]?.add(element.createdAt);
+          }
+        },
+      );
+      statistic.stepsLogs?.forEach(
+        (element) {
+          var createdAtDifference = DateTime.now().difference(element.createdAt);
+          if (createdAtDifference.inDays < 30 && dateMap[element.type]!.contains(element.createdAt)) {
+            steps.add(element);
+            dateMap[element.type]?.add(element.createdAt);
+          }
+        },
+      );
+      statistic.weightLogs?.forEach(
+        (element) {
+          var createdAtDifference = DateTime.now().difference(element.createdAt);
+          if (createdAtDifference.inDays < 30 && dateMap[element.type]!.contains(element.createdAt)) {
+            weight.add(element);
+            dateMap[element.type]?.add(element.createdAt);
+          }
+        },
+      );
+      statistic.activeEnergyBurned?.forEach(
+        (element) {
+          var createdAtDifference = DateTime.now().difference(element.createdAt);
+          if (createdAtDifference.inDays < 30 && dateMap[element.type]!.contains(element.createdAt)) {
+            activeEnergyBurned.add(element);
+            dateMap[element.type]?.add(element.createdAt);
+          }
+        },
+      );
+      statistic.bodyFatPercentageLogs?.forEach(
+        (element) {
+          var createdAtDifference = DateTime.now().difference(element.createdAt);
+          if (createdAtDifference.inDays < 30 && dateMap[element.type]!.contains(element.createdAt)) {
+            bodyFatPercentage.add(element);
+            dateMap[element.type]?.add(element.createdAt);
+          }
+        },
+      );
 
       emit(
         state.copyWith(
           snapshotUpdateStatus: StatisticsSnapshotUpdateStatus.loaded,
           userStatistic: state.userStatistic.copyWith(
-            updatedAt: DateTime.now(),
+            updatedAt: DateTime.now().toUtc(),
             stepsLogs: steps,
-            weightLogs: weights,
+            weightLogs: weight,
             bodyMassIndexLogs: bmi,
-            activeEnergyBurned: activeEnergy,
-            bodyFatPercentageLogs: bodyFat,
+            activeEnergyBurned: activeEnergyBurned,
+            bodyFatPercentageLogs: bodyFatPercentage,
           ),
         ),
       );

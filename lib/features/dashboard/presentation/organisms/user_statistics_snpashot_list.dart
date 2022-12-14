@@ -17,7 +17,6 @@ class UserProgressSnapshotList extends StatelessWidget {
             ? Center(child: CircularProgressIndicator())
             : Stack(
                 children: [
-                  if (state.snapshotUpdateStatus == StatisticsSnapshotUpdateStatus.loading) LinearProgressIndicator(),
                   ListView(
                     padding: EdgeInsets.zero,
                     scrollDirection: Axis.horizontal,
@@ -76,6 +75,8 @@ class UserProgressSnapshotList extends StatelessWidget {
                         ),
                     ],
                   ),
+                  //TODO: wrap around container
+                  if (state.snapshotUpdateStatus == StatisticsSnapshotUpdateStatus.loading) Positioned(child: LinearProgressIndicator()),
                 ],
               );
       },
