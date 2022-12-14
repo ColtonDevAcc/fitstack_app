@@ -54,14 +54,30 @@ class UserStatistic extends Equatable {
         updatedAt: DateTime(1).toUtc(),
         createdAt: DateTime(1).toUtc(),
       );
+
+  UserStatistic copyWith({
+    String? id,
+    List<WeightLog>? weightLogs,
+    List<BodyMassIndexLog>? bodyMassIndexLogs,
+    List<BodyFatPercentageLog>? bodyFatPercentageLogs,
+    List<StepsLog>? stepsLogs,
+    List<HeartRateLog>? heartRateLogs,
+    List<SleepAsleepLog>? sleepAsleepLogs,
+    List<ActiveEnergyBurnedLog>? activeEnergyBurned,
+    DateTime? updatedAt,
+    DateTime? createdAt,
+  }) {
+    return UserStatistic(
+      id: id ?? this.id,
+      weightLogs: weightLogs ?? this.weightLogs,
+      bodyMassIndexLogs: bodyMassIndexLogs ?? this.bodyMassIndexLogs,
+      bodyFatPercentageLogs: bodyFatPercentageLogs ?? this.bodyFatPercentageLogs,
+      stepsLogs: stepsLogs ?? this.stepsLogs,
+      heartRateLogs: heartRateLogs ?? this.heartRateLogs,
+      sleepAsleepLogs: sleepAsleepLogs ?? this.sleepAsleepLogs,
+      activeEnergyBurned: activeEnergyBurned ?? this.activeEnergyBurned,
+      updatedAt: updatedAt ?? this.updatedAt,
+      createdAt: createdAt ?? this.createdAt,
+    );
+  }
 }
-
-
-//  ID          string         `json:"id" gorm:"primaryKey;"`
-// 	HeightLogs  []HeightLog    `json:"height_log" gorm:"foreignKey:UserStatisticID"`
-// 	WeightLogs  []WeightLog    `json:"weight_log" gorm:"foreignKey:UserStatisticID"`
-// 	BMILogs     []BMILog       `json:"bmi_log" gorm:"foreignKey:UserStatisticID"`
-// 	BodyFatLogs []BodyFatLog   `json:"body_fat_log" gorm:"foreignKey:UserStatisticID"`
-// 	CreatedAt   time.Time      `json:"created_at"`
-// 	UpdatedAt   time.Time      `json:"updated_at"`
-// 	DeletedAt   gorm.DeletedAt `json:"deleted_at" gorm:"index"`

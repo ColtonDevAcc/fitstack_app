@@ -4,7 +4,6 @@ import 'dart:io';
 import 'package:FitStack/app/models/user/user_model.dart' as fs;
 import 'package:FitStack/app/models/user/user_profile_model.dart';
 import 'package:FitStack/app/repository/auth_repository.dart';
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -13,6 +12,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:health/health.dart';
 import 'package:image_picker/image_picker.dart';
+// ignore: depend_on_referenced_packages
+import 'package:bloc/bloc.dart';
 
 part 'signup_state.dart';
 

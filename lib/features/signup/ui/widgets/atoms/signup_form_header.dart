@@ -1,5 +1,5 @@
 import 'package:FitStack/features/signup/state/signup_cubit.dart';
-import 'package:FitStack/features/signup/ui/widgets/atoms/create_account_text.dart';
+import 'package:FitStack/features/signup/ui/widgets/atoms/registration_header.dart';
 import 'package:FitStack/features/signup/ui/widgets/atoms/signup_form_header_subtitle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -46,7 +46,7 @@ class SignupFormHeader extends StatelessWidget {
               children: [
                 Center(child: Icon(icon, color: Theme.of(context).colorScheme.primary)),
                 const SizedBox(width: 5),
-                SignUp_Header_Text_Widget(text: text),
+                SignUpHeaderText(text: text),
               ],
             ),
             const SizedBox(height: 10),

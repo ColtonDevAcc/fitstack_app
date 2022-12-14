@@ -1,10 +1,11 @@
 import 'package:FitStack/app/models/program/program_model.dart';
 import 'package:FitStack/app/repository/program_repository.dart';
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+// ignore: depend_on_referenced_packages
+import 'package:bloc/bloc.dart';
 
 part 'program_state.dart';
 

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class SocialAuthButton_Widget extends StatelessWidget {
+class SocialAuthButton extends StatelessWidget {
   final Color color;
   final Widget child;
   final void Function()? onTap;
 
-  const SocialAuthButton_Widget({
+  const SocialAuthButton({
     Key? key,
     required this.color,
     required this.child,

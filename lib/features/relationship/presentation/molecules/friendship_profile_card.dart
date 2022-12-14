@@ -31,11 +31,7 @@ class FriendshipProfileCard extends StatelessWidget {
           minHeight: 10,
         ),
       ),
-      trailing: accepted != null && accepted == false
-          ? Container(
-              child: const Icon(FontAwesome.check, color: Colors.green),
-            )
-          : const SizedBox(),
+      trailing: accepted != null && accepted == false ? const Icon(FontAwesome.check, color: Colors.green) : const SizedBox(),
     );
   }
 }

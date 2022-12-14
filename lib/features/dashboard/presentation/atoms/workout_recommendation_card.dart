@@ -1,14 +1,14 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
-class Workout_Recommendation_Card extends StatefulWidget {
-  const Workout_Recommendation_Card({Key? key}) : super(key: key);
+class WorkoutRecommendationCard extends StatefulWidget {
+  const WorkoutRecommendationCard({Key? key}) : super(key: key);
 
   @override
-  State<Workout_Recommendation_Card> createState() => Workout_Recommendation_Card_State();
+  State<WorkoutRecommendationCard> createState() => WorkoutRecommendationCardState();
 }
 
-class Workout_Recommendation_Card_State extends State<Workout_Recommendation_Card> {
+class WorkoutRecommendationCardState extends State<WorkoutRecommendationCard> {
   @override
   Widget build(BuildContext context) {
     return Card(

@@ -70,6 +70,32 @@ class Exercise extends Equatable {
         creator: User.empty(),
         creatorId: '',
       );
+
+  Exercise copyWith({
+    int? id,
+    String? name,
+    String? description,
+    List<String>? images,
+    double? metValue,
+    ExerciseType? type,
+    List<ExerciseEquipment>? exerciseEquipment,
+    List<MuscleTarget>? muscleTarget,
+    User? creator,
+    String? creatorId,
+  }) {
+    return Exercise(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      description: description ?? this.description,
+      images: images ?? this.images,
+      metValue: metValue ?? this.metValue,
+      type: type ?? this.type,
+      exerciseEquipment: exerciseEquipment ?? this.exerciseEquipment,
+      muscleTarget: muscleTarget ?? this.muscleTarget,
+      creator: creator ?? this.creator,
+      creatorId: creatorId ?? this.creatorId,
+    );
+  }
 }
 
 enum ExerciseType {

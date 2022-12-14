@@ -1,3 +1,5 @@
+// ignore_for_file: depend_on_referenced_packages
+
 import 'package:FitStack/app/models/logs/log_model.dart';
 import 'package:health/health.dart';
 import 'package:json_annotation/json_annotation.dart';

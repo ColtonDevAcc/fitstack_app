@@ -24,7 +24,7 @@ class ProfileAvatar extends StatelessWidget {
     return FutureBuilder(
       future: avatar == null || avatar == "" ? null : FirebaseStorage.instance.ref(url).getDownloadURL(),
       builder: (context, snapshot) {
-        final String? url = snapshot.hasData ? snapshot.data as String : null;
+        final String? url = snapshot.hasData ? snapshot.data as String? : null;
         return withBorder
             ? GestureDetector(
                 onTap: onTap,

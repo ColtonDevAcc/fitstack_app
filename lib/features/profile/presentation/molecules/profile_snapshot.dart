@@ -5,17 +5,17 @@ import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
 
 class ProfileSnapshot extends StatelessWidget {
-  final void Function()? avatarOnTap;
   final String? avatar;
   final int daysInARow;
-  final int fit_credits;
+  final int fitCredits;
   final int socialPoints;
+  final void Function()? avatarOnTap;
   const ProfileSnapshot({
     Key? key,
     this.avatarOnTap,
     required this.avatar,
     required this.daysInARow,
-    required this.fit_credits,
+    required this.fitCredits,
     required this.socialPoints,
   }) : super(key: key);
 
@@ -36,7 +36,7 @@ class ProfileSnapshot extends StatelessWidget {
               ),
             ),
             ProfileSocialCurrencyIcon(icon: FontAwesome.chart_simple, value: "$socialPoints", color: Colors.blue),
-            ProfileSocialCurrencyIcon(icon: FontAwesome.shekel_sign, value: "$fit_credits", color: Theme.of(context).colorScheme.secondary),
+            ProfileSocialCurrencyIcon(icon: FontAwesome.shekel_sign, value: "$fitCredits", color: Theme.of(context).colorScheme.secondary),
             ProfileSocialCurrencyIcon(icon: FontAwesome.fire_flame_curved, value: "$daysInARow", color: Theme.of(context).colorScheme.error),
             const SizedBox(),
           ],
@@ -68,25 +68,23 @@ class ProfileSnapshot extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 30),
-        Container(
-          child: Column(
-            children: [
-              LinearProgressIndicator(value: .2, backgroundColor: Theme.of(context).colorScheme.onBackground.withOpacity(.08)),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'xp',
-                    style: TextStyle(color: Theme.of(context).colorScheme.primary),
-                  ),
-                  Text(
-                    '20/100',
-                    style: TextStyle(color: Theme.of(context).colorScheme.onBackground),
-                  )
-                ],
-              ),
-            ],
-          ),
+        Column(
+          children: [
+            LinearProgressIndicator(value: .2, backgroundColor: Theme.of(context).colorScheme.onBackground.withOpacity(.08)),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'xp',
+                  style: TextStyle(color: Theme.of(context).colorScheme.primary),
+                ),
+                Text(
+                  '20/100',
+                  style: TextStyle(color: Theme.of(context).colorScheme.onBackground),
+                )
+              ],
+            ),
+          ],
         ),
       ],
     );

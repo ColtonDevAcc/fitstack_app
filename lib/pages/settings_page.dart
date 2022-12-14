@@ -29,7 +29,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     child: ProfileSnapshot(
                       avatar: state.userProfile.avatar,
                       daysInARow: state.userProfile.loginStreak,
-                      fit_credits: state.userProfile.fitCredits,
+                      fitCredits: state.userProfile.fitCredits,
                       socialPoints: state.userProfile.socialPoints,
                     ),
                   ),

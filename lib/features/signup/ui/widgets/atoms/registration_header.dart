@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-class SignUp_Header_Text_Widget extends StatelessWidget {
+class SignUpHeaderText extends StatelessWidget {
   final String? text;
-  const SignUp_Header_Text_Widget({Key? key, this.text}) : super(key: key);
+  const SignUpHeaderText({Key? key, this.text}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

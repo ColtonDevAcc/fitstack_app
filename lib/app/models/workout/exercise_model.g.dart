@@ -3,170 +3,13 @@
 part of 'exercise_model.dart';
 
 // **************************************************************************
-// CopyWithGenerator
-// **************************************************************************
-
-abstract class _$ExerciseCWProxy {
-  Exercise creator_id(String creator_id);
-
-  Exercise creator(User creator);
-
-  Exercise muscle_target(List<MuscleTarget>? muscle_target);
-
-  Exercise name(String? name);
-
-  Exercise description(String? description);
-
-  Exercise images(List<String>? images);
-
-  Exercise met_value(double? met_value);
-
-  Exercise type(ExerciseType? type);
-
-  Exercise exercise_equipment(List<ExerciseEquipment>? exercise_equipment);
-
-  Exercise id(int? id);
-
-  /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `Exercise(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
-  ///
-  /// Usage
-  /// ```dart
-  /// Exercise(...).copyWith(id: 12, name: "My name")
-  /// ````
-  Exercise call({
-    String? creator_id,
-    User? creator,
-    List<MuscleTarget>? muscle_target,
-    String? name,
-    String? description,
-    List<String>? images,
-    double? met_value,
-    ExerciseType? type,
-    List<ExerciseEquipment>? exercise_equipment,
-    int? id,
-  });
-}
-
-/// Proxy class for `copyWith` functionality. This is a callable class and can be used as follows: `instanceOfExercise.copyWith(...)`. Additionally contains functions for specific fields e.g. `instanceOfExercise.copyWith.fieldName(...)`
-class _$ExerciseCWProxyImpl implements _$ExerciseCWProxy {
-  const _$ExerciseCWProxyImpl(this._value);
-
-  final Exercise _value;
-
-  @override
-  Exercise creator_id(String creator_id) => this(creator_id: creator_id);
-
-  @override
-  Exercise creator(User creator) => this(creator: creator);
-
-  @override
-  Exercise muscle_target(List<MuscleTarget>? muscle_target) =>
-      this(muscle_target: muscle_target);
-
-  @override
-  Exercise name(String? name) => this(name: name);
-
-  @override
-  Exercise description(String? description) => this(description: description);
-
-  @override
-  Exercise images(List<String>? images) => this(images: images);
-
-  @override
-  Exercise met_value(double? met_value) => this(met_value: met_value);
-
-  @override
-  Exercise type(ExerciseType? type) => this(type: type);
-
-  @override
-  Exercise exercise_equipment(List<ExerciseEquipment>? exercise_equipment) =>
-      this(exercise_equipment: exercise_equipment);
-
-  @override
-  Exercise id(int? id) => this(id: id);
-
-  @override
-
-  /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `Exercise(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
-  ///
-  /// Usage
-  /// ```dart
-  /// Exercise(...).copyWith(id: 12, name: "My name")
-  /// ````
-  Exercise call({
-    Object? creator_id = const $CopyWithPlaceholder(),
-    Object? creator = const $CopyWithPlaceholder(),
-    Object? muscle_target = const $CopyWithPlaceholder(),
-    Object? name = const $CopyWithPlaceholder(),
-    Object? description = const $CopyWithPlaceholder(),
-    Object? images = const $CopyWithPlaceholder(),
-    Object? met_value = const $CopyWithPlaceholder(),
-    Object? type = const $CopyWithPlaceholder(),
-    Object? exercise_equipment = const $CopyWithPlaceholder(),
-    Object? id = const $CopyWithPlaceholder(),
-  }) {
-    return Exercise(
-      creator_id:
-          creator_id == const $CopyWithPlaceholder() || creator_id == null
-              // ignore: unnecessary_non_null_assertion
-              ? _value.creator_id!
-              // ignore: cast_nullable_to_non_nullable
-              : creator_id as String,
-      creator: creator == const $CopyWithPlaceholder() || creator == null
-          // ignore: unnecessary_non_null_assertion
-          ? _value.creator!
-          // ignore: cast_nullable_to_non_nullable
-          : creator as User,
-      muscle_target: muscle_target == const $CopyWithPlaceholder()
-          ? _value.muscle_target
-          // ignore: cast_nullable_to_non_nullable
-          : muscle_target as List<MuscleTarget>?,
-      name: name == const $CopyWithPlaceholder()
-          ? _value.name
-          // ignore: cast_nullable_to_non_nullable
-          : name as String?,
-      description: description == const $CopyWithPlaceholder()
-          ? _value.description
-          // ignore: cast_nullable_to_non_nullable
-          : description as String?,
-      images: images == const $CopyWithPlaceholder()
-          ? _value.images
-          // ignore: cast_nullable_to_non_nullable
-          : images as List<String>?,
-      met_value: met_value == const $CopyWithPlaceholder()
-          ? _value.met_value
-          // ignore: cast_nullable_to_non_nullable
-          : met_value as double?,
-      type: type == const $CopyWithPlaceholder()
-          ? _value.type
-          // ignore: cast_nullable_to_non_nullable
-          : type as ExerciseType?,
-      exercise_equipment: exercise_equipment == const $CopyWithPlaceholder()
-          ? _value.exercise_equipment
-          // ignore: cast_nullable_to_non_nullable
-          : exercise_equipment as List<ExerciseEquipment>?,
-      id: id == const $CopyWithPlaceholder()
-          ? _value.id
-          // ignore: cast_nullable_to_non_nullable
-          : id as int?,
-    );
-  }
-}
-
-extension $ExerciseCopyWith on Exercise {
-  /// Returns a callable class that can be used as follows: `instanceOfExercise.copyWith(...)` or like so:`instanceOfExercise.copyWith.fieldName(...)`.
-  // ignore: library_private_types_in_public_api
-  _$ExerciseCWProxy get copyWith => _$ExerciseCWProxyImpl(this);
-}
-
-// **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
 Exercise _$ExerciseFromJson(Map json) => Exercise(
-      creator_id: json['creator_id'] as String,
+      creatorId: json['creator_id'] as String,
       creator: User.fromJson(Map<String, dynamic>.from(json['creator'] as Map)),
-      muscle_target: (json['muscle_target'] as List<dynamic>?)
+      muscleTarget: (json['muscle_target'] as List<dynamic>?)
           ?.map(
               (e) => MuscleTarget.fromJson(Map<String, dynamic>.from(e as Map)))
           .toList(),
@@ -174,9 +17,9 @@ Exercise _$ExerciseFromJson(Map json) => Exercise(
       description: json['description'] as String?,
       images:
           (json['images'] as List<dynamic>?)?.map((e) => e as String).toList(),
-      met_value: (json['met_value'] as num?)?.toDouble(),
+      metValue: (json['met_value'] as num?)?.toDouble(),
       type: $enumDecodeNullable(_$ExerciseTypeEnumMap, json['type']),
-      exercise_equipment: (json['exercise_equipment'] as List<dynamic>?)
+      exerciseEquipment: (json['exercise_equipment'] as List<dynamic>?)
           ?.map((e) =>
               ExerciseEquipment.fromJson(Map<String, dynamic>.from(e as Map)))
           .toList(),
@@ -188,12 +31,12 @@ const _$ExerciseFieldMap = <String, String>{
   'name': 'name',
   'description': 'description',
   'images': 'images',
-  'met_value': 'met_value',
+  'metValue': 'met_value',
   'creator': 'creator',
-  'creator_id': 'creator_id',
+  'creatorId': 'creator_id',
   'type': 'type',
-  'exercise_equipment': 'exercise_equipment',
-  'muscle_target': 'muscle_target',
+  'exerciseEquipment': 'exercise_equipment',
+  'muscleTarget': 'muscle_target',
 };
 
 Map<String, dynamic> _$ExerciseToJson(Exercise instance) => <String, dynamic>{
@@ -201,13 +44,13 @@ Map<String, dynamic> _$ExerciseToJson(Exercise instance) => <String, dynamic>{
       'name': instance.name,
       'description': instance.description,
       'images': instance.images,
-      'met_value': instance.met_value,
+      'met_value': instance.metValue,
       'creator': instance.creator.toJson(),
-      'creator_id': instance.creator_id,
+      'creator_id': instance.creatorId,
       'type': _$ExerciseTypeEnumMap[instance.type],
       'exercise_equipment':
-          instance.exercise_equipment?.map((e) => e.toJson()).toList(),
-      'muscle_target': instance.muscle_target?.map((e) => e.toJson()).toList(),
+          instance.exerciseEquipment?.map((e) => e.toJson()).toList(),
+      'muscle_target': instance.muscleTarget?.map((e) => e.toJson()).toList(),
     };
 
 const _$ExerciseTypeEnumMap = {

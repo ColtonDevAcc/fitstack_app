@@ -2,11 +2,12 @@ import 'dart:developer';
 
 import 'package:FitStack/app/models/user/user_profile_model.dart';
 import 'package:FitStack/app/repository/relationship_repository.dart';
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart' as fb;
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+// ignore: depend_on_referenced_packages
+import 'package:bloc/bloc.dart';
 
 part 'friendship_state.dart';
 
@@ -43,7 +44,7 @@ class FriendshipCubit extends Cubit<FriendshipState> {
     }
   }
 
-  void setShowAddFriend(bool? show) {
+  void setShowAddFriend({required bool show}) {
     emit(state.copyWith(showAddFriend: show));
   }
 
@@ -72,9 +73,7 @@ class FriendshipCubit extends Cubit<FriendshipState> {
     try {
       final String? token = await fb.FirebaseAuth.instance.currentUser?.getIdToken();
       await relationshipRepository.addFriend(token: token!, uid: friend.id);
-      final List<UserProfile?> friendsList = [...?state.friends, friend]
-        
-        ;
+      final List<UserProfile?> friendsList = [...?state.friends, friend];
 
       emit(state.copyWith(friendsList: friendsList));
     } catch (e) {

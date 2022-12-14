@@ -1,7 +1,9 @@
 import 'package:FitStack/app/helpers/fitstack_error_toast.dart';
 import 'package:FitStack/app/repository/auth_repository.dart';
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+// ignore: depend_on_referenced_packages
+import 'package:bloc/bloc.dart';
+
 part 'login_state.dart';
 
 class LoginCubit extends Cubit<LoginState> {
@@ -26,14 +28,14 @@ class LoginCubit extends Cubit<LoginState> {
 
   Future<void> logInWithCredentials() async {
     try {
-      emit(state.copyWith(step: AuthStep.Loading));
+      emit(state.copyWith(step: AuthStep.loading));
 
       await authenticationRepository.logInWithEmailAndPassword(
         email: state.email,
         password: state.password,
       );
     } catch (e) {
-      emit(state.copyWith(step: AuthStep.Error, errorMessage: e.toString()));
+      emit(state.copyWith(step: AuthStep.error, errorMessage: e.toString()));
       FitStackToast.showErrorToast("error logging in $e");
       return;
     }

@@ -84,7 +84,7 @@ class ProfilePage extends StatelessWidget {
                     },
                     avatar: state.userProfile.avatar,
                     daysInARow: state.userProfile.loginStreak,
-                    fit_credits: state.userProfile.fitCredits,
+                    fitCredits: state.userProfile.fitCredits,
                     socialPoints: state.userProfile.socialPoints,
                   ),
                 ),

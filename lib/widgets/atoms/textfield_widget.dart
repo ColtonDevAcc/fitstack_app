@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
-class TextField_Widget extends StatelessWidget {
+class FSTextField extends StatelessWidget {
   final String title;
   final String? hintText;
   final String? bottomTitle;
@@ -12,7 +12,7 @@ class TextField_Widget extends StatelessWidget {
   final TextInputType? keyboardType;
   final AutovalidateMode? autovalidateMode;
 
-  const TextField_Widget({
+  const FSTextField({
     Key? key,
     this.onEditingComplete,
     required this.title,

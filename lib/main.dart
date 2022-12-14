@@ -2,7 +2,7 @@ import 'package:FitStack/app/injection/state_providers.dart';
 import 'package:FitStack/app/providers/bloc/app/app_bloc.dart';
 import 'package:FitStack/app/routing/app_router.dart';
 import 'package:FitStack/app/services/analytics_service.dart';
-import 'package:FitStack/app/theme/color_Theme.dart';
+import 'package:FitStack/app/theme/color_theme.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';

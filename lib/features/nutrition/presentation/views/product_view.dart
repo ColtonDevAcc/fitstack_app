@@ -61,7 +61,7 @@ class ProductView extends StatelessWidget {
                         padding: EdgeInsets.zero,
                         children: product.nutriments?.toJson().entries.map((e) {
                               return NutrientsScoreChip(
-                                icon: IngredientsToIcon[e.key.split("_")[0]] ?? FontAwesome.fire,
+                                icon: ingredientsToIcon[e.key.split("_")[0]] ?? FontAwesome.fire,
                                 value: "${e.value} ${e.key}",
                               );
                             }).toList() ??
@@ -79,7 +79,7 @@ class ProductView extends StatelessWidget {
                           if (product.ingredients != null && product.ingredients!.isNotEmpty)
                             for (var i = 0; i < product.ingredients!.length; i++)
                               NutrientsScoreChip(
-                                icon: IngredientsToIcon[product.ingredients?[i].text] ?? FontAwesome.question,
+                                icon: ingredientsToIcon[product.ingredients?[i].text] ?? FontAwesome.question,
                                 value: product.ingredients?[i].text ?? "",
                               ),
                           Padding(
@@ -89,7 +89,7 @@ class ProductView extends StatelessWidget {
                           if (product.additives != null && product.additives!.names.isNotEmpty)
                             for (var i = 0; i < product.additives!.names.length; i++)
                               NutrientsScoreChip(
-                                icon: IngredientsToIcon[product.additives?.names[i]] ?? FontAwesomeIcons.pills,
+                                icon: ingredientsToIcon[product.additives?.names[i]] ?? FontAwesomeIcons.pills,
                                 value: product.additives?.names[i] ?? "",
                               ),
                         ],
@@ -134,7 +134,7 @@ class ProductView extends StatelessWidget {
   }
 }
 
-const Map<String, IconData> IngredientsToIcon = {
+const Map<String, IconData> ingredientsToIcon = {
   "natural flavors": FontAwesome.leaf,
   "polysorbate 80": FontAwesome.pills,
   "turmeric": FontAwesome.plant_wilt,

@@ -24,30 +24,28 @@ class AddFriendBottomSheet extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Expanded(
-                  child: Container(
-                    child: FormBuilderTextField(
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      keyboardType: TextInputType.emailAddress,
-                      onSubmitted: (value) => context.read<FriendshipCubit>().getFriend(email: value),
-                      validator: (value) {
-                        if (EmailValidator.validate(value ?? "")) {
-                          return null;
-                        } else {
-                          return "not valid";
-                        }
-                      },
-                      name: 'friendEmail',
-                      decoration: InputDecoration(
-                        fillColor: Theme.of(context).colorScheme.surface,
-                        filled: true,
-                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(20), borderSide: BorderSide.none),
-                        hintText: 'Search',
-                        hintStyle: const TextStyle(color: Colors.grey, fontSize: 18),
-                        prefixIcon: Container(
-                          padding: const EdgeInsets.all(15),
-                          width: 18,
-                          child: const Icon(FontAwesome.magnifying_glass),
-                        ),
+                  child: FormBuilderTextField(
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    keyboardType: TextInputType.emailAddress,
+                    onSubmitted: (value) => context.read<FriendshipCubit>().getFriend(email: value),
+                    validator: (value) {
+                      if (EmailValidator.validate(value ?? "")) {
+                        return null;
+                      } else {
+                        return "not valid";
+                      }
+                    },
+                    name: 'friendEmail',
+                    decoration: InputDecoration(
+                      fillColor: Theme.of(context).colorScheme.surface,
+                      filled: true,
+                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(20), borderSide: BorderSide.none),
+                      hintText: 'Search',
+                      hintStyle: const TextStyle(color: Colors.grey, fontSize: 18),
+                      prefixIcon: Container(
+                        padding: const EdgeInsets.all(15),
+                        width: 18,
+                        child: const Icon(FontAwesome.magnifying_glass),
                       ),
                     ),
                   ),
@@ -71,21 +69,24 @@ class AddFriendBottomSheet extends StatelessWidget {
                 ),
               ],
             ),
-            if (friend == UserProfile.empty()) const SizedBox() else Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        child: GestureDetector(
-                          onTap: () => context.read<FriendshipCubit>().addFriend(friend: friend),
-                          child: FriendshipProfileCard(
-                            username: friend.displayName,
-                            colorTheme: Colors.red,
-                          ),
-                        ),
+            if (friend == UserProfile.empty())
+              const SizedBox()
+            else
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () => context.read<FriendshipCubit>().addFriend(friend: friend),
+                      child: FriendshipProfileCard(
+                        username: friend.displayName,
+                        colorTheme: Colors.red,
                       ),
-                      const Icon(FontAwesome.plus)
-                    ],
-                  )
+                    ),
+                  ),
+                  const Icon(FontAwesome.plus)
+                ],
+              )
           ],
         ),
       ),

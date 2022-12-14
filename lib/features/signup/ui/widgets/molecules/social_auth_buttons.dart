@@ -19,7 +19,7 @@ class SocialAuthButtons extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               if (state.index == 0)
-                SocialAuthButton_Widget(
+                SocialAuthButton(
                   color: Theme.of(context).colorScheme.primary,
                   child: Icon(
                     FontAwesome.facebook_f,
@@ -28,7 +28,7 @@ class SocialAuthButtons extends StatelessWidget {
                 ),
               if (state.index == 0) const SizedBox(width: 15),
               if (state.index == 0)
-                SocialAuthButton_Widget(
+                SocialAuthButton(
                   onTap: () {},
                   color: Theme.of(context).colorScheme.secondary,
                   child: Icon(

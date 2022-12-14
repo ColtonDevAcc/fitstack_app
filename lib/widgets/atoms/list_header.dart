@@ -20,24 +20,22 @@ class ListHeader extends StatelessWidget {
         const SizedBox(width: 10),
         Text(subtitle ?? ""),
         const Spacer(),
-        Container(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              GestureDetector(
-                onTap: onTap,
-                child: const Text(
-                  "more",
-                  style: TextStyle(color: Colors.blue),
-                ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            GestureDetector(
+              onTap: onTap,
+              child: const Text(
+                "more",
+                style: TextStyle(color: Colors.blue),
               ),
-              const Icon(
-                FontAwesome.chevron_right,
-                color: Colors.blue,
-                size: 12,
-              ),
-            ],
-          ),
+            ),
+            const Icon(
+              FontAwesome.chevron_right,
+              color: Colors.blue,
+              size: 12,
+            ),
+          ],
         ),
       ],
     );

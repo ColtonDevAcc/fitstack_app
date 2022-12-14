@@ -25,7 +25,7 @@ class FriendsRelationshipView extends StatelessWidget {
           key: scaffoldKey,
           floatingActionButton: FloatingActionButton(
             onPressed: () {
-              context.read<FriendshipCubit>().setShowAddFriend(true);
+              context.read<FriendshipCubit>().setShowAddFriend(show: true);
               showMaterialModalBottomSheet(
                 context: context,
                 useRootNavigator: true,
@@ -47,13 +47,12 @@ class FriendsRelationshipView extends StatelessWidget {
                     style: TextStyle(color: Theme.of(context).colorScheme.onBackground),
                   ),
                   leading: GestureDetector(
-                      onTap: () => GoRouter.of(context).pop(),
-                      child: Container(
-                        child: Icon(
-                          FontAwesome.arrow_left,
-                          color: Theme.of(context).colorScheme.onBackground,
-                        ),
-                      ),),
+                    onTap: () => GoRouter.of(context).pop(),
+                    child: Icon(
+                      FontAwesome.arrow_left,
+                      color: Theme.of(context).colorScheme.onBackground,
+                    ),
+                  ),
                   elevation: 0,
                   backgroundColor: Theme.of(context).colorScheme.background,
                 )

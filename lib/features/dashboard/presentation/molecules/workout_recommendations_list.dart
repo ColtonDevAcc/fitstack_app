@@ -1,19 +1,19 @@
 import 'package:FitStack/features/dashboard/presentation/atoms/workout_recommendation_card.dart';
 import 'package:flutter/material.dart';
 
-class Workout_Recommendation_List extends StatefulWidget {
+class WorkoutRecommendationList extends StatefulWidget {
   final PageController pageController;
 
-  const Workout_Recommendation_List({
+  const WorkoutRecommendationList({
     Key? key,
     required this.pageController,
   }) : super(key: key);
 
   @override
-  State<Workout_Recommendation_List> createState() => _Workout_Recommendation_ListState();
+  State<WorkoutRecommendationList> createState() => WorkoutRecommendationListState();
 }
 
-class _Workout_Recommendation_ListState extends State<Workout_Recommendation_List> {
+class WorkoutRecommendationListState extends State<WorkoutRecommendationList> {
   int currentIndex = 0;
 
   @override
@@ -36,7 +36,7 @@ class _Workout_Recommendation_ListState extends State<Workout_Recommendation_Lis
             child: AnimatedScale(
               scale: index == currentIndex ? 1.05 : 0.9,
               duration: const Duration(milliseconds: 200),
-              child: const Workout_Recommendation_Card(),
+              child: const WorkoutRecommendationCard(),
             ),
           );
         },

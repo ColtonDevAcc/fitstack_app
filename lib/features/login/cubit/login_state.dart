@@ -1,14 +1,14 @@
 part of 'login_cubit.dart';
 
 enum AuthStep {
-  Loading,
-  Uninitialized,
-  Authorized,
-  Error,
+  loading,
+  uninitialized,
+  authorized,
+  error,
 }
 
 class LoginState extends Equatable {
-  const LoginState({this.email = "", this.password = "", this.errorMessage, this.step = AuthStep.Uninitialized});
+  const LoginState({this.email = "", this.password = "", this.errorMessage, this.step = AuthStep.uninitialized});
 
   final String email;
   final String password;

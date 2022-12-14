@@ -1,6 +1,6 @@
 import 'package:FitStack/app/providers/bloc/app/app_bloc.dart';
 import 'package:FitStack/app/providers/bloc/user_statistics/user_statistics_bloc.dart';
-import 'package:FitStack/features/dashboard/presentation/molecules/workout_recommendations%20_list.dart';
+import 'package:FitStack/features/dashboard/presentation/molecules/workout_recommendations_list.dart';
 import 'package:FitStack/features/dashboard/presentation/molecules/statistics_dashboard.dart';
 import 'package:FitStack/features/dashboard/presentation/organisms/user_statistics_snpashot_list.dart';
 import 'package:FitStack/features/profile/cubit/profile_cubit.dart';
@@ -61,7 +61,7 @@ class DashboardPage extends StatelessWidget {
                       style: labelTextStyle,
                     ),
                   ),
-                  const Statistics_Dashboard(),
+                  const StatisticsDashboard(),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(0, topPadding, 0, bottomPadding),
                     child: Text(
@@ -70,7 +70,7 @@ class DashboardPage extends StatelessWidget {
                       style: labelTextStyle,
                     ),
                   ),
-                  Workout_Recommendation_List(pageController: pageController),
+                  WorkoutRecommendationList(pageController: pageController),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(0, topPadding, 10, bottomPadding),
                     child: Row(

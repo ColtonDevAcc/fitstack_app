@@ -12,7 +12,7 @@ class Login_Page extends StatelessWidget {
       body: SafeArea(
         child: Padding(
           padding: Platform.isAndroid ? const EdgeInsets.fromLTRB(0, 10, 0, 10) : const EdgeInsets.all(0),
-          child: const Login_View(),
+          child: const LoginView(),
         ),
       ),
     );

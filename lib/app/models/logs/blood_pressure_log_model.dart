@@ -1,6 +1,7 @@
 import 'package:FitStack/app/models/logs/log_model.dart';
 import 'package:health/health.dart';
 import 'package:json_annotation/json_annotation.dart';
+// ignore: depend_on_referenced_packages
 import 'package:copy_with_extension/copy_with_extension.dart';
 
 part 'blood_pressure_log_model.g.dart';
