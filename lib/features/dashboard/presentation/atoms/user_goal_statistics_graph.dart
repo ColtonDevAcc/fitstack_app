@@ -23,11 +23,11 @@ class UserGoalStatisticsGraph extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var difference = data!.first.value - data!.last.value;
+    final difference = data!.first.value - data!.last.value;
     return Padding(
       padding: EdgeInsets.fromLTRB(0, 0, width != null ? 0 : 10, width != null ? 0 : 3),
       child: Container(
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         width: width ?? 150,
         height: 175,
         decoration: BoxDecoration(
@@ -38,7 +38,7 @@ class UserGoalStatisticsGraph extends StatelessWidget {
               color: Colors.grey.withOpacity(0.2),
               spreadRadius: 2,
               blurRadius: 5,
-              offset: Offset(1, 3),
+              offset: const Offset(1, 3),
               blurStyle: BlurStyle.outer,
             ),
           ],
@@ -46,20 +46,18 @@ class UserGoalStatisticsGraph extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            difference.isNegative
-                ? Row(
+            if (difference.isNegative) Row(
                     children: [
                       Icon(FontAwesomeIcons.arrowDown, size: 15, color: Theme.of(context).colorScheme.error),
                       Text(
-                        "${(difference * -1).toStringAsFixed(1)}",
+                        (difference * -1).toStringAsFixed(1),
                         style: Theme.of(context).textTheme.labelLarge?.copyWith(fontWeight: FontWeight.bold),
                       ),
                     ],
-                  )
-                : Row(
+                  ) else Row(
                     children: [
-                      Icon(FontAwesomeIcons.arrowUp, size: 15, color: Colors.green),
-                      Text("${difference.toStringAsFixed(2)}", style: Theme.of(context).textTheme.labelLarge?.copyWith(fontWeight: FontWeight.bold)),
+                      const Icon(FontAwesomeIcons.arrowUp, size: 15, color: Colors.green),
+                      Text(difference.toStringAsFixed(2), style: Theme.of(context).textTheme.labelLarge?.copyWith(fontWeight: FontWeight.bold)),
                     ],
                   ),
             Text(
@@ -70,7 +68,7 @@ class UserGoalStatisticsGraph extends StatelessWidget {
                   ?.copyWith(fontWeight: FontWeight.normal, color: Theme.of(context).colorScheme.onSurface.withOpacity(.5)),
               textScaleFactor: .9,
             ),
-            SizedBox(height: 5),
+            const SizedBox(height: 5),
             Expanded(
               child: LineChart(
                 LineChartData(
@@ -82,7 +80,7 @@ class UserGoalStatisticsGraph extends StatelessWidget {
                       getTooltipItems: (List<LineBarSpot> touchedBarSpots) {
                         return touchedBarSpots.map(
                           (barSpot) {
-                            DateTime today = DateTime.now();
+                            final DateTime today = DateTime.now();
                             final flSpot = barSpot;
                             if (flSpot.x == today.day) {
                               return LineTooltipItem(
@@ -118,9 +116,9 @@ class UserGoalStatisticsGraph extends StatelessWidget {
                     LineChartBarData(
                       isStrokeJoinRound: true,
                       spots: data!.map((e) {
-                        DateTime today = DateTime.now().toUtc();
+                        final DateTime today = DateTime.now().toUtc();
                         return FlSpot(
-                            today.difference(DateTime(e.createdAt.year, e.createdAt.month, e.createdAt.day)).inDays * -1 + 1, e.value.toDouble());
+                            today.difference(DateTime(e.createdAt.year, e.createdAt.month, e.createdAt.day)).inDays * -1 + 1, e.value.toDouble(),);
                       }).toList(),
                       isCurved: true,
                       color: color,
@@ -139,8 +137,6 @@ class UserGoalStatisticsGraph extends StatelessWidget {
                     ),
                   ],
                 ),
-                swapAnimationDuration: Duration(milliseconds: 150), // Optional
-                swapAnimationCurve: Curves.linear, // Optional
               ),
             ),
           ],

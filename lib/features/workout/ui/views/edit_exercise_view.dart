@@ -17,7 +17,7 @@ class EditExerciseView extends StatelessWidget {
       backgroundColor: Theme.of(context).colorScheme.background,
       body: BlocBuilder<ExerciseBloc, ExerciseState>(
         builder: (context, state) {
-          bool emptyImageList = state.currentlyEditingExercise.images == null || state.currentlyEditingExercise.images!.isEmpty;
+          final bool emptyImageList = state.currentlyEditingExercise.images == null || state.currentlyEditingExercise.images!.isEmpty;
           return Scrollbar(
             child: SingleChildScrollView(
               child: SafeArea(
@@ -46,18 +46,17 @@ class EditExerciseView extends StatelessWidget {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.max,
                         children: [
                           Row(
                             children: [
                               Expanded(child: ExerciseTextField(label: "Name", hintText: state.currentlyEditingExercise.name ?? "")),
-                              SizedBox(width: 10),
-                              Expanded(child: ExerciseTextField(label: "MET", hintText: state.currentlyEditingExercise.met_value.toString())),
+                              const SizedBox(width: 10),
+                              Expanded(child: ExerciseTextField(label: "MET", hintText: state.currentlyEditingExercise.metValue.toString())),
                             ],
                           ),
-                          SizedBox(height: 20),
+                          const SizedBox(height: 20),
                           ExerciseTextField(label: "Description", hintText: state.currentlyEditingExercise.description ?? "", maxLines: 3),
-                          SizedBox(height: 20),
+                          const SizedBox(height: 20),
                           ExerciseTextField(
                             label: "Exercise Type",
                             hintText: state.currentlyEditingExercise.type.toString(),
@@ -88,7 +87,7 @@ class EditExerciseView extends StatelessWidget {
                             child: GestureDetector(
                               onTap: () {
                                 if (emptyImageList && index == 0 || index == state.currentlyEditingExercise.images!.length) {
-                                  context.read<ExerciseBloc>().add(EditExerciseImage());
+                                  context.read<ExerciseBloc>().add(const EditExerciseImage());
                                 }
                               },
                               child: Container(
@@ -127,12 +126,12 @@ class EditExerciseView extends StatelessWidget {
                         minorMuscleColor: Colors.yellow,
                         onMajorMuscleSelected: (TapUpDetails, Muscle) => context.read<ExerciseBloc>().add(SelectMajorMuscle(muscle: Muscle)),
                         onMinorMuscleSelected: (LongPressEndDetails, Muscle) => context.read<ExerciseBloc>().add(SelectMinorMuscle(muscle: Muscle)),
-                        onIconPressed: () => context.read<ExerciseBloc>().add(RotateMuscleAnatomyView()),
+                        onIconPressed: () => context.read<ExerciseBloc>().add(const RotateMuscleAnatomyView()),
                         muscleAnatomyViewRotationIndex: state.muscleAnatomyViewRotationIndex,
                         backMuscleList: state.backMuscleList,
                       ),
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                   ],
                 ),
               ),
@@ -158,58 +157,58 @@ class ExerciseTextField extends StatelessWidget {
       children: [
         if (dropDown != true)
           FormBuilderTextField(
-            name: '$label',
+            name: label,
             maxLines: maxLines ?? 1,
             decoration: InputDecoration(
               fillColor: Theme.of(context).colorScheme.surface,
               filled: true,
-              hintText: '$hintText',
+              hintText: hintText,
               hintStyle: TextStyle(
                 color: Theme.of(context).colorScheme.onBackground.withOpacity(0.5),
                 fontSize: 18,
               ),
-              labelText: '$label',
+              labelText: label,
               labelStyle: TextStyle(
                 color: Theme.of(context).colorScheme.onBackground.withOpacity(0.5),
                 fontSize: 18,
               ),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
-                borderSide: BorderSide(color: Theme.of(context).colorScheme.secondary, width: 1.0),
+                borderSide: BorderSide(color: Theme.of(context).colorScheme.secondary),
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
-                borderSide: BorderSide(color: Theme.of(context).colorScheme.secondary, width: 1.0),
+                borderSide: BorderSide(color: Theme.of(context).colorScheme.secondary),
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
-                borderSide: BorderSide(color: Theme.of(context).colorScheme.surface, width: 1.0),
+                borderSide: BorderSide(color: Theme.of(context).colorScheme.surface),
               ),
             ),
           ),
         if (dropDown == true)
           FormBuilderDropdown(
             name: label,
-            items: [
+            items: const [
               DropdownMenuItem(
-                child: Text("Push", style: TextStyle(fontSize: 20)),
                 value: ExerciseType.push,
+                child: Text("Push", style: TextStyle(fontSize: 20)),
               ),
               DropdownMenuItem(
-                child: Text("Pull", style: TextStyle(fontSize: 20)),
                 value: ExerciseType.pull,
+                child: Text("Pull", style: TextStyle(fontSize: 20)),
               ),
               DropdownMenuItem(
-                child: Text("Legs", style: TextStyle(fontSize: 20)),
                 value: ExerciseType.legs,
+                child: Text("Legs", style: TextStyle(fontSize: 20)),
               ),
               DropdownMenuItem(
-                child: Text("Core", style: TextStyle(fontSize: 20)),
                 value: ExerciseType.core,
+                child: Text("Core", style: TextStyle(fontSize: 20)),
               ),
               DropdownMenuItem(
-                child: Text("Other", style: TextStyle(fontSize: 20)),
                 value: ExerciseType.other,
+                child: Text("Other", style: TextStyle(fontSize: 20)),
               ),
             ],
             decoration: InputDecoration(
@@ -221,11 +220,11 @@ class ExerciseTextField extends StatelessWidget {
               ),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
-                borderSide: BorderSide(color: Theme.of(context).colorScheme.secondary, width: 1.0),
+                borderSide: BorderSide(color: Theme.of(context).colorScheme.secondary),
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
-                borderSide: BorderSide(color: Theme.of(context).colorScheme.surface, width: 1.0),
+                borderSide: BorderSide(color: Theme.of(context).colorScheme.surface),
               ),
               fillColor: Theme.of(context).colorScheme.surface,
               filled: true,

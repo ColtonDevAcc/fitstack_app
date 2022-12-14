@@ -20,7 +20,7 @@ class ConsumptionStatisticCard extends StatelessWidget {
               color: Theme.of(context).colorScheme.surface,
               spreadRadius: 2,
               blurRadius: 5,
-              offset: Offset(1, 3),
+              offset: const Offset(1, 3),
               blurStyle: BlurStyle.outer,
             ),
           ],
@@ -28,12 +28,10 @@ class ConsumptionStatisticCard extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(15.0),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
             children: [
               icon,
-              SizedBox(width: 10),
+              const SizedBox(width: 10),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

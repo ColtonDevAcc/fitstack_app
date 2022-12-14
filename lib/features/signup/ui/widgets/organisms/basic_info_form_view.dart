@@ -17,7 +17,7 @@ class BasicInfoFormView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SignupFormHeader(
+        const SignupFormHeader(
           subtitle: "Enter you basic information",
           text: "Lets configure your account",
           icon: FontAwesome.weight_scale,
@@ -26,7 +26,7 @@ class BasicInfoFormView extends StatelessWidget {
           buildWhen: (previous, current) =>
               previous.formKey?[previous.index].currentState?.value != current.formKey?[current.index].currentState?.value,
           builder: (context, state) {
-            var formKey = state.formKey?[state.index];
+            final formKey = state.formKey?[state.index];
             return Expanded(
               child: FormBuilder(
                 autoFocusOnValidationFailure: true,
@@ -35,19 +35,18 @@ class BasicInfoFormView extends StatelessWidget {
                 key: formKey,
                 child: Column(
                   children: [
-                    SizedBox(height: 10),
-                    PlatHealthFillButton(),
-                    Spacer(flex: 1),
-                    DateOfBirthButton(),
-                    SizedBox(height: 10),
-                    AssignedSexButton(),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
+                    const PlatHealthFillButton(),
+                    const Spacer(),
+                    const DateOfBirthButton(),
+                    const SizedBox(height: 10),
+                    const AssignedSexButton(),
+                    const SizedBox(height: 10),
                     Row(
                       children: [
                         Expanded(
-                          flex: 1,
                           child: SignupTextfield(
-                            key: Key('Height'),
+                            key: const Key('Height'),
                             suffixText: 'ft',
                             title: 'Height',
                             fieldName: 'heightFt',
@@ -58,11 +57,10 @@ class BasicInfoFormView extends StatelessWidget {
                             onChanged: (value) => BlocProvider.of<SignupCubit>(context).heightFtChanged(int.tryParse(value ?? "")),
                           ),
                         ),
-                        SizedBox(width: 15),
+                        const SizedBox(width: 15),
                         Expanded(
-                          flex: 1,
                           child: SignupTextfield(
-                            key: Key('In'),
+                            key: const Key('In'),
                             suffixText: 'In',
                             title: "",
                             fieldName: "heightInch",
@@ -75,9 +73,9 @@ class BasicInfoFormView extends StatelessWidget {
                         ),
                       ],
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     SignupTextfield(
-                      key: Key('Weight'),
+                      key: const Key('Weight'),
                       title: "Weight",
                       fieldName: "weight",
                       suffixText: 'lb',
@@ -89,7 +87,7 @@ class BasicInfoFormView extends StatelessWidget {
                       ]),
                       onChanged: (value) => BlocProvider.of<SignupCubit>(context).weightChanged(int.tryParse(value ?? "0")?.toDouble()),
                     ),
-                    Spacer(flex: 2),
+                    const Spacer(flex: 2),
                   ],
                 ),
               ),

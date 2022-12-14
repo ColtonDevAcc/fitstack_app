@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:FitStack/app/services/analytics_service.dart';
+import 'package:FitStack/main.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
 class FirebaseStorageService {
@@ -11,7 +13,7 @@ class FirebaseStorageService {
       await ref.putFile(image);
       return ref.getDownloadURL();
     } on FirebaseException catch (e) {
-      print(e);
+      locator<AnalyticsService>().logError(exception: e.toString(), reason: 'error uploading image');
       return '';
     }
   }

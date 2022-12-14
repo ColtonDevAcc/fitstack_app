@@ -8,7 +8,6 @@ class TrainerRelationshipView extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomScrollView(
       clipBehavior: Clip.none,
-      scrollDirection: Axis.vertical,
       slivers: [
         SliverFillRemaining(
           hasScrollBody: false,
@@ -19,7 +18,7 @@ class TrainerRelationshipView extends StatelessWidget {
                 runSpacing: MediaQuery.of(context).size.width * .05,
                 runAlignment: WrapAlignment.spaceBetween,
                 alignment: WrapAlignment.spaceBetween,
-                children: [
+                children: const [
                   TrainerRelationshipCard(),
                   TrainerRelationshipCard(),
                   TrainerRelationshipCard(),

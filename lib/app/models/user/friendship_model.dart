@@ -1,37 +1,64 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:copy_with_extension/copy_with_extension.dart';
 
 part 'friendship_model.g.dart';
 
 @JsonSerializable(includeIfNull: true, explicitToJson: true, anyMap: true)
-@CopyWith()
 class Friendship extends Equatable {
+  @JsonKey(name: 'id')
   final String id;
-  final String from_user;
-  final String to_user;
+  @JsonKey(name: 'from_user')
+  final String fromUser;
+  @JsonKey(name: 'to_user')
+  final String toUser;
+  @JsonKey(name: 'accepted')
   final bool accepted;
-  final String sent_time;
-  final String? response_time;
-  final DateTime? updated_at;
-  final DateTime? deleted_at;
+  @JsonKey(name: 'sent_time')
+  final String sentTime;
+  @JsonKey(name: 'response_time')
+  final String? responseTime;
+  @JsonKey(name: 'updated_at')
+  final DateTime? updatedAt;
+  @JsonKey(name: 'deleted_at')
+  final DateTime? deletedAt;
 
-  Friendship({
+  const Friendship({
     required this.id,
-    this.updated_at,
-    this.deleted_at,
-    required this.sent_time,
-    this.response_time,
+    this.updatedAt,
+    this.deletedAt,
+    required this.sentTime,
+    this.responseTime,
     required this.accepted,
-    required this.to_user,
-    required this.from_user,
+    required this.toUser,
+    required this.fromUser,
   });
 
   @override
-  List<Object?> get props =>
-      [this.to_user, this.from_user, this.sent_time, this.response_time, this.accepted, this.id, this.updated_at, this.deleted_at];
+  List<Object?> get props => [toUser, fromUser, sentTime, responseTime, accepted, id, updatedAt, deletedAt];
 
   factory Friendship.fromJson(Map<String, dynamic> json) => _$FriendshipFromJson(json);
   Map<String, dynamic> toJson() => _$FriendshipToJson(this);
-  factory Friendship.empty() => Friendship(accepted: false, from_user: '', sent_time: '', to_user: '', id: '');
+  factory Friendship.empty() => const Friendship(accepted: false, fromUser: '', sentTime: '', toUser: '', id: '');
+
+  Friendship copyWith({
+    String? id,
+    String? fromUser,
+    String? toUser,
+    bool? accepted,
+    String? sentTime,
+    String? responseTime,
+    DateTime? updatedAt,
+    DateTime? deletedAt,
+  }) {
+    return Friendship(
+      id: id ?? this.id,
+      fromUser: fromUser ?? this.fromUser,
+      toUser: toUser ?? this.toUser,
+      accepted: accepted ?? this.accepted,
+      sentTime: sentTime ?? this.sentTime,
+      responseTime: responseTime ?? this.responseTime,
+      updatedAt: updatedAt ?? this.updatedAt,
+      deletedAt: deletedAt ?? this.deletedAt,
+    );
+  }
 }

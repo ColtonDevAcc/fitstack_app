@@ -7,12 +7,10 @@ import 'package:FitStack/app/models/logs/step_log_model.dart';
 import 'package:FitStack/app/models/logs/weight_log_model.dart';
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:copy_with_extension/copy_with_extension.dart';
 
 part 'user_statistic_model.g.dart';
 
 @JsonSerializable(includeIfNull: true, explicitToJson: true, anyMap: true)
-@CopyWith()
 class UserStatistic extends Equatable {
   @JsonKey(name: 'id')
   final String? id;
@@ -34,7 +32,7 @@ class UserStatistic extends Equatable {
   final DateTime? updatedAt;
   @JsonKey(name: 'created_at')
   final DateTime? createdAt;
-  UserStatistic({
+  const UserStatistic({
     this.stepsLogs,
     this.heartRateLogs,
     this.sleepAsleepLogs,

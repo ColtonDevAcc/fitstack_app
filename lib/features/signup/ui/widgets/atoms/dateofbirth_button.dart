@@ -22,12 +22,12 @@ class DateOfBirthButton extends StatelessWidget {
               'Date of Birth',
               style: Theme.of(context).textTheme.subtitle2!.copyWith(fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             FormBuilderDateTimePicker(
               autovalidateMode: autovalidateMode ?? AutovalidateMode.always,
               name: 'dateOfBirth',
-              resetIcon: Padding(
-                padding: const EdgeInsets.only(right: 10),
+              resetIcon: const Padding(
+                padding: EdgeInsets.only(right: 10),
                 child: Icon(FontAwesome.angle_down, size: 15),
               ),
               onChanged: (value) => BlocProvider.of<SignupCubit>(context).dateOfBirthChanged(value),
@@ -42,9 +42,9 @@ class DateOfBirthButton extends StatelessWidget {
               format: DateFormat('MM/dd/yyyy'),
               decoration: InputDecoration(
                 hintText: "select a date",
-                suffixIconConstraints: BoxConstraints(maxHeight: 30, maxWidth: 40),
-                suffixIcon: Padding(
-                  padding: const EdgeInsets.only(right: 10),
+                suffixIconConstraints: const BoxConstraints(maxHeight: 30, maxWidth: 40),
+                suffixIcon: const Padding(
+                  padding: EdgeInsets.only(right: 10),
                   child: Icon(FontAwesome.calendar),
                 ),
                 border: OutlineInputBorder(

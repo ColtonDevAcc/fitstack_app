@@ -4,12 +4,14 @@ import 'dart:developer';
 import 'package:FitStack/app/helpers/endpoints.dart';
 import 'package:FitStack/app/models/user/friendship_model.dart';
 import 'package:FitStack/app/models/user/user_profile_model.dart';
+import 'package:FitStack/app/services/analytics_service.dart';
+import 'package:FitStack/main.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:dio/dio.dart';
 
 class RelationshipRepository {
   final dio = Endpoints();
-  final storage = new FlutterSecureStorage();
+  final storage = const FlutterSecureStorage();
   final controller = StreamController<FriendStream>.broadcast();
 
   RelationshipRepository();
@@ -23,24 +25,24 @@ class RelationshipRepository {
   Future<List<UserProfile?>?> getFriends({required String token}) async {
     try {
       controller.add(FriendStream(friendship: [], status: FriendshipFetchStatus.loading));
-      Response response = await dio.get(
+      final Response response = await dio.get(
         '/friendship/get-friends',
         options: Options(
-          headers: {"Authorization": "Bearer ${token}"},
+          headers: {"Authorization": "Bearer $token"},
         ),
       );
 
       if (response.statusCode == 200) {
-        List responseJson = response.data as List;
+        final List responseJson = response.data as List;
 
-        var friends = responseJson.map((e) => UserProfile.fromJson(e)).toList();
+        final friends = responseJson.map((e) => UserProfile.fromJson(e)).toList();
         return friends;
       } else {
         log("error");
       }
-    } on Error catch (e) {
+    } catch (e) {
       controller.add(FriendStream(friendship: [], status: FriendshipFetchStatus.error));
-      log('error: ${e}, stacktrace: ${e.stackTrace}');
+      locator<AnalyticsService>().logError(exception: e.toString(), reason: 'error getting friends');
       return null;
     }
     return null;
@@ -49,24 +51,24 @@ class RelationshipRepository {
   Future<List<UserProfile?>?> getFriendsList({required String token}) async {
     try {
       controller.add(FriendStream(friendship: [], status: FriendshipFetchStatus.loading));
-      Response response = await dio.get(
+      final Response response = await dio.get(
         '/friendship/get-friends-list',
         options: Options(
-          headers: {"Authorization": "Bearer ${token}"},
+          headers: {"Authorization": "Bearer $token"},
         ),
       );
 
       if (response.statusCode == 200) {
-        List responseJson = response.data as List;
+        final List responseJson = response.data as List;
 
-        var friends = responseJson.map((e) => UserProfile.fromJson(e)).toList();
+        final friends = responseJson.map((e) => UserProfile.fromJson(e)).toList();
         return friends;
       } else {
         log("error");
       }
-    } on Error catch (e) {
+    } catch (e) {
       controller.add(FriendStream(friendship: [], status: FriendshipFetchStatus.error));
-      log('error: ${e}, stacktrace: ${e.stackTrace}');
+      locator<AnalyticsService>().logError(exception: e.toString(), reason: 'error getting friends');
       return null;
     }
     return null;
@@ -75,23 +77,23 @@ class RelationshipRepository {
   Future<UserProfile?> getFriend({required String token, required String email}) async {
     try {
       controller.add(FriendStream(friendship: [], status: FriendshipFetchStatus.loading));
-      Response response = await dio.post(
+      final Response response = await dio.post(
         '/friendship/get-friend',
         options: Options(
-          headers: {"Authorization": "Bearer ${token}"},
+          headers: {"Authorization": "Bearer $token"},
         ),
         data: {"email": email},
       );
 
       if (response.statusCode == 200) {
-        var friend = UserProfile.fromJson(response.data);
+        final friend = UserProfile.fromJson(response.data);
         return friend;
       } else {
         log("error");
       }
-    } on Error catch (e) {
+    } catch (e) {
       controller.add(FriendStream(friendship: [], status: FriendshipFetchStatus.error));
-      log('error: ${e}, stacktrace: ${e.stackTrace}');
+      locator<AnalyticsService>().logError(exception: e.toString(), reason: 'error getting friends');
       return null;
     }
     return null;
@@ -100,10 +102,10 @@ class RelationshipRepository {
   Future<void> addFriend({required String token, required String uid}) async {
     try {
       controller.add(FriendStream(friendship: [], status: FriendshipFetchStatus.loading));
-      Response response = await dio.post(
+      final Response response = await dio.post(
         '/friendship/add',
         options: Options(
-          headers: {"Authorization": "Bearer ${token}"},
+          headers: {"Authorization": "Bearer $token"},
         ),
         data: {"to_user": uid},
       );
@@ -111,12 +113,12 @@ class RelationshipRepository {
       if (response.statusCode != 200) {
         throw Error();
       }
-    } on Error catch (e) {
+    } catch (e) {
       controller.add(FriendStream(friendship: [], status: FriendshipFetchStatus.error));
-      log('error: ${e}, stacktrace: ${e.stackTrace}');
-      return null;
+      locator<AnalyticsService>().logError(exception: e.toString(), reason: 'error adding friend');
+      return;
     }
-    return null;
+    return;
   }
 
   void dispose() => controller.close();

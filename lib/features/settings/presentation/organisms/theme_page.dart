@@ -10,15 +10,13 @@ class ThemeSettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
-      appBar: AppBar(title: Text("Choose a theme")),
+      appBar: AppBar(title: const Text("Choose a theme")),
       body: SafeArea(
         child: SingleChildScrollView(
           clipBehavior: Clip.none,
-          scrollDirection: Axis.vertical,
           padding: EdgeInsets.zero,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Row(),
               BlocBuilder<SettingsCubit, SettingsState>(
@@ -31,12 +29,12 @@ class ThemeSettingsPage extends StatelessWidget {
                         return e.name != "custom"
                             ? Builder(
                                 builder: (context) {
-                                  ThemeData theme = FlexThemeData.light(scheme: FlexScheme.values.where((element) => element.name == e.name).first);
+                                  final ThemeData theme = FlexThemeData.light(scheme: FlexScheme.values.where((element) => element.name == e.name).first);
 
                                   return Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: Container(
-                                      padding: EdgeInsets.all(8),
+                                      padding: const EdgeInsets.all(8),
                                       decoration: BoxDecoration(color: theme.colorScheme.surface),
                                       child: GestureDetector(
                                         onTap: () {
@@ -45,7 +43,7 @@ class ThemeSettingsPage extends StatelessWidget {
                                         child: Column(
                                           children: [
                                             Text(e.name),
-                                            SizedBox(height: 10),
+                                            const SizedBox(height: 10),
                                             Row(
                                               mainAxisSize: MainAxisSize.min,
                                               children: [

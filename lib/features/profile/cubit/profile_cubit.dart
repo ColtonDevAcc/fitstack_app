@@ -17,12 +17,12 @@ class ProfileCubit extends Cubit<ProfileState> {
       : super(ProfileState(
           avatar: user?.profile.avatar ?? "",
           userProfile: user?.profile ?? UserProfile.empty(),
-        ));
+        ),);
 
-  void changeProfileUrl() async {
+  Future<void> changeProfileUrl() async {
     await ImagePicker().pickImage(source: ImageSource.gallery).then((value) async {
-      var token = await fb.FirebaseAuth.instance.currentUser?.getIdToken();
-      var profileUrl = await userRepository.updateProfileAvatar(token: token!, file: XFile(value!.path));
+      final token = await fb.FirebaseAuth.instance.currentUser?.getIdToken();
+      final profileUrl = await userRepository.updateProfileAvatar(token: token!, file: XFile(value!.path));
       emit(
         state.copyWith(
           userProfile: state.userProfile.copyWith(avatar: profileUrl),
@@ -31,7 +31,7 @@ class ProfileCubit extends Cubit<ProfileState> {
       );
     }).onError(
       (error, stackTrace) {
-        log("${error}");
+        log("$error");
         emit(state.copyWith(scaffoldMessageString: error.toString()));
       },
     );
@@ -40,9 +40,9 @@ class ProfileCubit extends Cubit<ProfileState> {
   Future<void> getUserProfile() async {
     try {
       if (kDebugMode) log("getting user profile");
-      var token = await fb.FirebaseAuth.instance.currentUser?.getIdToken();
-      var userProfile = await userRepository.getUserProfile(token: token!);
-      log("${userProfile.display_name}");
+      final token = await fb.FirebaseAuth.instance.currentUser?.getIdToken();
+      final userProfile = await userRepository.getUserProfile(token: token!);
+      log(userProfile.displayName);
       emit(state.copyWith(userProfile: userProfile));
     } catch (e) {
       log("$e");

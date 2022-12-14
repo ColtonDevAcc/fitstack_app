@@ -1,15 +1,17 @@
 import 'package:FitStack/app/models/workout/exercise_model.dart';
-import 'package:bloc/bloc.dart';
+import 'package:FitStack/app/repository/active_workout_repository.dart';
 import 'package:equatable/equatable.dart';
+// ignore: depend_on_referenced_packages
+import 'package:bloc/bloc.dart';
 
 part 'active_workout_event.dart';
 part 'active_workout_state.dart';
 
 class ActiveWorkoutBloc extends Bloc<ActiveWorkoutEvent, ActiveWorkoutState> {
-  final activeWorkoutRepository;
+  final ActiveWorkoutRepository activeWorkoutRepository;
   ActiveWorkoutBloc({required this.activeWorkoutRepository})
       : super(
-          ActiveWorkoutState(
+          const ActiveWorkoutState(
             exercises: [],
             status: ExerciseListStatus.initial,
           ),

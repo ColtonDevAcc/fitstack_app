@@ -1,4 +1,5 @@
 import 'package:FitStack/app/models/logs/log_model.dart';
+// ignore: depend_on_referenced_packages
 import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:health/health.dart';
 import 'package:json_annotation/json_annotation.dart';
@@ -29,6 +30,7 @@ class StepsLog extends Log {
     return 'StepsLog { id: $id, created_at: $createdAt, userId: $userId, type: $type, value: $value }';
   }
 
+  @override
   Map<String, dynamic> toJson() => _$StepsLogToJson(this);
   factory StepsLog.fromJson(Map<String, dynamic> json) => _$StepsLogFromJson(json);
 
@@ -36,7 +38,7 @@ class StepsLog extends Log {
   List<Object?> get props => [id, createdAt, updatedAt, userId, type, value];
 
   @override
-  factory StepsLog.copyWith({String? id, DateTime? created_at, DateTime? updated_at, String? userId, HealthDataType? type, num? value}) {
+  factory StepsLog.copyWith() {
     return StepsLog();
   }
 
@@ -45,10 +47,8 @@ class StepsLog extends Log {
 
   @override
   factory StepsLog.fromHealthData(HealthDataPoint data) {
-    var value = data.value as NumericHealthValue;
+    final value = data.value as NumericHealthValue;
     return StepsLog(
-      id: null,
-      userId: null,
       type: data.type,
       value: value.numericValue,
       createdAt: data.dateFrom.toUtc(),

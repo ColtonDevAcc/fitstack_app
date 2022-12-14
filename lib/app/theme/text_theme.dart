@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+// ignore: avoid_classes_with_only_static_members
 class FSTextTheme {
-  static Primary_Text_Theme(BuildContext context) {
+  static TextTheme primaryTextTheme(BuildContext context) {
     return GoogleFonts.latoTextTheme().copyWith(
       titleLarge: GoogleFonts.bebasNeue(),
       titleMedium: GoogleFonts.roboto(fontSize: 24, fontWeight: FontWeight.normal),

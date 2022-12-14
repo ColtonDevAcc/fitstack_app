@@ -13,13 +13,12 @@ class AccountAuthFrom extends StatelessWidget {
     return BlocBuilder<SignupCubit, SignupState>(
       buildWhen: (previous, current) => previous.formKey?[previous.index].currentState?.value != current.formKey?[current.index].currentState?.value,
       builder: (context, state) {
-        var formKey = state.formKey![state.index];
+        final formKey = state.formKey![state.index];
         return FormBuilder(
           autovalidateMode: AutovalidateMode.always,
           onChanged: () => BlocProvider.of<SignupCubit>(context).formKeyChanged(formKey),
           key: formKey,
           child: Column(
-            mainAxisSize: MainAxisSize.max,
             children: [
               SignupTextfield(
                 onChanged: (email) => BlocProvider.of<SignupCubit>(context).emailChanged(email),
@@ -31,7 +30,7 @@ class AccountAuthFrom extends StatelessWidget {
                 title: 'Email',
                 hintText: "email",
               ),
-              SizedBox(height: 15),
+              const SizedBox(height: 15),
               SignupTextfield(
                 keyboardType: TextInputType.phone,
                 onChanged: (phoneNumber) => BlocProvider.of<SignupCubit>(context).phoneNumberChanged(phoneNumber),
@@ -39,7 +38,7 @@ class AccountAuthFrom extends StatelessWidget {
                   FormBuilderValidators.required(errorText: "required"),
                   FormBuilderValidators.compose([
                     (value) {
-                      RegExp pattern = RegExp(r"^\+[1-9]\d{1,14}$");
+                      final RegExp pattern = RegExp(r"^\+[1-9]\d{1,14}$");
                       if (pattern.hasMatch(value ?? "")) {
                         return null;
                       } else {
@@ -51,7 +50,7 @@ class AccountAuthFrom extends StatelessWidget {
                 title: 'Phone Number',
                 hintText: "phone number",
               ),
-              SizedBox(height: 15),
+              const SizedBox(height: 15),
               Row(
                 children: [
                   Expanded(
@@ -70,7 +69,7 @@ class AccountAuthFrom extends StatelessWidget {
                       hintText: "password",
                     ),
                   ),
-                  SizedBox(width: 15),
+                  const SizedBox(width: 15),
                   Expanded(
                     child: SignupTextfield(
                       keyboardType: TextInputType.text,

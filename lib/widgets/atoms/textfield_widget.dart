@@ -12,7 +12,7 @@ class TextField_Widget extends StatelessWidget {
   final TextInputType? keyboardType;
   final AutovalidateMode? autovalidateMode;
 
-  TextField_Widget({
+  const TextField_Widget({
     Key? key,
     this.onEditingComplete,
     required this.title,
@@ -35,12 +35,12 @@ class TextField_Widget extends StatelessWidget {
           title,
           style: Theme.of(context).textTheme.subtitle2!.copyWith(fontWeight: FontWeight.bold),
         ),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         FormBuilderTextField(
           keyboardType: keyboardType,
           onEditingComplete: onEditingComplete,
           autovalidateMode: autovalidateMode ?? AutovalidateMode.always,
-          onChanged: onChanged ?? null,
+          onChanged: onChanged,
           name: title,
           validator: validator,
           style: Theme.of(context).textTheme.bodyMedium,
@@ -58,7 +58,7 @@ class TextField_Widget extends StatelessWidget {
             fillColor: Theme.of(context).colorScheme.surface,
           ),
         ),
-        SizedBox(height: 5),
+        const SizedBox(height: 5),
         if (bottomTitle != null)
           Text(
             bottomTitle!,

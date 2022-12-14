@@ -18,7 +18,7 @@ class HistoryStepperControlButton extends StatelessWidget {
           padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
           child: Text(
             title,
-            style: TextStyle(color: Colors.white),
+            style: const TextStyle(color: Colors.white),
           ),
         ),
       ),

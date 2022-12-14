@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:FitStack/app/models/user/friendship_model.dart';
 import 'package:FitStack/app/repository/relationship_repository.dart';
+// ignore: depend_on_referenced_packages
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -13,7 +14,7 @@ class RelationshipBloc extends Bloc<RelationshipEvent, RelationshipState> {
   final RelationshipRepository relationshipRepository;
   late StreamSubscription<FriendStream> authenticationStatusSubscription;
 
-  RelationshipBloc({required this.relationshipRepository}) : super(const RelationshipState.Initial()) {
+  RelationshipBloc({required this.relationshipRepository}) : super(const RelationshipState.initial()) {
     on<FriendshipError>(onFriendshipError);
     on<FriendshipLoaded>(onFriendsLoaded);
     authenticationStatusSubscription = relationshipRepository.friendStatus.listen((status) => add(FriendshipInitial()));
@@ -21,7 +22,7 @@ class RelationshipBloc extends Bloc<RelationshipEvent, RelationshipState> {
 
   void onFriendshipError(FriendshipError event, Emitter<RelationshipState> emit) {}
 
-  void onFriendsLoaded(FriendshipLoaded event, Emitter<RelationshipState> emit) async {
+  Future<void> onFriendsLoaded(FriendshipLoaded event, Emitter<RelationshipState> emit) async {
     // try {
     //   String? token = await FirebaseAuth.instance.currentUser?.getIdToken();
     //   List<Friendship?>? relationships = await relationshipRepository.getFriends(token: token!);
@@ -33,16 +34,22 @@ class RelationshipBloc extends Bloc<RelationshipEvent, RelationshipState> {
     switch (event.status.status) {
       case FriendshipFetchStatus.initial:
         {
-          String? token = await FirebaseAuth.instance.currentUser?.getIdToken();
+          final String? token = await FirebaseAuth.instance.currentUser?.getIdToken();
           await relationshipRepository.getFriends(token: token!);
-          return emit(const RelationshipState.Initial());
+          return emit(const RelationshipState.initial());
         }
       case FriendshipFetchStatus.loaded:
-        return emit(RelationshipState.Loaded(event.status.friendship));
+        return emit(RelationshipState.loaded(event.status.friendship));
       case FriendshipFetchStatus.loading:
-        return emit(const RelationshipState.Error());
+        return emit(const RelationshipState.error());
       case FriendshipFetchStatus.error:
         break;
     }
+  }
+
+  @override
+  Future<void> close() {
+    authenticationStatusSubscription.cancel();
+    return super.close();
   }
 }

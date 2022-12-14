@@ -16,19 +16,19 @@ class WorkoutRepository {
   }
 
   Future<void> init() async {
-    var token = await FirebaseAuth.instance.currentUser!.getIdToken();
+    final token = await FirebaseAuth.instance.currentUser!.getIdToken();
 
-    Response response = await dio.get(
+    final Response response = await dio.get(
       '/workout/get',
       options: Options(
         headers: {
-          "Authorization": "Bearer ${token}",
+          "Authorization": "Bearer $token",
         },
       ),
     );
 
     if (response.statusCode == 200) {
-      var data = response.data as List;
+      final data = response.data as List;
       workoutStreamController.add(data.map((e) => Workout.fromJson(e)).toList());
     } else {
       log("${response.statusCode}: ${response.statusMessage}");
@@ -37,11 +37,11 @@ class WorkoutRepository {
 
   Future<void> deleteWorkout({required int id}) async {
     token = await FirebaseAuth.instance.currentUser!.getIdToken();
-    Response response = await dio.post(
+    final Response response = await dio.post(
       '/workout/delete',
       options: Options(
         headers: {
-          "Authorization": "Bearer ${token}",
+          "Authorization": "Bearer $token",
         },
       ),
       data: {

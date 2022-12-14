@@ -24,12 +24,12 @@ class ProfileAvatar extends StatelessWidget {
     return FutureBuilder(
       future: avatar == null || avatar == "" ? null : FirebaseStorage.instance.ref(url).getDownloadURL(),
       builder: (context, snapshot) {
-        String? url = snapshot.hasData ? snapshot.data as String : null;
+        final String? url = snapshot.hasData ? snapshot.data as String : null;
         return withBorder
             ? GestureDetector(
                 onTap: onTap,
                 child: Container(
-                  padding: EdgeInsets.all(10),
+                  padding: const EdgeInsets.all(10),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(60),
                     color: Colors.transparent,
@@ -37,8 +37,8 @@ class ProfileAvatar extends StatelessWidget {
                   ),
                   child: CircleAvatar(
                     maxRadius: maxRadius ?? 30,
-                    child: url == null || url == "" ? Icon(FontAwesome.user_large) : null,
                     foregroundImage: url == null || url == "" ? null : NetworkImage(url),
+                    child: url == null || url == "" ? const Icon(FontAwesome.user_large) : null,
                   ),
                 ),
               )
@@ -46,8 +46,8 @@ class ProfileAvatar extends StatelessWidget {
                 onTap: onTap,
                 child: CircleAvatar(
                   maxRadius: maxRadius ?? 30,
-                  child: url == null || url == "" ? Icon(FontAwesome.user_large, size: 15) : null,
                   foregroundImage: url == null || url == "" ? null : NetworkImage(url),
+                  child: url == null || url == "" ? const Icon(FontAwesome.user_large, size: 15) : null,
                 ),
               );
       },

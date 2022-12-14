@@ -2,12 +2,14 @@ import 'dart:developer';
 
 import 'package:FitStack/app/helpers/fitstack_error_toast.dart';
 import 'package:FitStack/app/repository/open_food_facts_repository.dart';
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/services.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
+
+// ignore: depend_on_referenced_packages
+import 'package:bloc/bloc.dart';
 
 part 'nutrition_event.dart';
 part 'nutrition_state.dart';
@@ -15,12 +17,14 @@ part 'nutrition_state.dart';
 class NutritionBloc extends Bloc<NutritionEvent, NutritionState> {
   final OpenFoodFactsRepository openFoodFactsRepository;
   NutritionBloc({required this.openFoodFactsRepository})
-      : super(NutritionState(
-          status: NutritionStatus.initial,
-          recentProducts: [],
-          barcode: '',
-          panelController: PanelController(),
-        )) {
+      : super(
+          NutritionState(
+            status: NutritionStatus.initial,
+            recentProducts: const [],
+            barcode: '',
+            panelController: PanelController(),
+          ),
+        ) {
     on<GetNutritionData>(onGetNutritionData);
     on<ScanBarcode>(onScanBarcode);
     on<GetNutritionDataFromProduct>(onGetNutritionDataFromProduct);

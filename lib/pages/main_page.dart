@@ -15,81 +15,72 @@ class MainPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> pages = [
-      DashboardPage(),
-      NutritionPage(),
-      ExercisePage(),
-      RelationshipPage(),
-      SettingsPage(),
+    final List<Widget> pages = [
+      const DashboardPage(),
+      const NutritionPage(),
+      const ExercisePage(),
+      const RelationshipPage(),
+      const SettingsPage(),
     ];
     return BlocBuilder<MainViewCubit, MainViewState>(
       buildWhen: (previous, current) => previous.pageIndex != current.pageIndex,
       builder: (context, state) {
         return PersistentTabView(
           context,
-          controller: PersistentTabController(initialIndex: 0),
+          controller: PersistentTabController(),
           screens: pages,
           items: [
             PersistentBottomNavBarItem(
-              icon: Icon(LineAwesome.home_solid),
-              title: ("Home"),
+              icon: const Icon(LineAwesome.home_solid),
+              title: "Home",
               opacity: .8,
               activeColorPrimary: Theme.of(context).colorScheme.primary,
               activeColorSecondary: Theme.of(context).colorScheme.surface,
               inactiveColorPrimary: CupertinoColors.systemGrey,
             ),
             PersistentBottomNavBarItem(
-              icon: Icon(LineAwesome.utensils_solid),
-              title: ("Nutrition"),
+              icon: const Icon(LineAwesome.utensils_solid),
+              title: "Nutrition",
               activeColorPrimary: Theme.of(context).colorScheme.primary,
               activeColorSecondary: Theme.of(context).colorScheme.surface,
               inactiveColorPrimary: CupertinoColors.systemGrey,
             ),
             PersistentBottomNavBarItem(
-              icon: Icon(LineAwesome.dumbbell_solid),
-              title: ("Programs"),
+              icon: const Icon(LineAwesome.dumbbell_solid),
+              title: "Programs",
               activeColorPrimary: Theme.of(context).colorScheme.primary,
               activeColorSecondary: Theme.of(context).colorScheme.surface,
               inactiveColorPrimary: CupertinoColors.systemGrey,
             ),
             PersistentBottomNavBarItem(
-              icon: Icon(LineAwesome.users_solid),
-              title: ("Relations"),
+              icon: const Icon(LineAwesome.users_solid),
+              title: "Relations",
               activeColorPrimary: Theme.of(context).colorScheme.primary,
               activeColorSecondary: Theme.of(context).colorScheme.surface,
               inactiveColorPrimary: CupertinoColors.systemGrey,
             ),
             PersistentBottomNavBarItem(
-              icon: Icon(LineAwesome.ellipsis_h_solid),
-              title: ("More"),
+              icon: const Icon(LineAwesome.ellipsis_h_solid),
+              title: "More",
               activeColorPrimary: Theme.of(context).colorScheme.primary,
               activeColorSecondary: Theme.of(context).colorScheme.surface,
               inactiveColorPrimary: CupertinoColors.systemGrey,
             ),
           ],
-          confineInSafeArea: true,
           backgroundColor: Theme.of(context).colorScheme.surface, // Default is Colors.white.
-          handleAndroidBackButtonPress: true, // Default is true.
           resizeToAvoidBottomInset: true, // This needs to be true if you want to move up the screen when keyboard appears. Default is true.
-          stateManagement: true, // Default is true.
-          hideNavigationBarWhenKeyboardShows:
-              true, // Recommended to set 'resizeToAvoidBottomInset' as true while using this argument. Default is true.
           decoration: NavBarDecoration(
             borderRadius: BorderRadius.circular(10.0),
             colorBehindNavBar: Colors.white,
           ),
-          popAllScreensOnTapOfSelectedTab: true,
-          popActionScreens: PopActionScreensType.all,
-          itemAnimationProperties: ItemAnimationProperties(
+          itemAnimationProperties: const ItemAnimationProperties(
             // Navigation Bar's items animation properties.
             duration: Duration(milliseconds: 200),
             curve: Curves.ease,
           ),
-          screenTransitionAnimation: ScreenTransitionAnimation(
+          screenTransitionAnimation: const ScreenTransitionAnimation(
             // Screen transition animation on change of selected tab.
             animateTabTransition: true,
-            curve: Curves.ease,
-            duration: Duration(milliseconds: 200),
           ),
           navBarStyle: NavBarStyle.style10, // Choose the nav bar style with this property.
         );

@@ -10,10 +10,8 @@ class ProgressBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 5),
+      padding: const EdgeInsets.symmetric(vertical: 5),
       child: Row(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Center(
             child: Material(
@@ -22,19 +20,18 @@ class ProgressBar extends StatelessWidget {
               child: CircleAvatar(
                 backgroundColor: Theme.of(context).colorScheme.surface,
                 maxRadius: 18,
-                child: Icon(icon, color: barColor, size: 18),
                 foregroundColor: Theme.of(context).colorScheme.surface,
+                child: Icon(icon, color: barColor, size: 18),
               ),
             ),
           ),
           const SizedBox(width: 5),
           Column(
-            mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Text(
-                ' ' + ((partialValue / totalValue) * 100).round().toString() + '%',
+                ' ${((partialValue / totalValue) * 100).round()}%',
                 style: TextStyle(
                   color: barColor,
                   fontWeight: FontWeight.bold,

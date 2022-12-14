@@ -15,29 +15,6 @@ class WorkoutListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       child: Slidable(
-        direction: Axis.horizontal,
-        child: Container(
-          decoration: BoxDecoration(
-            border: Border(
-              bottom: BorderSide(
-                color: Theme.of(context).colorScheme.onBackground.withOpacity(0.1),
-                width: 1,
-              ),
-            ),
-          ),
-          child: ListTile(
-            contentPadding: EdgeInsets.zero,
-            title: Text(
-              workout.title ?? "Workout",
-              textScaleFactor: .9,
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-            subtitle: Text(
-              workout.description ?? "no description",
-              style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.normal, fontSize: 14),
-            ),
-          ),
-        ),
         endActionPane: ActionPane(
           motion: const ScrollMotion(),
           children: [
@@ -69,8 +46,29 @@ class WorkoutListTile extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(width: 10),
+            const SizedBox(width: 10),
           ],
+        ),
+        child: Container(
+          decoration: BoxDecoration(
+            border: Border(
+              bottom: BorderSide(
+                color: Theme.of(context).colorScheme.onBackground.withOpacity(0.1),
+              ),
+            ),
+          ),
+          child: ListTile(
+            contentPadding: EdgeInsets.zero,
+            title: Text(
+              workout.title ?? "Workout",
+              textScaleFactor: .9,
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
+            subtitle: Text(
+              workout.description ?? "no description",
+              style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.normal, fontSize: 14),
+            ),
+          ),
         ),
       ),
     );

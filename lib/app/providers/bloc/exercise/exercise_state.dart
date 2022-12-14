@@ -46,7 +46,7 @@ class ExerciseState extends Equatable {
     return ExerciseState(
       exercises: exercises ?? this.exercises,
       status: status ?? this.status,
-      currentlyEditingExercise: editingExercise ?? this.currentlyEditingExercise,
+      currentlyEditingExercise: editingExercise ?? currentlyEditingExercise,
       minorMuscles: minorMuscles ?? this.minorMuscles,
       frontMuscleList: frontMuscleList ?? this.frontMuscleList,
       majorMuscles: majorMuscles ?? this.majorMuscles,

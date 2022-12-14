@@ -9,13 +9,13 @@ class UserAccountAuthFormView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: [
+      children: const [
         SignupFormHeader(
           icon: FontAwesome.lock,
           text: 'Account',
-          subtitle: 'Let\'s secure your account',
+          subtitle: "Let's secure your account",
         ),
-        Spacer(flex: 1),
+        Spacer(),
         AccountAuthFrom(),
         Spacer(flex: 2),
       ],

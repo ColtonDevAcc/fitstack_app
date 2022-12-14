@@ -14,7 +14,6 @@ class RecentProductList extends StatelessWidget {
     return BlocBuilder<NutritionBloc, NutritionState>(
       builder: (context, state) {
         return Wrap(
-          runAlignment: WrapAlignment.start,
           alignment: WrapAlignment.spaceBetween,
           spacing: 20,
           runSpacing: 20,

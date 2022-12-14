@@ -2,6 +2,8 @@ import 'dart:developer';
 
 import 'package:FitStack/app/helpers/endpoints.dart';
 import 'package:FitStack/app/models/workout/exercise_model.dart';
+import 'package:FitStack/app/services/analytics_service.dart';
+import 'package:FitStack/main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:dio/dio.dart';
 
@@ -17,12 +19,12 @@ class ExerciseRepository {
       final response = await dio.get(
         "/exercise/",
         options: Options(
-          headers: {"Authorization": "Bearer ${userToken}"},
+          headers: {"Authorization": "Bearer $userToken"},
         ),
       );
       if (response.statusCode == 200) {
-        List responseJson = response.data as List;
-        List<Exercise> exercise = responseJson.map((e) => Exercise.fromJson(e)).toList();
+        final List responseJson = response.data as List;
+        final List<Exercise> exercise = responseJson.map((e) => Exercise.fromJson(e)).toList();
         return exercise;
       } else {
         throw Exception("Failed to load exercises");
@@ -38,7 +40,7 @@ class ExerciseRepository {
       final response = await dio.get("/exercise/$id");
       return Exercise.fromJson(response.data);
     } catch (e) {
-      print(e);
+      locator<AnalyticsService>().logError(exception: e.toString(), reason: 'error getting exercise');
       return Exercise.empty();
     }
   }
@@ -48,18 +50,18 @@ class ExerciseRepository {
       final response = await dio.post("/exercise", data: exercise.toJson());
       return Exercise.fromJson(response.data);
     } catch (e) {
-      print(e);
+      locator<AnalyticsService>().logError(exception: e.toString(), reason: 'error adding exercise');
       return Exercise.empty();
     }
   }
 
   Future<void> updateExercise(Exercise exercise) async {
     log("exercise: ${exercise.toJson()}");
-    String token = await FirebaseAuth.instance.currentUser!.getIdToken();
+    final String token = await FirebaseAuth.instance.currentUser!.getIdToken();
     final response = await dio.post(
       "/exercise/update",
       options: Options(
-        headers: {"Authorization": "Bearer ${token}"},
+        headers: {"Authorization": "Bearer $token"},
       ),
       data: exercise.toJson(),
     );
@@ -74,7 +76,7 @@ class ExerciseRepository {
     try {
       await dio.delete("/exercise/$id");
     } catch (e) {
-      print(e);
+      locator<AnalyticsService>().logError(exception: e.toString(), reason: 'error deleting exercise');
     }
   }
 
@@ -83,7 +85,7 @@ class ExerciseRepository {
       final response = await dio.get("/exercise/search/$query");
       return (response.data as List).map((e) => Exercise.fromJson(e)).toList();
     } catch (e) {
-      print(e);
+      locator<AnalyticsService>().logError(exception: e.toString(), reason: 'error searching exercises');
       return [];
     }
   }

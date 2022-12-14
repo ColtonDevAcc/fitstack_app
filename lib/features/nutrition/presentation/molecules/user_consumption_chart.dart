@@ -9,7 +9,7 @@ class UserConsumptionChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Map<String, dynamic> nutrients = {};
+    final Map<String, dynamic> nutrients = {};
     products.map((e) => e.nutriments?.toJson()).forEach((element) {
       nutrients['Calories'] = element?['energy-kcal_serving'] ?? 0;
       nutrients['Protein'] = element?['proteins_serving'] ?? 0;
@@ -22,7 +22,7 @@ class UserConsumptionChart extends StatelessWidget {
       nutrients['calcium'] = element?['calcium_serving'] ?? 0;
     });
 
-    return Container(
+    return SizedBox(
       width: double.infinity,
       child: Wrap(
         runAlignment: WrapAlignment.spaceBetween,
@@ -39,7 +39,7 @@ class UserConsumptionChart extends StatelessWidget {
           ConsumptionStatisticCard(
             title: 'Protein',
             value: (nutrients['Protein'] ?? 0).toString(),
-            icon: Icon(
+            icon: const Icon(
               FontAwesomeIcons.cow,
               color: Colors.brown,
             ),
@@ -47,7 +47,7 @@ class UserConsumptionChart extends StatelessWidget {
           ConsumptionStatisticCard(
             title: 'Carbs',
             value: (nutrients['Carbs'] ?? 0).toString(),
-            icon: Icon(
+            icon: const Icon(
               FontAwesomeIcons.breadSlice,
               color: Colors.amber,
             ),
@@ -55,7 +55,7 @@ class UserConsumptionChart extends StatelessWidget {
           ConsumptionStatisticCard(
             title: 'Fat',
             value: (nutrients['Fat'] ?? 0).toString(),
-            icon: Icon(
+            icon: const Icon(
               FontAwesomeIcons.pizzaSlice,
               color: Colors.deepOrange,
             ),
@@ -63,7 +63,7 @@ class UserConsumptionChart extends StatelessWidget {
           ConsumptionStatisticCard(
             title: 'Fiber',
             value: (nutrients['Fiber'] ?? 0).toString(),
-            icon: Icon(
+            icon: const Icon(
               FontAwesomeIcons.wheat,
               color: Colors.orange,
             ),
@@ -71,7 +71,7 @@ class UserConsumptionChart extends StatelessWidget {
           ConsumptionStatisticCard(
             title: 'Sodium',
             value: (nutrients['Sodium'] ?? 0).toString(),
-            icon: Icon(
+            icon: const Icon(
               FontAwesomeIcons.saltShaker,
               color: Colors.blue,
             ),

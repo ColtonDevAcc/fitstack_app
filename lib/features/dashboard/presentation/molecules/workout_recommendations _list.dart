@@ -18,27 +18,25 @@ class _Workout_Recommendation_ListState extends State<Workout_Recommendation_Lis
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: MediaQuery.of(context).size.height * .3,
       width: double.infinity,
       child: PageView.builder(
         clipBehavior: Clip.none,
-        pageSnapping: true,
         controller: widget.pageController,
         onPageChanged: (index) {
           setState(() {
             currentIndex = index;
           });
         },
-        scrollDirection: Axis.horizontal,
         itemCount: 10,
         itemBuilder: (BuildContext context, int index) {
           return Transform.translate(
-            offset: Offset(-95, 0),
+            offset: const Offset(-95, 0),
             child: AnimatedScale(
               scale: index == currentIndex ? 1.05 : 0.9,
-              child: Workout_Recommendation_Card(),
-              duration: Duration(milliseconds: 200),
+              duration: const Duration(milliseconds: 200),
+              child: const Workout_Recommendation_Card(),
             ),
           );
         },

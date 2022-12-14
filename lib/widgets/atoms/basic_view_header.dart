@@ -21,10 +21,9 @@ class BasicPageHeader extends StatelessWidget {
             children: [
               Align(
                 alignment: Alignment.centerLeft,
-                child: leading ?? SizedBox(),
+                child: leading ?? const SizedBox(),
               ),
               Align(
-                alignment: Alignment.center,
                 child: AutoSizeText(
                   title,
                   minFontSize: 25,
@@ -39,7 +38,7 @@ class BasicPageHeader extends StatelessWidget {
               ),
               Align(
                 alignment: Alignment.centerRight,
-                child: trailing ?? SizedBox(),
+                child: trailing ?? const SizedBox(),
               ),
             ],
           ),

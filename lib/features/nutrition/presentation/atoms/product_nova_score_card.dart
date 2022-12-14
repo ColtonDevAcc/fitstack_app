@@ -32,7 +32,7 @@ class ProductNovaScoreCard extends StatelessWidget {
               color: nutraScore != null ? nutraScoreColorMap[nutraScore] : novaScoreColorList[novaScore! - 1],
               borderRadius: BorderRadius.circular(10),
             ),
-            padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
+            padding: const EdgeInsets.fromLTRB(15, 10, 15, 10),
             child: nutraScore == ""
                 ? Text(
                     "${nutraScore?.toUpperCase()}",
@@ -49,6 +49,6 @@ class ProductNovaScoreCard extends StatelessWidget {
                         ?.copyWith(fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.onPrimary),
                   ),
           )
-        : SizedBox();
+        : const SizedBox();
   }
 }

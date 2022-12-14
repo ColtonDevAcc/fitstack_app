@@ -18,10 +18,10 @@ part 'signup_state.dart';
 
 class SignupCubit extends Cubit<SignupState> {
   final AuthenticationRepository authRepository;
-  SignupCubit({required this.authRepository}) : super(SignupState());
+  SignupCubit({required this.authRepository}) : super(const SignupState());
 
   void usernameChanged(String username) {
-    List<GlobalKey<FormBuilderState>>? formKeyList = state.formKey;
+    final List<GlobalKey<FormBuilderState>>? formKeyList = state.formKey;
     if (username.length > 3) {
       formKeyList?[state.index].currentState!.validate();
     } else {
@@ -34,7 +34,7 @@ class SignupCubit extends Cubit<SignupState> {
   }
 
   void firstLastNameChanged(String firstLast) {
-    List<GlobalKey<FormBuilderState>>? formKeyList = state.formKey;
+    final List<GlobalKey<FormBuilderState>>? formKeyList = state.formKey;
     if (firstLast.length > 5 && firstLast.contains(" ")) {
       formKeyList?[state.index].currentState!.validate();
     } else {
@@ -45,20 +45,20 @@ class SignupCubit extends Cubit<SignupState> {
     );
   }
 
-  void changeProfileImage(BuildContext context) async {
+  Future<void> changeProfileImage(BuildContext context) async {
     try {
       UploadTask? uploadTask;
 
       await ImagePicker().pickImage(source: ImageSource.gallery).then((value) {
-        Reference firebaseStorageRef = FirebaseStorage.instance.ref().child('uploads/${value?.path}');
+        final Reference firebaseStorageRef = FirebaseStorage.instance.ref().child('uploads/${value?.path}');
         uploadTask = firebaseStorageRef.putFile(File(value!.path));
       }).onError(
         (error, stackTrace) {
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${error}")));
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("$error")));
         },
       );
 
-      String? url = await uploadTask?.then((p0) => p0.ref.getDownloadURL());
+      final String? url = await uploadTask?.then((p0) => p0.ref.getDownloadURL());
 
       emit(
         state.copyWith(profileImage: url),
@@ -67,19 +67,21 @@ class SignupCubit extends Cubit<SignupState> {
       state.user?.updatePhotoURL(url);
     } catch (e) {
       log("$e");
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        backgroundColor: Theme.of(context).colorScheme.error,
-        content: Text("${e}"),
-      ));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          backgroundColor: Theme.of(context).colorScheme.error,
+          content: Text("$e"),
+        ),
+      );
     }
   }
 
-  void healthDataChanged(List<HealthDataType>? PassedHealthDataTypeList) async {
-    HealthFactory health = HealthFactory();
+  Future<void> healthDataChanged({required List<HealthDataType>? passedHealthDataTypeList}) async {
+    final HealthFactory health = HealthFactory();
     List<HealthDataPoint> healthDataList = [];
     final now = DateTime.now();
-    final timeSeparation = now.subtract(Duration(days: 1000));
-    final types = PassedHealthDataTypeList ??
+    final timeSeparation = now.subtract(const Duration(days: 1000));
+    final types = passedHealthDataTypeList ??
         [
           HealthDataType.STEPS,
           HealthDataType.BLOOD_GLUCOSE,
@@ -97,27 +99,29 @@ class SignupCubit extends Cubit<SignupState> {
           HealthDataType.WATER,
           HealthDataType.WORKOUT,
         ];
-    List<HealthDataAccess> permissions = [];
-    types.forEach((element) => permissions.add(HealthDataAccess.READ_WRITE));
+    final List<HealthDataAccess> permissions = [];
+    for (final _ in types) {
+      permissions.add(HealthDataAccess.READ_WRITE);
+    }
 
-    bool requested = await health.requestAuthorization(types, permissions: permissions);
+    final bool requested = await health.requestAuthorization(types, permissions: permissions);
 
     if (requested) {
       try {
         // fetch health data
-        List<HealthDataPoint> healthData = await health.getHealthDataFromTypes(timeSeparation, now, types);
+        final List<HealthDataPoint> healthData = await health.getHealthDataFromTypes(timeSeparation, now, types);
         healthDataList = HealthFactory.removeDuplicates(healthData);
 
         log("height type: ${healthDataList.where((element) => element.type == HealthDataType.HEIGHT)}");
-        HealthDataPoint? healthDataWeight = healthDataList.where((element) => element.type == HealthDataType.WEIGHT).first;
-        HealthDataPoint? healthDataHeight = healthDataList.where((element) => element.type == HealthDataType.HEIGHT).first;
+        final HealthDataPoint healthDataWeight = healthDataList.where((element) => element.type == HealthDataType.WEIGHT).first;
+        final HealthDataPoint healthDataHeight = healthDataList.where((element) => element.type == HealthDataType.HEIGHT).first;
 
-        var height = double.tryParse(healthDataHeight.value.toString())! * 39.37007874;
-        var weight = (double.tryParse(healthDataWeight.value.toString())! * 2.20462262185).roundToDouble();
-        var heightFt = (height / 12).floor();
-        var heightInch = (height % 12).round();
+        final height = double.tryParse(healthDataHeight.value.toString())! * 39.37007874;
+        final weight = (double.tryParse(healthDataWeight.value.toString())! * 2.20462262185).roundToDouble();
+        final heightFt = (height / 12).floor();
+        final heightInch = (height % 12).round();
 
-        GlobalKey<FormBuilderState> formKey = state.formKey![state.index];
+        final GlobalKey<FormBuilderState> formKey = state.formKey![state.index];
         if (formKey.currentState!.fields.containsKey('heightFt')) {
           formKey.currentState?.fields['heightFt']?.didChange("$heightFt");
           formKey.currentState?.fields['heightInch']?.didChange("$heightInch");
@@ -135,7 +139,7 @@ class SignupCubit extends Cubit<SignupState> {
   }
 
   void setIndexRange(int range) {
-    List<GlobalKey<FormBuilderState>> formKey = [];
+    final List<GlobalKey<FormBuilderState>> formKey = [];
     for (int i = 0; i <= range; i++) {
       formKey.add(GlobalKey<FormBuilderState>());
     }
@@ -171,17 +175,18 @@ class SignupCubit extends Cubit<SignupState> {
   }
 
   void formKeyChanged(GlobalKey<FormBuilderState>? formKey) {
-    List<GlobalKey<FormBuilderState>> keyList = state.formKey!;
+    final List<GlobalKey<FormBuilderState>> keyList = state.formKey!;
     keyList.replaceRange(state.index, state.index, [formKey!]);
 
     if (keyList[state.index].currentState?.value == state.formKey?[state.index].currentState?.value) {
       log("the keys where the same. No change");
-    } else
+    } else {
       emit(state.copyWith(formKey: keyList));
+    }
   }
 
-  void nextPage(BuildContext context) async {
-    bool isValid = state.formKey![state.index].currentState!.isValid;
+  Future<void> nextPage(BuildContext context) async {
+    final bool isValid = state.formKey![state.index].currentState!.isValid;
     if (isValid && state.index + 1 != state.indexRange) {
       emit(state.copyWith(index: state.index + 1));
     } else if (state.indexRange == state.index + 1 && isValid) {
@@ -191,25 +196,25 @@ class SignupCubit extends Cubit<SignupState> {
             .userSignUp(
           user: fs.User(
             profile: UserProfile(
-              display_name: state.username,
+              displayName: state.username,
               id: '',
-              achievements: [],
+              achievements: const [],
               avatar: '',
-              challenges: [],
-              days_logged_in_a_row: 0,
-              fit_credits: 0,
-              social_points: 0,
-              updated_at: null,
-              user_statistics: null,
+              challenges: const [],
+              loginStreak: 0,
+              fitCredits: 0,
+              socialPoints: 0,
             ),
-            date_of_birth: state.dob!,
-            first_name: state.firstLastName.split(" ")[0],
-            last_name: state.firstLastName.split(" ")[1],
-            email_verified: false,
+            dateOfBirth: state.dob!,
+            firstName: state.firstLastName.split(" ")[0],
+            lastName: state.firstLastName.split(" ")[1],
+            emailVerified: false,
             email: state.email,
-            phone_number: state.phoneNumber,
+            phoneNumber: state.phoneNumber,
             password: state.password,
           ),
+          email: state.email,
+          password: state.password,
         )
             .onError((error, stackTrace) {
           emit(state.copyWith(errorMessage: "$error"));

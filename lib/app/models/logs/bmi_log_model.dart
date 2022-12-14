@@ -29,6 +29,7 @@ class BodyMassIndexLog extends Log {
     return 'BodyMassIndexLog { id: $id, created_at: $createdAt, userId: $userId, type: $type, value: $value }';
   }
 
+  @override
   Map<String, dynamic> toJson() => _$BodyMassIndexLogToJson(this);
   factory BodyMassIndexLog.fromJson(Map<String, dynamic> json) => _$BodyMassIndexLogFromJson(json);
 
@@ -36,7 +37,7 @@ class BodyMassIndexLog extends Log {
   List<Object?> get props => [id, createdAt, updatedAt, userId, type, value];
 
   @override
-  factory BodyMassIndexLog.copyWith({String? id, DateTime? created_at, DateTime? updated_at, String? userId, HealthDataType? type, num? value}) {
+  factory BodyMassIndexLog.copyWith() {
     return BodyMassIndexLog();
   }
 
@@ -45,10 +46,8 @@ class BodyMassIndexLog extends Log {
 
   @override
   factory BodyMassIndexLog.fromHealthData(HealthDataPoint data) {
-    var value = data.value as NumericHealthValue;
+    final value = data.value as NumericHealthValue;
     return BodyMassIndexLog(
-      id: null,
-      userId: null,
       type: data.type,
       value: value.numericValue,
       createdAt: data.dateFrom.toUtc(),

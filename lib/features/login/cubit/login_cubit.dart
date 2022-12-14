@@ -6,7 +6,7 @@ part 'login_state.dart';
 
 class LoginCubit extends Cubit<LoginState> {
   final AuthenticationRepository authenticationRepository;
-  LoginCubit({required this.authenticationRepository}) : super(LoginState());
+  LoginCubit({required this.authenticationRepository}) : super(const LoginState());
 
   void emailChanged(String value) {
     emit(
@@ -35,7 +35,7 @@ class LoginCubit extends Cubit<LoginState> {
     } catch (e) {
       emit(state.copyWith(step: AuthStep.Error, errorMessage: e.toString()));
       FitStackToast.showErrorToast("error logging in $e");
-      return null;
+      return;
     }
   }
 }

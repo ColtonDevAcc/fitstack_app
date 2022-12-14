@@ -15,7 +15,6 @@ class WorkoutView extends StatelessWidget {
 
     return CustomScrollView(
       clipBehavior: Clip.none,
-      scrollDirection: Axis.vertical,
       slivers: [
         BlocBuilder<WorkoutBloc, WorkoutState>(
           buildWhen: (previous, current) => previous.workouts != current.workouts || previous.status != current.status,
@@ -27,21 +26,21 @@ class WorkoutView extends StatelessWidget {
                 child: Column(
                   children: [
                     SlideInDown(
+                      duration: const Duration(milliseconds: 300),
                       child: Container(
                         height: 200,
                         width: double.infinity,
                         padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
                         decoration: BoxDecoration(color: Theme.of(context).colorScheme.surface, borderRadius: BorderRadius.circular(20)),
-                        child: WorkoutStatisticsSnapshot(minFontSize: minFontSize, maxFontSize: maxFontSize),
+                        child: const WorkoutStatisticsSnapshot(minFontSize: minFontSize, maxFontSize: maxFontSize),
                       ),
-                      duration: Duration(milliseconds: 300),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     Container(
-                      padding: EdgeInsets.all(10),
+                      padding: const EdgeInsets.all(10),
                       decoration: BoxDecoration(
                         color: Theme.of(context).colorScheme.surface,
-                        borderRadius: BorderRadius.only(
+                        borderRadius: const BorderRadius.only(
                           topLeft: Radius.circular(20),
                           topRight: Radius.circular(20),
                         ),

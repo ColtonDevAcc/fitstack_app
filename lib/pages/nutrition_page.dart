@@ -13,7 +13,7 @@ class NutritionPage extends StatelessWidget {
     const double bottomPadding = 17;
     const double topPadding = 25;
     const double textLabelScale = 1.2;
-    TextStyle labelTextStyle = Theme.of(context).textTheme.labelLarge!.copyWith(
+    final TextStyle labelTextStyle = Theme.of(context).textTheme.labelLarge!.copyWith(
           color: Theme.of(context).colorScheme.onBackground,
           fontWeight: FontWeight.bold,
         );
@@ -23,14 +23,12 @@ class NutritionPage extends StatelessWidget {
         padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
         child: CustomScrollView(
           clipBehavior: Clip.none,
-          scrollDirection: Axis.vertical,
           slivers: [
             SliverFillRemaining(
-              hasScrollBody: true,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  BasicPageHeader(title: 'NUTRITION'),
+                  const BasicPageHeader(title: 'NUTRITION'),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(0, topPadding - 5, 0, bottomPadding),
                     child: Text(
@@ -40,7 +38,6 @@ class NutritionPage extends StatelessWidget {
                     ),
                   ),
                   Expanded(
-                    flex: 1,
                     child: BlocBuilder<NutritionBloc, NutritionState>(
                       buildWhen: (previous, current) => previous.recentProducts != current.recentProducts,
                       builder: (context, state) {
@@ -56,7 +53,7 @@ class NutritionPage extends StatelessWidget {
                       style: labelTextStyle,
                     ),
                   ),
-                  Expanded(flex: 2, child: RecentProductList()),
+                  const Expanded(flex: 2, child: RecentProductList()),
                 ],
               ),
             ),

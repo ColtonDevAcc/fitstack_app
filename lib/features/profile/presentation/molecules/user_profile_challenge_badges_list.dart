@@ -10,10 +10,9 @@ class UserProfileChallengeBadgesList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+        const Padding(
+          padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
           child: ListHeader(title: "Challenges", subtitle: '(10 wins)'),
         ),
         Padding(

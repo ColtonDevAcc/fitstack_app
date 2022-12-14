@@ -8,3 +8,14 @@ new_icons:
 
 upgrade_all_dep: 
 	flutterfire update && flutter pub upgrade --major-versions
+
+lint_fix:
+	dart fix --apply
+
+lint:
+	dart analyze && dart fix --dry-run
+
+test:
+	flutter test
+
+# Path: makefile

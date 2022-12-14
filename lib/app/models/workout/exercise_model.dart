@@ -3,34 +3,42 @@ import 'package:FitStack/app/models/workout/exercise_equipment_model.dart';
 import 'package:FitStack/app/models/workout/muscle_target_model.dart';
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:copy_with_extension/copy_with_extension.dart';
 
 part 'exercise_model.g.dart';
 
 @JsonSerializable(includeIfNull: true, explicitToJson: true, anyMap: true)
-@CopyWith()
 class Exercise extends Equatable {
+  @JsonKey(name: 'id')
   final int? id;
+  @JsonKey(name: 'name')
   final String? name;
+  @JsonKey(name: 'description')
   final String? description;
+  @JsonKey(name: 'images')
   final List<String>? images;
-  final double? met_value;
+  @JsonKey(name: 'met_value')
+  final double? metValue;
+  @JsonKey(name: 'creator')
   final User creator;
-  final String creator_id;
+  @JsonKey(name: 'creator_id')
+  final String creatorId;
+  @JsonKey(name: 'type')
   final ExerciseType? type;
-  final List<ExerciseEquipment>? exercise_equipment;
-  final List<MuscleTarget>? muscle_target;
+  @JsonKey(name: 'exercise_equipment')
+  final List<ExerciseEquipment>? exerciseEquipment;
+  @JsonKey(name: 'muscle_target')
+  final List<MuscleTarget>? muscleTarget;
 
-  Exercise({
-    required this.creator_id,
+  const Exercise({
+    required this.creatorId,
     required this.creator,
-    required this.muscle_target,
+    required this.muscleTarget,
     required this.name,
     required this.description,
     required this.images,
-    required this.met_value,
+    required this.metValue,
     required this.type,
-    required this.exercise_equipment,
+    required this.exerciseEquipment,
     required this.id,
   });
 
@@ -40,12 +48,12 @@ class Exercise extends Equatable {
         name,
         description,
         images,
-        met_value,
+        metValue,
         type,
-        exercise_equipment,
-        muscle_target,
+        exerciseEquipment,
+        muscleTarget,
         creator,
-        creator_id,
+        creatorId,
       ];
 
   factory Exercise.fromJson(Map<String, dynamic> json) => _$ExerciseFromJson(json);
@@ -54,13 +62,13 @@ class Exercise extends Equatable {
         id: 0,
         name: '',
         description: '',
-        images: [],
-        met_value: 0,
+        images: const [],
+        metValue: 0,
         type: ExerciseType.pull,
-        exercise_equipment: [],
-        muscle_target: [],
+        exerciseEquipment: const [],
+        muscleTarget: const [],
         creator: User.empty(),
-        creator_id: '',
+        creatorId: '',
       );
 }
 

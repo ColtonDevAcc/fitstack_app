@@ -10,9 +10,8 @@ class UserProfileAchievementsList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Padding(padding: const EdgeInsets.fromLTRB(20, 0, 20, 0), child: ListHeader(title: "Achievements", subtitle: "(6)")),
+        const Padding(padding: EdgeInsets.fromLTRB(20, 0, 20, 0), child: ListHeader(title: "Achievements", subtitle: "(6)")),
         Padding(
           padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
           child: Row(

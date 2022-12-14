@@ -13,20 +13,18 @@ class FirstLastNameFormView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisSize: MainAxisSize.max,
       children: [
-        SignupFormHeader(
+        const SignupFormHeader(
           icon: FontAwesome.weight_scale,
           text: "Personal Data",
           subtitle: "What is your first and last name?",
         ),
-        Spacer(flex: 1),
+        const Spacer(),
         BlocBuilder<SignupCubit, SignupState>(
           buildWhen: (previous, current) => previous.firstLastName != current.firstLastName,
           builder: (context, state) {
-            var formKey = state.formKey?[state.index];
+            final formKey = state.formKey?[state.index];
             return FormBuilder(
               onChanged: () => BlocProvider.of<SignupCubit>(context).formKeyChanged(formKey!),
               autovalidateMode: AutovalidateMode.always,
@@ -37,7 +35,7 @@ class FirstLastNameFormView extends StatelessWidget {
                   FormBuilderValidators.required(errorText: "required"),
                   FormBuilderValidators.compose([
                     (value) {
-                      RegExp pattern = RegExp(r"^[A-Z][a-z]+\s[A-Z][a-z]+$");
+                      final RegExp pattern = RegExp(r"^[A-Z][a-z]+\s[A-Z][a-z]+$");
                       if (pattern.hasMatch(value ?? "")) {
                         return null;
                       } else {
@@ -51,7 +49,7 @@ class FirstLastNameFormView extends StatelessWidget {
             );
           },
         ),
-        Spacer(flex: 1),
+        const Spacer(),
       ],
     );
   }

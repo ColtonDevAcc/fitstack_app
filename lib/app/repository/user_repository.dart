@@ -4,7 +4,6 @@ import 'package:FitStack/app/models/logs/active_energy_log_model.dart';
 import 'package:FitStack/app/models/logs/bmi_log_model.dart';
 import 'package:FitStack/app/models/logs/body_fat_log_model.dart';
 import 'package:FitStack/app/models/logs/heart_rate_log_model.dart';
-import 'package:FitStack/app/models/logs/height_log_model.dart';
 import 'package:FitStack/app/models/logs/log_model.dart';
 import 'package:FitStack/app/models/logs/sleep_asleep_log_model.dart';
 import 'package:FitStack/app/models/logs/step_log_model.dart';
@@ -23,12 +22,12 @@ import 'package:image_picker/image_picker.dart';
 class UserRepository {
   final dio = Endpoints();
 
-  Future<User?> getUser({required token}) async {
+  Future<User?> getUser({required String token}) async {
     try {
-      Response response = await dio.post(
+      final Response response = await dio.post(
         '/user/signin',
         options: Options(
-          headers: {"Authorization": "Bearer ${token}"},
+          headers: {"Authorization": "Bearer $token"},
         ),
       );
 
@@ -38,26 +37,26 @@ class UserRepository {
         log("${response.statusCode}: ${response.statusMessage}");
         return null;
       }
-    } on Error catch (e) {
-      log('error: ${e}, stacktrace: ${e.stackTrace}');
+    } catch (e) {
+      locator<AnalyticsService>().logError(exception: e.toString(), reason: 'error getting user', stacktrace: StackTrace.current);
       return null;
     }
   }
 
   Future<String?> updateProfileAvatar({required String token, required XFile file}) async {
     try {
-      FormData data = FormData.fromMap({
+      final FormData data = FormData.fromMap({
         "file": await MultipartFile.fromFile(
           file.path,
           filename: file.path.split('/').last,
         ),
       });
 
-      Response response = await dio.post(
+      final Response response = await dio.post(
         '/user/update-avatar',
         options: Options(
           headers: {
-            "Authorization": "Bearer ${token}",
+            "Authorization": "Bearer $token",
           },
         ),
         data: data,
@@ -67,19 +66,19 @@ class UserRepository {
         log(response.data);
         return response.data;
       } else {}
-    } on Error catch (e) {
-      log('error: ${e}, stacktrace: ${e.stackTrace}');
+    } catch (e) {
+      locator<AnalyticsService>().logError(exception: e.toString(), reason: 'error updating profile avatar', stacktrace: StackTrace.current);
     }
     return null;
   }
 
   Future<UserProfile> getUserProfile({required String token}) async {
     try {
-      Response response = await dio.get(
+      final Response response = await dio.get(
         '/user/profile',
         options: Options(
           headers: {
-            "Authorization": "Bearer ${token}",
+            "Authorization": "Bearer $token",
           },
         ),
       );
@@ -87,19 +86,19 @@ class UserRepository {
       if (response.statusCode == 200) {
         return UserProfile.fromJson(response.data);
       } else {}
-    } on Error catch (e) {
-      log('error: ${e}, stacktrace: ${e.stackTrace}');
+    } catch (e) {
+      locator<AnalyticsService>().logError(exception: e.toString(), reason: 'error getting user profile', stacktrace: StackTrace.current);
     }
     return UserProfile.empty();
   }
 
   Future<UserStatistic> getStatistics({required String token}) async {
     try {
-      Response response = await dio.get(
+      final Response response = await dio.get(
         '/user/statistics',
         options: Options(
           headers: {
-            "Authorization": "Bearer ${token}",
+            "Authorization": "Bearer $token",
           },
         ),
       );
@@ -110,7 +109,7 @@ class UserRepository {
         log("${response.data}");
       }
     } catch (e) {
-      log('error: ${e}, stacktrace: ${e}');
+      log('error: $e, stacktrace: $e');
       locator<AnalyticsService>().logError(exception: e.toString(), reason: "error retrieving user statistics", stacktrace: StackTrace.current);
     }
     return UserStatistic.empty();
@@ -118,11 +117,11 @@ class UserRepository {
 
   Future<UserStatistic> getStatisticsSnapshot({required String token}) async {
     try {
-      Response response = await dio.get(
+      final Response response = await dio.get(
         '/user/statistics/snapshot',
         options: Options(
           headers: {
-            "Authorization": "Bearer ${token}",
+            "Authorization": "Bearer $token",
           },
         ),
       );
@@ -131,7 +130,7 @@ class UserRepository {
         return UserStatistic.fromJson(response.data);
       }
     } catch (e) {
-      log('error: ${e}, stacktrace: ${e}');
+      log('error: $e, stacktrace: $e');
       locator<AnalyticsService>()
           .logError(exception: e.toString(), reason: "error retrieving user statistics snapshot", stacktrace: StackTrace.current);
     }
@@ -146,7 +145,7 @@ class UserRepository {
         '/user/statistics',
         options: Options(
           headers: {
-            "Authorization": "Bearer ${token}",
+            "Authorization": "Bearer $token",
           },
         ),
         data: statistic.toJson(),
@@ -158,8 +157,8 @@ class UserRepository {
 
   Future<UserStatistic> updateStatisticsSnapshot({required Duration fetchDate}) async {
     try {
-      String token = await fb.FirebaseAuth.instance.currentUser!.getIdToken();
-      Map<HealthDataType, List<Log>> statistics = await UserHealthRepository().getUserStatisticsSnapshot(fetchDate: fetchDate);
+      final String token = await fb.FirebaseAuth.instance.currentUser!.getIdToken();
+      final Map<HealthDataType, List<Log>> statistics = await UserHealthRepository().getUserStatisticsSnapshot(fetchDate: fetchDate);
 
       // check if all the values in statistics are empty
       if (statistics.values.every((element) => element.isEmpty)) {
@@ -167,7 +166,7 @@ class UserRepository {
         return UserStatistic.empty();
       }
 
-      UserStatistic userStatistic = UserStatistic(
+      final UserStatistic userStatistic = UserStatistic(
         stepsLogs: statistics[HealthDataType.STEPS]?.map((e) => e as StepsLog).toList(),
         weightLogs: statistics[HealthDataType.WEIGHT]?.map((e) => e as WeightLog).toList(),
         heartRateLogs: statistics[HealthDataType.HEART_RATE]?.map((e) => e as HeartRateLog).toList(),
@@ -182,7 +181,7 @@ class UserRepository {
           '/user/statistics',
           options: Options(
             headers: {
-              "Authorization": "Bearer ${token}",
+              "Authorization": "Bearer $token",
             },
           ),
           data: userStatistic.toJson(),
@@ -200,11 +199,11 @@ class UserRepository {
 
   Future<UserStatistic> getStatistic({required HealthDataType type}) {
     final token = fb.FirebaseAuth.instance.currentUser!.getIdToken();
-    var response = dio.post(
+    final response = dio.post(
       '/user/statistic',
       options: Options(
         headers: {
-          "Authorization": "Bearer ${token}",
+          "Authorization": "Bearer $token",
         },
       ),
       data: {

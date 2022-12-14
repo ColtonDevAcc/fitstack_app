@@ -29,7 +29,6 @@ class NutritionScanView extends StatelessWidget {
                     context.read<NutritionBloc>().add(ScanBarcode(controller: p0));
                   },
                   overlay: QrScannerOverlayShape(
-                    borderColor: Colors.red,
                     borderRadius: 10,
                     borderLength: 30,
                     borderWidth: 10,
@@ -45,7 +44,7 @@ class NutritionScanView extends StatelessWidget {
                 maxHeight: 700,
                 minHeight: 80,
                 controller: state.panelController,
-                borderRadius: BorderRadius.only(
+                borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(20.0),
                   topRight: Radius.circular(20.0),
                 ),
@@ -53,7 +52,7 @@ class NutritionScanView extends StatelessWidget {
                 collapsed: Container(
                   decoration: BoxDecoration(
                     color: Theme.of(context).colorScheme.background,
-                    borderRadius: BorderRadius.only(
+                    borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(20.0),
                       topRight: Radius.circular(20.0),
                     ),
@@ -71,21 +70,20 @@ class NutritionScanView extends StatelessWidget {
                       context.read<NutritionBloc>().add(AddProductToHistory(product: state.product!));
                       context.go("/nutrition");
                     },
-                    child: Icon(FontAwesomeIcons.plus),
                     backgroundColor: Theme.of(context).colorScheme.primary,
+                    child: const Icon(FontAwesomeIcons.plus),
                   ),
                   backgroundColor: Theme.of(context).colorScheme.background,
                   body: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       Container(
                         height: 5,
                         width: 50,
                         decoration: BoxDecoration(
                           color: Theme.of(context).colorScheme.onBackground.withOpacity(0.4),
-                          borderRadius: BorderRadius.all(Radius.circular(12.0)),
+                          borderRadius: const BorderRadius.all(Radius.circular(12.0)),
                         ),
                       ),
                       Expanded(
@@ -93,7 +91,6 @@ class NutritionScanView extends StatelessWidget {
                           padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
                           child: Scrollbar(
                             child: CustomScrollView(
-                              scrollDirection: Axis.vertical,
                               slivers: [
                                 SliverToBoxAdapter(
                                   child: Column(
@@ -105,7 +102,7 @@ class NutritionScanView extends StatelessWidget {
                                             child: Padding(
                                               padding: const EdgeInsets.only(right: 10.0),
                                               child: AutoSizeText(
-                                                "${state.product?.productName ?? "Scan a product"}",
+                                                state.product?.productName ?? "Scan a product",
                                                 overflow: TextOverflow.ellipsis,
                                                 style: Theme.of(context).textTheme.headlineMedium,
                                               ),
@@ -120,7 +117,6 @@ class NutritionScanView extends StatelessWidget {
                                 ),
                                 SliverFillRemaining(
                                   child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       if (state.product != null)
@@ -128,12 +124,12 @@ class NutritionScanView extends StatelessWidget {
                                           crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
                                             Text(
-                                              "${state.product?.ingredientsText ?? "no ingredients listed"}",
+                                              state.product?.ingredientsText ?? "no ingredients listed",
                                               maxLines: 2,
                                               overflow: TextOverflow.ellipsis,
                                               style: Theme.of(context).textTheme.headlineSmall,
                                             ),
-                                            SizedBox(height: 20),
+                                            const SizedBox(height: 20),
                                             ProductNutrientsSnapshot(nutrients: state.product?.nutriments),
                                           ],
                                         ),

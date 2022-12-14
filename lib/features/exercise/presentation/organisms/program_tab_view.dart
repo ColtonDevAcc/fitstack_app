@@ -13,7 +13,6 @@ class ProgramTabView extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomScrollView(
       clipBehavior: Clip.none,
-      scrollDirection: Axis.vertical,
       slivers: [
         BlocBuilder<ProgramCubit, ProgramState>(
           buildWhen: (previous, current) => previous.programs != current.programs,
@@ -36,7 +35,7 @@ class ProgramTabView extends StatelessWidget {
                           (program) => GestureDetector(
                             onTap: () => context.go('/programs/workout'),
                             child: ProgramCard(
-                              description: program.creator?.profile.display_name ?? "Community",
+                              description: program.creator?.profile.displayName ?? "Community",
                               title: program.title,
                             ),
                           ),

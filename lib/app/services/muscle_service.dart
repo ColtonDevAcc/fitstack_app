@@ -8,68 +8,64 @@ import 'package:touchable/touchable.dart';
 import 'package:xml/xml.dart';
 
 class MuscleService {
-  Future<List<Muscle>> ParseFrontMuscleList() async {
-    String generalString = await rootBundle.loadString("assets/muscles/model/muscular_front.svg", cache: false);
-    XmlDocument document = XmlDocument.parse(generalString);
+  Future<List<Muscle>> parseFrontMuscleList() async {
+    final String generalString = await rootBundle.loadString("assets/muscles/model/muscular_front.svg", cache: false);
+    final XmlDocument document = XmlDocument.parse(generalString);
     final paths = document.findAllElements('path');
-    List<Muscle> muscles = [];
+    final List<Muscle> muscles = [];
     int muscleChecks = 0;
 
-    paths.forEach(
-      (element) async {
-        String partName = element.getAttribute('id').toString();
-        String partPath = element.getAttribute('d').toString();
-        Path svgPath = parseSvgPath(partPath);
+    for (final element in paths) {
+      final String partName = element.getAttribute('id').toString();
+      final String partPath = element.getAttribute('d').toString();
+      final Path svgPath = parseSvgPath(partPath);
 
-        if (!partName.contains('path')) {
-          Muscle part = Muscle(
-            name: partName,
-            svgPath: svgPath,
-            type: PrimaryMuscleGroups.values.firstWhere(
-              (element) {
-                muscleChecks++;
-                return partName.toLowerCase().contains(element.toString().split(".")[1].toLowerCase());
-              },
-              orElse: () => PrimaryMuscleGroups.empty,
-            ),
-          );
-          muscles.add(part);
-        }
-      },
-    );
+      if (!partName.contains('path')) {
+        final Muscle part = Muscle(
+          name: partName,
+          svgPath: svgPath,
+          type: PrimaryMuscleGroups.values.firstWhere(
+            (element) {
+              muscleChecks++;
+              return partName.toLowerCase().contains(element.toString().split(".")[1].toLowerCase());
+            },
+            orElse: () => PrimaryMuscleGroups.empty,
+          ),
+        );
+        muscles.add(part);
+      }
+    }
     log("Muscle checks: $muscleChecks");
     return muscles;
   }
 
-  Future<List<Muscle>> ParseBackMuscleList() async {
-    String generalString = await rootBundle.loadString("assets/muscles/model/muscular_back.svg", cache: true);
-    XmlDocument document = XmlDocument.parse(generalString);
+  Future<List<Muscle>> parseBackMuscleList() async {
+    final String generalString = await rootBundle.loadString("assets/muscles/model/muscular_back.svg");
+    final XmlDocument document = XmlDocument.parse(generalString);
     final paths = document.findAllElements('path');
-    List<Muscle> muscles = [];
+    final List<Muscle> muscles = [];
     int muscleChecks = 0;
 
-    paths.forEach(
-      (element) async {
-        String partName = element.getAttribute('id').toString();
-        String partPath = element.getAttribute('d').toString();
-        Path svgPath = parseSvgPath(partPath);
+    for (final XmlElement element in paths) {
+      final String partName = element.getAttribute('id').toString();
+      final String partPath = element.getAttribute('d').toString();
+      final Path svgPath = parseSvgPath(partPath);
 
-        if (!partName.contains('path')) {
-          Muscle part = Muscle(
-            name: partName,
-            svgPath: svgPath,
-            type: PrimaryMuscleGroups.values.firstWhere(
-              (element) {
-                muscleChecks++;
-                return partName.toLowerCase().contains(element.toString().split(".")[1].toLowerCase());
-              },
-              orElse: () => PrimaryMuscleGroups.empty,
-            ),
-          );
-          muscles.add(part);
-        }
-      },
-    );
+      if (!partName.contains('path')) {
+        final Muscle part = Muscle(
+          name: partName,
+          svgPath: svgPath,
+          type: PrimaryMuscleGroups.values.firstWhere(
+            (element) {
+              muscleChecks++;
+              return partName.toLowerCase().contains(element.toString().split(".")[1].toLowerCase());
+            },
+            orElse: () => PrimaryMuscleGroups.empty,
+          ),
+        );
+        muscles.add(part);
+      }
+    }
     log("Muscle checks: $muscleChecks");
     return muscles;
   }
@@ -101,9 +97,9 @@ class MusclePainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    var _canvas = TouchyCanvas(context, canvas);
-    var xScale;
-    var yScale;
+    final baseCanvas = TouchyCanvas(context, canvas);
+    double xScale;
+    double yScale;
 
     if (muscleAnatomyViewRotationIndex == 0) {
       xScale = size.width / 1107.22900;
@@ -116,7 +112,7 @@ class MusclePainter extends CustomPainter {
     final Matrix4 matrix4 = Matrix4.identity();
     matrix4.scale(xScale, yScale);
 
-    for (Muscle muscle in muscleList) {
+    for (final Muscle muscle in muscleList) {
       Color getMuscleColor(Muscle muscle) {
         if (majorMuscleList != null && majorMuscleList!.map((e) => e.type == muscle.type).contains(true)) {
           return majorMuscleColor;
@@ -128,7 +124,7 @@ class MusclePainter extends CustomPainter {
         return Theme.of(context).colorScheme.surface;
       }
 
-      _canvas.drawPath(
+      baseCanvas.drawPath(
         muscle.svgPath!.transform(matrix4.storage),
         Paint()
           ..color = getMuscleColor(muscle)

@@ -11,19 +11,19 @@ class ExerciseCard extends StatelessWidget {
     return ExpansionTileCard(
       borderRadius: BorderRadius.circular(15),
       expandedTextColor: Theme.of(context).colorScheme.secondary,
-      subtitle: Text('Shoulders'),
-      title: Text('Exercise'),
+      subtitle: const Text('Shoulders'),
+      title: const Text('Exercise'),
       children: [
         SizedBox(
           width: double.infinity,
           child: DataTable(
-            decoration: BoxDecoration(),
-            columns: [
+            decoration: const BoxDecoration(),
+            columns: const [
               DataColumn(label: Text('set'), numeric: true),
               DataColumn(label: Text('reps'), numeric: true),
               DataColumn(label: Text('weight'), numeric: true),
             ],
-            rows: [
+            rows: const [
               DataRow(
                 cells: [
                   DataCell(Text('1')),

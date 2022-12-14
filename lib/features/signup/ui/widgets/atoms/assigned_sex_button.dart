@@ -16,14 +16,13 @@ class AssignedSexButton extends StatelessWidget {
       buildWhen: (previous, current) => previous.assignedSex != current.assignedSex,
       builder: (context, state) {
         return Column(
-          mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               'Assigned Sex',
               style: Theme.of(context).textTheme.subtitle2!.copyWith(fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Container(
               child: FormBuilderDropdown(
                 autovalidateMode: autovalidateMode ?? AutovalidateMode.always,
@@ -33,8 +32,8 @@ class AssignedSexButton extends StatelessWidget {
                   FormBuilderValidators.required(errorText: "required"),
                 ]),
                 iconEnabledColor: Colors.transparent,
-                icon: Padding(
-                  padding: const EdgeInsets.only(right: 10),
+                icon: const Padding(
+                  padding: EdgeInsets.only(right: 10),
                   child: Icon(
                     FontAwesome.angle_down,
                     size: 15,
@@ -42,8 +41,8 @@ class AssignedSexButton extends StatelessWidget {
                 ),
                 style: Theme.of(context).textTheme.subtitle2,
                 decoration: InputDecoration(
-                  suffixIcon: Padding(
-                    padding: const EdgeInsets.only(right: 10),
+                  suffixIcon: const Padding(
+                    padding: EdgeInsets.only(right: 10),
                     child: Icon(
                       FontAwesome.angle_down,
                       size: 15,
@@ -51,7 +50,7 @@ class AssignedSexButton extends StatelessWidget {
                   ),
                   hintText: "choose an option",
                   hintStyle: Theme.of(context).textTheme.subtitle2!.copyWith(color: Theme.of(context).colorScheme.onBackground.withOpacity(.6)),
-                  suffixIconConstraints: BoxConstraints(maxHeight: 30, maxWidth: 40),
+                  suffixIconConstraints: const BoxConstraints(maxHeight: 30, maxWidth: 40),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
                     borderSide: BorderSide.none,
@@ -65,20 +64,18 @@ class AssignedSexButton extends StatelessWidget {
                 ),
                 items: [
                   DropdownMenuItem(
-                    enabled: true,
+                    value: AssignedSex.Male,
                     child: Text(
                       'Male',
                       style: Theme.of(context).textTheme.subtitle2,
                     ),
-                    value: AssignedSex.Male,
                   ),
                   DropdownMenuItem(
-                    enabled: true,
+                    value: AssignedSex.Female,
                     child: Text(
                       'Female',
                       style: Theme.of(context).textTheme.subtitle2,
                     ),
-                    value: AssignedSex.Female,
                   ),
                 ],
               ),

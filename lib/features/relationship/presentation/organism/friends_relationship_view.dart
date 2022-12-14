@@ -29,7 +29,7 @@ class FriendsRelationshipView extends StatelessWidget {
               showMaterialModalBottomSheet(
                 context: context,
                 useRootNavigator: true,
-                builder: (context) => Container(
+                builder: (context) => SizedBox(
                   height: 450,
                   child: AddFriendBottomSheet(
                     friend: context.watch<FriendshipCubit>().state.friend,
@@ -38,7 +38,7 @@ class FriendsRelationshipView extends StatelessWidget {
               );
             },
             backgroundColor: Theme.of(context).colorScheme.primary,
-            child: Icon(FontAwesome.plus),
+            child: const Icon(FontAwesome.plus),
           ),
           appBar: appBar == null
               ? AppBar(
@@ -53,14 +53,13 @@ class FriendsRelationshipView extends StatelessWidget {
                           FontAwesome.arrow_left,
                           color: Theme.of(context).colorScheme.onBackground,
                         ),
-                      )),
+                      ),),
                   elevation: 0,
                   backgroundColor: Theme.of(context).colorScheme.background,
                 )
               : null,
           body: SingleChildScrollView(
             clipBehavior: Clip.none,
-            scrollDirection: Axis.vertical,
             padding: EdgeInsets.zero,
             child: Column(
               children: state.friendsList == null
@@ -68,7 +67,7 @@ class FriendsRelationshipView extends StatelessWidget {
                   : state.friendsList!
                       .map(
                         (e) => FriendshipProfileCard(
-                          username: e!.display_name,
+                          username: e!.displayName,
                           colorTheme: Colors.red,
                         ),
                       )

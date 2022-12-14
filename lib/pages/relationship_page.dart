@@ -8,7 +8,7 @@ class RelationshipPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double topPadding = MediaQuery.of(context).padding.top;
+    final double topPadding = MediaQuery.of(context).padding.top;
 
     return Padding(
       padding: EdgeInsets.fromLTRB(15, topPadding, 15, 0),
@@ -19,7 +19,7 @@ class RelationshipPage extends StatelessWidget {
           children: [
             Padding(
                 padding: const EdgeInsets.only(bottom: 15),
-                child: BasicPageHeader(title: "Relationships", color: Theme.of(context).colorScheme.onBackground)),
+                child: BasicPageHeader(title: "Relationships", color: Theme.of(context).colorScheme.onBackground),),
             Container(
               height: 40,
               decoration: BoxDecoration(
@@ -34,7 +34,7 @@ class RelationshipPage extends StatelessWidget {
                   indicator: BoxDecoration(
                     color: Theme.of(context).colorScheme.primary,
                   ),
-                  tabs: [
+                  tabs: const [
                     Text('Groups'),
                     Text('Friends'),
                     Text('Trainers'),
@@ -42,8 +42,8 @@ class RelationshipPage extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 15),
-            Expanded(
+            const SizedBox(height: 15),
+            const Expanded(
               child: TabBarView(
                 children: [
                   TrainerRelationshipView(),

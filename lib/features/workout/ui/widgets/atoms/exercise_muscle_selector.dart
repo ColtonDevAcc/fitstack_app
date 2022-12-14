@@ -43,15 +43,14 @@ class ExerciseMuscleSelector extends StatelessWidget {
                     color: Theme.of(context).colorScheme.onBackground.withOpacity(0.7),
                   ),
             ),
-            Spacer(),
+            const Spacer(),
             IconButton(
               padding: EdgeInsets.zero,
               onPressed: onIconPressed,
               splashRadius: 20,
-              alignment: Alignment.center,
-              constraints: BoxConstraints(),
+              constraints: const BoxConstraints(),
               visualDensity: VisualDensity.compact,
-              icon: Icon(FontAwesome.rotate),
+              icon: const Icon(FontAwesome.rotate),
             )
           ],
         ),
@@ -59,7 +58,6 @@ class ExerciseMuscleSelector extends StatelessWidget {
           height: 20,
           child: Wrap(
             spacing: 5,
-            runAlignment: WrapAlignment.start,
             children: minorMuscles
                 .map(
                   (e) => Chip(
@@ -84,14 +82,14 @@ class ExerciseMuscleSelector extends StatelessWidget {
                 .toList(),
           ),
         ),
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
         AspectRatio(
           aspectRatio: 3 / 6,
-          child: Container(
+          child: SizedBox(
             width: double.infinity,
             height: MediaQuery.of(context).size.height,
             child: CanvasTouchDetector(
-              gesturesToOverride: [GestureType.onTapUp, GestureType.onLongPressEnd],
+              gesturesToOverride: const [GestureType.onTapUp, GestureType.onLongPressEnd],
               builder: (context) => CustomPaint(
                 painter: MusclePainter(
                   context: context,

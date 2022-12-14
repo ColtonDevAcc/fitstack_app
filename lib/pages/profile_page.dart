@@ -31,18 +31,18 @@ class ProfilePage extends StatelessWidget {
         return Scaffold(
           resizeToAvoidBottomInset: false,
           key: globalKey,
-          endDrawer: ProfileDrawer(),
+          endDrawer: const ProfileDrawer(),
           appBar: AppBar(
             centerTitle: false,
             title: AutoSizeText(
-              "${state.userProfile.display_name}",
+              state.userProfile.displayName,
               style: Theme.of(context).textTheme.headlineSmall?.apply(color: Theme.of(context).colorScheme.onBackground),
               textAlign: TextAlign.center,
             ),
             leading: GestureDetector(
               onTap: () => context.pop(),
               child: Container(
-                padding: EdgeInsets.all(5),
+                padding: const EdgeInsets.all(5),
                 child: Icon(
                   FontAwesome.arrow_left_long,
                   color: Theme.of(context).colorScheme.onBackground,
@@ -55,7 +55,7 @@ class ProfilePage extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.only(right: 10),
                   child: Container(
-                    padding: EdgeInsets.all(5),
+                    padding: const EdgeInsets.all(5),
                     child: Badge(
                       badgeContent: Text("3", style: Theme.of(context).textTheme.labelLarge?.apply(color: Theme.of(context).colorScheme.background)),
                       child: Icon(
@@ -73,7 +73,6 @@ class ProfilePage extends StatelessWidget {
           backgroundColor: Theme.of(context).colorScheme.background,
           body: SingleChildScrollView(
             clipBehavior: Clip.none,
-            scrollDirection: Axis.vertical,
             padding: EdgeInsets.zero,
             child: Column(
               children: [
@@ -84,9 +83,9 @@ class ProfilePage extends StatelessWidget {
                       context.read<ProfileCubit>().changeProfileUrl();
                     },
                     avatar: state.userProfile.avatar,
-                    daysInARow: state.userProfile.days_logged_in_a_row,
-                    fit_credits: state.userProfile.fit_credits,
-                    socialPoints: state.userProfile.social_points,
+                    daysInARow: state.userProfile.loginStreak,
+                    fit_credits: state.userProfile.fitCredits,
+                    socialPoints: state.userProfile.socialPoints,
                   ),
                 ),
                 Divider(height: 1, color: Theme.of(context).colorScheme.onBackground),
@@ -94,22 +93,22 @@ class ProfilePage extends StatelessWidget {
                   height: MediaQuery.of(context).size.height * .08,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
+                    children: const [
                       ProfileFeaturedUserStatistics(statisticValue: "4.4", statisticMeasurement: "km", subtitle: "Distance Avg"),
                       FeaturedStatisticDivider(),
-                      ProfileFeaturedUserStatistics(statisticValue: "3,000", statisticMeasurement: null, subtitle: "Distance Avg"),
+                      ProfileFeaturedUserStatistics(statisticValue: "3,000", subtitle: "Distance Avg"),
                       FeaturedStatisticDivider(),
                       ProfileFeaturedUserStatistics(statisticValue: "800", statisticMeasurement: "cal", subtitle: "Calories Avg"),
                     ],
                   ),
                 ),
                 Container(height: 10, color: Theme.of(context).colorScheme.onBackground.withOpacity(.02)),
-                UserProfileAchievementsList(),
+                const UserProfileAchievementsList(),
                 Container(height: 10, color: Theme.of(context).colorScheme.onBackground.withOpacity(.02)),
-                UserProfileChallengeBadgesList(),
+                const UserProfileChallengeBadgesList(),
                 Container(height: 10, color: Theme.of(context).colorScheme.onBackground.withOpacity(.02)),
                 Container(
-                  padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                  padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                   color: Theme.of(context).colorScheme.surface,
                   child: Column(
                     children: [
@@ -118,7 +117,7 @@ class ProfilePage extends StatelessWidget {
                         subtitle: "(2nd place)",
                         onTap: () => GoRouter.of(context).push("/friendship"),
                       ),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       Column(
                         children: state.userProfile.friends == null || state.userProfile.friends!.isEmpty
                             ? []
@@ -127,7 +126,7 @@ class ProfilePage extends StatelessWidget {
                                   (e) => FriendshipProfileCard(
                                     colorTheme: Theme.of(context).colorScheme.primary,
                                     position: "1st",
-                                    username: e.display_name,
+                                    username: e.displayName,
                                     avatar: e.avatar,
                                   ),
                                 )
@@ -136,7 +135,7 @@ class ProfilePage extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(height: 40)
+                const SizedBox(height: 40)
               ],
             ),
           ),
@@ -153,8 +152,8 @@ class FeaturedStatisticDivider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+    return const Padding(
+      padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
       child: VerticalDivider(color: Colors.black),
     );
   }

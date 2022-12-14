@@ -23,7 +23,7 @@ class ProductView extends StatelessWidget {
               color: Theme.of(context).colorScheme.surface,
               borderRadius: BorderRadius.circular(10),
             ),
-            margin: EdgeInsets.only(top: 20),
+            margin: const EdgeInsets.only(top: 20),
             width: double.infinity,
             height: 50,
             child: TabBar(
@@ -50,15 +50,13 @@ class ProductView extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Expanded(
             child: TabBarView(
               children: [
                 CustomScrollView(
-                  scrollDirection: Axis.vertical,
                   slivers: [
                     SliverFillRemaining(
-                      hasScrollBody: true,
                       child: ListView(
                         padding: EdgeInsets.zero,
                         children: product.nutriments?.toJson().entries.map((e) {
@@ -73,10 +71,8 @@ class ProductView extends StatelessWidget {
                   ],
                 ),
                 CustomScrollView(
-                  scrollDirection: Axis.vertical,
                   slivers: [
                     SliverFillRemaining(
-                      hasScrollBody: true,
                       child: ListView(
                         padding: EdgeInsets.zero,
                         children: [
@@ -102,10 +98,8 @@ class ProductView extends StatelessWidget {
                   ],
                 ),
                 CustomScrollView(
-                  scrollDirection: Axis.vertical,
                   slivers: [
                     SliverFillRemaining(
-                      hasScrollBody: true,
                       child: ListView(
                         padding: EdgeInsets.zero,
                         children: [

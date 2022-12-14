@@ -10,16 +10,16 @@ class PlatHealthFillButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool platform = Platform.isAndroid;
+    final bool platform = Platform.isAndroid;
     return BlocBuilder<SignupCubit, SignupState>(
       buildWhen: (previous, current) => previous.healthData != current.healthData,
       builder: (context, state) {
         return GestureDetector(
           onTap: () {
-            BlocProvider.of<SignupCubit>(context).healthDataChanged([HealthDataType.WEIGHT, HealthDataType.HEIGHT]);
+            BlocProvider.of<SignupCubit>(context).healthDataChanged(passedHealthDataTypeList: [HealthDataType.WEIGHT, HealthDataType.HEIGHT]);
           },
           child: Container(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             height: MediaQuery.of(context).size.height * .05,
             decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.secondary,
@@ -32,7 +32,7 @@ class PlatHealthFillButton extends StatelessWidget {
                   platform ? 'assets/app/icons/googleFit.png' : 'assets/app/icons/healthKit.png',
                   fit: BoxFit.cover,
                 ),
-                SizedBox(width: 10),
+                const SizedBox(width: 10),
                 Text(
                   "Fill with ${platform ? "Google Fit" : "Apple Health"}",
                   style: Theme.of(context).textTheme.subtitle2!.copyWith(fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.surface),

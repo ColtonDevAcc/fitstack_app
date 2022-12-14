@@ -10,13 +10,13 @@ class Statistics_Dashboard extends StatelessWidget {
     return Container(
       child: Column(
         children: [
-          ProgressBar(
+          const ProgressBar(
             barColor: Color.fromRGBO(253, 117, 5, 1),
             totalValue: 100,
             partialValue: 73,
             icon: FontAwesome.droplet,
           ),
-          ProgressBar(
+          const ProgressBar(
             barColor: Color.fromRGBO(87, 54, 232, 1),
             totalValue: 100,
             partialValue: 88,

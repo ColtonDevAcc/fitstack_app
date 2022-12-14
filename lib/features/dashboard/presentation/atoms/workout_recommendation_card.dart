@@ -2,7 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 class Workout_Recommendation_Card extends StatefulWidget {
-  Workout_Recommendation_Card({Key? key}) : super(key: key);
+  const Workout_Recommendation_Card({Key? key}) : super(key: key);
 
   @override
   State<Workout_Recommendation_Card> createState() => Workout_Recommendation_Card_State();
@@ -23,7 +23,7 @@ class Workout_Recommendation_Card_State extends State<Workout_Recommendation_Car
         mainAxisSize: MainAxisSize.min,
         children: [
           Ink.image(
-            image: AssetImage('assets/app/images/Workout.jpg'),
+            image: const AssetImage('assets/app/images/Workout.jpg'),
             height: 140,
             fit: BoxFit.cover,
           ),

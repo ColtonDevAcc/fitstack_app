@@ -1,19 +1,20 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:copy_with_extension/copy_with_extension.dart';
 
 part 'routine_schedule_model.g.dart';
 
 @JsonSerializable(includeIfNull: true, explicitToJson: true, anyMap: true)
-@CopyWith()
 class RoutineSchedule extends Equatable {
+  @JsonKey(name: 'id')
   final int id;
-  final DateTime? start_date;
-  final DateTime? end_date;
+  @JsonKey(name: 'start_date')
+  final DateTime? startDate;
+  @JsonKey(name: 'end_date')
+  final DateTime? endDate;
 
-  RoutineSchedule({
-    required this.start_date,
-    required this.end_date,
+  const RoutineSchedule({
+    required this.startDate,
+    required this.endDate,
     required this.id,
   });
 
@@ -22,7 +23,19 @@ class RoutineSchedule extends Equatable {
 
   factory RoutineSchedule.fromJson(Map<String, dynamic> json) => _$RoutineScheduleFromJson(json);
   Map<String, dynamic> toJson() => _$RoutineScheduleToJson(this);
-  factory RoutineSchedule.empty() => RoutineSchedule(end_date: null, id: 0, start_date: null);
+  factory RoutineSchedule.empty() => const RoutineSchedule(endDate: null, id: 0, startDate: null);
+
+  RoutineSchedule copyWith({
+    DateTime? startDate,
+    DateTime? endDate,
+    int? id,
+  }) {
+    return RoutineSchedule(
+      startDate: startDate ?? this.startDate,
+      endDate: endDate ?? this.endDate,
+      id: id ?? this.id,
+    );
+  }
 }
 
 //  ID        *int       `json:"id" db:"id"`

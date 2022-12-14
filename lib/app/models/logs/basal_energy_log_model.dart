@@ -29,6 +29,7 @@ class BasalEnergyLog extends Log {
     return 'BasalEnergyLog { id: $id, created_at: $createdAt, userId: $userId, type: $type, value: $value }';
   }
 
+  @override
   Map<String, dynamic> toJson() => _$BasalEnergyLogToJson(this);
   factory BasalEnergyLog.fromJson(Map<String, dynamic> json) => _$BasalEnergyLogFromJson(json);
 
@@ -36,7 +37,7 @@ class BasalEnergyLog extends Log {
   List<Object?> get props => [id, createdAt, updatedAt, userId, type, value];
 
   @override
-  factory BasalEnergyLog.copyWith({String? id, DateTime? created_at, DateTime? updated_at, String? userId, HealthDataType? type, num? value}) {
+  factory BasalEnergyLog.copyWith() {
     return BasalEnergyLog();
   }
 
@@ -45,10 +46,8 @@ class BasalEnergyLog extends Log {
 
   @override
   factory BasalEnergyLog.fromHealthData(HealthDataPoint data) {
-    var value = data.value as NumericHealthValue;
+    final value = data.value as NumericHealthValue;
     return BasalEnergyLog(
-      id: null,
-      userId: null,
       type: data.type,
       value: value.numericValue,
       createdAt: data.dateFrom.toUtc(),

@@ -2,6 +2,7 @@ import 'package:FitStack/app/models/routine/routine_model.dart';
 import 'package:FitStack/app/models/user/user_model.dart';
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
+// ignore: depend_on_referenced_packages
 import 'package:copy_with_extension/copy_with_extension.dart';
 
 part 'program_model.g.dart';
@@ -18,7 +19,7 @@ class Program extends Equatable {
   final DateTime? updatedAt;
   final DateTime? deletedAt;
 
-  Program({
+  const Program({
     this.createdAt,
     this.updatedAt,
     this.deletedAt,

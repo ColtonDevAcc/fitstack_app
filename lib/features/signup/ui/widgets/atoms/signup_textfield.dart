@@ -34,7 +34,7 @@ class SignupTextfield extends StatelessWidget {
           title,
           style: Theme.of(context).textTheme.subtitle2!.copyWith(fontWeight: FontWeight.bold),
         ),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         FormBuilderTextField(
           autovalidateMode: autovalidateMode ?? AutovalidateMode.always,
           keyboardType: keyboardType ?? TextInputType.number,
@@ -45,12 +45,12 @@ class SignupTextfield extends StatelessWidget {
           onSubmitted: onSubmitted,
           decoration: InputDecoration(
             hintText: hintText,
-            suffixIconConstraints: BoxConstraints(maxHeight: 30, maxWidth: 40),
+            suffixIconConstraints: const BoxConstraints(maxHeight: 30, maxWidth: 40),
             suffixIcon: suffixText != null
                 ? Padding(
                     padding: const EdgeInsets.only(right: 10),
                     child: Container(
-                      padding: EdgeInsets.fromLTRB(5, 2, 5, 2),
+                      padding: const EdgeInsets.fromLTRB(5, 2, 5, 2),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         border: Border.all(color: Theme.of(context).colorScheme.secondary),

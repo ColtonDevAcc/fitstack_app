@@ -16,11 +16,10 @@ class ProfileFeaturedUserStatistics extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         AutoSizeText.rich(
           TextSpan(
-            text: '$statisticValue',
+            text: statisticValue,
             style: TextStyle(color: Theme.of(context).colorScheme.onBackground, fontWeight: FontWeight.bold),
             children: [
               TextSpan(

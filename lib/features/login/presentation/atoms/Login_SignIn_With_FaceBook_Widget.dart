@@ -8,7 +8,7 @@ class Login_SignIn_With_FaceBook_Widget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SocialAuthButton_Widget(
-      color: Color.fromRGBO(45, 113, 197, 1),
+      color: const Color.fromRGBO(45, 113, 197, 1),
       child: Icon(
         FontAwesome.facebook_f,
         color: Theme.of(context).colorScheme.onPrimary,

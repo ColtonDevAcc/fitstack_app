@@ -14,20 +14,20 @@ class ActiveWorkoutRepository {
 
   Future<List<Exercise>> fetchExercises() async {
     try {
-      var token = await FirebaseAuth.instance.currentUser!.getIdToken();
+      final token = await FirebaseAuth.instance.currentUser!.getIdToken();
 
       final Response response = await dio.get(
         '/workout/exercises',
         options: Options(
           headers: {
-            "Authorization": "Bearer ${token}",
+            "Authorization": "Bearer $token",
           },
         ),
       );
 
       if (response.statusCode == 200) {
-        List responseJson = response.data as List;
-        List<Exercise> exercise = responseJson.map((e) => Exercise.fromJson(e)).toList();
+        final List responseJson = response.data as List;
+        final List<Exercise> exercise = responseJson.map((e) => Exercise.fromJson(e)).toList();
         return exercise;
       } else {
         throw Exception('Failed to load exercises');

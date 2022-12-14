@@ -29,6 +29,7 @@ class BloodPressureLog extends Log {
     return 'BloodPressureLog { id: $id, created_at: $createdAt, userId: $userId, type: $type, value: $value }';
   }
 
+  @override
   Map<String, dynamic> toJson() => _$BloodPressureLogToJson(this);
   factory BloodPressureLog.fromJson(Map<String, dynamic> json) => _$BloodPressureLogFromJson(json);
 
@@ -36,7 +37,7 @@ class BloodPressureLog extends Log {
   List<Object?> get props => [id, createdAt, updatedAt, userId, type, value];
 
   @override
-  factory BloodPressureLog.copyWith({String? id, DateTime? created_at, DateTime? updated_at, String? userId, HealthDataType? type, num? value}) {
+  factory BloodPressureLog.copyWith() {
     return BloodPressureLog();
   }
 
@@ -45,10 +46,8 @@ class BloodPressureLog extends Log {
 
   @override
   factory BloodPressureLog.fromHealthData(HealthDataPoint data) {
-    var value = data.value as NumericHealthValue;
+    final value = data.value as NumericHealthValue;
     return BloodPressureLog(
-      id: null,
-      userId: null,
       type: data.type,
       value: value.numericValue,
       createdAt: data.dateFrom.toUtc(),

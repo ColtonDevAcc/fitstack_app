@@ -16,3 +16,5 @@ class AuthenticationStatusChanged extends AppEvent {
 }
 
 class AuthenticationLogoutRequested extends AppEvent {}
+
+class AuthenticationPersistRequested extends AppEvent {}

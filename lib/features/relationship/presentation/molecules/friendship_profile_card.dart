@@ -33,9 +33,9 @@ class FriendshipProfileCard extends StatelessWidget {
       ),
       trailing: accepted != null && accepted == false
           ? Container(
-              child: Icon(FontAwesome.check, color: Colors.green),
+              child: const Icon(FontAwesome.check, color: Colors.green),
             )
-          : SizedBox(),
+          : const SizedBox(),
     );
   }
 }

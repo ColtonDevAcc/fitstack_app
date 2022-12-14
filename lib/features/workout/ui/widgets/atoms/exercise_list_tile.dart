@@ -18,7 +18,7 @@ class ExerciseListTile extends StatelessWidget {
   final Exercise exercise;
   @override
   Widget build(BuildContext context) {
-    User user = context.read<AppBloc>().state.user ?? User.empty();
+    final User user = context.read<AppBloc>().state.user ?? User.empty();
     return Slidable(
       startActionPane: user.id == "8uySBz11AfV9gf1VYlGRznOoZWr1"
           ? ActionPane(
@@ -44,7 +44,7 @@ class ExerciseListTile extends StatelessWidget {
             )
           : null,
       child: ListTile(
-        contentPadding: EdgeInsets.symmetric(horizontal: 10),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 10),
         title: Text(exercise.name ?? ""),
         leading: exercise.images == null || exercise.images!.isEmpty
             ? null
@@ -62,8 +62,8 @@ class ExerciseListTile extends StatelessWidget {
               ),
         subtitle: Wrap(
           spacing: 3,
-          children: exercise.muscle_target != [] && exercise.muscle_target != null
-              ? exercise.muscle_target!.map((e) {
+          children: exercise.muscleTarget != [] && exercise.muscleTarget != null
+              ? exercise.muscleTarget!.map((e) {
                   return Chip(label: Text(e.name), backgroundColor: Theme.of(context).colorScheme.surface);
                 }).toList()
               : [],

@@ -2,26 +2,30 @@ import 'package:FitStack/app/models/user/user_model.dart';
 import 'package:FitStack/app/models/workout/workout_sets_model.dart';
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:copy_with_extension/copy_with_extension.dart';
 
 part 'workout_model.g.dart';
 
 @JsonSerializable(includeIfNull: true, explicitToJson: true, anyMap: true)
-@CopyWith()
 class Workout extends Equatable {
+  @JsonKey(name: 'id')
   final int? id;
+  @JsonKey(name: 'title')
   final String? title;
+  @JsonKey(name: 'description')
   final String? description;
+  @JsonKey(name: 'creator')
   final User? creator;
-  final String? creator_id;
-  final List<WorkoutSets>? workout_sets;
+  @JsonKey(name: 'creator_id')
+  final String? creatorId;
+  @JsonKey(name: 'workout_sets')
+  final List<WorkoutSets>? workoutSets;
 
-  Workout({
-    this.creator_id,
+  const Workout({
+    this.creatorId,
     this.creator,
     this.description,
     required this.id,
-    required this.workout_sets,
+    required this.workoutSets,
     required this.title,
   });
 
@@ -30,9 +34,23 @@ class Workout extends Equatable {
 
   factory Workout.fromJson(Map<String, dynamic> json) => _$WorkoutFromJson(json);
   Map<String, dynamic> toJson() => _$WorkoutToJson(this);
-  factory Workout.empty() => Workout(title: '', id: 0, workout_sets: null);
-}
+  factory Workout.empty() => const Workout(title: '', id: 0, workoutSets: null);
 
-//  ID          *int           `json:"id" db:"workout.id"`
-// 	Name        *string        `json:"name" db:"workout.name"`
-// 	WorkoutSets []*WorkoutSets `json:"workout_sets" db:"workout.sets"`
+  Workout copyWith({
+    int? id,
+    String? title,
+    String? description,
+    User? creator,
+    String? creatorId,
+    List<WorkoutSets>? workoutSets,
+  }) {
+    return Workout(
+      id: id ?? this.id,
+      title: title ?? this.title,
+      description: description ?? this.description,
+      creator: creator ?? this.creator,
+      creatorId: creatorId ?? this.creatorId,
+      workoutSets: workoutSets ?? this.workoutSets,
+    );
+  }
+}

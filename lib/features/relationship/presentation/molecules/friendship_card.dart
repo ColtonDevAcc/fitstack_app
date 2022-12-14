@@ -5,21 +5,20 @@ class FriendshipCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 200,
       width: 180,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Expanded(
             child: Container(
               decoration: BoxDecoration(
-                image: DecorationImage(
+                image: const DecorationImage(
                   image: NetworkImage('https://images.pexels.com/photos/1431282/pexels-photo-1431282.jpeg?auto=compress&cs=tinysrgb&w=1600'),
                   fit: BoxFit.cover,
                 ),
-                borderRadius: BorderRadius.only(
+                borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(20),
                   topRight: Radius.circular(20),
                 ),
@@ -31,14 +30,13 @@ class FriendshipCard extends StatelessWidget {
             height: 50,
             decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.surface,
-              borderRadius: BorderRadius.only(
+              borderRadius: const BorderRadius.only(
                 bottomLeft: Radius.circular(20),
                 bottomRight: Radius.circular(20),
               ),
             ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Expanded(
                   child: Padding(
@@ -53,7 +51,7 @@ class FriendshipCard extends StatelessWidget {
                         ),
                         TextSpan(text: 'FitScore - 50!'),
                       ],
-                    )),
+                    ),),
                   ),
                 ),
               ],

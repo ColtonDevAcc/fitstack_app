@@ -21,13 +21,11 @@ class CircularStatisticsProgressIndicator extends StatelessWidget {
     return Container(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
         children: [
           Stack(
             children: <Widget>[
               Align(
-                alignment: Alignment.center,
                 child: SizedBox(
                   height: ratio,
                   width: ratio,
@@ -40,7 +38,6 @@ class CircularStatisticsProgressIndicator extends StatelessWidget {
                 ),
               ),
               Align(
-                alignment: Alignment.center,
                 child: Padding(
                   padding: EdgeInsets.all(ratio * .145),
                   child: SizedBox(
@@ -60,7 +57,6 @@ class CircularStatisticsProgressIndicator extends StatelessWidget {
           if (label != null)
             AutoSizeText(
               label!,
-              minFontSize: 12,
               style: TextStyle(
                 fontFamily: GoogleFonts.poppins().fontFamily,
               ),

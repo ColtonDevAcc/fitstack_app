@@ -1,6 +1,7 @@
 import 'package:FitStack/app/models/logs/log_model.dart';
 import 'package:health/health.dart';
 import 'package:json_annotation/json_annotation.dart';
+// ignore: depend_on_referenced_packages
 import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:units_converter/models/extension_converter.dart';
 import 'package:units_converter/properties/mass.dart';
@@ -31,6 +32,7 @@ class WeightLog extends Log {
     return 'WeightLog { id: $id, created_at: $createdAt, userId: $userId, type: $type, value: $value }';
   }
 
+  @override
   Map<String, dynamic> toJson() => _$WeightLogToJson(this);
   factory WeightLog.fromJson(Map<String, dynamic> json) => _$WeightLogFromJson(json);
 
@@ -38,7 +40,7 @@ class WeightLog extends Log {
   List<Object?> get props => [id, createdAt, updatedAt, userId, type, value];
 
   @override
-  factory WeightLog.copyWith({String? id, DateTime? created_at, DateTime? updated_at, String? userId, HealthDataType? type, num? value}) {
+  factory WeightLog.copyWith() {
     return WeightLog();
   }
 
@@ -47,10 +49,8 @@ class WeightLog extends Log {
 
   @override
   factory WeightLog.fromHealthData(HealthDataPoint data) {
-    var value = data.value as NumericHealthValue;
+    final value = data.value as NumericHealthValue;
     return WeightLog(
-      id: null,
-      userId: null,
       type: data.type,
       value: value.numericValue,
       createdAt: data.dateFrom.toUtc(),

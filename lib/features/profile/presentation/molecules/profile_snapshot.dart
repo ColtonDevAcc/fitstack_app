@@ -23,11 +23,9 @@ class ProfileSnapshot extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             GestureDetector(
               onTap: avatarOnTap,
@@ -40,10 +38,10 @@ class ProfileSnapshot extends StatelessWidget {
             ProfileSocialCurrencyIcon(icon: FontAwesome.chart_simple, value: "$socialPoints", color: Colors.blue),
             ProfileSocialCurrencyIcon(icon: FontAwesome.shekel_sign, value: "$fit_credits", color: Theme.of(context).colorScheme.secondary),
             ProfileSocialCurrencyIcon(icon: FontAwesome.fire_flame_curved, value: "$daysInARow", color: Theme.of(context).colorScheme.error),
-            SizedBox(),
+            const SizedBox(),
           ],
         ),
-        SizedBox(height: 30),
+        const SizedBox(height: 30),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
@@ -53,14 +51,14 @@ class ProfileSnapshot extends StatelessWidget {
               subtitle: 'Weight Gain',
               value: '-40',
             ),
-            SizedBox(width: 10),
+            const SizedBox(width: 10),
             ProfileFeaturedStatisticsGraph(
               graphColor: Theme.of(context).colorScheme.secondary,
               measurementAbrv: 'BMI',
               subtitle: 'body mass index',
               value: '-1.0',
             ),
-            SizedBox(width: 10),
+            const SizedBox(width: 10),
             ProfileFeaturedStatisticsGraph(
               graphColor: Theme.of(context).colorScheme.primary,
               measurementAbrv: 'LBM',
@@ -69,7 +67,7 @@ class ProfileSnapshot extends StatelessWidget {
             ),
           ],
         ),
-        SizedBox(height: 30),
+        const SizedBox(height: 30),
         Container(
           child: Column(
             children: [

@@ -16,28 +16,27 @@ class SignUpFocusedButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double buttonSize = MediaQuery.of(context).size.width * 0.8;
+    final double buttonSize = MediaQuery.of(context).size.width * 0.8;
 
     return BlocBuilder<SignupCubit, SignupState>(
       buildWhen: (previous, current) => previous != current,
       builder: (context, state) {
-        GlobalKey<FormBuilderState>? formKey = state.formKey![state.index];
+        final GlobalKey<FormBuilderState> formKey = state.formKey![state.index];
 
         return TextButton(
           onPressed: () => BlocProvider.of<SignupCubit>(context).nextPage(context),
           child: AnimatedContainer(
             decoration: BoxDecoration(
-              boxShadow: [
+              boxShadow: const [
                 BoxShadow(color: Colors.grey, blurRadius: 20),
               ],
               color: Theme.of(context).colorScheme.primary,
               borderRadius: BorderRadius.circular(10),
             ),
-            padding: EdgeInsets.all(25),
+            padding: const EdgeInsets.all(25),
             width: buttonSize,
-            duration: Duration(milliseconds: 2000),
+            duration: const Duration(milliseconds: 2000),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Text(
                   text,
@@ -47,11 +46,11 @@ class SignUpFocusedButton extends StatelessWidget {
                 ),
                 AnimatedContainer(
                   curve: Curves.bounceOut,
-                  duration: Duration(milliseconds: 900),
+                  duration: const Duration(milliseconds: 900),
                   width: formKey.currentState != null && formKey.currentState!.isValid ? buttonSize * .67 : 20,
                 ),
                 AnimatedRotation(
-                  duration: Duration(milliseconds: 300),
+                  duration: const Duration(milliseconds: 300),
                   turns: formKey.currentState != null && formKey.currentState!.isValid ? 0 : -.25,
                   child: Icon(
                     FontAwesome.arrow_right,
@@ -60,7 +59,7 @@ class SignUpFocusedButton extends StatelessWidget {
                   ),
                 ),
                 if (state.authState == AuthState.AUTHORIZING)
-                  Container(
+                  SizedBox(
                     height: 14,
                     width: 14,
                     child: CircularProgressIndicator(

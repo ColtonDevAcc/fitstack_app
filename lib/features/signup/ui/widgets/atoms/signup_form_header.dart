@@ -21,7 +21,6 @@ class SignupFormHeader extends StatelessWidget {
     return BlocBuilder<SignupCubit, SignupState>(
       builder: (context, state) {
         return Column(
-          mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             GestureDetector(
@@ -44,15 +43,13 @@ class SignupFormHeader extends StatelessWidget {
               ),
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Center(child: Icon(icon, color: Theme.of(context).colorScheme.primary)),
-                SizedBox(width: 5),
+                const SizedBox(width: 5),
                 SignUp_Header_Text_Widget(text: text),
               ],
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Signup_Form_Header_Subtitle_Widget(text: subtitle),
           ],
         );

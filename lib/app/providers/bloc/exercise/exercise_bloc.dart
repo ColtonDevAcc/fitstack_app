@@ -4,29 +4,33 @@ import 'dart:io';
 import 'package:FitStack/app/helpers/fitstack_error_toast.dart';
 import 'package:FitStack/app/models/muscle/muscle_model.dart';
 import 'package:FitStack/app/models/workout/exercise_model.dart';
+import 'package:FitStack/app/repository/exercise_repository.dart';
 import 'package:FitStack/app/services/firebase_storage_service.dart';
 import 'package:FitStack/app/services/muscle_service.dart';
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
+// ignore: depend_on_referenced_packages
+import 'package:bloc/bloc.dart';
 
 part 'exercise_event.dart';
 part 'exercise_state.dart';
 
 class ExerciseBloc extends Bloc<ExerciseEvent, ExerciseState> {
-  final exerciseRepository;
+  final ExerciseRepository exerciseRepository;
   ExerciseBloc({required this.exerciseRepository})
-      : super(ExerciseState(
-          exercises: [],
-          status: ExerciseListStatus.initial,
-          currentlyEditingExercise: Exercise.empty(),
-          minorMuscles: [],
-          frontMuscleList: [],
-          majorMuscles: [],
-          backMuscleList: [],
-          muscleAnatomyViewRotationIndex: 0,
-        )) {
+      : super(
+          ExerciseState(
+            exercises: const [],
+            status: ExerciseListStatus.initial,
+            currentlyEditingExercise: Exercise.empty(),
+            minorMuscles: const [],
+            frontMuscleList: const [],
+            majorMuscles: const [],
+            backMuscleList: const [],
+            muscleAnatomyViewRotationIndex: 0,
+          ),
+        ) {
     on<ExerciseEvent>((event, emit) {});
     on<LoadExercises>(onLoadExercises);
     on<AddCustomExercise>(onAddCustomExercise);
@@ -38,7 +42,7 @@ class ExerciseBloc extends Bloc<ExerciseEvent, ExerciseState> {
     on<RotateMuscleAnatomyView>(onRotateMuscleAnatomyView);
   }
 
-  void onLoadExercises(LoadExercises event, Emitter<ExerciseState> emit) async {
+  Future<void> onLoadExercises(LoadExercises event, Emitter<ExerciseState> emit) async {
     try {
       emit(state.copyWith(status: ExerciseListStatus.loading));
       final List<Exercise> exercises = await exerciseRepository.getExercises();
@@ -61,7 +65,7 @@ class ExerciseBloc extends Bloc<ExerciseEvent, ExerciseState> {
     emit(state.copyWith(exercises: exercises));
   }
 
-  void onEditExerciseImage(EditExerciseImage event, Emitter<ExerciseState> emit) async {
+  Future<void> onEditExerciseImage(EditExerciseImage event, Emitter<ExerciseState> emit) async {
     try {
       await ImagePicker().pickImage(source: ImageSource.gallery).then((value) async {
         if (value != null) {
@@ -72,9 +76,9 @@ class ExerciseBloc extends Bloc<ExerciseEvent, ExerciseState> {
           await FirebaseStorageService()
               .uploadImage('exercises', state.currentlyEditingExercise.id.toString(), File(value.path))
               .then((imageURL) async {
-            var imageList = state.currentlyEditingExercise.images ?? [];
+            final imageList = state.currentlyEditingExercise.images ?? [];
             imageList.add(imageURL);
-            List<String> newImageList = imageList;
+            final List<String> newImageList = imageList;
 
             exercises[index] = state.currentlyEditingExercise.copyWith(images: newImageList);
             emit(state.copyWith(exercises: exercises, editingExercise: state.currentlyEditingExercise.copyWith(images: newImageList)));
@@ -89,7 +93,7 @@ class ExerciseBloc extends Bloc<ExerciseEvent, ExerciseState> {
   }
 
   Future<void> onEditExercise(EditExercise event, Emitter<ExerciseState> emit) async {
-    final muscleList = await MuscleService().ParseFrontMuscleList();
+    final muscleList = await MuscleService().parseFrontMuscleList();
     emit(state.copyWith(editingExercise: event.exercise, frontMuscleList: muscleList));
   }
 
@@ -129,12 +133,12 @@ class ExerciseBloc extends Bloc<ExerciseEvent, ExerciseState> {
     emit(state.copyWith(minorMuscles: selectedMuscles));
   }
 
-  void onRotateMuscleAnatomyView(RotateMuscleAnatomyView event, Emitter<ExerciseState> emit) async {
-    int currentIndex = state.muscleAnatomyViewRotationIndex;
+  Future<void> onRotateMuscleAnatomyView(RotateMuscleAnatomyView event, Emitter<ExerciseState> emit) async {
+    final int currentIndex = state.muscleAnatomyViewRotationIndex;
     log("Current index: $currentIndex");
     if (currentIndex == 0) {
       if (state.backMuscleList.isEmpty) {
-        await MuscleService().ParseBackMuscleList().then((value) => emit(state.copyWith(backMuscleList: value, muscleAnatomyViewRotationIndex: 1)));
+        await MuscleService().parseBackMuscleList().then((value) => emit(state.copyWith(backMuscleList: value, muscleAnatomyViewRotationIndex: 1)));
       } else {
         emit(state.copyWith(muscleAnatomyViewRotationIndex: 1));
       }

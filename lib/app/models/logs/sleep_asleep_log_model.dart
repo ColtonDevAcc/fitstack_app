@@ -1,6 +1,7 @@
 import 'package:FitStack/app/models/logs/log_model.dart';
 import 'package:health/health.dart';
 import 'package:json_annotation/json_annotation.dart';
+// ignore: depend_on_referenced_packages
 import 'package:copy_with_extension/copy_with_extension.dart';
 
 part 'sleep_asleep_log_model.g.dart';
@@ -29,6 +30,7 @@ class SleepAsleepLog extends Log {
     return 'SleepLog { id: $id, created_at: $createdAt, userId: $userId, type: $type, value: $value }';
   }
 
+  @override
   Map<String, dynamic> toJson() => _$SleepAsleepLogToJson(this);
   factory SleepAsleepLog.fromJson(Map<String, dynamic> json) => _$SleepAsleepLogFromJson(json);
 
@@ -36,7 +38,7 @@ class SleepAsleepLog extends Log {
   List<Object?> get props => [id, createdAt, updatedAt, userId, type, value];
 
   @override
-  factory SleepAsleepLog.copyWith({String? id, DateTime? created_at, DateTime? updated_at, String? userId, HealthDataType? type, num? value}) {
+  factory SleepAsleepLog.copyWith() {
     return SleepAsleepLog();
   }
 
@@ -45,10 +47,8 @@ class SleepAsleepLog extends Log {
 
   @override
   factory SleepAsleepLog.fromHealthData(HealthDataPoint data) {
-    var value = data.value as NumericHealthValue;
+    final value = data.value as NumericHealthValue;
     return SleepAsleepLog(
-      id: null,
-      userId: null,
       type: data.type,
       value: value.numericValue,
       createdAt: data.dateFrom.toUtc(),

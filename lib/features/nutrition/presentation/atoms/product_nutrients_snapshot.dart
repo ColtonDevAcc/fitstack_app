@@ -23,7 +23,6 @@ class ProductNutrientsSnapshot extends StatelessWidget {
         runSpacing: 10,
         alignment: WrapAlignment.spaceBetween,
         runAlignment: WrapAlignment.spaceEvenly,
-        crossAxisAlignment: WrapCrossAlignment.start,
         children: [
           NutrientsScoreChip(
             icon: FontAwesome.fire_flame_simple,

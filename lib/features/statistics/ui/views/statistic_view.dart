@@ -10,7 +10,7 @@ import 'package:intl/intl.dart';
 
 class StatisticView extends StatelessWidget {
   final List<Log> data;
-  StatisticView({Key? key, required this.data}) : super(key: key);
+  const StatisticView({Key? key, required this.data}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -37,18 +37,18 @@ class StatisticView extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text("Last Updated", style: Theme.of(context).textTheme.headline6),
-                    Text("${formatter.format(data.last.createdAt)}", style: Theme.of(context).textTheme.headline6),
+                    Text(formatter.format(data.last.createdAt), style: Theme.of(context).textTheme.headline6),
                   ],
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text("First Updated", style: Theme.of(context).textTheme.headline6),
-                    Text("${formatter.format(data.last.createdAt)}", style: Theme.of(context).textTheme.headline6),
+                    Text(formatter.format(data.last.createdAt), style: Theme.of(context).textTheme.headline6),
                   ],
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 UserGoalStatisticsGraph(
                   data: data,
                   width: double.infinity,
@@ -56,7 +56,7 @@ class StatisticView extends StatelessWidget {
                   subtitle: 'Weight Difference',
                   dataType: HealthDataType.WEIGHT,
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 //create fl_chart that displays weight by day
                 Container(
                   height: 200,
@@ -69,7 +69,7 @@ class StatisticView extends StatelessWidget {
                         color: Colors.grey.withOpacity(0.2),
                         spreadRadius: 2,
                         blurRadius: 5,
-                        offset: Offset(1, 3),
+                        offset: const Offset(1, 3),
                         blurStyle: BlurStyle.outer,
                       ),
                     ],

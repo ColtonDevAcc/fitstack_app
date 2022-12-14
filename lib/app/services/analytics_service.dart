@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:FitStack/main.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_performance/firebase_performance.dart';
@@ -16,7 +17,7 @@ class AnalyticsService extends NavigatorObserver {
   final FirebaseAnalytics analytics = FirebaseAnalytics.instance;
   final FirebaseCrashlytics crashlytics = FirebaseCrashlytics.instance;
   final FirebasePerformance performance = FirebasePerformance.instance;
-  var currentRoute = "/";
+  String currentRoute = "/";
 
   FirebaseAnalyticsObserver getAnalyticsObserver() => FirebaseAnalyticsObserver(analytics: analytics);
 
@@ -83,14 +84,10 @@ class AnalyticsService extends NavigatorObserver {
             },
           ),
         );
-      } on Error catch (e) {
-        var error = e;
+      } catch (e) {
+        final error = e;
         if (debug) log("error adding dio wrapper");
-        logError(
-          exception: error.toString(),
-          stacktrace: error.stackTrace,
-          reason: "unable to add network wrapper for firebase performance analytics",
-        );
+        locator<AnalyticsService>().logError(exception: error.toString(), reason: 'error adding dio wrapper');
       }
     }
 
@@ -108,6 +105,6 @@ class AnalyticsService extends NavigatorObserver {
     if (debug) log("observer constructed");
     currentRoute = route.settings.name ?? "/";
     analytics.setCurrentScreen(screenName: route.settings.name);
-    print('PUSHED SCREEN: ${route.settings.name}'); //name comes back null
+    if (debug) log('PUSHED SCREEN: ${route.settings.name}'); //name comes back null
   }
 }

@@ -17,11 +17,11 @@ class DashboardPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    PageController pageController = PageController(viewportFraction: 0.5);
+    final PageController pageController = PageController(viewportFraction: 0.5);
     const double bottomPadding = 17;
     const double topPadding = 25;
     const double textLabelScale = 1.2;
-    TextStyle labelTextStyle = Theme.of(context).textTheme.labelLarge!.copyWith(
+    final TextStyle labelTextStyle = Theme.of(context).textTheme.labelLarge!.copyWith(
           color: Theme.of(context).colorScheme.onBackground,
           fontWeight: FontWeight.bold,
         );
@@ -29,7 +29,6 @@ class DashboardPage extends StatelessWidget {
     return SafeArea(
       child: SingleChildScrollView(
         clipBehavior: Clip.none,
-        scrollDirection: Axis.vertical,
         padding: EdgeInsets.zero,
         child: Column(
           children: [
@@ -62,7 +61,7 @@ class DashboardPage extends StatelessWidget {
                       style: labelTextStyle,
                     ),
                   ),
-                  Statistics_Dashboard(),
+                  const Statistics_Dashboard(),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(0, topPadding, 0, bottomPadding),
                     child: Text(
@@ -77,14 +76,13 @@ class DashboardPage extends StatelessWidget {
                     child: Row(
                       children: [
                         Text("Progress Snapshot", textScaleFactor: textLabelScale, style: labelTextStyle),
-                        Spacer(),
+                        const Spacer(),
                         TextButton(
                           onPressed: () => context.read<UserStatisticsBloc>().add(UserStatisticsRequested()),
                           child: BlocBuilder<UserStatisticsBloc, UserStatisticsState>(
                             builder: (context, state) {
                               return Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Text(
                                     state.status == UserStatisticsStatus.loading ? "syncing" : "sync",
@@ -94,7 +92,7 @@ class DashboardPage extends StatelessWidget {
                                           fontWeight: FontWeight.bold,
                                         ),
                                   ),
-                                  SizedBox(width: 5),
+                                  const SizedBox(width: 5),
                                   Spin(
                                     controller: (controller) =>
                                         state.status == UserStatisticsStatus.loading ? controller.repeat() : controller.stop(),
@@ -113,7 +111,7 @@ class DashboardPage extends StatelessWidget {
                       ],
                     ),
                   ),
-                  Container(height: MediaQuery.of(context).size.height * .2, child: UserProgressSnapshotList()),
+                  SizedBox(height: MediaQuery.of(context).size.height * .2, child: const UserProgressSnapshotList()),
                 ],
               ),
             ),

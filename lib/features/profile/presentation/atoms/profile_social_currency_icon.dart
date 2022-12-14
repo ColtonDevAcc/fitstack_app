@@ -14,7 +14,7 @@ class ProfileSocialCurrencyIcon extends StatelessWidget {
           icon,
           color: color ?? Theme.of(context).colorScheme.error,
         ),
-        SizedBox(width: 10),
+        const SizedBox(width: 10),
         Text(value),
       ],
     );

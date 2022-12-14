@@ -16,23 +16,23 @@ class UsernameFormView extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SignupFormHeader(
+        const SignupFormHeader(
           icon: FontAwesome.pencil,
           text: 'Username',
           subtitle: "Enter a username",
         ),
-        Spacer(flex: 1),
+        const Spacer(),
         BlocBuilder<SignupCubit, SignupState>(
           buildWhen: (previous, current) => previous.username != current.username,
           builder: (context, state) {
-            GlobalKey<FormBuilderState>? formKey = state.formKey?[state.index];
+            final GlobalKey<FormBuilderState>? formKey = state.formKey?[state.index];
             return FormBuilder(
               autoFocusOnValidationFailure: true,
               autovalidateMode: AutovalidateMode.always,
               key: formKey,
               onChanged: () => BlocProvider.of<SignupCubit>(context).formKeyChanged(formKey!),
               child: SignUpFullscreenTextfield(
-                key: Key("usernameForm"),
+                key: const Key("usernameForm"),
                 onChanged: (p0) => BlocProvider.of<SignupCubit>(context).usernameChanged(p0 ?? ""),
                 name: 'username',
                 validator: FormBuilderValidators.compose(
@@ -46,7 +46,7 @@ class UsernameFormView extends StatelessWidget {
             );
           },
         ),
-        Spacer(flex: 2),
+        const Spacer(flex: 2),
       ],
     );
   }

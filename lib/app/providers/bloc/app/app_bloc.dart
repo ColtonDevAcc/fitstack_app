@@ -1,10 +1,12 @@
 import 'dart:async';
+import 'dart:developer';
 import 'package:FitStack/app/helpers/fitstack_error_toast.dart';
 import 'package:FitStack/app/models/user/user_model.dart';
 import 'package:FitStack/app/repository/auth_repository.dart';
 import 'package:FitStack/app/repository/user_repository.dart';
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+// ignore: depend_on_referenced_packages
+import 'package:bloc/bloc.dart';
 
 part 'app_event.dart';
 part 'app_state.dart';
@@ -17,6 +19,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
   AppBloc({required this.authenticationRepository, required this.userRepository}) : super(const AppState.unknown()) {
     on<AuthenticationStatusChanged>(onAuthenticationStatusChanged);
     on<AuthenticationLogoutRequested>(onAuthenticationLogoutRequested);
+    on<AuthenticationPersistRequested>(onAuthenticationPersistRequested);
     authenticationStatusSubscription = authenticationRepository.status.listen((status) => add(AuthenticationStatusChanged(status)));
   }
 
@@ -55,5 +58,16 @@ class AppBloc extends Bloc<AppEvent, AppState> {
 
   void onAuthenticationLogoutRequested(AuthenticationLogoutRequested event, Emitter<AppState> emit) {
     authenticationRepository.logOut();
+  }
+
+  Future<void> onAuthenticationPersistRequested(AuthenticationPersistRequested event, Emitter<AppState> emit) async {
+    emit(state.copyWith(status: AuthenticationStatus.authenticating));
+    try {
+      await authenticationRepository.persistLogin();
+      log("persisted login");
+    } catch (e) {
+      emit(state.copyWith(status: AuthenticationStatus.unauthenticated));
+    }
+    emit(state.copyWith(status: AuthenticationStatus.authenticated));
   }
 }

@@ -8,13 +8,10 @@ class HistoryTabView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
-      scrollDirection: Axis.vertical,
       slivers: [
         SliverFillRemaining(
-          hasScrollBody: true,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Flexible(
                 child: Stepper(
@@ -44,18 +41,17 @@ class HistoryTabView extends StatelessWidget {
                       ),
                     );
                   },
-                  type: StepperType.vertical,
                   steps: [
-                    Step(
-                      title: const Text('workout 1'),
+                    const Step(
+                      title: Text('workout 1'),
                       subtitle: Text('10/05/1999'),
                       content: ProgramCard(
                         description: '',
                         title: '',
                       ),
                     ),
-                    Step(
-                      title: const Text('workout 1'),
+                    const Step(
+                      title: Text('workout 1'),
                       content: ProgramCard(
                         description: '',
                         title: '',

@@ -25,21 +25,21 @@ class FriendshipCubit extends Cubit<FriendshipState> {
 
   Future<void> getFriends() async {
     try {
-      String? token = await fb.FirebaseAuth.instance.currentUser?.getIdToken(false);
-      var friends = await relationshipRepository.getFriends(token: token!);
+      final String? token = await fb.FirebaseAuth.instance.currentUser?.getIdToken();
+      final friends = await relationshipRepository.getFriends(token: token!);
       emit(state.copyWith(friends: friends));
     } catch (e) {
-      log("${e}");
+      log("$e");
     }
   }
 
   Future<void> getFriendsList() async {
     try {
-      String? token = await fb.FirebaseAuth.instance.currentUser?.getIdToken(false);
-      var friends = await relationshipRepository.getFriendsList(token: token!);
+      final String? token = await fb.FirebaseAuth.instance.currentUser?.getIdToken();
+      final friends = await relationshipRepository.getFriendsList(token: token!);
       emit(state.copyWith(friendsList: friends));
     } catch (e) {
-      log("${e}");
+      log("$e");
     }
   }
 
@@ -52,15 +52,14 @@ class FriendshipCubit extends Cubit<FriendshipState> {
       emit(state.copyWith(friend: UserProfile.empty()));
     } else {
       try {
-        String? token = await fb.FirebaseAuth.instance.currentUser?.getIdToken(false);
-        var friend = await relationshipRepository.getFriend(token: token!, email: email!);
+        final String? token = await fb.FirebaseAuth.instance.currentUser?.getIdToken();
+        final friend = await relationshipRepository.getFriend(token: token!, email: email!);
         emit(state.copyWith(friend: friend));
       } catch (e) {
         Fluttertoast.showToast(
           msg: "$e",
           toastLength: Toast.LENGTH_LONG,
           gravity: ToastGravity.BOTTOM,
-          timeInSecForIosWeb: 1,
           backgroundColor: Colors.red,
           textColor: Colors.white,
           fontSize: 16.0,
@@ -71,11 +70,11 @@ class FriendshipCubit extends Cubit<FriendshipState> {
 
   Future<void> addFriend({required UserProfile friend}) async {
     try {
-      String? token = await fb.FirebaseAuth.instance.currentUser?.getIdToken(false);
+      final String? token = await fb.FirebaseAuth.instance.currentUser?.getIdToken();
       await relationshipRepository.addFriend(token: token!, uid: friend.id);
-      List<UserProfile?>? friendsList = []
-        ..addAll(state.friends ?? [])
-        ..add(friend);
+      final List<UserProfile?> friendsList = [...?state.friends, friend]
+        
+        ;
 
       emit(state.copyWith(friendsList: friendsList));
     } catch (e) {
@@ -83,7 +82,6 @@ class FriendshipCubit extends Cubit<FriendshipState> {
         msg: "$e",
         toastLength: Toast.LENGTH_LONG,
         gravity: ToastGravity.BOTTOM,
-        timeInSecForIosWeb: 1,
         backgroundColor: Colors.red,
         textColor: Colors.white,
         fontSize: 16.0,

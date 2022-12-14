@@ -13,12 +13,11 @@ class ExerciseListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
-        mainAxisSize: MainAxisSize.max,
         children: [
           Container(
             child: Container(
               height: MediaQuery.of(context).size.height * .25,
-              padding: EdgeInsets.fromLTRB(10, 0, 10, 10),
+              padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
               decoration: BoxDecoration(
                 color: Theme.of(context).colorScheme.surface,
               ),
@@ -35,10 +34,10 @@ class ExerciseListView extends StatelessWidget {
                     ),
                   ),
                   Text("Add an exercise", style: Theme.of(context).textTheme.headlineLarge),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   BlocBuilder<ExerciseBloc, ExerciseState>(
                     builder: (context, state) {
-                      return Container(
+                      return SizedBox(
                         width: double.infinity,
                         height: 50,
                         child: TextField(
@@ -68,7 +67,7 @@ class ExerciseListView extends StatelessWidget {
               buildWhen: (previous, current) => previous.exercises != current.exercises,
               builder: (context, state) {
                 return state.status == ExerciseListStatus.loading
-                    ? Center(
+                    ? const Center(
                         child: CircularProgressIndicator(),
                       )
                     : Column(
@@ -81,13 +80,13 @@ class ExerciseListView extends StatelessWidget {
               },
             ),
           ),
-          Spacer(),
+          const Spacer(),
           Align(
             alignment: Alignment.bottomCenter,
             child: Container(
               width: double.infinity,
               alignment: Alignment.center,
-              padding: EdgeInsets.symmetric(vertical: 25),
+              padding: const EdgeInsets.symmetric(vertical: 25),
               decoration: BoxDecoration(
                 color: Theme.of(context).colorScheme.primary,
               ),

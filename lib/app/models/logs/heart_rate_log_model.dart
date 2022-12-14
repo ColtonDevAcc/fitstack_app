@@ -29,6 +29,7 @@ class HeartRateLog extends Log {
     return 'HeartRateLog { id: $id, created_at: $createdAt, userId: $userId, type: $type, value: $value }';
   }
 
+  @override
   Map<String, dynamic> toJson() => _$HeartRateLogToJson(this);
   factory HeartRateLog.fromJson(Map<String, dynamic> json) => _$HeartRateLogFromJson(json);
 
@@ -36,7 +37,7 @@ class HeartRateLog extends Log {
   List<Object?> get props => [id, createdAt, updatedAt, userId, type, value];
 
   @override
-  factory HeartRateLog.copyWith({String? id, DateTime? created_at, DateTime? updated_at, String? userId, HealthDataType? type, num? value}) {
+  factory HeartRateLog.copyWith() {
     return HeartRateLog();
   }
 
@@ -45,10 +46,8 @@ class HeartRateLog extends Log {
 
   @override
   factory HeartRateLog.fromHealthData(HealthDataPoint data) {
-    var value = data.value as NumericHealthValue;
+    final value = data.value as NumericHealthValue;
     return HeartRateLog(
-      id: null,
-      userId: null,
       type: data.type,
       value: value.numericValue,
       createdAt: data.dateFrom.toUtc(),

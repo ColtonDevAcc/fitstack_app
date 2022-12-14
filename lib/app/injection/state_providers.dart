@@ -52,11 +52,11 @@ class StateProviders extends StatelessWidget {
             create: (BuildContext context) => AppBloc(
               authenticationRepository: context.read<AuthenticationRepository>(),
               userRepository: context.read<UserRepository>(),
-            ),
+            )..add(AuthenticationPersistRequested()),
           ),
           BlocProvider<LoginCubit>(
             create: (BuildContext context) => LoginCubit(
-              authenticationRepository: context.read<AuthenticationRepository>()..persistLogin(),
+              authenticationRepository: context.read<AuthenticationRepository>(),
             ),
           ),
           BlocProvider<SignupCubit>(

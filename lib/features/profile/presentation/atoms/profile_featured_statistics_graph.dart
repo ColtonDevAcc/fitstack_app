@@ -8,12 +8,12 @@ class ProfileFeaturedStatisticsGraph extends StatelessWidget {
   final String measurementAbrv;
   final String subtitle;
   const ProfileFeaturedStatisticsGraph(
-      {Key? key, required this.graphColor, required this.value, required this.measurementAbrv, required this.subtitle})
+      {Key? key, required this.graphColor, required this.value, required this.measurementAbrv, required this.subtitle,})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    List<_SalesData> data = [
+    final List<_SalesData> data = [
       _SalesData('Jan', 28),
       _SalesData('Feb', 28),
       _SalesData('Mar', 30),
@@ -32,12 +32,12 @@ class ProfileFeaturedStatisticsGraph extends StatelessWidget {
               color: Colors.grey.withOpacity(0.2),
               spreadRadius: 2,
               blurRadius: 5,
-              offset: Offset(1, 3),
+              offset: const Offset(1, 3),
               blurStyle: BlurStyle.outer,
             ),
           ],
         ),
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         width: 120,
         height: 100,
         child: Column(
@@ -67,7 +67,6 @@ class ProfileFeaturedStatisticsGraph extends StatelessWidget {
                 margin: EdgeInsets.zero,
                 plotAreaBorderColor: Colors.transparent,
                 enableAxisAnimation: true,
-                borderColor: Colors.transparent,
                 primaryXAxis: CategoryAxis(
                   borderWidth: 0,
                   rangePadding: ChartRangePadding.none,
@@ -85,12 +84,11 @@ class ProfileFeaturedStatisticsGraph extends StatelessWidget {
                   SplineAreaSeries<_SalesData, String>(
                     borderColor: graphColor,
                     borderWidth: 3,
-                    borderDrawMode: BorderDrawMode.top,
                     splineType: SplineType.monotonic,
                     gradient: LinearGradient(
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
-                      stops: [.01, 1],
+                      stops: const [.01, 1],
                       colors: [
                         graphColor,
                         Colors.white,

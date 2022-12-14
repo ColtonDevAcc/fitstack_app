@@ -7,7 +7,8 @@ class Endpoints {
   // base url
   //iphone 172.20.10.4
   //wifi 192.168.0.203
-  static const String baseUrl = kDebugMode ? "http://192.168.0.203:8080" : "https://dev.fitstack.io";
+  //work 10.16.2.16
+  static const String baseUrl = kDebugMode ? "http://10.16.2.16:8081" : "https://dev.fitstack.io";
   static const int receiveTimeout = 15000;
   static const int connectionTimeout = 15000;
   Future<Dio> dio = locator<AnalyticsService>().networkPerformanceInterceptor(
@@ -48,6 +49,7 @@ class Endpoints {
   // Post:----------------------------------------------------------------------
   Future<Response> post(
     String uri, {
+    // ignore: type_annotate_public_apis
     data,
     Map<String, dynamic>? queryParameters,
     Options? options,
@@ -76,6 +78,7 @@ class Endpoints {
   // Put:-----------------------------------------------------------------------
   Future<Response> put(
     String uri, {
+    // ignore: type_annotate_public_apis
     data,
     Map<String, dynamic>? queryParameters,
     Options? options,
@@ -104,6 +107,7 @@ class Endpoints {
   // Delete:--------------------------------------------------------------------
   Future<dynamic> delete(
     String uri, {
+    // ignore: type_annotate_public_apis
     data,
     Map<String, dynamic>? queryParameters,
     Options? options,

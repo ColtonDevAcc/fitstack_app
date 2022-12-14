@@ -19,7 +19,6 @@ class AddFriendBottomSheet extends StatelessWidget {
         padding: const EdgeInsets.fromLTRB(10, 5, 10, 0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -27,7 +26,6 @@ class AddFriendBottomSheet extends StatelessWidget {
                 Expanded(
                   child: Container(
                     child: FormBuilderTextField(
-                      maxLines: 1,
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       keyboardType: TextInputType.emailAddress,
                       onSubmitted: (value) => context.read<FriendshipCubit>().getFriend(email: value),
@@ -44,24 +42,24 @@ class AddFriendBottomSheet extends StatelessWidget {
                         filled: true,
                         border: OutlineInputBorder(borderRadius: BorderRadius.circular(20), borderSide: BorderSide.none),
                         hintText: 'Search',
-                        hintStyle: TextStyle(color: Colors.grey, fontSize: 18),
+                        hintStyle: const TextStyle(color: Colors.grey, fontSize: 18),
                         prefixIcon: Container(
-                          padding: EdgeInsets.all(15),
-                          child: Icon(FontAwesome.magnifying_glass),
+                          padding: const EdgeInsets.all(15),
                           width: 18,
+                          child: const Icon(FontAwesome.magnifying_glass),
                         ),
                       ),
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 50,
                 ),
                 GestureDetector(
                   onTap: () {
                     context.read<FriendshipCubit>().getFriend(clear: true, email: '');
                   },
-                  child: Container(
+                  child: SizedBox(
                     height: 30,
                     width: 30,
                     child: Icon(
@@ -73,21 +71,19 @@ class AddFriendBottomSheet extends StatelessWidget {
                 ),
               ],
             ),
-            friend == UserProfile.empty()
-                ? SizedBox()
-                : Row(
+            if (friend == UserProfile.empty()) const SizedBox() else Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Expanded(
                         child: GestureDetector(
                           onTap: () => context.read<FriendshipCubit>().addFriend(friend: friend),
                           child: FriendshipProfileCard(
-                            username: friend.display_name,
+                            username: friend.displayName,
                             colorTheme: Colors.red,
                           ),
                         ),
                       ),
-                      Icon(FontAwesome.plus)
+                      const Icon(FontAwesome.plus)
                     ],
                   )
           ],

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-const ColorScheme lightColors = const ColorScheme(
+const ColorScheme lightColors = ColorScheme(
   surface: Colors.white,
   background: Color.fromRGBO(249, 249, 249, 1),
   brightness: Brightness.light,
@@ -68,9 +68,9 @@ TextTheme lightTextTheme = GoogleFonts.latoTextTheme().copyWith(
 );
 
 ThemeData lightTheme = ThemeData(
-  iconTheme: IconThemeData(color: Color.fromRGBO(112, 112, 112, 1)),
-  backgroundColor: Color.fromARGB(249, 249, 249, 249),
-  primaryColor: Color.fromRGBO(254, 99, 71, 1),
+  iconTheme: const IconThemeData(color: Color.fromRGBO(112, 112, 112, 1)),
+  backgroundColor: const Color.fromARGB(249, 249, 249, 249),
+  primaryColor: const Color.fromRGBO(254, 99, 71, 1),
   colorScheme: lightColors,
   textTheme: lightTextTheme,
 );

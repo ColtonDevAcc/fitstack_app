@@ -13,18 +13,18 @@ class UploadPictureFormView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SignupFormHeader(
+        const SignupFormHeader(
           icon: FontAwesome.camera,
           text: 'Upload your avatar',
           subtitle: 'Upload a supported image',
         ),
-        Spacer(flex: 1),
+        const Spacer(),
         BlocBuilder<SignupCubit, SignupState>(
           buildWhen: (previous, current) {
             return previous.profileImage != current.profileImage;
           },
           builder: (context, state) {
-            var formKey = state.formKey?[state.index];
+            final formKey = state.formKey?[state.index];
             formKey?.currentState?.validate();
             return FormBuilder(
               key: formKey,
@@ -41,7 +41,7 @@ class UploadPictureFormView extends StatelessWidget {
             );
           },
         ),
-        Spacer(flex: 1)
+        const Spacer()
       ],
     );
   }

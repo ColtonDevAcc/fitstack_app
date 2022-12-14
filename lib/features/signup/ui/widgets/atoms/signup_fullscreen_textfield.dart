@@ -18,7 +18,7 @@ class SignUpFullscreenTextfield extends StatelessWidget {
     return FormBuilderTextField(
       validator: validator,
       onChanged: onChanged,
-      style: TextStyle(color: Colors.black),
+      style: const TextStyle(color: Colors.black),
       textAlign: TextAlign.center,
       decoration: InputDecoration(
         hintText: 'Enter here',

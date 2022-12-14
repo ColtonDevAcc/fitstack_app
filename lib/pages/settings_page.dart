@@ -24,32 +24,32 @@ class _SettingsPageState extends State<SettingsPage> {
               padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
               child: Column(
                 children: [
-                  Container(
+                  SizedBox(
                     height: MediaQuery.of(context).size.height * .3,
                     child: ProfileSnapshot(
                       avatar: state.userProfile.avatar,
-                      daysInARow: state.userProfile.days_logged_in_a_row,
-                      fit_credits: state.userProfile.fit_credits,
-                      socialPoints: state.userProfile.social_points,
+                      daysInARow: state.userProfile.loginStreak,
+                      fit_credits: state.userProfile.fitCredits,
+                      socialPoints: state.userProfile.socialPoints,
                     ),
                   ),
-                  SizedBox(height: 5),
+                  const SizedBox(height: 5),
                   ProfileDrawerListTile(
                     onTap: () => GoRouter.of(context).push('/friendship'),
                     title: "Friends",
                     icon: FontAwesome.user_group,
                   ),
-                  SizedBox(height: 5),
-                  ProfileDrawerListTile(
+                  const SizedBox(height: 5),
+                  const ProfileDrawerListTile(
                     title: "settings",
                     icon: FontAwesome.gear,
                   ),
-                  SizedBox(height: 5),
-                  ProfileDrawerListTile(
+                  const SizedBox(height: 5),
+                  const ProfileDrawerListTile(
                     title: "alerts",
                     icon: FontAwesome.bell,
                   ),
-                  SizedBox(height: 5),
+                  const SizedBox(height: 5),
                   ProfileDrawerListTile(
                     onTap: () => context.go("/settings/theme"),
                     title: "themes",

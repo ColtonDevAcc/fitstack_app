@@ -4,16 +4,16 @@ import 'package:FitStack/app/helpers/fitstack_error_toast.dart';
 import 'package:FitStack/app/models/logs/active_energy_log_model.dart';
 import 'package:FitStack/app/models/logs/bmi_log_model.dart';
 import 'package:FitStack/app/models/logs/body_fat_log_model.dart';
-import 'package:FitStack/app/models/logs/log_model.dart';
 import 'package:FitStack/app/models/logs/step_log_model.dart';
 import 'package:FitStack/app/models/logs/weight_log_model.dart';
 import 'package:FitStack/app/models/user/user_statistic_model.dart';
 import 'package:FitStack/app/repository/user_health_repository.dart';
 import 'package:FitStack/app/repository/user_repository.dart';
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:health/health.dart';
+// ignore: depend_on_referenced_packages
+import 'package:bloc/bloc.dart';
 
 part 'user_statistics_event.dart';
 part 'user_statistics_state.dart';
@@ -23,18 +23,20 @@ class UserStatisticsBloc extends Bloc<UserStatisticsEvent, UserStatisticsState> 
   final UserHealthRepository userHealthRepository;
 
   UserStatisticsBloc({required this.userRepository, required this.userHealthRepository})
-      : super(UserStatisticsState(
-          status: UserStatisticsStatus.initial,
-          userStatistic: UserStatistic.empty(),
-          selected: UserStatistic.empty(),
-          snapshotUpdateStatus: StatisticsSnapshotUpdateStatus.initial,
-        )) {
+      : super(
+          UserStatisticsState(
+            status: UserStatisticsStatus.initial,
+            userStatistic: UserStatistic.empty(),
+            selected: UserStatistic.empty(),
+            snapshotUpdateStatus: StatisticsSnapshotUpdateStatus.initial,
+          ),
+        ) {
     on<UserStatisticsRequested>(onUserStatisticsRequested);
     on<UserStatisticsUpdated>(onUserStatisticsUpdated);
     on<UserStatisticsSnapshotUpdateRequested>(onUserStatisticsSnapshotUpdateRequested);
   }
 
-  void onUserStatisticsRequested(UserStatisticsRequested event, Emitter<UserStatisticsState> emit) async {
+  Future<void> onUserStatisticsRequested(UserStatisticsRequested event, Emitter<UserStatisticsState> emit) async {
     emit(state.copyWith(status: UserStatisticsStatus.loading));
     try {
       final token = await FirebaseAuth.instance.currentUser?.getIdToken();
@@ -47,7 +49,7 @@ class UserStatisticsBloc extends Bloc<UserStatisticsEvent, UserStatisticsState> 
     add(UserStatisticsSnapshotUpdateRequested());
   }
 
-  void onUserStatisticsUpdated(UserStatisticsUpdated event, Emitter<UserStatisticsState> emit) async {
+  Future<void> onUserStatisticsUpdated(UserStatisticsUpdated event, Emitter<UserStatisticsState> emit) async {
     emit(state.copyWith(status: UserStatisticsStatus.loading));
     try {
       final token = await FirebaseAuth.instance.currentUser?.getIdToken();
@@ -59,39 +61,39 @@ class UserStatisticsBloc extends Bloc<UserStatisticsEvent, UserStatisticsState> 
     }
   }
 
-  void onUserStatisticsSnapshotUpdateRequested(UserStatisticsSnapshotUpdateRequested event, Emitter<UserStatisticsState> emit) async {
+  Future<void> onUserStatisticsSnapshotUpdateRequested(UserStatisticsSnapshotUpdateRequested event, Emitter<UserStatisticsState> emit) async {
     try {
       emit(state.copyWith(snapshotUpdateStatus: StatisticsSnapshotUpdateStatus.loading));
       Duration? fetchDate;
       if (state.userStatistic.updatedAt == null) {
-        fetchDate = Duration(days: 365);
+        fetchDate = const Duration(days: 365);
       } else {
         fetchDate = DateTime.now().difference(state.userStatistic.updatedAt!);
       }
 
-      UserStatistic statistic = await userRepository.updateStatisticsSnapshot(fetchDate: fetchDate);
+      final UserStatistic statistic = await userRepository.updateStatisticsSnapshot(fetchDate: fetchDate);
 
       if (statistic == UserStatistic.empty()) {
         emit(state.copyWith(snapshotUpdateStatus: StatisticsSnapshotUpdateStatus.loaded));
         return;
       }
 
-      Map<HealthDataType, List<DateTime>> dateMap = {
+      final Map<HealthDataType, List<DateTime>> dateMap = {
         HealthDataType.STEPS: [],
         HealthDataType.WEIGHT: [],
         HealthDataType.BODY_MASS_INDEX: [],
         HealthDataType.ACTIVE_ENERGY_BURNED: [],
         HealthDataType.BODY_FAT_PERCENTAGE: [],
       };
-      List<StepsLog> steps = []..addAll(state.userStatistic.stepsLogs ?? []);
-      List<WeightLog> weight = []..addAll(state.userStatistic.weightLogs ?? []);
-      List<BodyMassIndexLog> bmi = []..addAll(state.userStatistic.bodyMassIndexLogs ?? []);
-      List<ActiveEnergyBurnedLog> activeEnergyBurned = []..addAll(state.userStatistic.activeEnergyBurned ?? []);
-      List<BodyFatPercentageLog> bodyFatPercentage = []..addAll(state.userStatistic.bodyFatPercentageLogs ?? []);
+      final List<StepsLog> steps = [...?state.userStatistic.stepsLogs];
+      final List<WeightLog> weight = [...?state.userStatistic.weightLogs];
+      final List<BodyMassIndexLog> bmi = [...?state.userStatistic.bodyMassIndexLogs];
+      final List<ActiveEnergyBurnedLog> activeEnergyBurned = [...?state.userStatistic.activeEnergyBurned];
+      final List<BodyFatPercentageLog> bodyFatPercentage = [...?state.userStatistic.bodyFatPercentageLogs];
 
       statistic.bodyMassIndexLogs?.forEach(
         (element) {
-          var createdAtDifference = DateTime.now().difference(element.createdAt);
+          final createdAtDifference = DateTime.now().difference(element.createdAt);
           if (createdAtDifference.inDays < 30 && dateMap[element.type]!.contains(element.createdAt)) {
             bmi.add(element);
             dateMap[element.type]?.add(element.createdAt);
@@ -100,7 +102,7 @@ class UserStatisticsBloc extends Bloc<UserStatisticsEvent, UserStatisticsState> 
       );
       statistic.stepsLogs?.forEach(
         (element) {
-          var createdAtDifference = DateTime.now().difference(element.createdAt);
+          final createdAtDifference = DateTime.now().difference(element.createdAt);
           if (createdAtDifference.inDays < 30 && dateMap[element.type]!.contains(element.createdAt)) {
             steps.add(element);
             dateMap[element.type]?.add(element.createdAt);
@@ -109,7 +111,7 @@ class UserStatisticsBloc extends Bloc<UserStatisticsEvent, UserStatisticsState> 
       );
       statistic.weightLogs?.forEach(
         (element) {
-          var createdAtDifference = DateTime.now().difference(element.createdAt);
+          final createdAtDifference = DateTime.now().difference(element.createdAt);
           if (createdAtDifference.inDays < 30 && dateMap[element.type]!.contains(element.createdAt)) {
             weight.add(element);
             dateMap[element.type]?.add(element.createdAt);
@@ -118,7 +120,7 @@ class UserStatisticsBloc extends Bloc<UserStatisticsEvent, UserStatisticsState> 
       );
       statistic.activeEnergyBurned?.forEach(
         (element) {
-          var createdAtDifference = DateTime.now().difference(element.createdAt);
+          final createdAtDifference = DateTime.now().difference(element.createdAt);
           if (createdAtDifference.inDays < 30 && dateMap[element.type]!.contains(element.createdAt)) {
             activeEnergyBurned.add(element);
             dateMap[element.type]?.add(element.createdAt);
@@ -127,7 +129,7 @@ class UserStatisticsBloc extends Bloc<UserStatisticsEvent, UserStatisticsState> 
       );
       statistic.bodyFatPercentageLogs?.forEach(
         (element) {
-          var createdAtDifference = DateTime.now().difference(element.createdAt);
+          final createdAtDifference = DateTime.now().difference(element.createdAt);
           if (createdAtDifference.inDays < 30 && dateMap[element.type]!.contains(element.createdAt)) {
             bodyFatPercentage.add(element);
             dateMap[element.type]?.add(element.createdAt);

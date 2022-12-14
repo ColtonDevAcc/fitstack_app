@@ -96,7 +96,7 @@ class AppRouter {
             name: 'exercises',
             builder: (context, state) => const ExerciseListView(),
             routes: [
-              GoRoute(path: 'edit', name: 'edit', builder: (context, state) => EditExerciseView()),
+              GoRoute(path: 'edit', name: 'edit', builder: (context, state) => const EditExerciseView()),
             ],
           ),
         ],
@@ -126,15 +126,13 @@ class AppRouter {
       GoRoute(
         path: '/user',
         name: 'user',
-        builder: (context, state) => ProfilePage(),
+        builder: (context, state) => const ProfilePage(),
         routes: [
           GoRoute(
             path: 'statistic',
             name: 'user statistic',
             builder: (context, state) {
-              return StatisticView(
-                data: state.extra as List<Log>,
-              );
+              return StatisticView(data: state.extra! as List<Log>);
             },
           ),
         ],

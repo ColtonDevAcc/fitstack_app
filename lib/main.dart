@@ -34,11 +34,11 @@ Future<void> main() async {
 
   locator.registerLazySingleton(() => AnalyticsService(debug: true));
 
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
-  MyApp({key}) : super(key: key);
+  const MyApp({key}) : super(key: key);
 
   @override
   State<MyApp> createState() => _MyAppState();
@@ -53,14 +53,12 @@ class _MyAppState extends State<MyApp> {
     return StateProviders(
       child: Builder(
         builder: (context) {
-          if (router == null) {
-            router = AppRouter(navigatorKey: navigatorKey, appBloc: context.read<AppBloc>());
-          }
+          router ??= AppRouter(navigatorKey: navigatorKey, appBloc: context.read<AppBloc>());
 
           return MaterialApp.router(
             routerConfig: router?.router,
-            theme: FSColorTheme.Light(context),
-            darkTheme: FSColorTheme.Light(context),
+            theme: FSColorTheme.light(context),
+            darkTheme: FSColorTheme.light(context),
           );
         },
       ),

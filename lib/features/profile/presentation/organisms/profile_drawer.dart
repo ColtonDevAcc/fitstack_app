@@ -17,9 +17,8 @@ class ProfileDrawer extends StatelessWidget {
     return Drawer(
       child: SafeArea(
         child: Column(
-          mainAxisSize: MainAxisSize.max,
           children: [
-            ProfileDrawerListTile(
+            const ProfileDrawerListTile(
               title: "Alerts",
               icon: FontAwesome.bell,
             ),
@@ -28,7 +27,7 @@ class ProfileDrawer extends StatelessWidget {
               title: "Friends",
               icon: FontAwesome.user_group,
             ),
-            ProfileDrawerListTile(
+            const ProfileDrawerListTile(
               title: "Extra",
               icon: FontAwesome.gear,
             ),
@@ -37,28 +36,28 @@ class ProfileDrawer extends StatelessWidget {
               title: "Sign Out",
               icon: FontAwesome.right_from_bracket,
             ),
-            Spacer(
-              flex: 1,
+            const Spacer(
+              
             ),
             ProfileDrawerListTile(
               onTap: () async {
                 final user = BlocProvider.of<AppBloc>(context).state.user!;
                 Scaffold.of(context).showBottomSheet(
-                    (context) => Container(
+                    (context) => SizedBox(
                           height: 200,
                           child: Text("${user.toJson()}"),
                         ),
-                    backgroundColor: Theme.of(context).colorScheme.surface);
-                var userId = await FirebaseAuth.instance.currentUser?.getIdToken();
+                    backgroundColor: Theme.of(context).colorScheme.surface,);
+                final userId = await FirebaseAuth.instance.currentUser?.getIdToken();
                 FlutterClipboard.copy(userId ?? "");
-                log("========================\nuser refresh token ${user.refresh_token}\n========================");
+                log("========================\nuser refresh token ${user.refreshToken}\n========================");
                 log("========================\nuser refresh token ${user.id}\n========================");
-                log("========================\nuser token ${userId}\n========================");
+                log("========================\nuser token $userId\n========================");
               },
               title: "Developer",
               icon: FontAwesome.terminal,
             ),
-            Align(
+            const Align(
               alignment: Alignment.bottomCenter,
               child: Text("version: 1"),
             )

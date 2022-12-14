@@ -8,9 +8,9 @@ class ProfileState extends Equatable {
 
   ProfileState copyWith({String? profileUrl, String? scaffoldMessageString, UserProfile? userProfile}) {
     return ProfileState(
-        avatar: profileUrl ?? this.avatar,
+        avatar: profileUrl ?? avatar,
         scaffoldMessageString: scaffoldMessageString ?? this.scaffoldMessageString,
-        userProfile: userProfile ?? this.userProfile);
+        userProfile: userProfile ?? this.userProfile,);
   }
 
   @override

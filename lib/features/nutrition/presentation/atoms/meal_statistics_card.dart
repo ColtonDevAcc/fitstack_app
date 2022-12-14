@@ -12,7 +12,7 @@ class MealStatisticsCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var name = productName?.split(" ");
+    final name = productName?.split(" ");
 
     return empty == false || empty == null
         ? GestureDetector(
@@ -29,7 +29,7 @@ class MealStatisticsCard extends StatelessWidget {
                     color: Colors.grey.withOpacity(0.2),
                     spreadRadius: 2,
                     blurRadius: 5,
-                    offset: Offset(1, 3),
+                    offset: const Offset(1, 3),
                     blurStyle: BlurStyle.outer,
                   ),
                 ],
@@ -40,7 +40,7 @@ class MealStatisticsCard extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Padding(
-                      padding: EdgeInsets.fromLTRB(15, 15, 15, 0),
+                      padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -50,21 +50,21 @@ class MealStatisticsCard extends StatelessWidget {
                             style: Theme.of(context).textTheme.labelLarge?.copyWith(fontWeight: FontWeight.bold),
                             textScaleFactor: 1.2,
                           ),
-                          Spacer(flex: 1),
+                          const Spacer(),
                           AutoSizeText(
                             '$calories',
                             style: Theme.of(context).textTheme.labelLarge?.copyWith(fontWeight: FontWeight.bold),
                             textScaleFactor: 1.1,
                           ),
                           AutoSizeText('Calories', style: Theme.of(context).textTheme.labelLarge),
-                          Spacer(flex: 1),
+                          const Spacer(),
                           AutoSizeText(
                             '${protein}g',
                             style: Theme.of(context).textTheme.labelLarge?.copyWith(fontWeight: FontWeight.bold),
                             textScaleFactor: 1.1,
                           ),
                           AutoSizeText('Protein', style: Theme.of(context).textTheme.labelLarge),
-                          Spacer(flex: 1),
+                          const Spacer(),
                         ],
                       ),
                     ),
@@ -104,7 +104,7 @@ class MealStatisticsCard extends StatelessWidget {
                     color: Colors.grey.withOpacity(0.2),
                     spreadRadius: 2,
                     blurRadius: 5,
-                    offset: Offset(1, 3),
+                    offset: const Offset(1, 3),
                     blurStyle: BlurStyle.outer,
                   ),
                 ],
@@ -112,7 +112,7 @@ class MealStatisticsCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
+                children: const [
                   Expanded(
                     child: Padding(
                       padding: EdgeInsets.fromLTRB(15, 15, 15, 0),

@@ -15,18 +15,16 @@ class CreateWorkoutView extends StatelessWidget {
       body: BlocBuilder<WorkoutBloc, WorkoutState>(
         builder: (context, state) {
           return CustomScrollView(
-            scrollDirection: Axis.vertical,
             slivers: [
               SliverFillRemaining(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.max,
                     children: [
                       SafeArea(
                         child: BasicPageHeader(
-                          title: "${state.WorkoutName}",
+                          title: state.workoutName,
                           leading: GestureDetector(
                             onTap: () {
                               context.pop();
@@ -41,15 +39,13 @@ class CreateWorkoutView extends StatelessWidget {
                         ),
                       ),
                       Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Text(
-                            '${state.WorkoutName}',
+                            state.workoutName,
                             style: Theme.of(context).textTheme.titleLarge,
                             textScaleFactor: 1.5,
                           ),
-                          SizedBox(width: 10),
+                          const SizedBox(width: 10),
                           Icon(FontAwesome.pencil, size: 20, color: Theme.of(context).colorScheme.onBackground.withOpacity(.6)),
                         ],
                       ),
@@ -57,14 +53,14 @@ class CreateWorkoutView extends StatelessWidget {
                         '${state.workouts.length} exercises',
                         style: Theme.of(context).textTheme.titleLarge?.copyWith(color: Theme.of(context).colorScheme.onBackground.withOpacity(0.7)),
                       ),
-                      SizedBox(height: 10),
-                      Container(
+                      const SizedBox(height: 10),
+                      SizedBox(
                         width: double.infinity,
                         child: Wrap(
                           spacing: 10,
                           runSpacing: 10,
                           alignment: WrapAlignment.spaceBetween,
-                          children: [
+                          children: const [
                             WorkoutStatisticBox(
                               label: 'Completions',
                               value: '30',
@@ -88,13 +84,12 @@ class CreateWorkoutView extends StatelessWidget {
                           ],
                         ),
                       ),
-                      SizedBox(height: 30),
+                      const SizedBox(height: 30),
                       Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text("Exercises", style: Theme.of(context).textTheme.titleLarge),
-                          Spacer(),
+                          const Spacer(),
                           GestureDetector(
                             onTap: () {
                               context.push('/exercise/exercises');
@@ -110,7 +105,7 @@ class CreateWorkoutView extends StatelessWidget {
                       ),
                       Expanded(
                         child: ListView.builder(
-                          padding: EdgeInsets.only(top: 10),
+                          padding: const EdgeInsets.only(top: 10),
                           itemCount: state.workouts.length,
                           itemBuilder: (BuildContext context, int index) {
                             return Padding(

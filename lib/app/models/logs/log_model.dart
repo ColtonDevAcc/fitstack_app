@@ -16,7 +16,7 @@ abstract class Log extends Equatable {
   @JsonKey(name: 'updated_at')
   final DateTime? updatedAt;
 
-  Log({
+  const Log({
     required this.createdAt,
     required this.type,
     required this.value,
@@ -31,19 +31,12 @@ abstract class Log extends Equatable {
   }
 
   Map<String, dynamic> toJson();
-  factory Log.fromJson(Map<String, dynamic> json) => throw UnimplementedError();
+  factory Log.fromJson() => throw UnimplementedError();
 
-  factory Log.fromHealthData(HealthDataPoint data) => throw UnimplementedError();
+  factory Log.fromHealthData() => throw UnimplementedError();
 
 // copy with factory
-  factory Log.copyWith({
-    int? id,
-    DateTime? created_at,
-    DateTime? updated_at,
-    String? userId,
-    HealthDataType? type,
-    num? value,
-  }) {
+  factory Log.copyWith() {
     throw UnimplementedError();
   }
 

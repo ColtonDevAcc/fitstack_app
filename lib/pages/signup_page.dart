@@ -17,8 +17,8 @@ class _SignUp_PageState extends State<SignUp_Page> {
       backgroundColor: Theme.of(context).colorScheme.background,
       body: SafeArea(
         child: Padding(
-          padding: Platform.isAndroid ? const EdgeInsets.fromLTRB(0, 10, 0, 10) : EdgeInsets.all(0),
-          child: SignUp_Page(),
+          padding: Platform.isAndroid ? const EdgeInsets.fromLTRB(0, 10, 0, 10) : const EdgeInsets.all(0),
+          child: const SignUp_Page(),
         ),
       ),
     );

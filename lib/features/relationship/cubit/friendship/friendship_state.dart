@@ -6,7 +6,7 @@ class FriendshipState extends Equatable {
   final bool showAddFriend;
   final UserProfile friend;
 
-  FriendshipState({
+  const FriendshipState({
     required this.friendsList,
     required this.friend,
     required this.showAddFriend,

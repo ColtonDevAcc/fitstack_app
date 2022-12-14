@@ -15,13 +15,13 @@ class FocusedButton_Widget extends StatelessWidget {
       onPressed: onPressed,
       child: Container(
         decoration: BoxDecoration(
-          boxShadow: [
+          boxShadow: const [
             BoxShadow(color: Colors.grey, blurRadius: 20),
           ],
           color: Theme.of(context).colorScheme.primary,
           borderRadius: BorderRadius.circular(10),
         ),
-        padding: EdgeInsets.all(30),
+        padding: const EdgeInsets.all(30),
         width: MediaQuery.of(context).size.width * 0.8,
         child: Center(
           child: title,

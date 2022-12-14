@@ -14,7 +14,7 @@ class UserProgressSnapshotList extends StatelessWidget {
     return BlocBuilder<UserStatisticsBloc, UserStatisticsState>(
       builder: (context, state) {
         return state.status != UserStatisticsStatus.loaded && state.userStatistic != UserStatistic.empty()
-            ? Center(child: CircularProgressIndicator())
+            ? const Center(child: CircularProgressIndicator())
             : Stack(
                 children: [
                   ListView(
@@ -24,7 +24,7 @@ class UserProgressSnapshotList extends StatelessWidget {
                       if (state.userStatistic.weightLogs != null && state.userStatistic.weightLogs!.length > 2)
                         GestureDetector(
                           onTap: () {
-                            context.read<UserStatisticsBloc>().add(UserStatisticSelected(HealthDataType.WEIGHT));
+                            context.read<UserStatisticsBloc>().add(const UserStatisticSelected(HealthDataType.WEIGHT));
                             context.push('/user/statistic', extra: {'data': state.userStatistic.weightLogs});
                           },
                           child: UserGoalStatisticsGraph(
@@ -37,7 +37,7 @@ class UserProgressSnapshotList extends StatelessWidget {
                       if (state.userStatistic.bodyMassIndexLogs != null && state.userStatistic.bodyMassIndexLogs!.length > 2)
                         GestureDetector(
                           onTap: () {
-                            context.read<UserStatisticsBloc>().add(UserStatisticSelected(HealthDataType.BODY_MASS_INDEX));
+                            context.read<UserStatisticsBloc>().add(const UserStatisticSelected(HealthDataType.BODY_MASS_INDEX));
                             context.push('/user/statistic', extra: {'data': state.userStatistic.weightLogs});
                           },
                           child: UserGoalStatisticsGraph(
@@ -50,7 +50,7 @@ class UserProgressSnapshotList extends StatelessWidget {
                       if (state.userStatistic.bodyFatPercentageLogs != null && state.userStatistic.bodyFatPercentageLogs!.length > 2)
                         GestureDetector(
                           onTap: () {
-                            context.read<UserStatisticsBloc>().add(UserStatisticSelected(HealthDataType.BODY_FAT_PERCENTAGE));
+                            context.read<UserStatisticsBloc>().add(const UserStatisticSelected(HealthDataType.BODY_FAT_PERCENTAGE));
                             context.push('/user/statistic', extra: {'data': state.userStatistic.weightLogs});
                           },
                           child: UserGoalStatisticsGraph(
@@ -63,7 +63,7 @@ class UserProgressSnapshotList extends StatelessWidget {
                       if (state.userStatistic.activeEnergyBurned != null && state.userStatistic.activeEnergyBurned!.length > 2)
                         GestureDetector(
                           onTap: () {
-                            context.read<UserStatisticsBloc>().add(UserStatisticSelected(HealthDataType.ACTIVE_ENERGY_BURNED));
+                            context.read<UserStatisticsBloc>().add(const UserStatisticSelected(HealthDataType.ACTIVE_ENERGY_BURNED));
                             context.push('/user/statistic', extra: {'data': state.userStatistic.weightLogs});
                           },
                           child: UserGoalStatisticsGraph(
@@ -76,7 +76,7 @@ class UserProgressSnapshotList extends StatelessWidget {
                     ],
                   ),
                   //TODO: wrap around container
-                  if (state.snapshotUpdateStatus == StatisticsSnapshotUpdateStatus.loading) Positioned(child: LinearProgressIndicator()),
+                  if (state.snapshotUpdateStatus == StatisticsSnapshotUpdateStatus.loading) const Positioned(child: LinearProgressIndicator()),
                 ],
               );
       },

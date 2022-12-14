@@ -12,7 +12,7 @@ class ExercisePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double topPadding = MediaQuery.of(context).padding.top;
+    final double topPadding = MediaQuery.of(context).padding.top;
 
     return Padding(
       padding: EdgeInsets.fromLTRB(8, topPadding, 8, 0),
@@ -68,9 +68,9 @@ class ExercisePage extends StatelessWidget {
                     labelColor: Theme.of(context).colorScheme.onBackground,
                     indicator: UnderlineTabIndicator(
                       borderSide: BorderSide(color: Theme.of(context).colorScheme.secondary, width: 2),
-                      insets: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+                      insets: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
                     ),
-                    tabs: [
+                    tabs: const [
                       Text('Programs'),
                       Text('Workouts'),
                       Text('History'),
@@ -80,7 +80,7 @@ class ExercisePage extends StatelessWidget {
                 Expanded(
                   child: TabBarView(
                     controller: DefaultTabController.of(context),
-                    children: [
+                    children: const [
                       ProgramTabView(),
                       WorkoutView(),
                       HistoryTabView(),

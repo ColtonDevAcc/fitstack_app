@@ -73,7 +73,6 @@ class WorkoutStatisticsSnapshot extends StatelessWidget {
         Expanded(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
                 child: AutoSizeText.rich(
@@ -93,43 +92,43 @@ class WorkoutStatisticsSnapshot extends StatelessWidget {
               ),
               CircularStatisticsProgressIndicator(
                 ratio: 20,
-                innerColor: Color.fromRGBO(15, 186, 184, 1),
+                innerColor: const Color.fromRGBO(15, 186, 184, 1),
                 outerColor: Theme.of(context).colorScheme.primary,
                 label: 'M',
               ),
               CircularStatisticsProgressIndicator(
                 ratio: 20,
-                innerColor: Color.fromRGBO(15, 186, 184, 1),
+                innerColor: const Color.fromRGBO(15, 186, 184, 1),
                 outerColor: Theme.of(context).colorScheme.primary,
                 label: 'T',
               ),
               CircularStatisticsProgressIndicator(
                 ratio: 20,
-                innerColor: Color.fromRGBO(15, 186, 184, 1),
+                innerColor: const Color.fromRGBO(15, 186, 184, 1),
                 outerColor: Theme.of(context).colorScheme.primary,
                 label: 'W',
               ),
               CircularStatisticsProgressIndicator(
                 ratio: 20,
-                innerColor: Color.fromRGBO(15, 186, 184, 1),
+                innerColor: const Color.fromRGBO(15, 186, 184, 1),
                 outerColor: Theme.of(context).colorScheme.primary,
                 label: 'T',
               ),
               CircularStatisticsProgressIndicator(
                 ratio: 20,
-                innerColor: Color.fromRGBO(15, 186, 184, 1),
+                innerColor: const Color.fromRGBO(15, 186, 184, 1),
                 outerColor: Theme.of(context).colorScheme.primary,
                 label: 'F',
               ),
               CircularStatisticsProgressIndicator(
                 ratio: 20,
-                innerColor: Color.fromRGBO(15, 186, 184, 1),
+                innerColor: const Color.fromRGBO(15, 186, 184, 1),
                 outerColor: Theme.of(context).colorScheme.primary,
                 label: 'S',
               ),
               CircularStatisticsProgressIndicator(
                 ratio: 20,
-                innerColor: Color.fromRGBO(15, 186, 184, 1),
+                innerColor: const Color.fromRGBO(15, 186, 184, 1),
                 outerColor: Theme.of(context).colorScheme.primary,
                 label: 'S',
               ),

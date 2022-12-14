@@ -12,10 +12,10 @@ class AuthCache {
   bool writeToCache({String? key, dynamic value}) {
     if (key == null || value == null) return false;
     try {
-      this._cache.write(key, value);
+      _cache.write(key, value);
       return true;
     } catch (e) {
-      if (kDebugMode) print("error writing to auth_storage cache: ${e}");
+      if (kDebugMode) print("error writing to auth_storage cache: $e");
       return false;
     }
   }
@@ -23,19 +23,19 @@ class AuthCache {
   dynamic readFromCache({String? key}) {
     if (key == null) return null;
     try {
-      return this._cache.read(key);
+      return _cache.read(key);
     } catch (e) {
-      if (kDebugMode) print("error reading from auth_storage cache: ${e}");
+      if (kDebugMode) print("error reading from auth_storage cache: $e");
       return null;
     }
   }
 
   User readUserFromCache() {
     try {
-      User? user = jsonDecode(this._cache.read('user'));
-      return user == null ? User.empty() : user;
+      final User? user = jsonDecode(_cache.read('user'));
+      return user ?? User.empty();
     } catch (e) {
-      if (kDebugMode) print("Error reading user from cache: ${e}");
+      if (kDebugMode) print("Error reading user from cache: $e");
       return User.empty();
     }
   }

@@ -21,7 +21,7 @@ class SignupState extends Equatable {
   final User? user;
   final String phoneNumber;
 
-  SignupState({
+  const SignupState({
     this.errorMessage,
     this.phoneNumber = '',
     this.authState = AuthState.UNAUTHORIZED,

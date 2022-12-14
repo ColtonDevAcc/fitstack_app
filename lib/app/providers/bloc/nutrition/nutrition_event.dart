@@ -9,20 +9,20 @@ class NutritionEvent extends Equatable {
 
 class ScanBarcode extends NutritionEvent {
   final QRViewController controller;
-  ScanBarcode({required this.controller});
+  const ScanBarcode({required this.controller});
 }
 
 class GetNutritionData extends NutritionEvent {
   final String barcode;
-  GetNutritionData({required this.barcode});
+  const GetNutritionData({required this.barcode});
 }
 
 class GetNutritionDataFromProduct extends NutritionEvent {
   final Product product;
-  GetNutritionDataFromProduct({required this.product});
+  const GetNutritionDataFromProduct({required this.product});
 }
 
 class AddProductToHistory extends NutritionEvent {
   final Product product;
-  AddProductToHistory({required this.product});
+  const AddProductToHistory({required this.product});
 }

@@ -30,7 +30,6 @@ class WorkoutStatisticBox extends StatelessWidget {
               children: [
                 Row(
                   mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Icon(
@@ -38,7 +37,7 @@ class WorkoutStatisticBox extends StatelessWidget {
                       color: Theme.of(context).colorScheme.primary,
                       size: 20,
                     ),
-                    SizedBox(width: 5),
+                    const SizedBox(width: 5),
                     AutoSizeText(
                       value,
                       textScaleFactor: 1.2,

@@ -14,7 +14,7 @@ class CreateWorkout extends WorkoutEvent {}
 class DeleteWorkout extends WorkoutEvent {
   final int id;
 
-  DeleteWorkout({required this.id});
+  const DeleteWorkout({required this.id});
 
   @override
   List<Object> get props => [id];
@@ -30,7 +30,7 @@ class WorkoutStreamSubscriptionRequested extends WorkoutEvent {}
 class UpdateWorkoutName extends WorkoutEvent {
   final String name;
 
-  UpdateWorkoutName({required this.name});
+  const UpdateWorkoutName({required this.name});
 
   @override
   List<Object> get props => [name];

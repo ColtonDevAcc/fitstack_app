@@ -11,7 +11,7 @@ class Login_SignIn_With_Google_Widget extends StatelessWidget {
       onTap: () {
         // authenticateWithGoogle(context);
       },
-      color: Color.fromRGBO(254, 78, 78, 1),
+      color: const Color.fromRGBO(254, 78, 78, 1),
       child: Icon(
         FontAwesome.google,
         color: Theme.of(context).colorScheme.onSecondary,

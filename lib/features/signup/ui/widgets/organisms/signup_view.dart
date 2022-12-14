@@ -17,13 +17,13 @@ class SignUp_View extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> forms = [
-      BasicInfoFormView(),
-      UsernameFormView(),
-      FirstLastNameFormView(),
-      UploadPictureFormView(),
-      HealthStatsFormView(),
-      UserAccountAuthFormView(),
+    final List<Widget> forms = [
+      const BasicInfoFormView(),
+      const UsernameFormView(),
+      const FirstLastNameFormView(),
+      const UploadPictureFormView(),
+      const HealthStatsFormView(),
+      const UserAccountAuthFormView(),
     ];
 
     return BlocBuilder<SignupCubit, SignupState>(
@@ -56,7 +56,7 @@ class SignUp_View extends StatelessWidget {
             children: [
               Expanded(child: forms[state.index]),
               SignUpFocusedButton(text: 'Next', index: state.index),
-              SocialAuthButtons(),
+              const SocialAuthButtons(),
             ],
           ),
         );

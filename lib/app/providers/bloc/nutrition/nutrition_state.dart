@@ -30,7 +30,7 @@ class NutritionState extends Equatable {
     return NutritionState(
       product: product ?? this.product,
       status: status ?? this.status,
-      recentProducts: recentMeals ?? this.recentProducts,
+      recentProducts: recentMeals ?? recentProducts,
       scanController: scanController ?? this.scanController,
       barcode: barcode ?? this.barcode,
       panelController: panelController ?? this.panelController,

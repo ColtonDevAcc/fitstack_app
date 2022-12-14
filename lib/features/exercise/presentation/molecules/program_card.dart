@@ -23,7 +23,7 @@ class ProgramCard extends StatelessWidget {
             Expanded(
               flex: 2,
               child: ClipRRect(
-                borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20)),
+                borderRadius: const BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20)),
                 child: Stack(
                   children: [
                     Image.network(
@@ -32,8 +32,8 @@ class ProgramCard extends StatelessWidget {
                       width: double.infinity,
                       alignment: Alignment.topCenter,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
+                    const Padding(
+                      padding: EdgeInsets.all(10.0),
                       child: Align(
                         alignment: Alignment.topRight,
                         child: SavedWorkoutIcon(),
@@ -44,12 +44,10 @@ class ProgramCard extends StatelessWidget {
               ),
             ),
             Expanded(
-              flex: 1,
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
-                  mainAxisSize: MainAxisSize.max,
                   children: [
                     Text(
                       title.toUpperCase(),

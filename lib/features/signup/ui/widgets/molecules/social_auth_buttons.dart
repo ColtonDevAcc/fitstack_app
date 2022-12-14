@@ -12,11 +12,10 @@ class SocialAuthButtons extends StatelessWidget {
     return BlocBuilder<SignupCubit, SignupState>(
       builder: (context, state) {
         return AnimatedContainer(
-          duration: Duration(milliseconds: 400),
+          duration: const Duration(milliseconds: 400),
           curve: Curves.decelerate,
           height: state.index == 0 ? MediaQuery.of(context).size.height * .045 : 0,
           child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               if (state.index == 0)
@@ -27,7 +26,7 @@ class SocialAuthButtons extends StatelessWidget {
                     color: Theme.of(context).colorScheme.onPrimary,
                   ),
                 ),
-              if (state.index == 0) SizedBox(width: 15),
+              if (state.index == 0) const SizedBox(width: 15),
               if (state.index == 0)
                 SocialAuthButton_Widget(
                   onTap: () {},

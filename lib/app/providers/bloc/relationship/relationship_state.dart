@@ -5,9 +5,9 @@ class RelationshipState extends Equatable {
   final List<Friendship?>? friendship;
   const RelationshipState._({this.status = FriendshipFetchStatus.initial, this.friendship});
 
-  const RelationshipState.Initial() : this._();
-  const RelationshipState.Loaded(List<Friendship?>? friendship) : this._(status: FriendshipFetchStatus.loaded, friendship: friendship);
-  const RelationshipState.Error() : this._(status: FriendshipFetchStatus.error);
+  const RelationshipState.initial() : this._();
+  const RelationshipState.loaded(List<Friendship?>? friendship) : this._(status: FriendshipFetchStatus.loaded, friendship: friendship);
+  const RelationshipState.error() : this._(status: FriendshipFetchStatus.error);
 
   @override
   List<Object> get props => [status, friendship ?? []];

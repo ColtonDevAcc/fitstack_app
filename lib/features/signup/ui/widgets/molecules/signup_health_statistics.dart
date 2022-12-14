@@ -13,11 +13,9 @@ class Signup_health_Statistics extends StatelessWidget {
     return BlocBuilder<SignupCubit, SignupState>(
       buildWhen: (previous, current) => previous.healthData != current.healthData,
       builder: (context, state) {
-        var formKey = state.formKey?[state.index];
+        final formKey = state.formKey?[state.index];
         formKey?.currentState?.validate();
-        if (state.healthData == null) {
-          BlocProvider.of<SignupCubit>(context).healthDataChanged(null);
-        }
+        if (state.healthData == null) {}
         return FormBuilder(
           // autovalidateMode: AutovalidateMode.always,
           key: formKey,
@@ -30,17 +28,15 @@ class Signup_health_Statistics extends StatelessWidget {
                 child: GestureDetector(
                   child: Container(
                     width: double.infinity,
-                    padding: EdgeInsets.all(20.0),
+                    padding: const EdgeInsets.all(20.0),
                     decoration: BoxDecoration(
                       color: Theme.of(context).colorScheme.surface,
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: Wrap(
-                      runAlignment: WrapAlignment.start,
                       spacing: 1,
                       runSpacing: 10,
                       alignment: WrapAlignment.spaceEvenly,
-                      crossAxisAlignment: WrapCrossAlignment.start,
                       children: state.healthData != null
                           ? ffState.value!
                               .map(

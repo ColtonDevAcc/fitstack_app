@@ -10,21 +10,21 @@ class HealthStatsFormView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SignupFormHeader(
+        const SignupFormHeader(
           icon: FontAwesome.person_running,
           text: 'Statistics',
           subtitle: 'Lets import your progress',
         ),
-        Spacer(flex: 1),
+        const Spacer(),
         Text(
           "Here is what we were able to retrieve",
           style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                 color: Theme.of(context).colorScheme.onBackground.withOpacity(.7),
               ),
         ),
-        SizedBox(height: 10),
-        Signup_health_Statistics(),
-        Spacer(flex: 1),
+        const SizedBox(height: 10),
+        const Signup_health_Statistics(),
+        const Spacer(),
       ],
     );
   }
