@@ -1,4 +1,4 @@
-package com.example.fitstackapp
+package com.voodoostack.fitstack
 
 import io.flutter.embedding.android.FlutterActivity
 

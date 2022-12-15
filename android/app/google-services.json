@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "606254244778",
+    "project_id": "fitstack-337104",
+    "storage_bucket": "fitstack-337104.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:606254244778:android:da05a52e47b791e05b81d3",
+        "android_client_info": {
+          "package_name": "com.voodoostack.fitstack"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "606254244778-49fo7ar6okpmp7r4sjaqdpmcuj2mu7sj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD00CGxTDoVgQEKBKLh2xIfudyaIHifS5Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "606254244778-49fo7ar6okpmp7r4sjaqdpmcuj2mu7sj.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "606254244778-ama567j91u9k53gukskb1q74761snb1r.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "io.enigmic.FitStack"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:606254244778:android:3f2165f34c5080eb5b81d3",
+        "android_client_info": {
+          "package_name": "io.enigmic.FitStack"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "606254244778-49fo7ar6okpmp7r4sjaqdpmcuj2mu7sj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD00CGxTDoVgQEKBKLh2xIfudyaIHifS5Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "606254244778-49fo7ar6okpmp7r4sjaqdpmcuj2mu7sj.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "606254244778-ama567j91u9k53gukskb1q74761snb1r.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "io.enigmic.FitStack"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

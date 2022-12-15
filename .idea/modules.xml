@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/fitstackapp.iml" filepath="$PROJECT_DIR$/fitstackapp.iml" />
-      <module fileurl="file://$PROJECT_DIR$/android/fitstackapp_android.iml" filepath="$PROJECT_DIR$/android/fitstackapp_android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/FitStack.iml" filepath="$PROJECT_DIR$/FitStack.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android/FitStack_android.iml" filepath="$PROJECT_DIR$/android/FitStack_android.iml" />
     </modules>
   </component>
 </project>

@@ -2,17 +2,16 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<!-- health kit start --> 
-	<key>NSHealthShareUsageDescription</key>
-	<string>We will sync your data with the Apple Health app to give you better insights</string>
-	<key>NSHealthUpdateUsageDescription</key>
-	<string>We will sync your data with the Apple Health app to give you better insights</string>
-	<!-- health kit end --> 
-
+	<!-- encryption compliancy start -->
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
+	<!-- encryption compliancy end -->
+	<key>CADisableMinimumFrameDurationOnPhone</key>
+	<true/>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>Fitstackapp</string>
+	<string>FitStack</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -20,7 +19,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>fitstackapp</string>
+	<string>FitStack</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -31,6 +30,16 @@
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>This app requires access to the camera.</string>
+	<!-- HealthKit Section Start -->
+	<key>NSHealthShareUsageDescription</key>
+	<string>We will sync your data with the Apple Health app to give you better insights</string>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>We will sync your data with the Apple Health app to give you better insights</string>
+	<!-- HealthKit Section End -->
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>This app requires access to the photo library.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

@@ -1,0 +1,75 @@
+import 'package:FitStack/app/models/user/user_model.dart';
+import 'package:FitStack/app/models/workout/exercise_model.dart';
+import 'package:FitStack/app/providers/bloc/app/app_bloc.dart';
+import 'package:FitStack/app/providers/bloc/exercise/exercise_bloc.dart';
+import 'package:extended_image/extended_image.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:icons_plus/icons_plus.dart';
+import 'package:go_router/go_router.dart';
+
+class ExerciseListTile extends StatelessWidget {
+  const ExerciseListTile({
+    Key? key,
+    required this.exercise,
+  }) : super(key: key);
+
+  final Exercise exercise;
+  @override
+  Widget build(BuildContext context) {
+    final User user = context.read<AppBloc>().state.user ?? User.empty();
+    return Slidable(
+      startActionPane: user.id == "8uySBz11AfV9gf1VYlGRznOoZWr1"
+          ? ActionPane(
+              motion: const ScrollMotion(),
+              children: [
+                Expanded(
+                  child: GestureDetector(
+                    onTap: () {
+                      context.read<ExerciseBloc>().add(EditExercise(exercise: exercise));
+                      context.pushNamed("edit");
+                    },
+                    child: Container(
+                      color: Theme.of(context).colorScheme.secondary,
+                      height: 100,
+                      child: Icon(
+                        FontAwesome.pencil,
+                        color: Theme.of(context).colorScheme.background,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            )
+          : null,
+      child: ListTile(
+        contentPadding: const EdgeInsets.symmetric(horizontal: 10),
+        title: Text(exercise.name ?? ""),
+        leading: exercise.images == null || exercise.images!.isEmpty
+            ? null
+            : Container(
+                width: 50,
+                height: 75,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: Theme.of(context).colorScheme.background,
+                  image: DecorationImage(
+                    image: ExtendedNetworkImageProvider(exercise.images!.first),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+        subtitle: Wrap(
+          spacing: 3,
+          children: exercise.muscleTarget != [] && exercise.muscleTarget != null
+              ? exercise.muscleTarget!.map((e) {
+                  return Chip(label: Text(e.name), backgroundColor: Theme.of(context).colorScheme.surface);
+                }).toList()
+              : [],
+        ),
+        trailing: Icon(FontAwesome.plus, color: Theme.of(context).colorScheme.secondary, size: 20),
+      ),
+    );
+  }
+}

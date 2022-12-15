@@ -1,51 +1,147 @@
-name: fitstackapp
+name: FitStack
 description: A new Flutter project.
-publish_to: "none" # Remove this line if you wish to publish to pub.dev
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 environment:
-  sdk: ">=2.16.2 <3.0.0"
+  sdk: '>=2.16.2 <3.0.0'
 
 dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.2
 
+  #util / services
+  device_info_plus: ^8.0.0
+  units_converter: ^2.0.1
+  collection:
+  very_good_performance: ^0.0.4
+  get_it: ^7.2.0
+  permission_handler: ^10.2.0
+  dio: ^4.0.6
+
+  #annotation
+  json_annotation: ^4.7.0
+  copy_with_extension_gen: ^5.0.0
+
   # state
-  bloc: ^8.0.3
-  shared_preferences: ^2.0.15
+  flutter_bloc: ^8.1.1
+  hydrated_bloc: ^9.0.0
+  shared_preferences:
+  equatable:
+  meta: ^1.3.0
+  very_good_analysis: ^3.1.0
+  flutter_form_builder: ^7.4.0
+  form_builder_validators: ^8.2.0
+
+  #cache/storage
+  get_storage: ^2.0.3
+  flutter_secure_storage: ^7.0.0
+
+  #ux
+  clipboard: ^0.1.3
+  pull_to_refresh: ^2.0.0
+  reorderables: ^0.5.0
+  expansion_tile_card: ^2.0.0
+  timelines: ^0.1.0
+  pluto_grid: ^5.3.0
 
   # ui
-  dot_navigation_bar: ^1.0.1+4
-  lottie: ^1.3.0
-  rive: ^0.8.4
+  persistent_bottom_nav_bar: ^5.0.2
+  lottie: ^2.0.0
+  rive: ^0.9.1
   carousel_slider: ^4.1.1
+  syncfusion_flutter_charts: ^20.2.39
+  syncfusion_flutter_datepicker: ^20.2.39
+  dropdown_button2: ^1.6.3
+  auto_size_text: ^3.0.0
+  badges: ^2.0.3
+  flutter_slidable: ^2.0.0
+  modal_bottom_sheet: ^2.1.2
+  anim_search_bar: ^2.0.2
+  fluttertoast: ^8.1.1
+  animations: ^2.0.7
+  fl_chart: ^0.55.2
+  sliding_up_panel: ^2.0.0+1
+  icons_plus: ^3.0.0
+  animated_loading_border: ^0.0.1
+
+  #nutrition
+  openfoodfacts: ^1.27.1
+  barcode: ^2.2.3
+  qr_code_scanner: ^1.0.1
+
+  #animations
+  animate_do: ^3.0.2
+
+  #theme
+  flex_color_scheme: ^6.0.1
+
+  #gameify
+  achievement_view: ^1.0.0
+
+  #auth
+  email_validator: ^2.0.1
 
   # fonts
-  google_fonts: ^2.3.2
-  font_awesome_flutter: ^10.1.0
-  line_icons: ^2.0.1
+  google_fonts: ^3.0.1
+  dependencies:
+  font_awesome_flutter: '4.7.0'
 
   # Images
   flutter_svg: ^1.0.3
+  image_picker: ^0.8.6
 
   # for debug
   device_preview: ^1.0.0
 
-  # interatial
-  health: ^3.4.4
+  # health
+  health: ^4.4.0
 
   # routing
-  auto_route: ^3.2.4
+  go_router: ^5.2.0
+
+  #firebase
+  firebase_core: ^2.2.0
+  firebase_crashlytics: ^3.0.2
+  firebase_analytics: ^10.0.2
+  firebase_performance: ^0.9.0+5
+  firebase_storage: ^11.0.5
+  firebase_dynamic_links: ^5.0.2
+  firebase_auth: ^4.1.2
+
+  #image
+  extended_image: ^6.3.2
+  svg_path_parser: ^1.1.1
+  touchable: ^1.0.2
+  xml:
+
+dependency_overrides:
+  font_awesome_flutter:
+    git:
+      url: https://github.com/ColtonDevAcc/fa_flutter.git
+      ref: master
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  mocktail: ^0.3.0
+  flutter_lorem: ^2.0.0
+  flutter_launcher_icons: ^0.11.0
+  build_runner: ^2.2.0
+  json_serializable: ^6.3.1
+  copy_with_extension: ^5.0.0
+  flutter_lints: ^2.0.1
 
-  auto_route_generator:
-  build_runner:
+flutter_icons:
+  android: true
+  ios: true
+  image_path: 'assets/app/AppIcons/appstore.png'
 
 flutter:
   uses-material-design: true
   assets:
     - assets/app/icons/
     - assets/app/images/
+    - assets/app/Appicons/
+    - assets/muscles/model/
+    - assets/muscles/

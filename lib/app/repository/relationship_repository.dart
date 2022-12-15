@@ -1,0 +1,133 @@
+import 'dart:async';
+import 'dart:developer';
+
+import 'package:FitStack/app/helpers/endpoints.dart';
+import 'package:FitStack/app/models/user/friendship_model.dart';
+import 'package:FitStack/app/models/user/user_profile_model.dart';
+import 'package:FitStack/app/services/analytics_service.dart';
+import 'package:FitStack/main.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:dio/dio.dart';
+
+class RelationshipRepository {
+  final dio = Endpoints();
+  final storage = const FlutterSecureStorage();
+  final controller = StreamController<FriendStream>.broadcast();
+
+  RelationshipRepository();
+
+  //! token section start
+  Stream<FriendStream> get friendStatus async* {
+    yield FriendStream(friendship: [], status: FriendshipFetchStatus.initial);
+    yield* controller.stream;
+  }
+
+  Future<List<UserProfile?>?> getFriends({required String token}) async {
+    try {
+      controller.add(FriendStream(friendship: [], status: FriendshipFetchStatus.loading));
+      final Response response = await dio.get(
+        '/friendship/get-friends',
+        options: Options(
+          headers: {"Authorization": "Bearer $token"},
+        ),
+      );
+
+      if (response.statusCode == 200) {
+        final List responseJson = response.data as List;
+
+        final friends = responseJson.map((e) => UserProfile.fromJson(e)).toList();
+        return friends;
+      } else {
+        log("error");
+      }
+    } catch (e) {
+      controller.add(FriendStream(friendship: [], status: FriendshipFetchStatus.error));
+      locator<AnalyticsService>().logError(exception: e.toString(), reason: 'error getting friends');
+      return null;
+    }
+    return null;
+  }
+
+  Future<List<UserProfile?>?> getFriendsList({required String token}) async {
+    try {
+      controller.add(FriendStream(friendship: [], status: FriendshipFetchStatus.loading));
+      final Response response = await dio.get(
+        '/friendship/get-friends-list',
+        options: Options(
+          headers: {"Authorization": "Bearer $token"},
+        ),
+      );
+
+      if (response.statusCode == 200) {
+        final List responseJson = response.data as List;
+
+        final friends = responseJson.map((e) => UserProfile.fromJson(e)).toList();
+        return friends;
+      } else {
+        log("error");
+      }
+    } catch (e) {
+      controller.add(FriendStream(friendship: [], status: FriendshipFetchStatus.error));
+      locator<AnalyticsService>().logError(exception: e.toString(), reason: 'error getting friends');
+      return null;
+    }
+    return null;
+  }
+
+  Future<UserProfile?> getFriend({required String token, required String email}) async {
+    try {
+      controller.add(FriendStream(friendship: [], status: FriendshipFetchStatus.loading));
+      final Response response = await dio.post(
+        '/friendship/get-friend',
+        options: Options(
+          headers: {"Authorization": "Bearer $token"},
+        ),
+        data: {"email": email},
+      );
+
+      if (response.statusCode == 200) {
+        final friend = UserProfile.fromJson(response.data);
+        return friend;
+      } else {
+        log("error");
+      }
+    } catch (e) {
+      controller.add(FriendStream(friendship: [], status: FriendshipFetchStatus.error));
+      locator<AnalyticsService>().logError(exception: e.toString(), reason: 'error getting friends');
+      return null;
+    }
+    return null;
+  }
+
+  Future<void> addFriend({required String token, required String uid}) async {
+    try {
+      controller.add(FriendStream(friendship: [], status: FriendshipFetchStatus.loading));
+      final Response response = await dio.post(
+        '/friendship/add',
+        options: Options(
+          headers: {"Authorization": "Bearer $token"},
+        ),
+        data: {"to_user": uid},
+      );
+
+      if (response.statusCode != 200) {
+        throw Error();
+      }
+    } catch (e) {
+      controller.add(FriendStream(friendship: [], status: FriendshipFetchStatus.error));
+      locator<AnalyticsService>().logError(exception: e.toString(), reason: 'error adding friend');
+      return;
+    }
+    return;
+  }
+
+  void dispose() => controller.close();
+}
+
+class FriendStream {
+  List<Friendship> friendship;
+  FriendshipFetchStatus status;
+  FriendStream({required this.friendship, required this.status});
+}
+
+enum FriendshipFetchStatus { initial, loading, error, loaded }
