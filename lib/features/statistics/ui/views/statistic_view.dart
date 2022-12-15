@@ -55,6 +55,7 @@ class StatisticView extends StatelessWidget {
                   color: Theme.of(context).colorScheme.primary,
                   subtitle: 'Weight Difference',
                   dataType: HealthDataType.WEIGHT,
+                  updating: false,
                 ),
                 const SizedBox(height: 20),
                 //create fl_chart that displays weight by day

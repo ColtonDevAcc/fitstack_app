@@ -157,6 +157,7 @@ class UserRepository {
 
   Future<UserStatistic> updateStatisticsSnapshot({required Duration fetchDate}) async {
     try {
+      fetchDate = Duration(days: 100);
       final String token = await fb.FirebaseAuth.instance.currentUser!.getIdToken();
       final Map<HealthDataType, List<Log>> statistics = await UserHealthRepository().getUserStatisticsSnapshot(fetchDate: fetchDate);
 

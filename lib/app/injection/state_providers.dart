@@ -85,7 +85,8 @@ class StateProviders extends StatelessWidget {
           BlocProvider<UserStatisticsBloc>(
             create: (BuildContext context) =>
                 UserStatisticsBloc(userRepository: context.read<UserRepository>(), userHealthRepository: context.read<UserHealthRepository>())
-                  ..add(UserStatisticsRequested()),
+                  ..add(UserStatisticsRequested())
+                  ..add(UserStatisticsSnapshotUpdateRequested()),
           ),
           BlocProvider<WorkoutBloc>(
             create: (BuildContext context) => WorkoutBloc(

@@ -63,6 +63,7 @@ dependencies:
   fl_chart: ^0.55.2
   sliding_up_panel: ^2.0.0+1
   icons_plus: ^3.0.0
+  animated_loading_border: ^0.0.1
 
   #nutrition
   openfoodfacts: ^1.27.1

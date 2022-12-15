@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:FitStack/app/providers/bloc/app/app_bloc.dart';
 import 'package:FitStack/app/providers/bloc/user_statistics/user_statistics_bloc.dart';
+import 'package:FitStack/features/dashboard/presentation/molecules/dashboard_stats_snapshot.dart';
 import 'package:FitStack/features/dashboard/presentation/molecules/workout_recommendations_list.dart';
 import 'package:FitStack/features/dashboard/presentation/molecules/statistics_dashboard.dart';
 import 'package:FitStack/features/dashboard/presentation/organisms/user_statistics_snpashot_list.dart';
@@ -71,47 +74,13 @@ class DashboardPage extends StatelessWidget {
                     ),
                   ),
                   WorkoutRecommendationList(pageController: pageController),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(0, topPadding, 10, bottomPadding),
-                    child: Row(
-                      children: [
-                        Text("Progress Snapshot", textScaleFactor: textLabelScale, style: labelTextStyle),
-                        const Spacer(),
-                        TextButton(
-                          onPressed: () => context.read<UserStatisticsBloc>().add(UserStatisticsRequested()),
-                          child: BlocBuilder<UserStatisticsBloc, UserStatisticsState>(
-                            builder: (context, state) {
-                              return Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    state.status == UserStatisticsStatus.loading ? "syncing" : "sync",
-                                    textScaleFactor: 1.1,
-                                    style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                                          color: Theme.of(context).colorScheme.onBackground,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                  ),
-                                  const SizedBox(width: 5),
-                                  Spin(
-                                    controller: (controller) =>
-                                        state.status == UserStatisticsStatus.loading ? controller.repeat() : controller.stop(),
-                                    infinite: true,
-                                    child: Icon(
-                                      FontAwesome.rotate,
-                                      size: 15,
-                                      color: Theme.of(context).colorScheme.onBackground,
-                                    ),
-                                  ),
-                                ],
-                              );
-                            },
-                          ),
-                        ),
-                      ],
+                  BlocBuilder<UserStatisticsBloc, UserStatisticsState>(
+                    builder: (context, state) => DashboardStatsSnapshotList(
+                      updating: state.snapshotUpdateStatus == StatisticsSnapshotUpdateStatus.loading,
+                      loading: state.status == UserStatisticsStatus.loading,
+                      userStatistic: state.userStatistic,
                     ),
-                  ),
-                  SizedBox(height: MediaQuery.of(context).size.height * .2, child: const UserProgressSnapshotList()),
+                  )
                 ],
               ),
             ),

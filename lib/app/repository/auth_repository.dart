@@ -43,9 +43,13 @@ class AuthenticationRepository {
       }
     } else {
       try {
-        final token = await fb.FirebaseAuth.instance.currentUser?.getIdToken();
-        final User? user = await UserRepository().getUser(token: token!);
-        controller.add(AuthStream(user: user!, status: AuthenticationStatus.authenticated));
+        final String token = await fbUser.getIdToken();
+        final User? user = await UserRepository().getUser(token: token);
+        if (user != null && user != User.empty()) {
+          controller.add(AuthStream(user: user, status: AuthenticationStatus.authenticated));
+        } else {
+          controller.add(AuthStream(user: User.empty(), status: AuthenticationStatus.unauthenticated));
+        }
       } catch (e) {
         log('error: $e, stacktrace: ${StackTrace.current}');
         controller.add(AuthStream(user: User.empty(), status: AuthenticationStatus.error, message: "Error logging in with token $e"));

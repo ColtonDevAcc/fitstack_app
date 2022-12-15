@@ -46,7 +46,6 @@ class UserStatisticsBloc extends Bloc<UserStatisticsEvent, UserStatisticsState> 
       emit(state.copyWith(status: UserStatisticsStatus.error));
       FitStackToast.showErrorToast("error retrieving user statistics");
     }
-    add(UserStatisticsSnapshotUpdateRequested());
   }
 
   Future<void> onUserStatisticsUpdated(UserStatisticsUpdated event, Emitter<UserStatisticsState> emit) async {
