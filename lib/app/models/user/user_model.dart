@@ -37,19 +37,19 @@ class User extends Equatable {
   final UserProfile profile;
 
   const User({
-    this.bmiGoal,
-    this.weightGoal,
     required this.profile,
-    this.password,
-    this.updatedAt,
-    this.createdAt,
-    this.refreshToken,
-    this.id,
     required this.email,
     required this.firstName,
     required this.lastName,
     required this.dateOfBirth,
     required this.emailVerified,
+    this.bmiGoal,
+    this.weightGoal,
+    this.password,
+    this.updatedAt,
+    this.createdAt,
+    this.refreshToken,
+    this.id,
     this.phoneNumber,
   });
 
@@ -96,18 +96,3 @@ class User extends Equatable {
         profile: UserProfile.empty(),
       );
 }
-
-//  "profile": {
-//         "id": "8uySBz11AfV9gf1VYlGRznOoZWr1",
-//         "challenges": null,
-//         "achievements": null,
-//         "user_statistics": null,
-//         "display_name": "ColtonDevAcc",
-//         "fit_credits": 2,
-//         "social_points": 20,
-//         "days_logged_in_a_row": 2,
-//         "avatar": null,
-//         "created_at": "0001-01-01T00:00:00Z",
-//         "updated_at": "0001-01-01T00:00:00Z",
-//         "DeletedAt": null
-// }

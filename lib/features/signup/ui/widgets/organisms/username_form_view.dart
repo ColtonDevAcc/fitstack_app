@@ -30,7 +30,7 @@ class UsernameFormView extends StatelessWidget {
               autoFocusOnValidationFailure: true,
               autovalidateMode: AutovalidateMode.always,
               key: formKey,
-              onChanged: () => BlocProvider.of<SignupCubit>(context).formKeyChanged(formKey!),
+              onChanged: () => BlocProvider.of<SignupCubit>(context).formKeyChanged(formKey),
               child: SignUpFullscreenTextfield(
                 key: const Key("usernameForm"),
                 onChanged: (p0) => BlocProvider.of<SignupCubit>(context).usernameChanged(p0 ?? ""),

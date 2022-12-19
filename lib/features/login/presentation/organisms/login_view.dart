@@ -1,8 +1,8 @@
 import 'package:FitStack/app/providers/bloc/app/app_bloc.dart';
 import 'package:FitStack/app/repository/auth_repository.dart';
 import 'package:FitStack/features/login/cubit/login_cubit.dart';
-import 'package:FitStack/widgets/atoms/FitStack_Logo_Widget.dart';
-import 'package:FitStack/widgets/atoms/focusedButton_widget.dart';
+import 'package:FitStack/widgets/atoms/fitstack_logo.dart';
+import 'package:FitStack/widgets/atoms/focused_button.dart';
 import 'package:FitStack/widgets/atoms/socialAuthButton_widget.dart';
 import 'package:FitStack/widgets/atoms/textfield_widget.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -23,7 +23,7 @@ class LoginView extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const FitStack_Logo_Widget(),
+          const FitStackLogo(),
           const SizedBox(height: 15),
           AutoSizeText(
             'LETS SIGN YOU IN,',
@@ -90,7 +90,7 @@ class LoginView extends StatelessWidget {
           BlocBuilder<AppBloc, AppState>(
             buildWhen: (previous, current) => previous.status != current.status,
             builder: (context, state) {
-              return FocusedButton_Widget(
+              return FocusedButton(
                 title: state.status == AuthenticationStatus.authenticating
                     ? SizedBox(height: 15, width: 15, child: CircularProgressIndicator(color: Theme.of(context).colorScheme.onPrimary))
                     : Text(

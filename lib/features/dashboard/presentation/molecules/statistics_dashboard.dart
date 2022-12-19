@@ -1,5 +1,13 @@
+import 'dart:developer';
+
+import 'package:FitStack/app/models/muscle/muscle_model.dart';
+import 'package:FitStack/app/providers/bloc/exercise/exercise_bloc.dart';
+import 'package:FitStack/app/providers/bloc/user_recovery/user_recovery_bloc.dart';
 import 'package:FitStack/features/dashboard/presentation/atoms/progress_bar.dart';
+import 'package:FitStack/features/recovery/presentation/atoms/recovery_container.dart';
+import 'package:FitStack/features/workout/ui/widgets/atoms/exercise_muscle_selector.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:icons_plus/icons_plus.dart';
 
 class StatisticsDashboard extends StatelessWidget {
@@ -7,25 +15,31 @@ class StatisticsDashboard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Row(
       children: [
-        const ProgressBar(
-          barColor: Color.fromRGBO(253, 117, 5, 1),
-          totalValue: 100,
-          partialValue: 73,
-          icon: FontAwesome.droplet,
+        BlocBuilder<UserRecoveryBloc, UserRecoveryState>(
+          builder: (context, state) {
+            return RecoveryContainer(
+              height: 200,
+              width: 100,
+              muscleAnatomyViewRotationIndex: 0,
+              recovery: state.userRecovery,
+              backMuscleList: const [],
+              frontMuscleList: state.frontMuscleList,
+              majorMuscleColor: Theme.of(context).colorScheme.tertiary,
+              minorMuscleColor: Colors.yellow,
+              onMajorMuscleSelected: (TapUpDetails tapUpDetails, Muscle muscle) =>
+                  context.read<ExerciseBloc>().add(SelectMajorMuscle(muscle: muscle)),
+              onMinorMuscleSelected: (longPressDetails, muscle) => context.read<ExerciseBloc>().add(SelectMinorMuscle(muscle: muscle)),
+            );
+          },
         ),
-        const ProgressBar(
-          barColor: Color.fromRGBO(87, 54, 232, 1),
-          totalValue: 100,
-          partialValue: 88,
-          icon: FontAwesome.jug_detergent,
-        ),
-        ProgressBar(
-          barColor: Theme.of(context).colorScheme.tertiary,
-          totalValue: 100,
-          partialValue: 25,
-          icon: FontAwesome.fire,
+        const SizedBox(width: 20),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ProgressBar(barColor: Theme.of(context).colorScheme.tertiary, totalValue: 100, partialValue: 25, icon: FontAwesome.record_vinyl),
+          ],
         ),
       ],
     );

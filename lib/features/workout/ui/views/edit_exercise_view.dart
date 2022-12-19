@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:go_router/go_router.dart';
+import 'package:icons_plus/icons_plus.dart';
 
 class EditExerciseView extends StatelessWidget {
   const EditExerciseView({Key? key}) : super(key: key);
@@ -32,11 +33,9 @@ class EditExerciseView extends StatelessWidget {
                           onTap: () {
                             context.pop();
                           },
-                          child: Container(
-                            child: Icon(
-                              Icons.arrow_back,
-                              color: Theme.of(context).colorScheme.onBackground,
-                            ),
+                          child: Icon(
+                            Icons.arrow_back,
+                            color: Theme.of(context).colorScheme.onBackground,
                           ),
                         ),
                       ),
@@ -118,15 +117,36 @@ class EditExerciseView extends StatelessWidget {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
+                      child: Row(
+                        children: [
+                          Text(
+                            "Muscle Targets",
+                            style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                                  color: Theme.of(context).colorScheme.onBackground.withOpacity(0.7),
+                                ),
+                          ),
+                          const Spacer(),
+                          IconButton(
+                            padding: EdgeInsets.zero,
+                            onPressed: () => context.read<ExerciseBloc>().add(const RotateMuscleAnatomyView()),
+                            splashRadius: 20,
+                            constraints: const BoxConstraints(),
+                            visualDensity: VisualDensity.compact,
+                            icon: const Icon(FontAwesome.rotate),
+                          )
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
                       child: ExerciseMuscleSelector(
                         majorMuscles: state.majorMuscles,
                         minorMuscles: state.minorMuscles,
                         frontMuscleList: state.frontMuscleList,
-                        majorMuscleColor: Theme.of(context).colorScheme.error,
+                        majorMuscleColor: Theme.of(context).colorScheme.primary,
                         minorMuscleColor: Colors.yellow,
-                        onMajorMuscleSelected: (TapUpDetails, Muscle) => context.read<ExerciseBloc>().add(SelectMajorMuscle(muscle: Muscle)),
-                        onMinorMuscleSelected: (LongPressEndDetails, Muscle) => context.read<ExerciseBloc>().add(SelectMinorMuscle(muscle: Muscle)),
-                        onIconPressed: () => context.read<ExerciseBloc>().add(const RotateMuscleAnatomyView()),
+                        onMajorMuscleSelected: (tapUpDetails, muscle) => context.read<ExerciseBloc>().add(SelectMajorMuscle(muscle: muscle)),
+                        onMinorMuscleSelected: (longPressEndDetails, muscle) => context.read<ExerciseBloc>().add(SelectMinorMuscle(muscle: muscle)),
                         muscleAnatomyViewRotationIndex: state.muscleAnatomyViewRotationIndex,
                         backMuscleList: state.backMuscleList,
                       ),

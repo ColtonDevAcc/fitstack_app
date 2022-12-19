@@ -16,17 +16,11 @@ class WorkoutRecommendationCardState extends State<WorkoutRecommendationCard> {
       elevation: 2,
       clipBehavior: Clip.antiAlias,
       color: Colors.white,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Ink.image(
-            image: const AssetImage('assets/app/images/Workout.jpg'),
-            height: 140,
-            fit: BoxFit.cover,
-          ),
+          Ink.image(image: const AssetImage('assets/app/images/Workout.jpg'), height: MediaQuery.of(context).size.height * .12, fit: BoxFit.cover),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.all(10.0),
@@ -34,7 +28,7 @@ class WorkoutRecommendationCardState extends State<WorkoutRecommendationCard> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Flexible(
+                  Expanded(
                     child: AutoSizeText(
                       "Title",
                       maxLines: 1,
@@ -42,7 +36,6 @@ class WorkoutRecommendationCardState extends State<WorkoutRecommendationCard> {
                             color: Theme.of(context).colorScheme.primary,
                             fontWeight: FontWeight.bold,
                           ),
-                      textScaleFactor: 1.5,
                     ),
                   ),
                   Expanded(

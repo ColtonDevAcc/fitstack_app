@@ -31,7 +31,7 @@ class BasicInfoFormView extends StatelessWidget {
               child: FormBuilder(
                 autoFocusOnValidationFailure: true,
                 autovalidateMode: AutovalidateMode.always,
-                onChanged: () => BlocProvider.of<SignupCubit>(context).formKeyChanged(formKey!),
+                onChanged: () => BlocProvider.of<SignupCubit>(context).formKeyChanged(formKey),
                 key: formKey,
                 child: Column(
                   children: [

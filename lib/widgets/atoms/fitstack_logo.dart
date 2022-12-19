@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class FitStack_Logo_Widget extends StatelessWidget {
-  const FitStack_Logo_Widget({Key? key}) : super(key: key);
+class FitStackLogo extends StatelessWidget {
+  const FitStackLogo({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

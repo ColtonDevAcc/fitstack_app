@@ -107,9 +107,9 @@ class ExerciseBloc extends Bloc<ExerciseEvent, ExerciseState> {
       minorMuscles.remove(event.muscle);
       emit(state.copyWith(minorMuscles: minorMuscles));
     } else if (!minorMuscles.contains(event.muscle) &&
-        event.muscle.type != PrimaryMuscleGroups.empty &&
-        event.muscle.type != PrimaryMuscleGroups.outline &&
-        event.muscle.type != PrimaryMuscleGroups.inner_outline) {
+        event.muscle.group.name != 'empty' &&
+        event.muscle.group.name != 'outline' &&
+        event.muscle.group.name != 'inner_outline') {
       selectedMuscles.add(event.muscle);
     }
     emit(state.copyWith(majorMuscles: selectedMuscles));
@@ -125,9 +125,9 @@ class ExerciseBloc extends Bloc<ExerciseEvent, ExerciseState> {
       majorMuscles.remove(event.muscle);
       emit(state.copyWith(majorMuscles: majorMuscles));
     } else if (!majorMuscles.contains(event.muscle) &&
-        event.muscle.type != PrimaryMuscleGroups.empty &&
-        event.muscle.type != PrimaryMuscleGroups.outline &&
-        event.muscle.type != PrimaryMuscleGroups.inner_outline) {
+        event.muscle.group.name != 'empty' &&
+        event.muscle.group.name != 'outline' &&
+        event.muscle.group.name != 'inner_outline') {
       selectedMuscles.add(event.muscle);
     }
     emit(state.copyWith(minorMuscles: selectedMuscles));

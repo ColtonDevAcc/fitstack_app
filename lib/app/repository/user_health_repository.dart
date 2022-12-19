@@ -58,7 +58,7 @@ class UserHealthRepository {
     List<HealthDataPoint> healthData = [];
     final List<HealthDataAccess> permissions = [];
 
-    for (final element in snapshotHealthDataTypes) {
+    for (final _ in snapshotHealthDataTypes) {
       permissions.add(HealthDataAccess.READ_WRITE);
     }
     final bool? hasPermissions = await HealthFactory.hasPermissions(snapshotHealthDataTypes);

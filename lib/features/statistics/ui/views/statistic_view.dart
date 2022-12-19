@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:health/health.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:go_router/go_router.dart';
+// ignore: depend_on_referenced_packages
 import 'package:intl/intl.dart';
 
 class StatisticView extends StatelessWidget {

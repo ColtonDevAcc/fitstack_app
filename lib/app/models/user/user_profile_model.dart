@@ -32,10 +32,6 @@ class UserProfile extends Equatable {
   final DateTime? createdAt;
 
   const UserProfile({
-    this.friends,
-    this.userStatistics,
-    this.updatedAt,
-    this.createdAt,
     required this.displayName,
     required this.id,
     required this.challenges,
@@ -44,6 +40,10 @@ class UserProfile extends Equatable {
     required this.socialPoints,
     required this.loginStreak,
     required this.avatar,
+    this.friends,
+    this.userStatistics,
+    this.updatedAt,
+    this.createdAt,
   });
 
   @override

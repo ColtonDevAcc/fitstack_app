@@ -7,6 +7,14 @@ part of 'user_profile_model.dart';
 // **************************************************************************
 
 UserProfile _$UserProfileFromJson(Map json) => UserProfile(
+      displayName: json['display_name'] as String,
+      id: json['id'] as String,
+      challenges: json['challenges'] as List<dynamic>?,
+      achievements: json['achievements'] as List<dynamic>?,
+      fitCredits: json['fit_credits'] as int,
+      socialPoints: json['social_points'] as int,
+      loginStreak: json['days_logged_in_a_row'] as int,
+      avatar: json['avatar'] as String?,
       friends: (json['friends'] as List<dynamic>?)
           ?.map(
               (e) => UserProfile.fromJson(Map<String, dynamic>.from(e as Map)))
@@ -21,14 +29,6 @@ UserProfile _$UserProfileFromJson(Map json) => UserProfile(
       createdAt: json['created_at'] == null
           ? null
           : DateTime.parse(json['created_at'] as String),
-      displayName: json['display_name'] as String,
-      id: json['id'] as String,
-      challenges: json['challenges'] as List<dynamic>?,
-      achievements: json['achievements'] as List<dynamic>?,
-      fitCredits: json['fit_credits'] as int,
-      socialPoints: json['social_points'] as int,
-      loginStreak: json['days_logged_in_a_row'] as int,
-      avatar: json['avatar'] as String?,
     );
 
 const _$UserProfileFieldMap = <String, String>{

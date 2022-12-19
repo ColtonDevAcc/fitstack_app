@@ -7,10 +7,15 @@ part of 'user_model.dart';
 // **************************************************************************
 
 User _$UserFromJson(Map json) => User(
-      bmiGoal: (json['bmi_goal'] as num?)?.toDouble(),
-      weightGoal: (json['weight_goal'] as num?)?.toDouble(),
       profile: UserProfile.fromJson(
           Map<String, dynamic>.from(json['profile'] as Map)),
+      email: json['email'] as String,
+      firstName: json['first_name'] as String,
+      lastName: json['last_name'] as String,
+      dateOfBirth: DateTime.parse(json['date_of_birth'] as String),
+      emailVerified: json['email_verified'] as bool,
+      bmiGoal: (json['bmi_goal'] as num?)?.toDouble(),
+      weightGoal: (json['weight_goal'] as num?)?.toDouble(),
       password: json['password'] as String?,
       updatedAt: json['updated_at'] == null
           ? null
@@ -20,11 +25,6 @@ User _$UserFromJson(Map json) => User(
           : DateTime.parse(json['created_at'] as String),
       refreshToken: json['refresh_token'] as String?,
       id: json['id'] as String?,
-      email: json['email'] as String,
-      firstName: json['first_name'] as String,
-      lastName: json['last_name'] as String,
-      dateOfBirth: DateTime.parse(json['date_of_birth'] as String),
-      emailVerified: json['email_verified'] as bool,
       phoneNumber: json['phone_number'] as String?,
     );
 

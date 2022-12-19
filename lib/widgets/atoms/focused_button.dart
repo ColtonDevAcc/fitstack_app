@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class FocusedButton_Widget extends StatelessWidget {
+class FocusedButton extends StatelessWidget {
   final Widget title;
   final void Function()? onPressed;
-  const FocusedButton_Widget({
+  const FocusedButton({
     Key? key,
     required this.title,
     required this.onPressed,

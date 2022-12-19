@@ -1,14 +1,14 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 
-class SignUp_Page extends StatefulWidget {
-  const SignUp_Page({Key? key}) : super(key: key);
+class SignUpPage extends StatefulWidget {
+  const SignUpPage({Key? key}) : super(key: key);
 
   @override
-  State<SignUp_Page> createState() => _SignUp_PageState();
+  State<SignUpPage> createState() => _SignUpPageState();
 }
 
-class _SignUp_PageState extends State<SignUp_Page> {
+class _SignUpPageState extends State<SignUpPage> {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
@@ -17,8 +17,9 @@ class _SignUp_PageState extends State<SignUp_Page> {
       backgroundColor: Theme.of(context).colorScheme.background,
       body: SafeArea(
         child: Padding(
+          // ignore: use_named_constants
           padding: Platform.isAndroid ? const EdgeInsets.fromLTRB(0, 10, 0, 10) : const EdgeInsets.all(0),
-          child: const SignUp_Page(),
+          child: const SignUpPage(),
         ),
       ),
     );

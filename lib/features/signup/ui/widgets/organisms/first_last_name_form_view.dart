@@ -26,7 +26,7 @@ class FirstLastNameFormView extends StatelessWidget {
           builder: (context, state) {
             final formKey = state.formKey?[state.index];
             return FormBuilder(
-              onChanged: () => BlocProvider.of<SignupCubit>(context).formKeyChanged(formKey!),
+              onChanged: () => BlocProvider.of<SignupCubit>(context).formKeyChanged(formKey),
               autovalidateMode: AutovalidateMode.always,
               key: formKey,
               child: SignUpFullscreenTextfield(

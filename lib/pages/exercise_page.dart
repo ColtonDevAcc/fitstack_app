@@ -48,9 +48,7 @@ class ExercisePage extends StatelessWidget {
                           default:
                         }
                       },
-                      child: Container(
-                        child: Icon(Icons.add, color: Theme.of(context).colorScheme.primary, size: 30),
-                      ),
+                      child: Icon(Icons.add, color: Theme.of(context).colorScheme.primary, size: 30),
                     ),
                   ),
                 ),

@@ -2,6 +2,7 @@ import 'package:FitStack/app/providers/bloc/active_workout/active_workout_bloc.d
 import 'package:FitStack/app/providers/bloc/app/app_bloc.dart';
 import 'package:FitStack/app/providers/bloc/exercise/exercise_bloc.dart';
 import 'package:FitStack/app/providers/bloc/nutrition/nutrition_bloc.dart';
+import 'package:FitStack/app/providers/bloc/user_recovery/user_recovery_bloc.dart';
 import 'package:FitStack/app/providers/bloc/user_statistics/user_statistics_bloc.dart';
 import 'package:FitStack/app/providers/bloc/workout/workout_bloc.dart';
 import 'package:FitStack/app/providers/cubit/main_view/main_view_cubit.dart';
@@ -12,6 +13,7 @@ import 'package:FitStack/app/repository/open_food_facts_repository.dart';
 import 'package:FitStack/app/repository/program_repository.dart';
 import 'package:FitStack/app/repository/relationship_repository.dart';
 import 'package:FitStack/app/repository/user_health_repository.dart';
+import 'package:FitStack/app/repository/user_recovery_repository.dart';
 import 'package:FitStack/app/repository/user_repository.dart';
 import 'package:FitStack/app/repository/workout_repository.dart';
 import 'package:FitStack/features/exercise/cubit/exercise_screen/exercise_screen_cubit.dart';
@@ -45,6 +47,7 @@ class StateProviders extends StatelessWidget {
         RepositoryProvider(create: (context) => ExerciseRepository()),
         RepositoryProvider(create: (context) => UserHealthRepository()),
         RepositoryProvider(create: (context) => OpenFoodFactsRepository()),
+        RepositoryProvider(create: (context) => UserRecoveryRepository()),
       ],
       child: MultiBlocProvider(
         providers: [
@@ -105,6 +108,10 @@ class StateProviders extends StatelessWidget {
           ),
           BlocProvider<NutritionBloc>(
             create: (BuildContext context) => NutritionBloc(openFoodFactsRepository: context.read<OpenFoodFactsRepository>()),
+          ),
+          BlocProvider<UserRecoveryBloc>(
+            create: (BuildContext context) =>
+                UserRecoveryBloc(userRecoveryRepository: context.read<UserRecoveryRepository>())..add(UserRecoveryRequested()),
           ),
         ],
         child: child,

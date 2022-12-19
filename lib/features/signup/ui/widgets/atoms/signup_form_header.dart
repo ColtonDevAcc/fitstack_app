@@ -50,7 +50,7 @@ class SignupFormHeader extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 10),
-            Signup_Form_Header_Subtitle_Widget(text: subtitle),
+            SignupFormHeaderSubtitle(text: subtitle),
           ],
         );
       },

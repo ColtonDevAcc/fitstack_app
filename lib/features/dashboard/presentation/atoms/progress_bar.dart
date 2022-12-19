@@ -19,9 +19,9 @@ class ProgressBar extends StatelessWidget {
               elevation: 2,
               child: CircleAvatar(
                 backgroundColor: Theme.of(context).colorScheme.surface,
-                maxRadius: 18,
+                maxRadius: MediaQuery.of(context).size.width * .04,
                 foregroundColor: Theme.of(context).colorScheme.surface,
-                child: Icon(icon, color: barColor, size: 18),
+                child: Icon(icon, color: barColor, size: 16),
               ),
             ),
           ),
@@ -32,18 +32,14 @@ class ProgressBar extends StatelessWidget {
             children: [
               Text(
                 ' ${((partialValue / totalValue) * 100).round()}%',
-                style: TextStyle(
-                  color: barColor,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 12,
-                ),
+                style: TextStyle(color: barColor, fontWeight: FontWeight.bold, fontSize: 12),
               ),
               const SizedBox(height: 5),
               ClipRRect(
                 borderRadius: BorderRadius.circular(20),
                 child: SizedBox(
                   height: 6,
-                  width: MediaQuery.of(context).size.width * .8 - 20,
+                  width: MediaQuery.of(context).size.width * .5,
                   child: LinearProgressIndicator(
                     backgroundColor: Theme.of(context).colorScheme.onBackground.withOpacity(.1),
                     color: barColor,

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-class Signup_Form_Header_Subtitle_Widget extends StatelessWidget {
+class SignupFormHeaderSubtitle extends StatelessWidget {
   final String text;
-  const Signup_Form_Header_Subtitle_Widget({Key? key, required this.text}) : super(key: key);
+  const SignupFormHeaderSubtitle({Key? key, required this.text}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

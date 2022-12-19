@@ -29,11 +29,9 @@ class CreateWorkoutView extends StatelessWidget {
                             onTap: () {
                               context.pop();
                             },
-                            child: Container(
-                              child: Icon(
-                                FontAwesome.arrow_left_long,
-                                color: Theme.of(context).colorScheme.onBackground,
-                              ),
+                            child: Icon(
+                              FontAwesome.arrow_left_long,
+                              color: Theme.of(context).colorScheme.onBackground,
                             ),
                           ),
                         ),

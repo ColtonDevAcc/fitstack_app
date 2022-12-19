@@ -1,5 +1,6 @@
 import 'package:FitStack/app/services/analytics_service.dart';
 import 'package:FitStack/main.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:dio/dio.dart';
 
@@ -8,18 +9,23 @@ class Endpoints {
   //iphone 172.20.10.4
   //wifi 192.168.0.203
   //work 10.16.2.16
-  static const String baseUrl = kDebugMode ? "http://localhost:8181" : "https://dev.fitstack.io";
+  static const String baseUrl = kDebugMode ? "http://localhost:8080" : "https://dev.fitstack.io";
   static const int receiveTimeout = 15000;
   static const int connectionTimeout = 15000;
-  Future<Dio> dio = locator<AnalyticsService>().networkPerformanceInterceptor(
-    dio: Dio(
-      BaseOptions(
-        baseUrl: baseUrl,
-        receiveTimeout: receiveTimeout,
-        connectTimeout: connectionTimeout,
+
+  Future<Dio> dio() async {
+    final String? token = await FirebaseAuth.instance.currentUser?.getIdToken();
+    return locator<AnalyticsService>().networkPerformanceInterceptor(
+      dio: Dio(
+        BaseOptions(
+          baseUrl: baseUrl,
+          headers: {"Authorization": "Bearer $token"},
+          receiveTimeout: receiveTimeout,
+          connectTimeout: connectionTimeout,
+        ),
       ),
-    ),
-  );
+    );
+  }
 
   // Get:-----------------------------------------------------------------------
   Future<Response> get(
@@ -30,7 +36,7 @@ class Endpoints {
     ProgressCallback? onReceiveProgress,
   }) async {
     try {
-      final Response response = await dio.then(
+      final Response response = await dio().then(
         (value) => value.get(
           baseUrl + url,
           queryParameters: queryParameters,
@@ -58,7 +64,7 @@ class Endpoints {
     ProgressCallback? onReceiveProgress,
   }) async {
     try {
-      final Response response = await dio.then(
+      final Response response = await dio().then(
         (value) => value.post(
           baseUrl + uri,
           data: data,
@@ -87,7 +93,7 @@ class Endpoints {
     ProgressCallback? onReceiveProgress,
   }) async {
     try {
-      final Response response = await dio.then(
+      final Response response = await dio().then(
         (value) => value.put(
           baseUrl + uri,
           data: data,
@@ -116,7 +122,7 @@ class Endpoints {
     ProgressCallback? onReceiveProgress,
   }) async {
     try {
-      final Response response = await dio.then(
+      final Response response = await dio().then(
         (value) async => value.delete(
           baseUrl + uri,
           data: data,

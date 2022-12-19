@@ -48,7 +48,7 @@ dependencies:
   # ui
   persistent_bottom_nav_bar: ^5.0.2
   lottie: ^2.0.0
-  rive: ^0.9.1
+  rive: ^0.10.0
   carousel_slider: ^4.1.1
   syncfusion_flutter_charts: ^20.2.39
   syncfusion_flutter_datepicker: ^20.2.39

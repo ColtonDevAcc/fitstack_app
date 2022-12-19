@@ -1,4 +1,4 @@
-import 'package:FitStack/features/workout/ui/widgets/atoms/circular_statistics_progressIndicator.dart';
+import 'package:FitStack/features/workout/ui/widgets/atoms/circular_statistics_progress_indicator.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
@@ -74,21 +74,19 @@ class WorkoutStatisticsSnapshot extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Container(
-                child: AutoSizeText.rich(
-                  TextSpan(
-                    text: "3/7\n",
-                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontSize: valueSize, fontWeight: FontWeight.bold),
-                    children: [
-                      TextSpan(
-                        text: "Week",
-                        style: Theme.of(context).textTheme.bodyText1?.copyWith(fontSize: labelSize),
-                      ),
-                    ],
-                  ),
-                  minFontSize: minFontSize,
-                  maxFontSize: maxFontSize,
+              AutoSizeText.rich(
+                TextSpan(
+                  text: "3/7\n",
+                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontSize: valueSize, fontWeight: FontWeight.bold),
+                  children: [
+                    TextSpan(
+                      text: "Week",
+                      style: Theme.of(context).textTheme.bodyText1?.copyWith(fontSize: labelSize),
+                    ),
+                  ],
                 ),
+                minFontSize: minFontSize,
+                maxFontSize: maxFontSize,
               ),
               CircularStatisticsProgressIndicator(
                 ratio: 20,
