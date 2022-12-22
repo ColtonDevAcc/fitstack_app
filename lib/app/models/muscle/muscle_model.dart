@@ -104,7 +104,7 @@ enum MuscleGroup {
 }
 
 enum ChildMuscle {
-  Biceps,
+  BicepsBrachii,
   Triceps,
   PectoralisMajor,
   PectoralisMinor,
@@ -138,22 +138,21 @@ enum ChildMuscle {
   Empty,
 }
 
-const Map<MuscleGroup, List<ChildMuscle>> muscleMap = {
-  MuscleGroup.Chest: [ChildMuscle.PectoralisMajor, ChildMuscle.PectoralisMinor],
-  MuscleGroup.Arms: [ChildMuscle.Biceps, ChildMuscle.Triceps],
-  MuscleGroup.Legs: [ChildMuscle.Quadriceps, ChildMuscle.Hamstrings],
-  MuscleGroup.Abdominals: [ChildMuscle.RectusAbdominis, ChildMuscle.Obliques],
-  MuscleGroup.Glutes: [ChildMuscle.GluteusMaximus, ChildMuscle.GluteusMedius, ChildMuscle.GluteusMinimus],
-  MuscleGroup.Calves: [ChildMuscle.Gastrocnemius, ChildMuscle.Soleus],
-  MuscleGroup.Forearms: [ChildMuscle.Flexors, ChildMuscle.Extensors],
-  MuscleGroup.Traps: [ChildMuscle.Sternocleidomastoid, ChildMuscle.Splenius],
-  MuscleGroup.Neck: [ChildMuscle.Rhomboids, ChildMuscle.LatissimusDorsi],
-  MuscleGroup.UpperBack: [ChildMuscle.ErectorSpinae, ChildMuscle.Iliopsoas],
-  MuscleGroup.LowerBack: [ChildMuscle.RectusFemoris, ChildMuscle.Gracilis],
-  MuscleGroup.HipFlexors: [ChildMuscle.AdductorBrevis, ChildMuscle.AdductorLongus],
-  MuscleGroup.Adductors: [ChildMuscle.GluteusMediusMinimus, ChildMuscle.TensorFasciaeLatae],
-  MuscleGroup.Abductors: [ChildMuscle.TibialisAnterior, ChildMuscle.TibialisPosterior],
-  MuscleGroup.PlantarFlexors: [ChildMuscle.ExtensorDigitorumLongus, ChildMuscle.FlexorDigitorumLongus],
+const Map<MuscleGroup, List<String>> muscleMap = {
+  MuscleGroup.Chest: ['Pectoralis Major', 'Pectoralis Minor'],
+  MuscleGroup.Arms: ['Biceps Brachii', 'Triceps'],
+  MuscleGroup.Legs: ['Quadriceps', 'Hamstrings'],
+  MuscleGroup.Abdominals: ['Rectus Abdominis', 'Obliques'],
+  MuscleGroup.Glutes: ['Gluteus Maximus', 'Gluteus Medius', 'Gluteus Minimus'],
+  MuscleGroup.Calves: ['Gastrocnemius', 'Soleus'],
+  MuscleGroup.Forearms: ['Flexors', 'Extensors', 'flexor carpi'],
+  MuscleGroup.Traps: ['Sternocleidomastoid', 'Splenius'],
+  MuscleGroup.Neck: ['Sternocleidomastoid'],
+  MuscleGroup.UpperBack: ['Rhomboids', 'Latissimus Dorsi'],
+  MuscleGroup.LowerBack: ['Erector Spinae'],
+  MuscleGroup.HipFlexors: ['Iliopsoas'],
+  MuscleGroup.Adductors: ['Rectus Femoris', 'Gracilis', 'Adductor Brevis', 'Adductor Longus'],
+  MuscleGroup.Abductors: ['Gluteus Medius Minimus'],
   MuscleGroup.Dorsiflexors: [],
   MuscleGroup.Invertors: [],
 };

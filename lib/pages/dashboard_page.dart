@@ -52,7 +52,7 @@ class DashboardPage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Padding(padding: const EdgeInsets.fromLTRB(0, topPadding - 5, 0, 0), child: Text("Stats", style: labelTextStyle)),
+                  Padding(padding: const EdgeInsets.fromLTRB(0, topPadding - 5, 0, 10), child: Text("Stats", style: labelTextStyle)),
                   const StatisticsDashboard(),
                   Padding(padding: const EdgeInsets.fromLTRB(0, topPadding, 0, bottomPadding), child: Text("Up Next", style: labelTextStyle)),
                   WorkoutRecommendationList(pageController: pageController),

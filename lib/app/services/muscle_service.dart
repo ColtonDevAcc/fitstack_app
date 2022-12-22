@@ -14,6 +14,7 @@ class MuscleService {
     final XmlDocument document = XmlDocument.parse(generalString);
     final paths = document.findAllElements('path');
     final List<Muscle> muscles = [];
+    MuscleGroup? group;
 
     try {
       for (final element in paths) {
@@ -23,27 +24,20 @@ class MuscleService {
 
         if (!partName.contains('path')) {
           final List<String> parsedName = partName.split("_");
+          for (final element in muscleMap.entries) {
+            final String parsedNameCheck = parsedName.length > 1 ? '${parsedName[0]} ${parsedName[1]}'.toLowerCase() : parsedName[0].toLowerCase();
+
+            if (element.value.firstWhere((element) => element.toLowerCase() == parsedNameCheck, orElse: () => 'empty') != 'empty') {
+              group = element.key;
+            } else {
+              // log("No group found for: $parsedNameCheck");
+            }
+          }
+
           final Muscle part = Muscle(
             name: parsedName.length >= 2 ? '${parsedName[0]} ${parsedName[1]}' : parsedName[0],
             svgPath: svgPath,
-            group: MuscleGroup.values.firstWhere(
-              (element) {
-                final String parsedNameCheck = parsedName.length > 2 ? '${parsedName[0]}${parsedName[1]}'.toLowerCase() : parsedName[0].toLowerCase();
-                return muscleMap.values.firstWhere(
-                  (muscleList) {
-                    return muscleList.firstWhere(
-                          (childMuscle) {
-                            return childMuscle.name.toLowerCase() == parsedNameCheck;
-                          },
-                          orElse: () => ChildMuscle.Empty,
-                        ) !=
-                        ChildMuscle.Empty;
-                  },
-                  orElse: () => [],
-                ).isNotEmpty;
-              },
-              orElse: () => MuscleGroup.Empty,
-            ),
+            group: group ?? MuscleGroup.Empty,
           );
           muscles.add(part);
         }
@@ -51,9 +45,6 @@ class MuscleService {
     } catch (e) {
       log("Error parsing front muscles: $e");
       //TODO: add to logging service
-    }
-    for (final element in muscles) {
-      log("name: ${element.name}, group: ${element.group}");
     }
     return muscles;
   }
@@ -161,22 +152,20 @@ class SelectionMusclePainter extends CustomPainter {
 class MusclePainter extends CustomPainter {
   final BuildContext context;
   final List<Muscle> muscleList;
-  final Color majorMuscleColor;
-  final Color minorMuscleColor;
   final int muscleAnatomyViewRotationIndex;
   final Recovery recovery;
+  final List<Color> muscleColorList;
   final void Function(TapUpDetails, Muscle) onTapUp;
   final void Function(LongPressEndDetails, Muscle) onLongPressEnd;
 
   MusclePainter({
     required this.recovery,
     required this.muscleAnatomyViewRotationIndex,
-    required this.majorMuscleColor,
-    required this.minorMuscleColor,
     required this.onLongPressEnd,
     required this.onTapUp,
     required this.context,
     required this.muscleList,
+    required this.muscleColorList,
   });
 
   @override
@@ -197,11 +186,22 @@ class MusclePainter extends CustomPainter {
     matrix4.scale(xScale, yScale);
 
     for (final Muscle muscle in muscleList) {
+      final now = DateTime.now();
+      Color muscleColor = Theme.of(context).colorScheme.tertiary;
+
       Color getMuscleColor(Muscle muscle) {
-        if (recovery.muscles.firstWhere((element) => element.group == muscle.group, orElse: Muscle.empty) != Muscle.empty()) {
-          log("Muscle: ${muscle.name} is in recovery");
-          return majorMuscleColor;
-        } else if (muscle.name == 'outline' || muscle.name == 'inner_outline') {
+        final recoveryMuscle = recovery.muscles.firstWhere((element) => element.group == muscle.group, orElse: Muscle.empty);
+        if (recoveryMuscle != Muscle.empty()) {
+          final recoveryValue = now.difference(recoveryMuscle.updatedAt!).inHours < 72 ? (now.difference(recoveryMuscle.updatedAt!).inHours / 72) : 1;
+          // ignore: join_return_with_assignment
+          muscleColor = muscleColorList[recoveryValue < .5
+              ? 0
+              : recoveryValue < .75
+                  ? 1
+                  : 2];
+
+          return muscleColor;
+        } else if (muscle.name == 'outline' || muscle.name == 'inner outline') {
           return Theme.of(context).colorScheme.onBackground.withOpacity(.1);
         }
         return Theme.of(context).colorScheme.surface;

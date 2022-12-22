@@ -68,8 +68,10 @@ const _$MuscleGroupEnumMap = {
 };
 
 const _$ChildMuscleEnumMap = {
-  ChildMuscle.Biceps: 'Biceps',
+  ChildMuscle.BicepsBrachii: 'BicepsBrachii',
   ChildMuscle.Triceps: 'Triceps',
+  ChildMuscle.PectoralisMajor: 'PectoralisMajor',
+  ChildMuscle.PectoralisMinor: 'PectoralisMinor',
   ChildMuscle.Quadriceps: 'Quadriceps',
   ChildMuscle.Hamstrings: 'Hamstrings',
   ChildMuscle.RectusAbdominis: 'RectusAbdominis',
@@ -97,4 +99,5 @@ const _$ChildMuscleEnumMap = {
   ChildMuscle.TibialisPosterior: 'TibialisPosterior',
   ChildMuscle.ExtensorDigitorumLongus: 'ExtensorDigitorumLongus',
   ChildMuscle.FlexorDigitorumLongus: 'FlexorDigitorumLongus',
+  ChildMuscle.Empty: 'Empty',
 };

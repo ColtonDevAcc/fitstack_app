@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:FitStack/app/helpers/fitstack_error_toast.dart';
 import 'package:FitStack/app/models/muscle/muscle_model.dart';
 import 'package:FitStack/app/models/muscle/recovery_model.dart';

@@ -4,7 +4,7 @@ import 'package:FitStack/app/services/muscle_service.dart';
 import 'package:flutter/material.dart';
 import 'package:touchable/touchable.dart';
 
-class RecoveryContainer extends StatelessWidget {
+class RecoverySvgPainter extends StatelessWidget {
   final Recovery recovery;
   final List<Muscle> frontMuscleList;
   final List<Muscle> backMuscleList;
@@ -15,7 +15,9 @@ class RecoveryContainer extends StatelessWidget {
   final int muscleAnatomyViewRotationIndex;
   final double? height;
   final double? width;
-  const RecoveryContainer({
+  final List<Color> muscleColorList;
+
+  const RecoverySvgPainter({
     Key? key,
     required this.recovery,
     required this.frontMuscleList,
@@ -27,6 +29,7 @@ class RecoveryContainer extends StatelessWidget {
     required this.muscleAnatomyViewRotationIndex,
     this.height,
     this.width,
+    required this.muscleColorList,
   }) : super(key: key);
 
   @override
@@ -45,8 +48,7 @@ class RecoveryContainer extends StatelessWidget {
                 muscleList: muscleAnatomyViewRotationIndex == 0 ? frontMuscleList : backMuscleList,
                 onTapUp: onMajorMuscleSelected,
                 onLongPressEnd: onMinorMuscleSelected,
-                majorMuscleColor: majorMuscleColor,
-                minorMuscleColor: minorMuscleColor,
+                muscleColorList: muscleColorList,
                 muscleAnatomyViewRotationIndex: muscleAnatomyViewRotationIndex,
                 recovery: recovery,
               ),
