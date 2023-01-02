@@ -7,89 +7,76 @@ class HistoryTabView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      slivers: [
-        SliverFillRemaining(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+    return Stepper(
+      controlsBuilder: (context, details) {
+        return Padding(
+          padding: const EdgeInsets.only(top: 10),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Flexible(
-                child: Stepper(
-                  controlsBuilder: (context, details) {
-                    return Padding(
-                      padding: const EdgeInsets.only(top: 10),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          HistoryStepperControlButton(
-                            title: 'View',
-                            onTap: () {},
-                          ),
-                          HistoryStepperControlButton(
-                            title: 'Share',
-                            onTap: () {},
-                          ),
-                          HistoryStepperControlButton(
-                            title: 'Analytics',
-                            onTap: () {},
-                          ),
-                          HistoryStepperControlButton(
-                            title: 'Delete',
-                            onTap: () {},
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                  steps: [
-                    const Step(
-                      title: Text('workout 1'),
-                      subtitle: Text('10/05/1999'),
-                      content: ProgramCard(
-                        description: '',
-                        title: '',
-                      ),
-                    ),
-                    const Step(
-                      title: Text('workout 1'),
-                      content: ProgramCard(
-                        description: '',
-                        title: '',
-                      ),
-                    ),
-                    Step(
-                      title: const Text('workout 1'),
-                      content: Container(alignment: Alignment.centerLeft, child: const Text('Content for Step 1')),
-                    ),
-                    Step(
-                      title: const Text('workout 1'),
-                      content: Container(alignment: Alignment.centerLeft, child: const Text('Content for Step 1')),
-                    ),
-                    Step(
-                      title: const Text('workout 1'),
-                      content: Container(alignment: Alignment.centerLeft, child: const Text('Content for Step 1')),
-                    ),
-                    Step(
-                      title: const Text('workout 1'),
-                      content: Container(alignment: Alignment.centerLeft, child: const Text('Content for Step 1')),
-                    ),
-                    Step(
-                      title: const Text('workout 1'),
-                      content: Container(alignment: Alignment.centerLeft, child: const Text('Content for Step 1')),
-                    ),
-                    Step(
-                      title: const Text('workout 1'),
-                      content: Container(alignment: Alignment.centerLeft, child: const Text('Content for Step 1')),
-                    ),
-                    Step(
-                      title: const Text('workout 1'),
-                      content: Container(alignment: Alignment.centerLeft, child: const Text('Content for Step 1')),
-                    ),
-                  ],
-                ),
+              HistoryStepperControlButton(
+                title: 'View',
+                onTap: () {},
+              ),
+              HistoryStepperControlButton(
+                title: 'Share',
+                onTap: () {},
+              ),
+              HistoryStepperControlButton(
+                title: 'Analytics',
+                onTap: () {},
+              ),
+              HistoryStepperControlButton(
+                title: 'Delete',
+                onTap: () {},
               ),
             ],
           ),
+        );
+      },
+      steps: [
+        const Step(
+          title: Text('workout 1'),
+          subtitle: Text('10/05/1999'),
+          content: ProgramCard(
+            description: '',
+            title: '',
+          ),
+        ),
+        const Step(
+          title: Text('workout 1'),
+          content: ProgramCard(
+            description: '',
+            title: '',
+          ),
+        ),
+        Step(
+          title: const Text('workout 1'),
+          content: Container(alignment: Alignment.centerLeft, child: const Text('Content for Step 1')),
+        ),
+        Step(
+          title: const Text('workout 1'),
+          content: Container(alignment: Alignment.centerLeft, child: const Text('Content for Step 1')),
+        ),
+        Step(
+          title: const Text('workout 1'),
+          content: Container(alignment: Alignment.centerLeft, child: const Text('Content for Step 1')),
+        ),
+        Step(
+          title: const Text('workout 1'),
+          content: Container(alignment: Alignment.centerLeft, child: const Text('Content for Step 1')),
+        ),
+        Step(
+          title: const Text('workout 1'),
+          content: Container(alignment: Alignment.centerLeft, child: const Text('Content for Step 1')),
+        ),
+        Step(
+          title: const Text('workout 1'),
+          content: Container(alignment: Alignment.centerLeft, child: const Text('Content for Step 1')),
+        ),
+        Step(
+          title: const Text('workout 1'),
+          content: Container(alignment: Alignment.centerLeft, child: const Text('Content for Step 1')),
         ),
       ],
     );

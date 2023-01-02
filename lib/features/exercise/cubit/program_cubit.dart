@@ -11,14 +11,15 @@ part 'program_state.dart';
 
 class ProgramCubit extends Cubit<ProgramState> {
   final ProgramRepository programRepository;
-  ProgramCubit({required this.programRepository}) : super(const ProgramState(programs: null));
+  ProgramCubit({required this.programRepository}) : super(const ProgramState(programs: null, status: ProgramStatus.initial));
 
   Future<void> getPrograms() async {
+    emit(state.copyWith(status: ProgramStatus.loading));
     try {
       final String? token = await FirebaseAuth.instance.currentUser?.getIdToken();
       final List<Program> programs = await programRepository.getPrograms(token: token!);
 
-      emit(state.copyWith(programs: programs));
+      emit(state.copyWith(programs: programs, status: ProgramStatus.success));
     } catch (e) {
       Fluttertoast.showToast(
         msg: "$e",

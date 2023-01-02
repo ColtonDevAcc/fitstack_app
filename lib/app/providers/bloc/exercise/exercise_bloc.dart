@@ -5,6 +5,7 @@ import 'package:FitStack/app/helpers/fitstack_error_toast.dart';
 import 'package:FitStack/app/models/muscle/muscle_model.dart';
 import 'package:FitStack/app/models/workout/exercise_model.dart';
 import 'package:FitStack/app/repository/exercise_repository.dart';
+import 'package:FitStack/app/repository/muscle_repository.dart';
 import 'package:FitStack/app/services/firebase_storage_service.dart';
 import 'package:FitStack/app/services/muscle_service.dart';
 import 'package:equatable/equatable.dart';
@@ -18,7 +19,8 @@ part 'exercise_state.dart';
 
 class ExerciseBloc extends Bloc<ExerciseEvent, ExerciseState> {
   final ExerciseRepository exerciseRepository;
-  ExerciseBloc({required this.exerciseRepository})
+  final MuscleRepository muscleRepository;
+  ExerciseBloc({required this.muscleRepository, required this.exerciseRepository})
       : super(
           ExerciseState(
             exercises: const [],
@@ -93,7 +95,7 @@ class ExerciseBloc extends Bloc<ExerciseEvent, ExerciseState> {
   }
 
   Future<void> onEditExercise(EditExercise event, Emitter<ExerciseState> emit) async {
-    final muscleList = await MuscleService().parseFrontMuscleList();
+    final muscleList = await muscleRepository.parseMuscleList(front: true);
     emit(state.copyWith(editingExercise: event.exercise, frontMuscleList: muscleList));
   }
 
@@ -138,7 +140,9 @@ class ExerciseBloc extends Bloc<ExerciseEvent, ExerciseState> {
     log("Current index: $currentIndex");
     if (currentIndex == 0) {
       if (state.backMuscleList.isEmpty) {
-        await MuscleService().parseBackMuscleList().then((value) => emit(state.copyWith(backMuscleList: value, muscleAnatomyViewRotationIndex: 1)));
+        await muscleRepository
+            .parseMuscleList(front: false)
+            .then((value) => emit(state.copyWith(backMuscleList: value, muscleAnatomyViewRotationIndex: 1)));
       } else {
         emit(state.copyWith(muscleAnatomyViewRotationIndex: 1));
       }

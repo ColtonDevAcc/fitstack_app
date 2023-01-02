@@ -8,18 +8,18 @@ class RelationshipPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double topPadding = MediaQuery.of(context).padding.top;
-
     return Padding(
-      padding: EdgeInsets.fromLTRB(15, topPadding, 15, 0),
+      padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
       child: DefaultTabController(
         length: 3,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-                padding: const EdgeInsets.only(bottom: 15),
-                child: BasicPageHeader(title: "Relationships", color: Theme.of(context).colorScheme.onBackground),),
+            BasicPageHeader(
+              title: "Relationships",
+              color: Theme.of(context).colorScheme.onBackground,
+              mainAxisAlignment: MainAxisAlignment.end,
+            ),
             Container(
               height: 40,
               decoration: BoxDecoration(
@@ -29,11 +29,9 @@ class RelationshipPage extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20),
                 child: TabBar(
-                  unselectedLabelStyle: TextStyle(color: Theme.of(context).colorScheme.onBackground),
-                  unselectedLabelColor: Theme.of(context).colorScheme.onBackground.withOpacity(.5),
-                  indicator: BoxDecoration(
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
+                  unselectedLabelStyle: TextStyle(color: Theme.of(context).colorScheme.secondary),
+                  unselectedLabelColor: Theme.of(context).colorScheme.onSurface,
+                  indicator: BoxDecoration(color: Theme.of(context).colorScheme.secondary),
                   tabs: const [
                     Text('Groups'),
                     Text('Friends'),

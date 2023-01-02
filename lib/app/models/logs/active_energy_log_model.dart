@@ -11,6 +11,7 @@ class ActiveEnergyBurnedLog extends Log {
     DateTime? updatedAt,
     String? userId,
     HealthDataType? type,
+    //this is calories
     num? value,
   }) : super(
           id: id,
@@ -20,6 +21,16 @@ class ActiveEnergyBurnedLog extends Log {
           type: type ?? HealthDataType.ACTIVE_ENERGY_BURNED,
           value: value ?? 0,
         );
+
+  double get calories => value * 1000;
+  double get kiloCalories => calories / 1000;
+  double get kiloJoules => kiloCalories * 4.184;
+  double get joules => kiloJoules * 1000;
+  double get kiloWattHours => kiloJoules / 3600;
+  double get wattHours => kiloWattHours * 1000;
+  double get kiloWattSeconds => kiloWattHours / 3600;
+  double get wattSeconds => kiloWattSeconds * 1000;
+  double get kiloWattMinutes => kiloWattHours / 60;
 
   @override
   String toString() {

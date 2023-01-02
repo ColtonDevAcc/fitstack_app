@@ -18,6 +18,8 @@ class ProgressBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final beforeCapitalLetter = RegExp("(?=[A-Z])");
+    final muscleName = muscle.child?.name.split(beforeCapitalLetter);
     final DateTime now = DateTime.now();
     final List<Path> paths = [];
     for (final rawMuscle in rawMuscleList) {
@@ -34,53 +36,41 @@ class ProgressBar extends StatelessWidget {
             ? 1
             : 2];
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 5),
-      child: Row(
+    return ListTile(
+      dense: true,
+      title: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(width: 5),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              SizedBox(
-                width: MediaQuery.of(context).size.width * .64,
-                child: ListTile(
-                  dense: true,
-                  title: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        muscle.group.name,
-                        style: TextStyle(color: Theme.of(context).colorScheme.onBackground, fontWeight: FontWeight.bold, fontSize: 12),
-                      ),
-                      const SizedBox(height: 3),
-                      Text(
-                        '${now.difference(muscle.updatedAt!).inHours < 72 ? (now.difference(muscle.updatedAt!).inHours / 72 * 100).toInt() : 100}%',
-                        style: TextStyle(color: barColor, fontWeight: FontWeight.bold, fontSize: 12),
-                      ),
-                      const SizedBox(height: 3),
-                    ],
-                  ),
-                  subtitle: ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
-                    child: SizedBox(
-                      height: 6,
-                      width: double.infinity,
-                      child: LinearProgressIndicator(
-                        backgroundColor: Theme.of(context).colorScheme.onBackground.withOpacity(.1),
-                        color: barColor,
-                        value: recoveryValue.toDouble(),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 5),
-            ],
+          Text(
+            muscle.group.name,
+            style: TextStyle(color: Theme.of(context).colorScheme.onBackground.withOpacity(.3), fontWeight: FontWeight.bold, fontSize: 12),
           ),
+          if (muscle.child != null)
+            Text(
+              '${muscleName![0]} ${muscleName[1]}',
+              style: TextStyle(color: Theme.of(context).colorScheme.onBackground, fontWeight: FontWeight.bold, fontSize: 12),
+            ),
+          if (muscle.child != null) const SizedBox(height: 3),
+          const SizedBox(height: 3),
+          Text(
+            '${now.difference(muscle.updatedAt!).inHours < 72 ? (now.difference(muscle.updatedAt!).inHours / 72 * 100).toInt() : 100}%',
+            style: TextStyle(color: barColor, fontWeight: FontWeight.bold, fontSize: 12),
+          ),
+          const SizedBox(height: 3),
         ],
+      ),
+      subtitle: ClipRRect(
+        borderRadius: BorderRadius.circular(20),
+        child: SizedBox(
+          height: 6,
+          width: double.infinity,
+          child: LinearProgressIndicator(
+            backgroundColor: Theme.of(context).colorScheme.onBackground.withOpacity(.1),
+            color: barColor,
+            value: recoveryValue.toDouble(),
+          ),
+        ),
       ),
     );
   }

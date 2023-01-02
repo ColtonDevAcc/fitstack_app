@@ -1,6 +1,9 @@
+import 'dart:developer';
+
 import 'package:FitStack/app/helpers/fitstack_error_toast.dart';
 import 'package:FitStack/app/models/muscle/muscle_model.dart';
 import 'package:FitStack/app/models/muscle/recovery_model.dart';
+import 'package:FitStack/app/repository/muscle_repository.dart';
 import 'package:FitStack/app/repository/user_recovery_repository.dart';
 import 'package:FitStack/app/services/muscle_service.dart';
 import 'package:equatable/equatable.dart';
@@ -12,7 +15,8 @@ part 'user_recovery_state.dart';
 
 class UserRecoveryBloc extends Bloc<UserRecoveryEvent, UserRecoveryState> {
   final UserRecoveryRepository userRecoveryRepository;
-  UserRecoveryBloc({required this.userRecoveryRepository})
+  final MuscleRepository muscleRepository;
+  UserRecoveryBloc({required this.muscleRepository, required this.userRecoveryRepository})
       : super(
           UserRecoveryState(
             status: UserRecoveryStatus.initial,
@@ -30,10 +34,11 @@ class UserRecoveryBloc extends Bloc<UserRecoveryEvent, UserRecoveryState> {
   Future<void> _onUserRecoveryRequested(UserRecoveryRequested event, Emitter<UserRecoveryState> emit) async {
     emit(state.copyWith(status: UserRecoveryStatus.loading));
     try {
-      final List<Muscle> frontMuscleList = await MuscleService().parseFrontMuscleList();
+      final List<Muscle> frontMuscleList = await muscleRepository.parseMuscleList(front: true);
       final userRecovery = await userRecoveryRepository.getUserRecovery();
       emit(state.copyWith(status: UserRecoveryStatus.success, userRecovery: userRecovery, frontMuscleList: frontMuscleList));
-    } catch (_) {
+    } catch (e) {
+      log("failed to load user recovery $e");
       FitStackToast.showErrorToast("Failed to load user recovery");
       emit(state.copyWith(status: UserRecoveryStatus.failure));
     }

@@ -3,7 +3,7 @@ import 'package:FitStack/app/repository/auth_repository.dart';
 import 'package:FitStack/features/login/cubit/login_cubit.dart';
 import 'package:FitStack/widgets/atoms/fitstack_logo.dart';
 import 'package:FitStack/widgets/atoms/focused_button.dart';
-import 'package:FitStack/widgets/atoms/socialAuthButton_widget.dart';
+import 'package:FitStack/widgets/atoms/social_auth_button.dart';
 import 'package:FitStack/widgets/atoms/textfield_widget.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:email_validator/email_validator.dart';
@@ -25,23 +25,9 @@ class LoginView extends StatelessWidget {
         children: [
           const FitStackLogo(),
           const SizedBox(height: 15),
-          AutoSizeText(
-            'LETS SIGN YOU IN,',
-            maxFontSize: 90,
-            minFontSize: 40,
-            maxLines: 1,
-            //style: TextStyle(color: Theme.of(context).primaryColor),
-            style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                  color: Theme.of(context).colorScheme.primary,
-                ),
-          ),
+          AutoSizeText('LETS SIGN YOU IN,', maxFontSize: 90, minFontSize: 40, style: Theme.of(context).textTheme.titleLarge!.copyWith()),
           const SizedBox(height: 15),
-          Text(
-            "Welcome Back you've\nbeen missed!",
-            style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                  color: Theme.of(context).colorScheme.onBackground.withOpacity(.7),
-                ),
-          ),
+          AutoSizeText("Welcome Back you've\nbeen missed!", style: Theme.of(context).textTheme.headlineMedium),
           const Spacer(flex: 2),
           Form(
             key: const Key("login_form"),
@@ -64,6 +50,7 @@ class LoginView extends StatelessWidget {
                   title: "Password",
                   bottomTitle: "Forgot Password?",
                   hintText: 'Password',
+                  obscureText: true,
                 ),
               ],
             ),
@@ -72,37 +59,28 @@ class LoginView extends StatelessWidget {
           Center(
             child: RichText(
               text: TextSpan(
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.onBackground.withOpacity(.7),
-                ),
+                style: TextStyle(color: Theme.of(context).colorScheme.onBackground),
                 text: "Don't have an account? ",
                 children: [
                   TextSpan(
                     text: "      Sign Up!",
-                    style: TextStyle(color: Theme.of(context).colorScheme.onBackground, fontWeight: FontWeight.bold),
+                    style: TextStyle(color: Theme.of(context).colorScheme.secondary, fontWeight: FontWeight.bold),
                     recognizer: TapGestureRecognizer()..onTap = () => GoRouter.of(context).push('/signup'),
                   ),
                 ],
               ),
             ),
           ),
-          const SizedBox(height: 10),
           BlocBuilder<AppBloc, AppState>(
             buildWhen: (previous, current) => previous.status != current.status,
             builder: (context, state) {
               return FocusedButton(
-                title: state.status == AuthenticationStatus.authenticating
-                    ? SizedBox(height: 15, width: 15, child: CircularProgressIndicator(color: Theme.of(context).colorScheme.onPrimary))
-                    : Text(
-                        "SIGN IN",
-                        style:
-                            Theme.of(context).textTheme.button?.copyWith(color: Theme.of(context).colorScheme.onPrimary, fontWeight: FontWeight.bold),
-                      ),
+                title: "SIGN IN",
                 onPressed: () => context.read<LoginCubit>().logInWithCredentials(),
+                isLoading: state.status == AuthenticationStatus.authenticating,
               );
             },
           ),
-          const SizedBox(height: 5),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -110,9 +88,7 @@ class LoginView extends StatelessWidget {
                 color: Theme.of(context).colorScheme.primary,
                 child: Icon(FontAwesome.facebook_f, color: Theme.of(context).colorScheme.onPrimary),
               ),
-              const SizedBox(width: 15),
               SocialAuthButton(
-                onTap: () {},
                 color: Theme.of(context).colorScheme.secondary,
                 child: Icon(FontAwesome.google, color: Theme.of(context).colorScheme.onSecondary),
               ),

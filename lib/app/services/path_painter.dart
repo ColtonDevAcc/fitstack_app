@@ -1,4 +1,3 @@
-import 'package:FitStack/app/models/muscle/muscle_model.dart';
 import 'package:flutter/material.dart';
 
 class PathPainter extends CustomPainter {

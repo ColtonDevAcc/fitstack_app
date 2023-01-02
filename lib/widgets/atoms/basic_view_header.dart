@@ -1,47 +1,54 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class BasicPageHeader extends StatelessWidget {
   final String title;
+  final String? subtitle;
   final Widget? trailing;
   final Color? color;
   final Widget? leading;
-  const BasicPageHeader({Key? key, required this.title, this.trailing, this.color, this.leading}) : super(key: key);
+  final bool? centerTitle;
+  final EdgeInsets? padding;
+  final MainAxisAlignment? mainAxisAlignment;
+  const BasicPageHeader({
+    Key? key,
+    required this.title,
+    this.trailing,
+    this.color,
+    this.leading,
+    this.centerTitle,
+    this.subtitle,
+    this.padding,
+    this.mainAxisAlignment,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Stack(
-          alignment: Alignment.center,
+    return SafeArea(
+      bottom: false,
+      child: Padding(
+        padding: padding ?? const EdgeInsets.only(left: 20, right: 20, bottom: 20),
+        child: Row(
+          mainAxisAlignment: mainAxisAlignment ?? MainAxisAlignment.spaceBetween,
           children: [
-            Align(
-              alignment: Alignment.centerLeft,
-              child: leading ?? const SizedBox(),
-            ),
-            Align(
-              child: AutoSizeText(
-                title,
-                minFontSize: 25,
-                maxLines: 1,
-                style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-                      color: color ?? Theme.of(context).colorScheme.primary,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: GoogleFonts.bebasNeue().fontFamily,
-                      letterSpacing: .8,
-                    ),
+            if (leading != null) leading!,
+            AutoSizeText.rich(
+              TextSpan(
+                text: title,
+                style: Theme.of(context).textTheme.titleLarge,
+                children: [
+                  if (subtitle != null) TextSpan(text: "\n$subtitle", style: Theme.of(context).textTheme.titleSmall),
+                ],
               ),
+              minFontSize: 25,
+              maxLines: 2,
+              textAlign: centerTitle ?? false ? TextAlign.center : TextAlign.right,
+              style: Theme.of(context).textTheme.titleLarge,
             ),
-            Align(
-              alignment: Alignment.centerRight,
-              child: trailing ?? const SizedBox(),
-            ),
+            if (trailing != null) trailing!,
           ],
         ),
-      ],
+      ),
     );
   }
 }

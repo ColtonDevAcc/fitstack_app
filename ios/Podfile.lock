@@ -23,30 +23,30 @@ PODS:
   - Firebase/Storage (10.3.0):
     - Firebase/CoreOnly
     - FirebaseStorage (~> 10.3.0)
-  - firebase_analytics (10.0.7):
+  - firebase_analytics (10.0.8):
     - Firebase/Analytics (= 10.3.0)
     - firebase_core
     - Flutter
-  - firebase_auth (4.2.1):
+  - firebase_auth (4.2.3):
     - Firebase/Auth (= 10.3.0)
     - firebase_core
     - Flutter
   - firebase_core (2.4.0):
     - Firebase/CoreOnly (= 10.3.0)
     - Flutter
-  - firebase_crashlytics (3.0.7):
+  - firebase_crashlytics (3.0.8):
     - Firebase/Crashlytics (= 10.3.0)
     - firebase_core
     - Flutter
-  - firebase_dynamic_links (5.0.9):
+  - firebase_dynamic_links (5.0.10):
     - Firebase/DynamicLinks (= 10.3.0)
     - firebase_core
     - Flutter
-  - firebase_performance (0.9.0-7):
+  - firebase_performance (0.9.0-8):
     - Firebase/Performance (= 10.3.0)
     - firebase_core
     - Flutter
-  - firebase_storage (11.0.8):
+  - firebase_storage (11.0.9):
     - Firebase/Storage (= 10.3.0)
     - firebase_core
     - Flutter
@@ -194,6 +194,8 @@ PODS:
   - shared_preferences_ios (0.0.1):
     - Flutter
   - Toast (4.0.0)
+  - workmanager (0.0.1):
+    - Flutter
 
 DEPENDENCIES:
   - device_info_plus (from `.symlinks/plugins/device_info_plus/ios`)
@@ -214,6 +216,7 @@ DEPENDENCIES:
   - qr_code_scanner (from `.symlinks/plugins/qr_code_scanner/ios`)
   - rive_common (from `.symlinks/plugins/rive_common/ios`)
   - shared_preferences_ios (from `.symlinks/plugins/shared_preferences_ios/ios`)
+  - workmanager (from `.symlinks/plugins/workmanager/ios`)
 
 SPEC REPOS:
   trunk:
@@ -278,17 +281,19 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/rive_common/ios"
   shared_preferences_ios:
     :path: ".symlinks/plugins/shared_preferences_ios/ios"
+  workmanager:
+    :path: ".symlinks/plugins/workmanager/ios"
 
 SPEC CHECKSUMS:
   device_info_plus: e5c5da33f982a436e103237c0c85f9031142abed
   Firebase: f92fc551ead69c94168d36c2b26188263860acd9
-  firebase_analytics: fd9cc19a31206f636cb3f7775b4b2ad41f4503d2
-  firebase_auth: 30cbdb28d5c38f572c331a8590a93e2a1201d75c
+  firebase_analytics: b55d5b87440d85c7850067c2fec4e49748aa3291
+  firebase_auth: 7ad9a5c696d502d5bda096ea8dc996761456dc7d
   firebase_core: 6f2f753e316765799d88568232ed59e300ff53db
-  firebase_crashlytics: 4aecad95b85802572a72804e4ca57385357e5255
-  firebase_dynamic_links: 8b29828bfefdc659c466ed21b224cde8ddaab045
-  firebase_performance: 4705884ed3d6f96b3f10666335f9469cdab981b9
-  firebase_storage: 5d5ae6888014dbd66190a47b54817e9c27b14e5f
+  firebase_crashlytics: d92ba7149a9cc098b1157ccb39154b83851f7d1f
+  firebase_dynamic_links: 3fded1a843f72e5f3b0f52f9cf6749f8962c8230
+  firebase_performance: f211ac9da1f726d7dc4349b543abfe74cbed77fa
+  firebase_storage: c361173a288f7c0322f58bdfb1075abb302bd063
   FirebaseABTesting: e6660693429b4663573c82f8d2f1041deff1753a
   FirebaseAnalytics: 036232b6a1e2918e5f67572417be1173576245f3
   FirebaseAppCheckInterop: 9fc57dfa08f0abb737b185ea065422b55355c909
@@ -321,6 +326,7 @@ SPEC CHECKSUMS:
   rive_common: 375e4e551a9b372e270b572b714484c4d55451a3
   shared_preferences_ios: 548a61f8053b9b8a49ac19c1ffbc8b92c50d68ad
   Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
+  workmanager: 0afdcf5628bbde6924c21af7836fed07b42e30e6
 
 PODFILE CHECKSUM: 164f116cc963607257869913380dc22c9737e970
 

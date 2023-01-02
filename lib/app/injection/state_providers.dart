@@ -5,10 +5,12 @@ import 'package:FitStack/app/providers/bloc/nutrition/nutrition_bloc.dart';
 import 'package:FitStack/app/providers/bloc/user_recovery/user_recovery_bloc.dart';
 import 'package:FitStack/app/providers/bloc/user_statistics/user_statistics_bloc.dart';
 import 'package:FitStack/app/providers/bloc/workout/workout_bloc.dart';
+import 'package:FitStack/app/providers/cubit/fs_text_field/fs_text_field_cubit.dart';
 import 'package:FitStack/app/providers/cubit/main_view/main_view_cubit.dart';
 import 'package:FitStack/app/repository/active_workout_repository.dart';
 import 'package:FitStack/app/repository/auth_repository.dart';
 import 'package:FitStack/app/repository/exercise_repository.dart';
+import 'package:FitStack/app/repository/muscle_repository.dart';
 import 'package:FitStack/app/repository/open_food_facts_repository.dart';
 import 'package:FitStack/app/repository/program_repository.dart';
 import 'package:FitStack/app/repository/relationship_repository.dart';
@@ -48,6 +50,7 @@ class StateProviders extends StatelessWidget {
         RepositoryProvider(create: (context) => UserHealthRepository()),
         RepositoryProvider(create: (context) => OpenFoodFactsRepository()),
         RepositoryProvider(create: (context) => UserRecoveryRepository()),
+        RepositoryProvider(create: (context) => MuscleRepository()),
       ],
       child: MultiBlocProvider(
         providers: [
@@ -83,7 +86,7 @@ class StateProviders extends StatelessWidget {
             create: (BuildContext context) => SettingsCubit(),
           ),
           BlocProvider<ProgramCubit>(
-            create: (BuildContext context) => ProgramCubit(programRepository: context.read<ProgramRepository>()),
+            create: (BuildContext context) => ProgramCubit(programRepository: context.read<ProgramRepository>())..getPrograms(),
           ),
           BlocProvider<UserStatisticsBloc>(
             create: (BuildContext context) =>
@@ -104,15 +107,19 @@ class StateProviders extends StatelessWidget {
             create: (BuildContext context) => ExerciseScreenCubit(),
           ),
           BlocProvider<ExerciseBloc>(
-            create: (BuildContext context) => ExerciseBloc(exerciseRepository: context.read<ExerciseRepository>())..add(LoadExercises()),
+            create: (BuildContext context) =>
+                ExerciseBloc(exerciseRepository: context.read<ExerciseRepository>(), muscleRepository: context.read<MuscleRepository>())
+                  ..add(LoadExercises()),
           ),
           BlocProvider<NutritionBloc>(
             create: (BuildContext context) => NutritionBloc(openFoodFactsRepository: context.read<OpenFoodFactsRepository>()),
           ),
           BlocProvider<UserRecoveryBloc>(
             create: (BuildContext context) =>
-                UserRecoveryBloc(userRecoveryRepository: context.read<UserRecoveryRepository>())..add(UserRecoveryRequested()),
+                UserRecoveryBloc(userRecoveryRepository: context.read<UserRecoveryRepository>(), muscleRepository: context.read<MuscleRepository>())
+                  ..add(UserRecoveryRequested()),
           ),
+          BlocProvider<FsTextFieldCubit>(create: (BuildContext context) => FsTextFieldCubit()),
         ],
         child: child,
       ),

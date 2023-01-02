@@ -19,16 +19,14 @@ class StatisticsDashboard extends StatelessWidget {
     return BlocBuilder<UserRecoveryBloc, UserRecoveryState>(
       builder: (context, state) {
         final muscleList = state.userRecovery.muscles;
-        // ignore: unnecessary_statements
-        muscleList.length > 1 ? muscleList.sort((a, b) => b.updatedAt!.compareTo(a.updatedAt!)) : null;
+        if (muscleList.length > 1) muscleList.sort((a, b) => b.updatedAt!.compareTo(a.updatedAt!));
         return Row(
           children: [
             RecoverySvgPainter(
-              height: 200,
-              width: 100,
+              height: MediaQuery.of(context).size.height * .25,
+              width: MediaQuery.of(context).size.width * .25,
               muscleAnatomyViewRotationIndex: 0,
               recovery: state.userRecovery,
-              //TODO: backMuscleList should be state.backMuscleList
               backMuscleList: const [],
               frontMuscleList: state.frontMuscleList,
               majorMuscleColor: Theme.of(context).colorScheme.tertiary,
@@ -38,18 +36,23 @@ class StatisticsDashboard extends StatelessWidget {
               onMinorMuscleSelected: (longPressDetails, muscle) => context.read<ExerciseBloc>().add(SelectMinorMuscle(muscle: muscle)),
               muscleColorList: colorList,
             ),
-            const SizedBox(width: 20),
             Column(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
               children: state.userRecovery.muscles
                   .map(
-                    (e) => ProgressBar(
-                      totalValue: 100,
-                      partialValue: 25,
-                      muscle: e,
-                      rawMuscleList: state.frontMuscleList,
-                      muscleColorList: colorList,
+                    (e) => Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 5),
+                      child: SizedBox(
+                        width: MediaQuery.of(context).size.width * .75 - 20,
+                        child: ProgressBar(
+                          totalValue: 100,
+                          partialValue: 25,
+                          muscle: e,
+                          rawMuscleList: state.frontMuscleList,
+                          muscleColorList: colorList,
+                        ),
+                      ),
                     ),
                   )
                   .toList(),

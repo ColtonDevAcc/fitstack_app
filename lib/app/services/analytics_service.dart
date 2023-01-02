@@ -10,14 +10,23 @@ import 'package:dio/dio.dart';
 
 class AnalyticsService extends NavigatorObserver {
   final bool debug;
-  AnalyticsService({
-    this.debug = false,
-  });
-
   final FirebaseAnalytics analytics = FirebaseAnalytics.instance;
   final FirebaseCrashlytics crashlytics = FirebaseCrashlytics.instance;
   final FirebasePerformance performance = FirebasePerformance.instance;
   String currentRoute = "/";
+  AnalyticsService({
+    this.debug = false,
+  }) {
+    if (!kDebugMode) {
+      performance.setPerformanceCollectionEnabled(true);
+      crashlytics.setCrashlyticsCollectionEnabled(true);
+      analytics.setAnalyticsCollectionEnabled(true);
+    } else {
+      performance.setPerformanceCollectionEnabled(false);
+      crashlytics.setCrashlyticsCollectionEnabled(false);
+      analytics.setAnalyticsCollectionEnabled(false);
+    }
+  }
 
   FirebaseAnalyticsObserver getAnalyticsObserver() => FirebaseAnalyticsObserver(analytics: analytics);
 

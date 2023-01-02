@@ -11,22 +11,15 @@ class ProgramTabView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      clipBehavior: Clip.none,
-      slivers: [
-        BlocBuilder<ProgramCubit, ProgramState>(
-          buildWhen: (previous, current) => previous.programs != current.programs,
-          builder: (context, state) {
-            if (state.programs == null) {
-              log('getting programs');
-              context.read<ProgramCubit>().getPrograms();
-            } else {
-              log("${state.programs}");
-            }
-
-            return SliverFillRemaining(
-              hasScrollBody: false,
-              child: Wrap(
+    return BlocBuilder<ProgramCubit, ProgramState>(
+      buildWhen: (previous, current) => previous.programs != current.programs,
+      builder: (context, state) {
+        return ListView(
+          shrinkWrap: true,
+          padding: EdgeInsets.zero,
+          children: [
+            if (state.status != ProgramStatus.loading)
+              Wrap(
                 alignment: WrapAlignment.spaceBetween,
                 children: state.programs == null
                     ? []
@@ -41,11 +34,17 @@ class ProgramTabView extends StatelessWidget {
                           ),
                         )
                         .toList(),
+              )
+            else
+              const Padding(
+                padding: EdgeInsets.only(top: 50),
+                child: Center(
+                  child: CircularProgressIndicator(),
+                ),
               ),
-            );
-          },
-        ),
-      ],
+          ],
+        );
+      },
     );
   }
 }

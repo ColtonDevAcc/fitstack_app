@@ -1,5 +1,5 @@
 import 'package:FitStack/features/signup/state/signup_cubit.dart';
-import 'package:FitStack/widgets/atoms/socialAuthButton_widget.dart';
+import 'package:FitStack/widgets/atoms/social_auth_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:icons_plus/icons_plus.dart';

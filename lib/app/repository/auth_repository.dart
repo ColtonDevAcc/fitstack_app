@@ -39,7 +39,6 @@ class AuthenticationRepository {
         }
       } catch (e) {
         log('error: $e, stacktrace: ${StackTrace.current}');
-        controller.add(AuthStream(user: User.empty(), status: AuthenticationStatus.error, message: "Error logging in with token $e"));
       }
     } else {
       try {

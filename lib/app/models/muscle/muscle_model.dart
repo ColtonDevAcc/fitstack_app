@@ -4,21 +4,27 @@ import 'dart:ui';
 
 import 'package:FitStack/app/models/muscle/muscle_recovery_model.dart';
 import 'package:equatable/equatable.dart';
+import 'package:hive/hive.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'muscle_model.g.dart';
 
 @JsonSerializable(includeIfNull: true, explicitToJson: true, anyMap: true)
-class Muscle extends Equatable {
+@HiveType(typeId: 0)
+// ignore: must_be_immutable
+class Muscle extends Equatable with HiveObjectMixin {
   @JsonKey(name: 'id')
   final int? id;
   @JsonKey(name: 'action')
   final String? action;
   @JsonKey(name: 'group')
+  @HiveField(2)
   final MuscleGroup group;
-  @JsonKey(name: 'child_muscles')
+  @JsonKey(name: 'child')
+  @HiveField(3)
   final ChildMuscle? child;
   @JsonKey(ignore: true)
+  @HiveField(4)
   final String? name;
   @JsonKey(name: 'image')
   final String? image;
@@ -27,10 +33,11 @@ class Muscle extends Equatable {
   @JsonKey(name: 'updated_at')
   final DateTime? updatedAt;
   @JsonKey(ignore: true)
+  @HiveField(8)
   final Path? svgPath;
   @JsonKey(name: 'recovery')
   final MuscleRecovery? recovery;
-  const Muscle({
+  Muscle({
     required this.group,
     this.name,
     this.createdAt,
@@ -76,30 +83,48 @@ class Muscle extends Equatable {
 
   Map<String, dynamic> toJson() => _$MuscleToJson(this);
 
-  //empty factory
-  factory Muscle.empty() => const Muscle(
+  factory Muscle.empty() => Muscle(
         group: MuscleGroup.Empty,
       );
 }
 
+@HiveType(typeId: 2)
 enum MuscleGroup {
+  @HiveField(0)
   Arms,
+  @HiveField(1)
   Chest,
+  @HiveField(2)
   Legs,
+  @HiveField(3)
   Abdominals,
+  @HiveField(4)
   Glutes,
+  @HiveField(5)
   Calves,
+  @HiveField(6)
   Forearms,
+  @HiveField(7)
   Traps,
+  @HiveField(8)
   Neck,
+  @HiveField(9)
   UpperBack,
+  @HiveField(10)
   LowerBack,
+  @HiveField(11)
   HipFlexors,
+  @HiveField(12)
   Adductors,
+  @HiveField(13)
   Abductors,
+  @HiveField(14)
   PlantarFlexors,
+  @HiveField(15)
   Dorsiflexors,
+  @HiveField(16)
   Invertors,
+  @HiveField(17)
   Empty,
 }
 

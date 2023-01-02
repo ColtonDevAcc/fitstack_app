@@ -1,7 +1,6 @@
 import 'dart:developer';
 import 'package:FitStack/app/models/muscle/recovery_model.dart';
 import 'package:flutter/services.dart';
-
 import 'package:FitStack/app/models/muscle/muscle_model.dart';
 import 'package:flutter/material.dart';
 import 'package:svg_path_parser/svg_path_parser.dart';
@@ -9,14 +8,13 @@ import 'package:touchable/touchable.dart';
 import 'package:xml/xml.dart';
 
 class MuscleService {
-  Future<List<Muscle>> parseFrontMuscleList() async {
-    final String generalString = await rootBundle.loadString("assets/muscles/model/muscular_front.svg", cache: false);
-    final XmlDocument document = XmlDocument.parse(generalString);
-    final paths = document.findAllElements('path');
-    final List<Muscle> muscles = [];
-    MuscleGroup? group;
-
+  Future<List<Muscle>> svgToMuscles(String url) async {
     try {
+      final generalString = await rootBundle.loadString(url);
+      final XmlDocument document = XmlDocument.parse(generalString);
+      MuscleGroup? group;
+      final List<Muscle> muscles = [];
+      final paths = document.findAllElements('path');
       for (final element in paths) {
         final String partName = element.getAttribute('id').toString();
         final String partPath = element.getAttribute('d').toString();
@@ -29,8 +27,6 @@ class MuscleService {
 
             if (element.value.firstWhere((element) => element.toLowerCase() == parsedNameCheck, orElse: () => 'empty') != 'empty') {
               group = element.key;
-            } else {
-              // log("No group found for: $parsedNameCheck");
             }
           }
 
@@ -42,42 +38,11 @@ class MuscleService {
           muscles.add(part);
         }
       }
+      return muscles;
     } catch (e) {
       log("Error parsing front muscles: $e");
-      //TODO: add to logging service
+      return [];
     }
-    return muscles;
-  }
-
-  Future<List<Muscle>> parseBackMuscleList() async {
-    final String generalString = await rootBundle.loadString("assets/muscles/model/muscular_back.svg");
-    final XmlDocument document = XmlDocument.parse(generalString);
-    final paths = document.findAllElements('path');
-    final List<Muscle> muscles = [];
-    int muscleChecks = 0;
-
-    for (final XmlElement element in paths) {
-      final String partName = element.getAttribute('id').toString();
-      final String partPath = element.getAttribute('d').toString();
-      final Path svgPath = parseSvgPath(partPath);
-
-      if (!partName.contains('path')) {
-        final Muscle part = Muscle(
-          name: partName,
-          svgPath: svgPath,
-          group: MuscleGroup.values.firstWhere(
-            (element) {
-              muscleChecks++;
-              return partName.toLowerCase().contains(element.toString().split(".")[1].toLowerCase());
-            },
-            orElse: () => MuscleGroup.Empty,
-          ),
-        );
-        muscles.add(part);
-      }
-    }
-    log("Muscle checks: $muscleChecks");
-    return muscles;
   }
 }
 
@@ -204,7 +169,7 @@ class MusclePainter extends CustomPainter {
         } else if (muscle.name == 'outline' || muscle.name == 'inner outline') {
           return Theme.of(context).colorScheme.onBackground.withOpacity(.1);
         }
-        return Theme.of(context).colorScheme.surface;
+        return Colors.green;
       }
 
       baseCanvas.drawPath(

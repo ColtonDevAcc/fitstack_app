@@ -1,9 +1,12 @@
+import 'dart:developer';
+
 import 'package:FitStack/app/models/logs/log_model.dart';
 import 'package:FitStack/app/providers/bloc/app/app_bloc.dart';
 import 'package:FitStack/app/repository/auth_repository.dart';
 import 'package:FitStack/app/services/analytics_service.dart';
 import 'package:FitStack/app/services/go_router_refresh_stream.dart';
 import 'package:FitStack/features/nutrition/presentation/views/nutrition_scan_view.dart';
+import 'package:FitStack/features/statistics/ui/views/statistic_report_view.dart';
 import 'package:FitStack/features/statistics/ui/views/statistic_view.dart';
 import 'package:FitStack/features/workout/ui/views/create_workout_view.dart';
 import 'package:FitStack/features/workout/ui/views/edit_exercise_view.dart';
@@ -38,6 +41,7 @@ class AppRouter {
   late final router = GoRouter(
     navigatorKey: navigatorKey,
     refreshListenable: GoRouterRefreshStream(appBloc.stream),
+    initialLocation: '/login',
     observers: [
       if (kDebugMode) GetIt.instance<AnalyticsService>(),
     ],
@@ -52,101 +56,130 @@ class AppRouter {
         name: 'signup',
         builder: (context, state) => const SignUpPage(),
       ),
-      GoRoute(
-        path: '/',
-        name: 'home',
-        builder: (context, state) => const MainPage(),
-      ),
-      GoRoute(
-        path: '/dashBoard',
-        name: "dashboard",
-        builder: (context, state) => const DashboardPage(),
-      ),
-      GoRoute(
-        path: '/nutrition',
-        name: "nutrition",
-        builder: (context, state) => const NutritionPage(),
+      ShellRoute(
+        navigatorKey: GlobalKey<NavigatorState>(),
+        builder: (context, state, child) {
+          return MainPage(
+            onTap: (val) => GoRouter.of(context).goNamed(baseRouteNames.entries.firstWhere((element) => element.value == val).key),
+            child: child,
+          );
+        },
         routes: [
           GoRoute(
-            path: 'scan',
-            name: 'nutrition scan',
-            builder: (context, state) => const NutritionScanView(),
-          ),
-        ],
-      ),
-      GoRoute(
-        path: '/exercise',
-        name: "exercise",
-        builder: (context, state) => const ExercisePage(),
-        routes: [
-          GoRoute(
-            path: 'workout',
-            name: 'workout',
-            builder: (context, state) => const WorkoutView(),
+            path: '/',
+            name: 'home_page',
+            builder: (context, state) => const SizedBox(),
             routes: [
               GoRoute(
-                path: 'create',
-                name: 'create',
-                builder: (context, state) => const CreateWorkoutView(),
+                path: 'dashboard',
+                name: "dashboard_page",
+                pageBuilder: (context, state) => const NoTransitionPage(child: DashboardPage()),
+                routes: [
+                  GoRoute(
+                    parentNavigatorKey: navigatorKey,
+                    path: 'statistic_report',
+                    name: 'statistic_report',
+                    builder: (context, state) => const StatisticReportView(),
+                  ),
+                ],
+              ),
+              GoRoute(
+                path: 'nutrition',
+                name: "nutrition_page",
+                pageBuilder: (context, state) => const NoTransitionPage(child: NutritionPage()),
+                routes: [
+                  GoRoute(
+                    path: 'scan',
+                    name: 'nutrition_scan_view',
+                    builder: (context, state) => const NutritionScanView(),
+                  ),
+                ],
+              ),
+              GoRoute(
+                path: 'exercise',
+                name: "exercise_page",
+                pageBuilder: (context, state) => const NoTransitionPage(child: ExercisePage()),
+                routes: [
+                  GoRoute(
+                    path: 'workout',
+                    name: 'workout_page',
+                    builder: (context, state) => const WorkoutTabView(),
+                    routes: [
+                      GoRoute(
+                        path: 'create',
+                        name: 'create_workout_page',
+                        builder: (context, state) => const CreateWorkoutView(),
+                      ),
+                    ],
+                  ),
+                  GoRoute(
+                    path: 'exercises',
+                    name: 'exercises',
+                    builder: (context, state) => const ExerciseListView(),
+                    routes: [
+                      GoRoute(path: 'edit', name: 'edit', builder: (context, state) => const EditExerciseView()),
+                    ],
+                  ),
+                ],
+              ),
+              GoRoute(
+                path: 'relationship',
+                name: "relationship_page",
+                pageBuilder: (context, state) => const NoTransitionPage(child: RelationshipPage()),
+              ),
+              GoRoute(
+                path: 'settings',
+                name: "settings_page",
+                pageBuilder: (context, state) => const NoTransitionPage(child: SettingsPage()),
+                routes: [
+                  GoRoute(
+                    path: 'theme',
+                    name: 'ThemeSettings ',
+                    builder: (context, state) => const ThemeSettingsPage(),
+                  ),
+                ],
+              ),
+              GoRoute(
+                path: 'friendship',
+                name: "friendship",
+                pageBuilder: (context, state) => const NoTransitionPage(child: FriendsRelationshipView()),
+              ),
+              GoRoute(
+                path: 'user',
+                name: 'user',
+                builder: (context, state) => const ProfilePage(),
+                routes: [
+                  GoRoute(
+                    path: 'statistic',
+                    name: 'user statistic',
+                    builder: (context, state) {
+                      return StatisticView(data: state.extra! as List<Log>);
+                    },
+                  ),
+                ],
               ),
             ],
-          ),
-          GoRoute(
-            path: 'exercises',
-            name: 'exercises',
-            builder: (context, state) => const ExerciseListView(),
-            routes: [
-              GoRoute(path: 'edit', name: 'edit', builder: (context, state) => const EditExerciseView()),
-            ],
-          ),
+          )
         ],
-      ),
-      GoRoute(
-        path: '/settings',
-        name: "settings",
-        builder: (context, state) => const SettingsPage(),
-        routes: [
-          GoRoute(
-            path: 'theme',
-            name: 'ThemeSettings ',
-            builder: (context, state) => const ThemeSettingsPage(),
-          ),
-        ],
-      ),
-      GoRoute(
-        path: '/relationship',
-        name: "relationship",
-        builder: (context, state) => const RelationshipPage(),
-      ),
-      GoRoute(
-        path: '/friendship',
-        name: "friendship",
-        builder: (context, state) => const FriendsRelationshipView(),
-      ),
-      GoRoute(
-        path: '/user',
-        name: 'user',
-        builder: (context, state) => const ProfilePage(),
-        routes: [
-          GoRoute(
-            path: 'statistic',
-            name: 'user statistic',
-            builder: (context, state) {
-              return StatisticView(data: state.extra! as List<Log>);
-            },
-          ),
-        ],
-      ),
+      )
     ],
     redirect: (context, state) {
       final bool isAuthenticated = appBloc.state.status == AuthenticationStatus.authenticated;
       if (state.location != "/signup" && !isAuthenticated && state.location != "/login" && !isAuthenticated) {
         return "/login";
       } else if (state.location == "/login" && isAuthenticated || state.location == "/signup" && isAuthenticated) {
-        return "/";
+        return "/dashboard";
       } else {
         return null;
       }
     },
   );
 }
+
+const Map<String, int> baseRouteNames = {
+  'dashboard_page': 0,
+  'nutrition_page': 1,
+  'exercise_page': 2,
+  'relationship_page': 3,
+  'settings_page': 4,
+};

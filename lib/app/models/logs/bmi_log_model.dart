@@ -25,6 +25,11 @@ class BodyMassIndexLog extends Log {
           value: value ?? 0,
         );
 
+  double get bmi => value as double;
+  double get kgPerMeterSquared => bmi;
+  double get kgPerCentimeterSquared => bmi / 10000;
+  double get lbPerInchSquared => bmi * 703;
+
   @override
   String toString() {
     return 'BodyMassIndexLog { id: $id, created_at: $createdAt, userId: $userId, type: $type, value: $value }';
