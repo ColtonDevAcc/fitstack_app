@@ -1,26 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class ReportTabContainer extends StatelessWidget {
+  final DateTime date;
+
   const ReportTabContainer({
     Key? key,
+    required this.date,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final format = DateFormat('E');
+    final formatted = format.format(date);
     return Container(
+      width: 80,
+      height: 90,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
         border: Border.all(color: Theme.of(context).colorScheme.onSurfaceVariant),
       ),
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            'Mon',
+            formatted,
             style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: Theme.of(context).colorScheme.onSurfaceVariant),
           ),
-          const Tab(text: '24', height: 35),
+          Tab(text: date.day.toString(), height: 35),
         ],
       ),
     );

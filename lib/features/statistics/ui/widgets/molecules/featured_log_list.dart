@@ -73,7 +73,7 @@ class FeaturedLogList extends StatelessWidget {
                       icon: FontAwesomeIcons.weightScale,
                       color: Theme.of(context).colorScheme.secondary,
                       title: 'Weight',
-                      value: '${weight.isNotEmpty ? weight.last.value.toDouble() : 0}',
+                      value: '${weight.isNotEmpty ? weight.last.valueInPounds?.toStringAsPrecision(4) : 0}',
                       trailingIcon: FontAwesomeIcons.chevronRight,
                     ),
                   if (sleepAsleep.isNotEmpty)

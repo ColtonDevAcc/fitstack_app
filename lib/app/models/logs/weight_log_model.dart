@@ -27,6 +27,9 @@ class WeightLog extends Log {
           value: value ?? 0,
         );
 
+  double get kg => value as double;
+  double? get valueInPounds => value.convertFromTo(MASS.kilograms, MASS.pounds);
+
   @override
   String toString() {
     return 'WeightLog { id: $id, created_at: $createdAt, userId: $userId, type: $type, value: $value }';
@@ -57,6 +60,4 @@ class WeightLog extends Log {
       updatedAt: data.dateTo.toUtc(),
     );
   }
-
-  double? get valueInPounds => value.convertFromTo(MASS.kilograms, MASS.pounds);
 }

@@ -32,23 +32,23 @@ class MainPage extends StatelessWidget {
             borderRadius: const Radius.circular(20),
             items: [
               CustomNavigationBarItem(
-                icon: const Icon(FontAwesomeIcons.house),
+                icon: const FaIcon(FontAwesomeIcons.house),
                 selectedIcon: const Icon(FontAwesomeIcons.solidHouse),
               ),
               CustomNavigationBarItem(
-                icon: const Icon(FontAwesomeIcons.utensils),
+                icon: const FaIcon(FontAwesomeIcons.utensils),
                 selectedIcon: const Icon(FontAwesomeIcons.solidUtensils),
               ),
               CustomNavigationBarItem(
-                icon: const Icon(FontAwesomeIcons.dumbbell),
+                icon: const FaIcon(FontAwesomeIcons.dumbbell),
                 selectedIcon: const Icon(FontAwesomeIcons.solidDumbbell),
               ),
               CustomNavigationBarItem(
-                icon: const Icon(FontAwesomeIcons.user),
+                icon: const FaIcon(FontAwesomeIcons.user),
                 selectedIcon: const Icon(FontAwesomeIcons.solidUser),
               ),
               CustomNavigationBarItem(
-                icon: const Icon(FontAwesomeIcons.ellipsis),
+                icon: const FaIcon(FontAwesomeIcons.ellipsis),
                 selectedIcon: const Icon(FontAwesomeIcons.solidEllipsis),
               ),
             ],
